@@ -19,9 +19,11 @@
 #  updated_at             :datetime         not null
 #
 
-class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+require 'rails_helper'
+
+RSpec.describe User, type: :model do
+  it 'should do something' do
+    user = create(:user)
+    expect(user).to be
+  end
 end

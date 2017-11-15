@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: users
+# Table name: property_managers
 #
 #  id                     :integer          not null, primary key
 #  email                  :string           default(""), not null
@@ -15,13 +15,12 @@
 #  last_sign_in_ip        :string
 #  first_name             :string
 #  last_name              :string
+#  company_id             :integer
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
 
-class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+require 'rails_helper'
+
+RSpec.describe PropertyManager, type: :model do
 end

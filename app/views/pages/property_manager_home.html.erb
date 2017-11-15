@@ -1,1 +1,5 @@
 <h1>SUP MANAGER</h1>
+
+<% if current_property_manager.company.nil? %>
+  <%= link_to "Create Your Company!", new_company_path %>
+<% end %>

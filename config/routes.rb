@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :companies
+
   devise_for :property_managers, path: 'property_managers', controllers: {
     sessions: 'property_managers/sessions',
     registrations: 'property_managers/registrations'
