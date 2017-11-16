@@ -27,4 +27,16 @@ class PropertyManager < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   belongs_to :company, optional: true
+
+  def has_company?
+    company.present?
+  end
+
+  def is_company_admin?
+    has_company? && admin
+  end
+
+  def make_admin_with_company(company)
+    update_attributes!(company: company, admin: true)
+  end
 end

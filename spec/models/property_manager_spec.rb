@@ -23,4 +23,41 @@
 require 'rails_helper'
 
 RSpec.describe PropertyManager, type: :model do
+  describe '#has_company?' do
+    it 'returns true if a company exists' do
+      pm = build_stubbed(:property_manager, :with_company)
+      expect(pm.has_company?).to be_truthy
+    end
+  end
+
+  describe '#is_company_admin?' do
+    it 'returns true if manager has company AND is admin' do
+      pm = build_stubbed(:property_manager, :with_company, admin: true)
+      expect(pm.is_company_admin?).to be_truthy
+    end
+
+    it 'returns false if user doesn\'t have company' do
+      pm = build_stubbed(:property_manager, admin: true)
+      expect(pm.is_company_admin?).to be_falsey
+    end
+
+    it 'returns false if user doesn\'t have amdin priveleges' do
+      pm = build_stubbed(:property_manager, :with_company, admin: false)
+      expect(pm.is_company_admin?).to be_falsey
+    end
+  end
+
+  describe '#make_admin_with_company' do
+    it 'will associate manager with company, and make admin, etc...' do
+      pm = create(:property_manager)
+      company = create(:company)
+
+      pm.make_admin_with_company(company)
+      pm.reload
+
+      expect(pm.company).to eq(company)
+      expect(company.property_managers).to include(pm)
+      expect(pm.is_company_admin?).to be_truthy
+    end
+  end
 end

@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20171115204851) do
     t.string "first_name"
     t.string "last_name"
     t.integer "company_id"
+    t.boolean "admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_property_managers_on_email", unique: true

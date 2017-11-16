@@ -9,6 +9,14 @@ RSpec.describe CompaniesController, type: :controller do
       end
     end
 
+    context 'when manager already has a company' do
+      it 'should redirect those silly idiots' do
+        sign_in(create(:property_manager, :with_company))
+        get :new
+        expect(response).to redirect_to(page_path('property_manager_home'))
+      end
+    end
+
     it 'returns http success' do
       sign_in(create(:property_manager))
       get :new
@@ -33,11 +41,9 @@ RSpec.describe CompaniesController, type: :controller do
           post :create, params: { company: { name: 'some stupid company' } }
         end.to(change { Company.count })
 
-        company = Company.last
         pm.reload
 
-        expect(pm.company).to eq(company)
-        expect(company.property_managers).to include(pm)
+        expect(pm.is_company_admin?).to be_truthy
       end
     end
   end
