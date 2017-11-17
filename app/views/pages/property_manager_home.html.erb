@@ -1,11 +1,11 @@
 <h1>SUP MANAGER</h1>
 
-<% if current_property_manager.has_company? %>
-  <h2>Your company: <%= current_property_manager.company.name %></h2>
-  <% if current_property_manager.is_company_admin? %>
+<% if current_property_manager&.has_company? %>
+  <h2>Your company: <%= current_property_manager&.company&.name %></h2>
+  <% if current_property_manager&.is_company_admin? %>
     <%=
       link_to "Edit company details",
-      edit_company_path(current_property_manager.company)
+      edit_company_path(current_property_manager&.company)
     %>
   <% end %>
 <% else %>

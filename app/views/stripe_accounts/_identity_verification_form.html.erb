@@ -1,0 +1,227 @@
+<div class="panel panel-default topspace-lg">
+  <div class="panel-body">
+    <%= form_for @account, url: stripe_account_path(@stripe_account.id), html: { method: "patch" }  do | f | %>
+      <% if @stripe_account.verification.fields_needed.find { |e| /address/ =~ e } %>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <%= f.label :address_line1, "Street address" %>
+              <%= f.text_field :address_line1, class: "form-control input-lg", placeholder: "185 Berry St" %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <%= f.label :address_city, "City" %>
+              <%= f.text_field :address_city, class: "form-control input-lg", placeholder: "San Francisco" %>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <%= f.label :address_state, "State" %>
+              <%= f.select(:address_state, options_for_select(states, @account[:address_state]), {}, { class: "form-control input-lg" }) %>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Zip code</label>
+              <%= f.label :address_postal, "Zip" %>
+              <%= f.text_field :address_postal, class: "form-control input-lg", placeholder: "90210" %>
+            </div>
+          </div>
+        </div>
+        <hr>
+      <% end %>
+      <% if @stripe_account.verification.fields_needed.include?('legal_entity.type') %>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <%= f.label :account_type, "Account Type" %>
+              <%= f.select(:account_type, options_for_select([["Individual","individual"], ["Company","company"]], @account[:account_type]), {}, { class: "form-control input-lg" }) %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <% if @stripe_account.verification.fields_needed.find { |e| /name/ =~ e } %>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <%= f.label :first_name, "First Name" %>
+              <%= f.text_field :first_name, class: "form-control input-lg", placeholder: "Jane" %>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <%= f.label :last_name, "Last Name" %>
+              <%= f.text_field :last_name, class: "form-control input-lg", placeholder: "Doe" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <% if @stripe_account.verification.fields_needed.find { |e| /dob/ =~ e } %>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <%= f.label :dob_month, "DOB Month" %>
+              <%= f.select(:dob_month, options_for_select([["January", "1"],["February", "2"],["March", "3"],["April", "4"],["May", "5"],["June", "6"],["July", "7"],["August", "8"],["September", "9"],["October", "10"],["November", "11"],["December", "12"]], @account[:dob_month]), {}, { class: "form-control input-lg" }) %>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <%= f.label :dob_day, "DOB Day" %>
+              <%= f.select(:dob_day, options_for_select((1..31).each{|n| [n, n]}, @account[:dob_day]), {}, { class: "form-control input-lg" }) %>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <%= f.label :dob_year, "DOB Year" %>
+              <%= f.select(:dob_year, options_for_select((1912..2016).each{|n| [n, n]}, @account[:dob_year]), {}, { class: "form-control input-lg" }) %>
+            </div>
+          </div>
+        </div>
+        <hr>
+      <% end %>
+      <% if @stripe_account.verification.fields_needed.include?('legal_entity.business_name') %>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <%= f.label :business_name, "Business name (as it appears to the IRS)" %>
+              <%= f.text_field :business_name, class: "form-control input-lg", placeholder: "My Business LLC" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <% if @stripe_account.verification.fields_needed.include?('legal_entity.business_tax_id') %>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <%= f.label :business_tax_id, "Business tax ID/EIN" %>
+              <%= f.text_field :business_tax_id, class: "form-control input-lg", placeholder: "27-0000000" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <% if @stripe_account.verification.fields_needed.include?('legal_entity.ssn_last_4') %>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <%= f.label :ssn_last_4, "Last 4 digits of your SSN" %>
+              <%= f.text_field :ssn_last_4, class: "form-control input-lg", placeholder: "6789" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <% if @stripe_account.verification.fields_needed.include?('legal_entity.personal_id_number') %>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Full social security number (used to verify your identity)</label>
+              <input type="text" id="personal_id_number" class="form-control input-lg" placeholder="123-45-6789" required>
+              <span class="help-block">Never stored, only used to verify your identity.</span>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <% if @stripe_account.verification.fields_needed.include?('legal_entity.verification.document') %>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Upload a photo ID</label>
+              <input type="file" id="file_upload" name="file" required>
+              <span class="help-block">We need a picture of your government-issued ID to verify your identity.</span>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <button type="submit" class="btn btn-lg btn-block btn-primary btn-custom submit">Submit your information</button>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<script type="text/javascript">
+  Stripe.setPublishableKey("<%= ENV['PUBLISHABLE_KEY'] %>");
+
+  $(function() {
+    var $form = $('form');
+
+    // If a personal ID number is requested, tokenize it
+    if ($('#personal_id_number').length){
+      $form.submit(function(event) {
+        // Disable the submit button to prevent repeated clicks:
+        $form.find('.submit').prop('disabled', true).html("<i class='fa fa-spinner fa-spin'></i> Submitting your information...");
+        // Create the token using Stripe.js
+        Stripe.piiData.createToken({
+          personal_id_number: $('#personal_id_number').val()
+        }, stripeResponseHandler);
+        return false;
+      });
+    }
+    function stripeResponseHandler(status, response) {
+      // Grab the form:
+      var $form = $('form');
+
+      if (response.error) { // Problem!
+        // Let the user know there was a problem
+        $form.append("<div class='alert alert-danger'>"+response.error.message+"</div>");
+        $form.find('.submit').prop('disabled', false); // Re-enable submission
+
+      } else { // Token created!
+        $form.find('.submit').html("<i class='fa fa-check'></i> Information submitted");
+
+        // Get the token ID:
+        var token = response.id;
+
+        // Insert the token into the form so it gets submitted to the server:
+        $form.append($('<input type="hidden" name="stripe_account[personal_id_number]" />').val(token));
+
+        // Submit the form:
+        $form.get(0).submit();
+      }
+    }
+    // If an identity document is requested, upload it
+    if ($('#file_upload').length){
+      $form.submit(function(event) {
+        // Prevent the form submission
+        event.preventDefault();
+
+        // Disable the submit button to prevent repeated clicks:
+        $form.find('.submit').prop('disabled', true).html("<i class='fa fa-spinner fa-spin'></i> Submitting your information...");
+        // Remove any existing errors
+        $form.find('.alert-danger').remove();
+
+        var data = new FormData();
+        data.append('file', $('#file_upload')[0].files[0]);
+        data.append('purpose', 'identity_document');
+
+        $.ajax({
+          url: 'https://uploads.stripe.com/v1/files',
+          data: data,
+          headers: {
+            'Authorization': 'Bearer ' + "<%= ENV['PUBLISHABLE_KEY'] %>"
+          },
+          cache: false,
+          contentType: false,
+          processData: false,
+          type: 'POST',
+        })
+        .done(function(response) {
+          // Insert the token into the form so it gets submitted to the server:
+          $form.append($('<input type="hidden" name="stripe_account[verification_document]" />').val(response.id));
+          // Submit the form:
+          $form.get(0).submit();
+        })
+        .fail(function(response) {
+          $form.append("<div class='alert alert-danger'>"+response.responseJSON.error.message+"</div>");
+          $form.find('.submit').prop('disabled', false).text('Submit your information'); // Re-enable submission
+        });
+      });
+    }
+  });
+</script>

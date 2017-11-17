@@ -1,4 +1,7 @@
 FactoryBot.define do
+  factory :stripe_account do
+    
+  end
   factory :property_manager do
     first_name 'chris'
     last_name 'power'

@@ -1,0 +1,45 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <form action="/bank_accounts" method="POST" id="payment-form">
+      <div class="errors"></div>
+      <div class="row">
+        <div class="col-md-8">
+          <div class="form-group">
+            <label>Country</label>
+            <select class="form-control input-lg" id="country" data-stripe="country">
+              <option value="US">United States</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>Currency</label>
+            <select class="form-control input-lg" id="currency" data-stripe="currency">
+              <option value="usd">USD</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6" id="routing_number_div">
+          <div class="form-group">
+            <label id="routing_number_label">Routing Number</label>
+            <input class="form-control input-lg bank_account" id="routing_number" type="tel" size="12" data-stripe="routing_number" value="110000000" autocomplete="off">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label id="account_number_label">Account Number</label>
+            <input class="form-control input-lg bank_account" id="account_number" type="tel" size="20" data-stripe="account_number" value="000123456789" autocomplete="off">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <button class="btn btn-lg btn-block btn-primary btn-custom submit" type="submit">Add Bank Account</button>
+        </div>
+      </div>
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+    </form>
+  </div>
+</div>

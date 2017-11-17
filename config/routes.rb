@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   resources :companies
+  resources :bank_accounts, only: [:new, :create]
+  resources :stripe_accounts
 
   devise_for :property_managers, path: 'property_managers', controllers: {
     sessions: 'property_managers/sessions',

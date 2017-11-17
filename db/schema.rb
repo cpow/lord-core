@@ -10,13 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171115204851) do
+ActiveRecord::Schema.define(version: 20171117151830) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "companies", force: :cascade do |t|
     t.string "name"
+    t.string "account_type"
+    t.string "stripe_account_guid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -40,6 +42,28 @@ ActiveRecord::Schema.define(version: 20171115204851) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_property_managers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_property_managers_on_reset_password_token", unique: true
+  end
+
+  create_table "stripe_accounts", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "account_type"
+    t.string "dob_month"
+    t.string "dob_day"
+    t.string "dob_year"
+    t.string "address_city"
+    t.string "address_state"
+    t.string "address_line1"
+    t.string "address_postal"
+    t.boolean "tos", default: false
+    t.string "ssn_last_4"
+    t.string "business_name"
+    t.string "business_tax_id"
+    t.string "business_id_number"
+    t.string "verification_document"
+    t.string "stripe_account_guid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

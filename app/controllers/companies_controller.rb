@@ -37,13 +37,6 @@ class CompaniesController < ApplicationController
 
   private
 
-  def can_create_company
-    if current_property_manager.has_company?
-      flash[:error] = 'You already have a company, you cannot create another'
-      redirect_to page_path('property_manager_home')
-    end
-  end
-
   def company_params
     params.require(:company).permit(:name)
   end
