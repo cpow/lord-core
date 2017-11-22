@@ -1,8 +1,7 @@
 # This is a list of TODOs for lordcore
 
 ## Big Stuff!
- * things that will take a while to do, but really need to be done and are
-     essential.
+ *things that will take a while to do, but really need to be done and are essential.*
 
 [ ] Create properties/units for property managers to.... manage
 [ ] Create login portal for users.
@@ -12,8 +11,7 @@ for this)
 company
 
 ## Smaller Stuff!
- * stuff that wont take as much time to do. and are mostly just bugs or
-      refactors.
+ *stuff that wont take as much time to do. and are mostly just bugs or refactors.*
 
 [ ] re-do the editing of a stripe account
 * This is currently pretty terrible. and is just copy+pasted from the original
