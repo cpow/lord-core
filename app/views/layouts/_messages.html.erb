@@ -1,5 +1,8 @@
 <% flash.each do |key, value| %>
-  <div class="alert alert-<%= key %>">
+  <%# NOTE: stupid hack for bootstrap. refactor when you can %>
+  <% klass = key == 'notice' ? 'info' : key %>
+
+  <div class="alert alert-<%= klass %>">
     <a href="#" data-dismiss="alert" class="close">×</a>
     <ul class="list-unstyled">
       <% if value.is_a? String %>

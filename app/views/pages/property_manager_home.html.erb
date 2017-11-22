@@ -7,7 +7,27 @@
       link_to "Edit company details",
       edit_company_path(current_property_manager&.company)
     %>
+
+    <% unless current_property_manager.company.stripe_account_guid.present? %>
+      <br>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="alert alert-info text-center shadow-sm">
+            <h4>
+              You must create a payment account to process payments
+            </h4>
+            <p>
+            <%= link_to "Add Payment Processing",
+              new_stripe_account_path,
+              class: "btn btn-lg btn-info btn-custom" %>
+            </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
   <% end %>
+
+
 <% else %>
   <%= link_to "Create Your Company!", new_company_path %>
 <% end %>

@@ -32,6 +32,10 @@ class PropertyManager < ApplicationRecord
     company.present?
   end
 
+  def dummy_company_name
+    "#{email} company"
+  end
+
   def is_company_admin?
     has_company? && admin
   end

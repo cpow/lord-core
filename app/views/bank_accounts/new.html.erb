@@ -1,52 +1,58 @@
 <%= content_for :page_title, "Add a new bank account" %>
-<% content_for(:header) do %>
-  <script src="https://js.stripe.com/v2/"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.payment/1.4.1/jquery.payment.js"></script>
-  <script>
-    // Set your Stripe publishable API key here
-    Stripe.setPublishableKey("<%= ENV['PUBLISHABLE_KEY'] %>");
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+  var stripe = Stripe("<%= ENV['PUBLISHABLE_KEY'] %>");
 
-    $(function() {
-      var $form = $('#payment-form');
-      $form.submit(function(event) {
-        // Clear any errors
-        $form.find('.has-error').removeClass('has-error');
+  $(function() {
+    var $form = $('#payment-form');
+    $form.submit(function(event) {
+      // Clear any errors
+      $form.find('.has-error').removeClass('has-error');
 
-        // Disable the submit button to prevent repeated clicks:
-        $form.find('.submit').prop('disabled', true).html("<i class='fa fa-spinner fa-spin'></i> Adding bank account...");
+      // Disable the submit button to prevent repeated clicks:
+      $form.find('.submit').prop('disabled', true).html("<i class='fa fa-spinner fa-spin'></i> Adding bank account...");
 
-        // Request a token from Stripe:
-        Stripe.bankAccount.createToken($form, stripeResponseHandler);
-
-        // Prevent the form from being submitted:
-        return false;
-      });
-    });
-
-    function stripeResponseHandler(status, response) {
-      var $form = $('#payment-form');
-
-      if (response.error) {
-        // Show the errors on the form
-        $form.find('.errors').text(response.error.message).addClass('alert alert-danger');
-        $form.find('.' + response.error.param).parent('.form-group').addClass('has-error');
-        $form.find('button').prop('disabled', false).text('Add Bank Account'); // Re-enable submission
-      } 
-      else { // Token was created!
-        $form.find('.submit').html("<i class='fa fa-check'></i> Account added");
-
-        // Get the token ID:
-        var token = response.id;
-
-        // Insert the token and name into the form so it gets submitted to the server:
-        $form.append($('<input type="hidden" name="stripeToken" />').val(token));
-
-        // Submit the form:
-        $form.get(0).submit();
+      var formData = {
+        country: $form.find("select#country").val(),
+        currency: $form.find("select#currency").val(),
+        routing_number: $form.find("input#routing_number").val(),
+        account_number: $form.find("input#account_number").val(),
+        account_holder_name: $form.find("input#account_holder_name").val(),
+        account_holder_type: $form.find("select#account_holder_type").val()
       }
+
+      stripe.createToken('bank_account', formData).then((result) => {
+        return stripeResponseHandler(result);
+      });
+
+      // Prevent the form from being submitted:
+      return false;
+    });
+  });
+
+  function stripeResponseHandler(result) {
+    var $form = $('#payment-form');
+
+    if (result.error) {
+      // Show the errors on the form
+      $form.find('.errors').text(result.error.message).addClass('alert alert-danger');
+      $form.find('.' + result.error.param).parent('.form-group').addClass('has-error');
+      $form.find('button').prop('disabled', false).text('Add Bank Account'); // Re-enable submission
     }
-  </script>
-<% end %>
+    else { // Token was created!
+      $form.find('.submit').html("<i class='fa fa-check'></i> Account added");
+
+      // Get the token ID:
+      var token = result.token.id;
+
+      // Insert the token and name into the form so it gets submitted to the server:
+      $form.append($('<input type="hidden" name="stripeToken" />').val(token));
+
+      // Submit the form:
+      $form.get(0).submit();
+    };
+  };
+</script>
 <div class="container">
   <div class="row topspace-lg">
     <div class="col-md-6 col-md-offset-3">

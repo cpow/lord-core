@@ -33,8 +33,9 @@ class BankAccountsController < ApplicationController
       account = Stripe::Account.retrieve(current_company.stripe_account_guid)
 
       # Create the bank account
-      account.external_account = params[:stripeToken]
-      account.save
+      token = params[:stripeToken]
+      account.external_accounts.create({ external_account: token })
+
 
       # Success, send on to the dashboard
       flash[:success] = 'Your bank account has been added!'

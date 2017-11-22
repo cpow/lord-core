@@ -3,10 +3,30 @@
     <form action="/bank_accounts" method="POST" id="payment-form">
       <div class="errors"></div>
       <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>Account Holder Name</label>
+            <input class="form-control input-lg" id="account_holer_name">
+            </input>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>Account Type</label>
+            <select class="form-control input-lg" id="account_holer_type">
+              <option value="company">Company</option>
+              <option value="individual">Individual</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
         <div class="col-md-8">
           <div class="form-group">
             <label>Country</label>
-            <select class="form-control input-lg" id="country" data-stripe="country">
+            <select class="form-control input-lg" id="country">
               <option value="US">United States</option>
             </select>
           </div>
@@ -14,7 +34,7 @@
         <div class="col-md-4">
           <div class="form-group">
             <label>Currency</label>
-            <select class="form-control input-lg" id="currency" data-stripe="currency">
+            <select class="form-control input-lg" id="currency">
               <option value="usd">USD</option>
             </select>
           </div>
@@ -24,13 +44,13 @@
         <div class="col-md-6" id="routing_number_div">
           <div class="form-group">
             <label id="routing_number_label">Routing Number</label>
-            <input class="form-control input-lg bank_account" id="routing_number" type="tel" size="12" data-stripe="routing_number" value="110000000" autocomplete="off">
+            <input class="form-control input-lg bank_account" id="routing_number" type="tel" size="12" value="110000000" autocomplete="off">
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
             <label id="account_number_label">Account Number</label>
-            <input class="form-control input-lg bank_account" id="account_number" type="tel" size="20" data-stripe="account_number" value="000123456789" autocomplete="off">
+            <input class="form-control input-lg bank_account" id="account_number" type="tel" size="20" value="000123456789" autocomplete="off">
           </div>
         </div>
       </div>
@@ -43,3 +63,4 @@
     </form>
   </div>
 </div>
+

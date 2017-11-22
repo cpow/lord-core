@@ -6,11 +6,11 @@ class ApplicationController < ActionController::Base
     render view
   end
 
-  private
-
   def current_company
     current_property_manager.company
   end
+
+  private
 
   def can_manage_company!
     current_property_manager&.is_company_admin?
