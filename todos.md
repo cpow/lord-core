@@ -13,6 +13,9 @@ company
 ## Smaller Stuff!
  *stuff that wont take as much time to do. and are mostly just bugs or refactors.*
 
+[ ] add simple_form with bootstrap initializer for form stuff
+* this will make everything look 1 million x better in forms
+
 [ ] re-do the editing of a stripe account
 * This is currently pretty terrible. and is just copy+pasted from the original
   thing

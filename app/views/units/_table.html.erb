@@ -1,0 +1,23 @@
+<table class="table table-striped">
+  <thead class="thead-default">
+    <tr>
+      <th scope="row">ID</th>
+      <th scope="row">Description</th>
+      <th scope="row">Name</th>
+      <th scope="row" colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% units.each do |unit| %>
+      <tr>
+        <td><%= unit.id %></td>
+        <td><%= unit.description %></td>
+        <td><%= unit.name %></td>
+        <td><%= link_to 'Show', property_unit_path(unit.property, unit) %></td>
+        <td><%= link_to 'Edit', edit_property_unit_path(unit.property, unit) %></td>
+        <td><%= link_to 'Destroy', property_unit_path(unit.property, unit), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

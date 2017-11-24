@@ -1,10 +1,34 @@
+require 'faker'
+
 FactoryBot.define do
-  factory :stripe_account do
-    
+  factory :residency do
+    unit
+    property
+    company
+    user
   end
+
+  factory :unit do
+    property
+    description Faker::Hipster.sentence(3)
+    name Faker::RickAndMorty.character
+  end
+
+  factory :property do
+    address_city Faker::Address.city
+    address_line1 Faker::Address.street_address
+    address_state Faker::Address.state_abbr
+    address_postal Faker::Address.postcode
+    name Faker::App.name
+    description Faker::Hipster.sentence(4)
+    company
+  end
+
+  factory :stripe_account do
+  end
+
   factory :property_manager do
-    first_name 'chris'
-    last_name 'power'
+    name Faker::RickAndMorty.character
     sequence(:email) { |n| "manager#{n}@example.com" }
     password 'test1234'
 
@@ -14,8 +38,7 @@ FactoryBot.define do
   end
 
   factory :user do
-    first_name 'chris'
-    last_name 'power'
+    name Faker::GameOfThrones.character
     sequence(:email) { |n| "tenant#{n}@example.com" }
     password 'test1234'
   end

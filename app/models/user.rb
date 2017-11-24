@@ -13,8 +13,11 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :string
 #  last_sign_in_ip        :string
-#  first_name             :string
-#  last_name              :string
+#  name                   :string
+#  invite_token           :string
+#  invited_by_id          :integer
+#  invite_date            :datetime
+#  activated              :boolean          default(FALSE)
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
@@ -24,4 +27,18 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  has_secure_token :invite_token
+
+  has_many :units,      through: :residencies
+  has_many :properties, through: :residencies
+  has_many :companies,  through: :residencies
+
+  def set_placeholder_password
+    self.password = unique_password
+  end
+
+  def unique_password
+    @unique_password ||= SecureRandom.base58(24)
+  end
 end

@@ -1,0 +1,49 @@
+<div class="card">
+  <h1 class="card-header">Property<%= @property.name %></h1>
+  <div class="card-body">
+    <p>
+      <strong>Address city:</strong>
+      <%= @property.address_city %>
+    </p>
+
+    <p>
+      <strong>Address line1:</strong>
+      <%= @property.address_line1 %>
+    </p>
+
+    <p>
+      <strong>Address state:</strong>
+      <%= @property.address_state %>
+    </p>
+
+    <p>
+      <strong>Address postal:</strong>
+      <%= @property.address_postal %>
+    </p>
+
+    <p>
+      <strong>Name:</strong>
+      <%= @property.name %>
+    </p>
+
+    <p>
+      <strong>Description:</strong>
+      <%= @property.description %>
+    </p>
+
+    <%= link_to 'Add Unit to this property', new_property_unit_path(@property), class: 'btn btn-primary' %>
+    <%= link_to 'New Residency', new_property_residency_path(@property), class: 'btn btn-primary' %>
+
+    <%= link_to 'Edit', edit_property_path(@property) %> |
+    <%= link_to 'Back', properties_path %>
+  </div>
+</div>
+
+<br>
+
+<div class="card">
+  <h1 class="card-header">Units</h1>
+  <div class="card-body">
+    <%= render 'units/table', units: @property.units %>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+<div class="card">
+  <h1 class="card-header">Properties</h1>
+  <div class="card-body">
+    <%= render partial: 'properties/table', locals: { properties: @properties } %>
+    <%= link_to 'New Property', new_property_path, class: "btn btn-info" %>
+  </div>
+</div>

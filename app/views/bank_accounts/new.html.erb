@@ -53,21 +53,17 @@
     };
   };
 </script>
-<div class="container">
-  <div class="row topspace-lg">
-    <div class="col-md-6 col-md-offset-3">
-      <h1 class="text-center">Add a bank account</h1>
-      <div>
-        <%= render 'bank_account_form' %>
-        <div class="hint">
-          <p>
-            <i class="fa fa-info-circle"></i> Hint: use <strong>110000000</strong> and <strong>000123456789</strong> to simulate a successful transfer.
-          </p>
-          <p class="text-center">
-            <a href="https://stripe.com/docs/testing#managed-accounts" target="_blank">Other test bank account numbers</a>
-          </p>
-        </div>
-      </div>
+<div class="card">
+  <h1 class="card-header">Add a bank account</h1>
+  <div class="card-body">
+    <%= render 'bank_account_form' %>
+    <div class="hint">
+      <p>
+        <i class="fa fa-info-circle"></i> Hint: use <strong>110000000</strong> and <strong>000123456789</strong> to simulate a successful transfer.
+      </p>
+      <p class="text-center">
+        <a href="https://stripe.com/docs/testing#managed-accounts" target="_blank">Other test bank account numbers</a>
+      </p>
     </div>
   </div>
 </div>

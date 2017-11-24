@@ -10,13 +10,9 @@
 
   <body>
     <%= render 'shared/navs/main_nav' %>
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <%= render 'layouts/messages' %>
-          <%= yield %>
-        </div>
-      </div>
+    <div class="container-fluid">
+      <%= render 'layouts/messages' %>
+      <%= yield %>
     </div>
   </body>
 </html>

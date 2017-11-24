@@ -1,0 +1,10 @@
+<div class="card">
+  <h1 class="card-header">Units</h1>
+  <div class="card-body">
+    <%= render 'units/table', units: @units %>
+  </div>
+
+  <br>
+
+  <%= link_to 'New Unit', new_property_unit_path(params[:property_id]) %>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171117151830) do
+ActiveRecord::Schema.define(version: 20171124175457) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,18 @@ ActiveRecord::Schema.define(version: 20171117151830) do
     t.string "name"
     t.string "account_type"
     t.string "stripe_account_guid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "properties", force: :cascade do |t|
+    t.string "address_city", null: false
+    t.string "address_line1", null: false
+    t.string "address_state", null: false
+    t.string "address_postal", null: false
+    t.string "name", null: false
+    t.text "description", null: false
+    t.integer "company_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -34,14 +46,26 @@ ActiveRecord::Schema.define(version: 20171117151830) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.string "first_name"
-    t.string "last_name"
+    t.string "name"
     t.integer "company_id"
     t.boolean "admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_property_managers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_property_managers_on_reset_password_token", unique: true
+  end
+
+  create_table "residencies", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "property_id"
+    t.integer "company_id"
+    t.integer "unit_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_residencies_on_company_id"
+    t.index ["property_id"], name: "index_residencies_on_property_id"
+    t.index ["unit_id"], name: "index_residencies_on_unit_id"
+    t.index ["user_id"], name: "index_residencies_on_user_id"
   end
 
   create_table "stripe_accounts", force: :cascade do |t|
@@ -66,6 +90,14 @@ ActiveRecord::Schema.define(version: 20171117151830) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "units", force: :cascade do |t|
+    t.integer "property_id", null: false
+    t.text "description"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -77,11 +109,15 @@ ActiveRecord::Schema.define(version: 20171117151830) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.string "first_name"
-    t.string "last_name"
+    t.string "name"
+    t.string "invite_token"
+    t.integer "invited_by_id"
+    t.datetime "invite_date"
+    t.boolean "activated", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["invite_token"], name: "index_users_on_invite_token", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 

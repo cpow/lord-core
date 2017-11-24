@@ -30,8 +30,7 @@ class DeviseCreatePropertyManagers < ActiveRecord::Migration[5.1]
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
 
-      t.string :first_name
-      t.string :last_name
+      t.string :name
       t.integer :company_id
       t.boolean :admin, default: false
 

@@ -1,0 +1,37 @@
+<%= form_with(model: property, local: true) do |form| %>
+  <%= render partial: 'layouts/errors', locals: { object: property } %>
+
+  <div class="form-group">
+    <%= form.label :address_city %>
+    <%= form.text_field :address_city, id: :property_address_city, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :address_line1 %>
+    <%= form.text_field :address_line1, id: :property_address_line1, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :address_state %>
+    <%= form.select(:address_state, options_for_select(states, property[:address_state]), {}, { class: "form-control input-lg" }) %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :address_postal %>
+    <%= form.text_field :address_postal, id: :property_address_postal, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :property_name, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :description %>
+    <%= form.text_area :description, id: :property_description, class: 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: 'btn btn-primary' %>
+  </div>
+<% end %>

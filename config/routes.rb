@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :properties do
+    resources :units
+    resources :residencies
+  end
+
   resources :companies
   resources :bank_accounts, only: [:new, :create]
   resources :stripe_accounts

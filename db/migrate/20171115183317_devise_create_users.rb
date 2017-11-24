@@ -19,8 +19,13 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       t.string   :current_sign_in_ip
       t.string   :last_sign_in_ip
 
-      t.string :first_name
-      t.string :last_name
+      t.string :name
+
+      ## Invitable
+      t.string :invite_token
+      t.integer :invited_by_id
+      t.datetime :invite_date
+      t.boolean :activated, default: false
 
       ## Confirmable
       # t.string   :confirmation_token
@@ -38,6 +43,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
     end
 
     add_index :users, :email,                unique: true
+    add_index :users, :invite_token,         unique: true
     add_index :users, :reset_password_token, unique: true
     # add_index :users, :confirmation_token,   unique: true
     # add_index :users, :unlock_token,         unique: true

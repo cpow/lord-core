@@ -13,9 +13,9 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :string
 #  last_sign_in_ip        :string
-#  first_name             :string
-#  last_name              :string
+#  name                   :string
 #  company_id             :integer
+#  admin                  :boolean          default(FALSE)
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
