@@ -34,6 +34,8 @@ class User < ApplicationRecord
   has_many :properties, through: :residencies
   has_many :companies,  through: :residencies
 
+  scope :inactive, -> { where(activated: false) }
+
   def set_placeholder_password
     self.password = unique_password
   end

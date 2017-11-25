@@ -4,4 +4,4 @@
 
 <p>Here is some move-in information</p>
 
-<p>Here we will link you to create an account on LordCore</p>
+<%= link_to "Accept invitation", new_user_invitation_acceptance_path(@user.invite_token) %>

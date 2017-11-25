@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     resources :residencies
   end
 
+
   resources :companies
   resources :bank_accounts, only: [:new, :create]
   resources :stripe_accounts
@@ -17,6 +18,10 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
     registrations: 'users/registrations'
   }
+
+  resources :user do
+    resources :invitation_acceptances
+  end
 
   authenticated :user do
     root 'high_voltage/pages#show', id: 'user_home', as: :authenticated_user_root

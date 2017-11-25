@@ -1,0 +1,26 @@
+<div class="card">
+  <h1 class="card-header">
+    USER: <%= @user.email %>
+  </h1>
+
+  <div class="card-body">
+    <%= form_with(model: @user, local: true, url: user_invitation_acceptances_path, method: :post) do |f| %>
+      <%= render partial: 'layouts/errors', locals: { object: @user } %>
+      <p class"alert alert-notice">To accept the invitation, please create a password</p>
+
+      <div class="form-group">
+        <%= f.label :password %>
+        <%= f.password_field :password, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password_confirmation%>
+        <%= f.password_field :passwor_confirmation, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.submit 'Accept Invitation', class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

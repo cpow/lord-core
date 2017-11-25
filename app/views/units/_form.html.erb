@@ -1,16 +1,5 @@
 <%= form_with(model: unit, local: true, url: property_units_path) do |form| %>
-  <% if unit.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(unit.errors.count, "error") %> prohibited this unit from being saved:</h2>
-
-      <ul>
-      <% unit.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+  <%= render partial: 'layouts/errors', locals: { object: unit } %>
   <div class="field">
     <%= form.label :description %>
     <%= form.text_area :description, id: :unit_description %>
