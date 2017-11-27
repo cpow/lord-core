@@ -18,6 +18,7 @@
 #  invited_by_id          :integer
 #  invite_date            :datetime
 #  activated              :boolean          default(FALSE)
+#  stripe_account_guid    :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
@@ -30,9 +31,11 @@ class User < ApplicationRecord
 
   has_secure_token :invite_token
 
+  has_many :residencies
   has_many :units,      through: :residencies
   has_many :properties, through: :residencies
   has_many :companies,  through: :residencies
+  has_many :payments
 
   scope :inactive, -> { where(activated: false) }
 

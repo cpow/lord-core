@@ -25,6 +25,7 @@ gem 'bootstrap', '~> 4.0.0.beta2.1'
 gem 'jquery-rails'
 gem 'devise'
 gem 'stripe'
+gem 'plaid'
 gem 'kaminari'
 
 # Use CoffeeScript for .coffee assets and views

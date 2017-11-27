@@ -1,6 +1,12 @@
 require 'faker'
 
 FactoryBot.define do
+  factory :payment do
+    amount 1
+    amount_refunded 1
+    unit_id 1
+    user_id 1
+  end
   factory :residency do
     unit
     property

@@ -18,6 +18,7 @@
 #  invited_by_id          :integer
 #  invite_date            :datetime
 #  activated              :boolean          default(FALSE)
+#  stripe_account_guid    :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #

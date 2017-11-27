@@ -4,7 +4,9 @@ Rails.application.routes.draw do
     resources :residencies
   end
 
+  resources :payments
 
+  resources :tenant_plaid_accounts, only: [:new, :create]
   resources :companies
   resources :bank_accounts, only: [:new, :create]
   resources :stripe_accounts

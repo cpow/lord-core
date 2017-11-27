@@ -27,6 +27,9 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       t.datetime :invite_date
       t.boolean :activated, default: false
 
+      ## Stripe stuff
+      t.string :stripe_account_guid
+
       ## Confirmable
       # t.string   :confirmation_token
       # t.datetime :confirmed_at
