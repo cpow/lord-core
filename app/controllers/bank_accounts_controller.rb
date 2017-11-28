@@ -36,7 +36,6 @@ class BankAccountsController < ApplicationController
       token = params[:stripeToken]
       account.external_accounts.create({ external_account: token })
 
-
       # Success, send on to the dashboard
       flash[:success] = 'Your bank account has been added!'
       redirect_to page_path('property_manager_home')

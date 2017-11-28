@@ -20,6 +20,10 @@ class Property < ApplicationRecord
   has_many :residencies
   has_many :users, through: :residencies
 
+  def payments
+    Payment.where(unit_id: units.pluck(:id))
+  end
+
   validates :address_line1,
     :address_postal,
     :address_city,

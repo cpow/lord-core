@@ -1,0 +1,17 @@
+<table class="table table-striped">
+  <thead class="thead-default">
+    <tr>
+      <th scope="row">ID</th>
+      <th scope="row">amount</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% payments.each do |payment| %>
+      <tr>
+        <td><%= payment.id %></td>
+        <td><%= payment.amount %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

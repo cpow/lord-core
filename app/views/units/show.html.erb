@@ -1,20 +1,37 @@
-<p id="notice"><%= notice %></p>
+<div class="card">
+  <h2 class="card-header">
+    <%= @unit.name %>
+  </h2>
+  <div class="card-body">
+    <p>
+      <strong>Property:</strong>
+      <%= @unit.property_id %>
+    </p>
 
-<p>
-  <strong>Property:</strong>
-  <%= @unit.property_id %>
-</p>
+    <p>
+      <strong>Description:</strong>
+      <%= @unit.description %>
+    </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @unit.description %>
-</p>
+    <p>
+      <strong>Name:</strong>
+      <%= @unit.name %>
+    </p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @unit.name %>
-</p>
 
-<%= link_to 'Edit', edit_property_unit_path(@unit.property, @unit) %> |
-<%= link_to 'Back', property_units_path(@unit.property) %> |
-<%= link_to 'Back To Property', property_path(@unit.property) %>
+    <%= link_to 'Edit', edit_property_unit_path(@unit.property, @unit) %> |
+    <%= link_to 'Back', property_units_path(@unit.property) %> |
+    <%= link_to 'Back To Property', property_path(@unit.property) %>
+  </div>
+</div>
+
+<% if @unit.payments %>
+  <div class="card">
+    <h2 class="card-header">
+      Payments
+    </h2>
+    <div class="card-body">
+      <%= render 'shared/payments/table', payments: @unit.payments %>
+    </div>
+  </div>
+<% end %>

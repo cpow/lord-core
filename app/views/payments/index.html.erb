@@ -1,8 +1,3 @@
 <div class="card">
-  <ul>
-    <% @payments.each do |payment| %>
-      <li>payment.amount</li>
-      <li>payment.unit.name</li>
-    <% end %>
-  </ul>
+  <%= render 'shared/payments/table', payments: @payments %>
 </div>

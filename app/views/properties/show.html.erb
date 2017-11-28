@@ -41,9 +41,23 @@
 
 <br>
 
+<% if @property.payments %>
+  <div class="card">
+    <h1 class="card-header">
+      Payments
+    </h1>
+    <div class="card-body">
+      <%= render 'shared/payments/table', payments: @property.payments %>
+    </div>
+  </div>
+<% end %>
+
+<br>
+
 <div class="card">
   <h1 class="card-header">Units</h1>
   <div class="card-body">
     <%= render 'units/table', units: @property.units %>
   </div>
 </div>
+

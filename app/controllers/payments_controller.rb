@@ -12,19 +12,24 @@ class PaymentsController < ApplicationController
   def create
     # NOTE: refactor this mess
     company_account = current_user.residencies.last.company.stripe_account_guid
-    bank_account = Stripe::Customer.retrieve(current_user.stripe_account_guid).sources.data.first.id
 
-    charge = Stripe::Charge.create({
-      source: bank_account,
+    token = Stripe::Token.create({
+              customer: current_user.stripe_account_guid,
+            }, {stripe_account: company_account})
+
+    data = {
+      source: token,
       amount: amount,
-      currency: "usd",
-      application_fee: amount/10, # Take a 10% application fee for the platform
-      destination: current_user.stripe_account_guid
-    })
+      application_fee: (amount / 10),
+      currency: 'usd'
+    }
+
+    Stripe::Charge
+      .create(data, stripe_account: company_account)
 
     local = current_user.payments.new(
       amount: amount,
-      unit_id: current_user.unit.last.id
+      unit_id: current_user.units.last.id
     )
 
     if local.save
@@ -35,11 +40,18 @@ class PaymentsController < ApplicationController
 
   private
 
+  def transaction_data
+  end
+
+  def destination_amount
+    (amount * 0.9).to_i
+  end
+
   def amount
-    params[:amount].to_i * 1000
+    (payment_params[:amount].to_i * 100).to_i
   end
 
   def payment_params
-    params.require(:payment).permit!(:user_id, :unit_id, :amount)
+    params.require(:payment).permit(:user_id, :unit_id, :amount)
   end
 end

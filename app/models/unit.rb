@@ -14,4 +14,5 @@ class Unit < ApplicationRecord
   belongs_to :property
 
   validates :name, :property_id, presence: true
+  has_many :payments
 end

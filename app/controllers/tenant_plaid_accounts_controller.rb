@@ -6,14 +6,12 @@ class TenantPlaidAccountsController < ApplicationController
   end
 
   def create
-
     # If a plaid token is submitted, request a bank token
     if params[:public_token] && params[:account_id]
       public_token = params[:public_token]
       account_id = params[:account_id]
 
       # Get the Stripe bank token from Plaid
-
       exchange_token_response = PLAID.item.public_token.exchange(public_token)
       access_token = exchange_token_response['access_token']
 
@@ -29,9 +27,6 @@ class TenantPlaidAccountsController < ApplicationController
         )
 
         current_user.update_attributes!(stripe_account_guid: customer.id)
-
-        # Create session for the bank account
-        session[:bank_account] = customer.sources.data.first.id
 
         # Direct the customer to pay
         flash[:success] = 'Your bank account has been connected.'
