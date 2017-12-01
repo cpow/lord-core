@@ -1,0 +1,15 @@
+<ul class="nav flex-column align-items-start bg-white signed-in__sidebar">
+  <li class="nav-item d-flex flex-row align-items-center">
+    <i class="fa fa-desktop text-center text-muted p-2">
+    </i>
+    <%= link_to "Home", page_path('user_home'), class: 'p-2 text-dark' %>
+  </li>
+  <li class="nav-item d-flex flex-row align-items-center">
+    <i class="fa fa-credit-card p-2 text-center text-muted"></i>
+    <%= link_to "New Payment",
+      new_payment_path,
+      class: 'p-2 text-dark'
+    %>
+  </li>
+</ul>
+

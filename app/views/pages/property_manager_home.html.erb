@@ -17,11 +17,29 @@
 <% end %>
 
 <div class="row">
-  <div class="col-4">
+  <div class="col-6">
     <div class="card">
-      <h2 class="card-header">
+      <h3 class="card-header text-center">
+        <i class="fa fa-user"></i>
+        Account Information
+      </h3>
+      <div class="card-body">
+        <p>
+          <%= current_property_manager.name %>
+        </p>
+        <%= link_to 'Edit Company Info',
+          edit_company_path(current_property_manager.company),
+          class: 'btn btn-info'
+        %>
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="card">
+      <h3 class="card-header text-center">
+        <i class="fa fa-address-card-o"></i>
         Company Information
-      </h2>
+      </h3>
       <div class="card-body">
         <p>
           <%= current_property_manager.company.name %>
@@ -33,18 +51,19 @@
       </div>
     </div>
   </div>
+</div>
+<br>
 
-  <div class="col-8">
-    <div class="card">
-      <h2 class="card-header">
-        Properties
-      </h2>
-      <div class="card-body">
-        <%= render partial: 'properties/table',
-          locals: { properties: current_property_manager.company.properties }
-        %>
-        <%= link_to 'See All Properties', properties_path, class: 'btn btn-info' %>
-      </div>
-    </div>
+
+<div class="card">
+  <h3 class="card-header text-center">
+    <i class="fa fa-home"></i>
+    Properties
+  </h3>
+  <div class="card-body">
+    <%= render partial: 'properties/table',
+      locals: { properties: current_property_manager.company.properties }
+    %>
+    <%= link_to 'See All Properties', properties_path, class: 'btn btn-info' %>
   </div>
 </div>

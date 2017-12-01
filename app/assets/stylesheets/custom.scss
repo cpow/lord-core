@@ -1,11 +1,41 @@
 @import "bootstrap";
+
 html {
   position: relative;
   min-height: 100%;
 }
+
 body {
   padding-top: 60px;
   font-size: 16px;
   margin-bottom: 220px;
   background-color: #f6f9fc;
+}
+
+.signed-in__sidebar {
+  // background-color: #f5f2f9;
+  // border-bottom: 1px solid rgba(0,0,0,.1);
+
+  @include media-breakpoint-up(md) {
+    @supports (position: sticky) {
+      position: sticky;
+      top: 4rem;
+      z-index: 1000;
+      max-height: calc(100vh - 4rem);
+    }
+    border-right: 1px solid rgba(0,0,0,.1);
+  }
+
+  @include media-breakpoint-up(xl) {
+    max-width: 320px;
+  }
+}
+
+ul.nav.flex-column {
+  font-size: 1em;
+  li.nav-item {
+    i {
+      width: 40px;
+    }
+  }
 }

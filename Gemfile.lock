@@ -97,6 +97,8 @@ GEM
     faraday (0.13.1)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.18)
+    font-awesome-rails (4.7.0.2)
+      railties (>= 3.2, < 5.2)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     high_voltage (3.0.0)
@@ -279,6 +281,7 @@ DEPENDENCIES
   dotenv-rails
   factory_bot_rails
   faker
+  font-awesome-rails
   high_voltage (~> 3.0.0)
   jbuilder (~> 2.5)
   jquery-rails

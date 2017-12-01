@@ -11,8 +11,30 @@
   <body>
     <%= render 'shared/navs/main_nav' %>
     <div class="container-fluid">
-      <%= render 'layouts/messages' %>
-      <%= yield %>
+      <div class="row">
+        <% if current_property_manager %>
+          <div class="col-2">
+            <%= render 'shared/navs/property_manager_sidebar_nav' %>
+          </div>
+          <div class="col-10">
+            <%= render 'layouts/messages' %>
+            <%= yield %>
+          </div>
+        <% elsif current_user %>
+          <div class="col-2">
+            <%= render 'shared/navs/user_sidebar_nav' %>
+          </div>
+          <div class="col-10">
+            <%= render 'layouts/messages' %>
+            <%= yield %>
+          </div>
+        <% else %>
+          <div class="col-12">
+            <%= render 'layouts/messages' %>
+            <%= yield %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </body>
 </html>
