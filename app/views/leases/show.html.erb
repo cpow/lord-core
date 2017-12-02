@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @lease.start_date %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @lease.end_date %>
+</p>
+
+<p>
+  <strong>Payment amount:</strong>
+  <%= @lease.payment_amount %>
+</p>
+
+<p>
+  <strong>Payment due day of month:</strong>
+  <%= @lease.payment_due_day_of_month %>
+</p>
+
+<p>
+  <strong>Payment days until late:</strong>
+  <%= @lease.payment_days_until_late %>
+</p>
+
+<p>
+  <strong>Unit:</strong>
+  <%= @lease.unit_id %>
+</p>
+
+<%= link_to 'Edit', edit_lease_path(@lease) %> |
+<%= link_to 'Back', leases_path %>

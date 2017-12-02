@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :properties do
-    resources :units
+    resources :units do
+      resources :leases
+    end
     resources :residencies
   end
 
