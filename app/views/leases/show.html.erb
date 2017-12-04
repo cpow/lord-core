@@ -17,7 +17,7 @@
 
 <p>
   <strong>Payment due day of month:</strong>
-  <%= @lease.payment_due_day_of_month %>
+  <%= @lease.payment_first_date %>
 </p>
 
 <p>
@@ -30,5 +30,5 @@
   <%= @lease.unit_id %>
 </p>
 
-<%= link_to 'Edit', edit_lease_path(@lease) %> |
-<%= link_to 'Back', leases_path %>
+<%= link_to 'Edit', edit_property_unit_lease_path(@property, @unit, @lease) %> |
+<%= link_to 'Back', property_unit_leases_path(@property, @unit) %>

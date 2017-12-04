@@ -26,8 +26,8 @@ ActiveRecord::Schema.define(version: 20171202205149) do
   create_table "leases", force: :cascade do |t|
     t.datetime "start_date"
     t.datetime "end_date"
+    t.datetime "payment_first_date"
     t.integer "payment_amount"
-    t.integer "payment_due_day_of_month"
     t.integer "payment_days_until_late"
     t.integer "unit_id"
     t.datetime "created_at", null: false

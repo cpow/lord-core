@@ -4,7 +4,6 @@ RSpec.describe "leases/edit", type: :view do
   before(:each) do
     @lease = assign(:lease, Lease.create!(
       :payment_amount => 1,
-      :payment_due_day_of_month => 1,
       :payment_days_until_late => 1,
       :unit_id => 1
     ))

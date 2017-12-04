@@ -1,47 +1,46 @@
-<%= form_with(model: lease, local: true, url: property_unit_leases_path) do |form| %>
-  <% if lease.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(lease.errors.count, "error") %> prohibited this lease from being saved:</h2>
-
-      <ul>
-      <% lease.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
+<%= form_with(model: lease, local: true, url: property_unit_lease_path) do |form| %>
+  <%= render partial: 'layouts/errors', locals: { object: lease } %>
+  <div class="form-group">
     <%= form.label :start_date %>
-    <%= form.datetime_select :start_date, id: :lease_start_date %>
+    <%= form.text_field :start_date,
+      id: :lease_start_date,
+      class: 'form-control',
+      data: { provide: "datepicker", 'date-format': 'yyyy/mm/dd' } %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :end_date %>
-    <%= form.datetime_select :end_date, id: :lease_end_date %>
+    <%= form.text_field :end_date,
+      id: :lease_end_date,
+      class: 'form-control',
+      data: { provide: "datepicker", 'date-format': 'yyyy/mm/dd' } %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
+    <%= form.label :payment_first_date %>
+    <%= form.text_field :payment_first_date,
+      id: :lease_payment_first_date,
+      class: 'form-control',
+      data: { provide: 'datepicker', 'date-format': 'yyyy/mm/dd' } %>
+  </div>
+
+  <div class="form-group">
     <%= form.label :payment_amount %>
-    <%= form.number_field :payment_amount, id: :lease_payment_amount %>
+    <%= form.number_field :payment_amount, id: :lease_payment_amount, class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= form.label :payment_due_day_of_month %>
-    <%= form.number_field :payment_due_day_of_month, id: :lease_payment_due_day_of_month %>
-  </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :payment_days_until_late %>
-    <%= form.number_field :payment_days_until_late, id: :lease_payment_days_until_late %>
+    <%= form.number_field :payment_days_until_late, id: :lease_payment_days_until_late, class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :unit_id %>
-    <%= form.number_field :unit_id, id: :lease_unit_id %>
+    <%= form.number_field :unit_id, id: :lease_unit_id, class: 'form-control' %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: 'btn btn-info' %>
   </div>
 <% end %>

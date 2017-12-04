@@ -1,5 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Lease, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe '#total_due' do
+    it 'calculates total due from months and payments' do
+    end
+  end
 end

@@ -4,17 +4,18 @@ FactoryBot.define do
   factory :lease do
     start_date "2017-12-02 15:18:24"
     end_date "2017-12-02 15:18:24"
-    payment_amount 1
-    payment_due_day_of_month 1
-    payment_days_until_late 1
-    unit_id 1
+    payment_amount 1234
+    payment_first_date
+    payment_days_until_late 3
+    unit
   end
+
   factory :payment do
-    amount 1
-    amount_refunded 1
-    unit_id 1
-    user_id 1
+    unit
+    user
+    amount 10000
   end
+
   factory :residency do
     unit
     property

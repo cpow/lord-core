@@ -5,13 +5,11 @@ RSpec.describe "leases/index", type: :view do
     assign(:leases, [
       Lease.create!(
         :payment_amount => 2,
-        :payment_due_day_of_month => 3,
         :payment_days_until_late => 4,
         :unit_id => 5
       ),
       Lease.create!(
         :payment_amount => 2,
-        :payment_due_day_of_month => 3,
         :payment_days_until_late => 4,
         :unit_id => 5
       )

@@ -1,7 +1,6 @@
 class LeasesController < ApplicationController
+  before_action :set_property, :set_unit
   before_action :set_lease, only: [:show, :edit, :update, :destroy]
-  before_action :set_property, only: [:show, :edit, :update, :destroy, :new]
-  before_action :set_unit, only: [:show, :edit, :update, :destroy, :new]
 
   # GET /leases
   # GET /leases.json
@@ -28,28 +27,20 @@ class LeasesController < ApplicationController
   def create
     @lease = @unit.leases.new(lease_params)
 
-    respond_to do |format|
-      if @lease.save
-        format.html { redirect_to @lease, notice: 'Lease was successfully created.' }
-        format.json { render :show, status: :created, location: @lease }
-      else
-        format.html { render :new }
-        format.json { render json: @lease.errors, status: :unprocessable_entity }
-      end
+    if @lease.save
+      redirect_to [@property, @unit, @lease], notice: 'Lease was successfully updated.'
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /leases/1
   # PATCH/PUT /leases/1.json
   def update
-    respond_to do |format|
-      if @lease.update(lease_params)
-        format.html { redirect_to @lease, notice: 'Lease was successfully updated.' }
-        format.json { render :show, status: :ok, location: @lease }
-      else
-        format.html { render :edit }
-        format.json { render json: @lease.errors, status: :unprocessable_entity }
-      end
+    if @lease.update(lease_params)
+      redirect_to [@property, @unit, @lease], notice: 'Lease was successfully updated.'
+    else
+      render :edit
     end
   end
 
@@ -66,7 +57,7 @@ class LeasesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_lease
-      @lease = current_unit.leases.find(params[:id])
+      @lease = @unit.leases.find(params[:id])
     end
 
     def set_property
@@ -79,6 +70,6 @@ class LeasesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def lease_params
-      params.require(:lease).permit(:unit_id, :start_date, :end_date, :payment_amount, :payment_due_day_of_month, :payment_days_until_late, :unit_id)
+      params.require(:lease).permit(:unit_id, :start_date, :end_date, :payment_amount, :payment_first_date, :payment_days_until_late, :unit_id)
     end
 end

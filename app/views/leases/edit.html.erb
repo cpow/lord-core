@@ -2,5 +2,5 @@
 
 <%= render 'form', lease: @lease %>
 
-<%= link_to 'Show', @lease %> |
+<%= link_to 'Show', [@property, @unit, @lease] %> |
 <%= link_to 'Back', property_unit_leases_path(@property, @unit) %>
