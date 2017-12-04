@@ -26,9 +26,9 @@ class LeasesController < ApplicationController
   # POST /leases.json
   def create
     @lease = @unit.leases.new(lease_params)
-
     if @lease.save
-      redirect_to [@property, @unit, @lease], notice: 'Lease was successfully updated.'
+      create_scheduled_payments_for_lease
+      redirect_to [@property, @unit, @lease], notice: 'Lease was successfully created.'
     else
       render :new
     end
@@ -60,6 +60,10 @@ class LeasesController < ApplicationController
       @lease = @unit.leases.find(params[:id])
     end
 
+    def create_scheduled_payments_for_lease
+      ScheduledPayment::CreateFromLease.new(lease: @lease).create_payments
+    end
+
     def set_property
       @property ||= Property.find(params[:property_id])
     end
@@ -70,6 +74,6 @@ class LeasesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def lease_params
-      params.require(:lease).permit(:unit_id, :start_date, :end_date, :payment_amount, :payment_first_date, :payment_days_until_late, :unit_id)
+      params.require(:lease).permit(:unit_id, :start_date, :end_date, :payment_amount, :payment_first_date, :payment_reminder_days, :payment_days_until_late, :unit_id)
     end
 end

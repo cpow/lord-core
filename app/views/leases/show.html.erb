@@ -32,3 +32,9 @@
 
 <%= link_to 'Edit', edit_property_unit_lease_path(@property, @unit, @lease) %> |
 <%= link_to 'Back', property_unit_leases_path(@property, @unit) %>
+
+<hr>
+
+<h2>Scheduled payments</h2>
+
+<%= render partial: 'scheduled_payments/table', locals: { scheduled_payments: @lease.scheduled_payments } %>

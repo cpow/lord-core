@@ -1,0 +1,26 @@
+<table class="table table-striped">
+  <thead class="thead-default">
+    <tr>
+      <th scope="row">ID</th>
+      <th scope="row">Unit ID</th>
+      <th scope="row">Due Date</th>
+      <th scope="row">Reminder Date</th>
+      <th scope="row">Past Due Date</th>
+      <th scope="row">Active (yes/no)</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% scheduled_payments.each do |scheduled_payment| %>
+      <tr>
+        <td><%= scheduled_payment.id %></td>
+        <td><%= scheduled_payment.unit_id %></td>
+        <td><%= scheduled_payment.due_date %></td>
+        <td><%= scheduled_payment.reminder_date %></td>
+        <td><%= scheduled_payment.past_due_date %></td>
+        <td><%= scheduled_payment.active %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

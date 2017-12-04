@@ -1,12 +1,21 @@
 require 'faker'
 
 FactoryBot.define do
+  factory :scheduled_payment do
+    company_id 1
+    unit_id 1
+    due_date "2017-12-04 11:46:39"
+    reminder_date "2017-12-04 11:46:39"
+    past_due_date "2017-12-04 11:46:39"
+  end
+
   factory :lease do
-    start_date "2017-12-02 15:18:24"
-    end_date "2017-12-02 15:18:24"
-    payment_amount 1234
-    payment_first_date
+    start_date DateTime.parse("2017-12-02")
+    end_date DateTime.parse("2018-12-02")
+    payment_amount 1550
+    payment_first_date DateTime.parse("2017-12-02")
     payment_days_until_late 3
+    payment_reminder_days 3
     unit
   end
 

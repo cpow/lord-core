@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171202205149) do
+ActiveRecord::Schema.define(version: 20171204164639) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20171202205149) do
     t.datetime "payment_first_date"
     t.integer "payment_amount"
     t.integer "payment_days_until_late"
+    t.integer "payment_reminder_days"
     t.integer "unit_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -88,6 +89,18 @@ ActiveRecord::Schema.define(version: 20171202205149) do
     t.index ["property_id"], name: "index_residencies_on_property_id"
     t.index ["unit_id"], name: "index_residencies_on_unit_id"
     t.index ["user_id"], name: "index_residencies_on_user_id"
+  end
+
+  create_table "scheduled_payments", force: :cascade do |t|
+    t.integer "company_id", null: false
+    t.integer "unit_id", null: false
+    t.integer "lease_id", null: false
+    t.datetime "due_date"
+    t.datetime "reminder_date"
+    t.datetime "past_due_date"
+    t.boolean "active", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "stripe_accounts", force: :cascade do |t|

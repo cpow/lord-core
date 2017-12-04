@@ -6,6 +6,7 @@ class CreateLeases < ActiveRecord::Migration[5.1]
       t.datetime :payment_first_date
       t.integer :payment_amount
       t.integer :payment_days_until_late
+      t.integer :payment_reminder_days
       t.integer :unit_id
 
       t.timestamps
