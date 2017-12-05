@@ -23,6 +23,17 @@ ActiveRecord::Schema.define(version: 20171204164639) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "lease_payments", force: :cascade do |t|
+    t.integer "unit_id", null: false
+    t.integer "lease_id", null: false
+    t.datetime "due_date"
+    t.datetime "reminder_date"
+    t.datetime "past_due_date"
+    t.boolean "active", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "leases", force: :cascade do |t|
     t.datetime "start_date"
     t.datetime "end_date"
@@ -41,6 +52,7 @@ ActiveRecord::Schema.define(version: 20171204164639) do
     t.integer "amount"
     t.integer "amount_refunded"
     t.integer "unit_id"
+    t.integer "lease_payment_id"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -89,18 +101,6 @@ ActiveRecord::Schema.define(version: 20171204164639) do
     t.index ["property_id"], name: "index_residencies_on_property_id"
     t.index ["unit_id"], name: "index_residencies_on_unit_id"
     t.index ["user_id"], name: "index_residencies_on_user_id"
-  end
-
-  create_table "scheduled_payments", force: :cascade do |t|
-    t.integer "company_id", null: false
-    t.integer "unit_id", null: false
-    t.integer "lease_id", null: false
-    t.datetime "due_date"
-    t.datetime "reminder_date"
-    t.datetime "past_due_date"
-    t.boolean "active", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "stripe_accounts", force: :cascade do |t|

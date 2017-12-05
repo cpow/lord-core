@@ -4,6 +4,7 @@ class CreatePayments < ActiveRecord::Migration[5.1]
       t.integer :amount
       t.integer :amount_refunded
       t.integer :unit_id
+      t.integer :lease_payment_id
       t.integer :user_id
 
       t.timestamps

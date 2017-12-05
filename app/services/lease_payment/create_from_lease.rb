@@ -1,4 +1,4 @@
-class ScheduledPayment::CreateFromLease
+class LeasePayment::CreateFromLease
   attr_accessor :lease
 
   def initialize(lease:)
@@ -11,7 +11,7 @@ class ScheduledPayment::CreateFromLease
     (0..total_months).each do |num_of_months|
       payment_date = @lease.payment_first_date + num_of_months.months
 
-      ScheduledPayment.create!(
+      LeasePayment.create!(
         unit: @lease.unit,
         company: @lease.unit.property.company,
         lease: @lease,

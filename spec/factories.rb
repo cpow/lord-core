@@ -1,9 +1,10 @@
 require 'faker'
 
 FactoryBot.define do
-  factory :scheduled_payment do
-    company_id 1
-    unit_id 1
+  factory :lease_payment do
+    unit
+    lease
+    active true
     due_date "2017-12-04 11:46:39"
     reminder_date "2017-12-04 11:46:39"
     past_due_date "2017-12-04 11:46:39"

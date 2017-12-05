@@ -35,6 +35,7 @@ class User < ApplicationRecord
   has_many :units,      through: :residencies
   has_many :properties, through: :residencies
   has_many :companies,  through: :residencies
+
   has_many :payments
 
   scope :inactive, -> { where(activated: false) }
@@ -45,5 +46,17 @@ class User < ApplicationRecord
 
   def unique_password
     @unique_password ||= SecureRandom.base58(24)
+  end
+
+  def current_unit
+    units.last.present? ? units.last : NullUnit.new
+  end
+
+  def current_lease_payment
+    current_unit.current_lease_payment
+  end
+
+  def current_amount_owed
+    current_lease_payment.amount_due
   end
 end

@@ -27,7 +27,7 @@ class LeasesController < ApplicationController
   def create
     @lease = @unit.leases.new(lease_params)
     if @lease.save
-      create_scheduled_payments_for_lease
+      create_lease_payments_for_lease
       redirect_to [@property, @unit, @lease], notice: 'Lease was successfully created.'
     else
       render :new
@@ -60,8 +60,8 @@ class LeasesController < ApplicationController
       @lease = @unit.leases.find(params[:id])
     end
 
-    def create_scheduled_payments_for_lease
-      ScheduledPayment::CreateFromLease.new(lease: @lease).create_payments
+    def create_lease_payments_for_lease
+      LeasePayment::CreateFromLease.new(lease: @lease).create_payments
     end
 
     def set_property

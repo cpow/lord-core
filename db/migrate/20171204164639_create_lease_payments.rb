@@ -1,7 +1,6 @@
-class CreateScheduledPayments < ActiveRecord::Migration[5.1]
+class CreateLeasePayments < ActiveRecord::Migration[5.1]
   def change
-    create_table :scheduled_payments do |t|
-      t.integer :company_id, null: false
+    create_table :lease_payments do |t|
       t.integer :unit_id, null: false
       t.integer :lease_id, null: false
       t.datetime :due_date

@@ -12,8 +12,14 @@
 
 class Unit < ApplicationRecord
   belongs_to :property
+
+  has_many :lease_payments
   has_many :payments
   has_many :leases
 
   validates :name, :property_id, presence: true
+
+  def current_lease_payment
+    lease_payments.active.last || NullLeasePayment.new
+  end
 end

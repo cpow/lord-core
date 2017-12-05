@@ -14,8 +14,17 @@
 #  updated_at    :datetime         not null
 #
 
-require 'rails_helper'
+class LeasePayment < ApplicationRecord
+  default_scope { order(due_date: :asc) }
+  scope :active, -> { where(active: true) }
 
-RSpec.describe LeasePayment, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  has_many :payments
+  has_many :users, through: :payment
+
+  belongs_to :lease
+  belongs_to :unit
+
+  def amount_due
+    lease.payment_amount - payments.sum(:amount)
+  end
 end

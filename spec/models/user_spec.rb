@@ -30,4 +30,34 @@ RSpec.describe User, type: :model do
     user = create(:user)
     expect(user).to be
   end
+
+  context '#current_lease_payment' do
+    it 'should return a null lease payment if there is nothing' do
+      user = create(:user)
+
+      expect(user.current_lease_payment).to be_instance_of(NullLeasePayment)
+    end
+
+    it 'should return lease payment when active lease and payment is there' do
+      residency = create(:residency)
+      lease_payment = create(:lease_payment, unit: residency.unit, active: true)
+      user = residency.user
+
+      expect(user.current_lease_payment).to eq(lease_payment)
+    end
+  end
+
+  context '#current_amount_owed' do
+    it 'should return a 0 if there is nothing' do
+      user = create(:user)
+
+      expect(user.current_amount_owed).to eq(0)
+    end
+
+    it 'should return lease amount if lease and current payment' do
+      user = create(:user)
+
+      expect(user.current_amount_owed).to eq(0)
+    end
+  end
 end

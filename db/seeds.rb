@@ -24,6 +24,12 @@ user = FactoryBot.create(
 
 unit = FactoryBot.create(:unit, property: property)
 
+residency = FactoryBot.create(:residency, user: user, company: manager.company, unit: unit, property: property)
+
+lease = FactoryBot.create(:lease, unit: unit)
+
+lease_payment = FactoryBot.create(:lease_payment, lease: lease, unit: unit)
+
 FactoryBot.create(:residency, user: user, property: property, unit: unit, company: manager.company)
 
 manager_without_company = FactoryBot.create(:property_manager,

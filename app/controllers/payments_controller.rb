@@ -1,5 +1,7 @@
 class PaymentsController < ApplicationController
   before_action :authenticate_user!
+  before_action :check_for_stripe_token
+  before_action :check_for_company_stripe_token
 
   def index
     @payments = current_user.payments
@@ -7,6 +9,7 @@ class PaymentsController < ApplicationController
 
   def new
     @payment = current_user.payments.new
+    @payment.amount = current_user.current_amount_owed
   end
 
   def create
@@ -29,7 +32,8 @@ class PaymentsController < ApplicationController
 
     local = current_user.payments.new(
       amount: amount,
-      unit_id: current_user.units.last.id
+      unit: current_user.current_unit,
+      lease_payment: current_user.current_lease_payment
     )
 
     if local.save
@@ -40,11 +44,20 @@ class PaymentsController < ApplicationController
 
   private
 
-  def transaction_data
-  end
-
   def destination_amount
     (amount * 0.9).to_i
+  end
+
+  def check_for_stripe_token
+    unless current_user.stripe_account_guid.present?
+      redirect_to page_path('user_home'), notice: 'you must create a payment account first'
+    end
+  end
+
+  def check_for_company_stripe_token
+    unless current_user.companies.last.stripe_account_guid.present?
+      redirect_to page_path('user_home'), notice: 'The property management company has not yet verified an account to accept payments. sorry :('
+    end
   end
 
   def amount

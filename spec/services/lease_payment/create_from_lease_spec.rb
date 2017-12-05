@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe ScheduledPayment::CreateFromLease do
+describe LeasePayment::CreateFromLease do
   describe '#new' do
     it 'should initialize properly' do
       lease = create(:lease)
@@ -18,7 +18,7 @@ describe ScheduledPayment::CreateFromLease do
 
       expect do
         described_class.new(lease: lease).create_payments
-      end.to change(ScheduledPayment, :count).by(4)
+      end.to change(LeasePayment, :count).by(4)
     end
 
     it 'should set first payment as active' do
@@ -28,7 +28,7 @@ describe ScheduledPayment::CreateFromLease do
 
       described_class.new(lease: lease).create_payments
 
-      expect(lease.scheduled_payments.first.active).to be
+      expect(lease.lease_payments.first.active).to be
     end
   end
 end

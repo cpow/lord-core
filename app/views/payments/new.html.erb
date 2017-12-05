@@ -3,6 +3,8 @@
     Pay your rent you fuck
   </h2>
   <div class="card-body">
+    <p>due date: <%= current_user.current_lease_payment.due_date %></p>
+    <p>amount due: <%= current_user.current_lease_payment.amount_due %></p>
     <%= form_with(model: @payment, local: true) do |f| %>
       <div class="form-group">
         <%= f.label :amount %>
