@@ -7,4 +7,19 @@
     method: :delete,
     class: 'nav-link'%>
 </li>
+<li class="nav-item">
+  <%= link_to current_property_manager.name,
+    edit_company_path(current_property_manager.company),
+    class: 'nav-link'
+  %>
+</li>
+<li class="nav-item">
+  <%= link_to current_property_manager.company.name,
+    edit_company_path(current_property_manager.company),
+    class: 'nav-link'
+  %>
+</li>
+<li class="nav-item">
+  <%= link_to 'Properties', properties_path, class: 'nav-link' %>
+</li>
 
