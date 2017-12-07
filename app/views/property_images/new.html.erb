@@ -1,0 +1,8 @@
+<%= form_with(model: @property_image, local: true, id: 'new_property_image') do |form| %>
+  <div class="form-group">
+    <%= form.label :image %>
+    <%= form.file_field :image, multiple: true, name: 'property_image[image]' %>
+  </div>
+<% end %>
+<hr>
+<div id="images"></div>

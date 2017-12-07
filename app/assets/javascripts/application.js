@@ -15,5 +15,7 @@
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
-
-//= require_tree .
+//= require file-upload/jquery.iframe-transport
+//= require file-upload/vendor/jquery.ui.widget
+//= require file-upload/jquery.fileupload
+//= require property_images

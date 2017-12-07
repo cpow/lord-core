@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     resources :residencies
   end
 
+  resources :property_images
+
   resources :payments
 
   resources :tenant_plaid_accounts, only: [:new, :create]
