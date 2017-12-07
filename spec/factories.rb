@@ -1,6 +1,9 @@
 require 'faker'
 
 FactoryBot.define do
+  factory :property_image do
+    property_id 1
+  end
   factory :lease_payment do
     unit
     lease

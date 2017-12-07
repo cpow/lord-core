@@ -17,6 +17,7 @@
 class Property < ApplicationRecord
   belongs_to :company
   has_many :units
+  has_many :property_images
   has_many :residencies
   has_many :users, through: :residencies
 
