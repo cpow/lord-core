@@ -2,10 +2,23 @@
   <h2 class="card-header">Images for Property <%= @property.name %></h2>
   <div class="card-body">
     <%= form_with(model: @property_image, local: true, id: 'new_property_image', url: property_property_images_path) do |form| %>
-      <div class="form-group">
-        <%= form.label :image %>
-        <%= form.file_field :image, multiple: true, name: 'property_image[image]' %>
+      <div class="card alert alert-warning">
+        <div class="card-body">
+          <p>
+            Drop files or choose from your computer
+          </p>
+          <div class="form-group">
+            <%= form.label :image %>
+            <%= form.file_field :image, multiple: true, name: 'property_image[image]' %>
+          </div>
+        </div>
       </div>
+    <% end %>
+
+    <br>
+    <%= link_to property_path(@property), class: 'btn btn-primary' do %>
+      <i class="fa fa-chevron-left"></i>
+      Back to Property
     <% end %>
   </div>
 </div>
