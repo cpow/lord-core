@@ -18,4 +18,5 @@
 //= require file-upload/jquery.iframe-transport
 //= require file-upload/vendor/jquery.ui.widget
 //= require file-upload/jquery.fileupload
-//= require property_images
+//= require handlebars-v4.0.11
+//= require_tree .

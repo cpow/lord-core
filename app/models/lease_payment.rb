@@ -3,7 +3,6 @@
 # Table name: lease_payments
 #
 #  id            :integer          not null, primary key
-#  company_id    :integer          not null
 #  unit_id       :integer          not null
 #  lease_id      :integer          not null
 #  due_date      :datetime

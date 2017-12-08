@@ -13,7 +13,6 @@ class LeasePayment::CreateFromLease
 
       LeasePayment.create!(
         unit: @lease.unit,
-        company: @lease.unit.property.company,
         lease: @lease,
         due_date: payment_date,
         past_due_date: payment_date + @lease.payment_days_until_late.days,

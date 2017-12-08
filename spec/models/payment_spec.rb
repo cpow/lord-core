@@ -2,13 +2,14 @@
 #
 # Table name: payments
 #
-#  id              :integer          not null, primary key
-#  amount          :integer
-#  amount_refunded :integer
-#  unit_id         :integer
-#  user_id         :integer
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  id               :integer          not null, primary key
+#  amount           :integer
+#  amount_refunded  :integer
+#  unit_id          :integer
+#  lease_payment_id :integer
+#  user_id          :integer
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
 #
 
 require 'rails_helper'
