@@ -1,0 +1,87 @@
+<h1>SUP USER</h1>
+
+<div class="card-deck text-center">
+  <div class="card ">
+    <div class="card-body">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <h4>
+              Banking
+            </h4>
+            <p>
+            <i class="fa fa-bank fa-3x text-info"></i>
+            </p>
+            <p>
+            <%= @user.name %>
+            </p>
+            <%= link_to "new plaid account", new_tenant_plaid_account_path %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card ">
+    <div class="card-body">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <h4>
+              Account
+            </h4>
+            <p>
+            <i class="fa fa-user fa-3x text-info"></i>
+            </p>
+            <p>
+            <%= @user.name %>
+            </p>
+            <%= link_to(edit_user_path(@user)) do %>
+              <div class="btn btn-light">
+                Edit Account
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% if @user.residencies.present? %>
+  <ul>
+    <h3>Your residence information</h3>
+    <li>
+      <%= @user.properties.last.name %>
+    </li>
+    <li>
+      <%= @user.properties.last.address_line1 %>
+    </li>
+    <li>
+      <%= @user.units.last.name %>
+    </li>
+  </ul>
+  <%= link_to "New Payment", new_payment_path %>
+<% end %>
+
+<% if @user.current_lease_payment %>
+  <div class="row">
+    <div class="col-8">
+      <div class="card">
+        <h2 class="card-header">
+          current payment due
+        </h2>
+
+        <div class="card-body">
+          <strong>
+            due: <%=  @user.current_lease_payment.due_date %>
+          </strong>
+          <strong>
+            amount left: <%=  @user.current_amount_owed %>
+          </strong>
+
+          <%= link_to "New Payment", new_payment_path, class: 'btn btn-primary' %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -13,7 +13,7 @@ RSpec.describe CompaniesController, type: :controller do
       it 'should redirect those silly idiots' do
         sign_in(create(:property_manager, :with_company))
         get :new
-        expect(response).to redirect_to(page_path('property_manager_home'))
+        expect(response).to redirect_to(authenticated_user_root_path)
       end
     end
 

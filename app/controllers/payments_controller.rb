@@ -50,13 +50,13 @@ class PaymentsController < ApplicationController
 
   def check_for_stripe_token
     unless current_user.stripe_account_guid.present?
-      redirect_to page_path('user_home'), notice: 'you must create a payment account first'
+      redirect_to authenticated_user_root_path, notice: 'you must create a payment account first'
     end
   end
 
   def check_for_company_stripe_token
     unless current_user.companies.last.stripe_account_guid.present?
-      redirect_to page_path('user_home'), notice: 'The property management company has not yet verified an account to accept payments. sorry :('
+      redirect_to authenticated_user_root_path, notice: 'The property management company has not yet verified an account to accept payments. sorry :('
     end
   end
 

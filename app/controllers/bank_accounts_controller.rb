@@ -38,7 +38,7 @@ class BankAccountsController < ApplicationController
 
       # Success, send on to the dashboard
       flash[:success] = 'Your bank account has been added!'
-      redirect_to page_path('property_manager_home')
+      redirect_to authenticated_user_root_path
 
     # Handle exceptions from Stripe
     rescue Stripe::StripeError => e

@@ -76,7 +76,7 @@ class StripeAccountsController < ApplicationController
     # Check for a valid account ID
     unless params[:id] && params[:id].eql?(current_company.stripe_account_guid)
       flash[:danger] = "No Stripe account specified"
-      return redirect_to page_path('property_manager_home')
+      return redirect_to authenticated_user_root_path
     end
 
     # Retrieve the Stripe account to find fields needed
@@ -87,7 +87,7 @@ class StripeAccountsController < ApplicationController
 
     if @stripe_account.verification.fields_needed.empty?
       flash[:success] = "Your information is all up to date."
-      return redirect_to page_path('property_manager_home')
+      return redirect_to authenticated_user_root_path
     end
   end
 
@@ -158,7 +158,7 @@ class StripeAccountsController < ApplicationController
 
       @stripe_account.save
       flash[:success] = "Thanks! Your account has been updated."
-      return redirect_to page_path('property_manager_home')
+      return redirect_to authenticated_user_root_path
 
       # Handle exceptions from Stripe
     rescue Stripe::StripeError => e

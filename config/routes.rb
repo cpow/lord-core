@@ -8,7 +8,6 @@ Rails.application.routes.draw do
     end
   end
 
-
   resources :payments
 
   resources :tenant_plaid_accounts, only: [:new, :create]
@@ -26,12 +25,14 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
+  resources :users
+
   resources :user do
     resources :invitation_acceptances
   end
 
   authenticated :user do
-    root 'high_voltage/pages#show', id: 'user_home', as: :authenticated_user_root
+    root 'user_dashboard#show', as: :authenticated_user_root
   end
 
   authenticated :property_manager do

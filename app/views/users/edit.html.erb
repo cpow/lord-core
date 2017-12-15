@@ -1,0 +1,32 @@
+<div class="card">
+  <h3 class="card-header">Editing User</h3>
+  <div class="card-body">
+    <%= form_with(model: @user, local: true) do |form| %>
+      <%= render partial: 'layouts/errors', locals: { object: @user } %>
+
+      <div class="form-group">
+        <%= form.label :email %>
+        <%= form.text_field :email, id: :user_email, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :name %>
+        <%= form.text_field :name, id: :user_name, class: 'form-control' %>
+s      </div>
+
+      <div class="form-group">
+        <%= form.label :password %>
+        <%= form.password_field :password, id: :user_password, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :password_confirmation %>
+        <%= form.password_field :password_confirmation, id: :user_password_confirmation, class: 'form-control' %>
+      </div>
+
+      <div class="actions">
+        <%= form.submit class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+</div>
