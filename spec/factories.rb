@@ -8,9 +8,7 @@ FactoryBot.define do
     unit
     lease
     active true
-    due_date "2017-12-04 11:46:39"
-    reminder_date "2017-12-04 11:46:39"
-    past_due_date "2017-12-04 11:46:39"
+    due_date (Time.zone.now + 10.days).beginning_of_day
   end
 
   factory :lease do

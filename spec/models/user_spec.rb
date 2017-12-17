@@ -47,6 +47,18 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe '#needs_to_sign_up_for_plaid?' do
+    it 'is false when guid is present' do
+      user = create(:user, stripe_account_guid: 'something')
+      expect(user.needs_to_sign_up_for_plaid?).to be_falsey
+    end
+
+    it 'is true when guid is not present' do
+      user = create(:user)
+      expect(user.needs_to_sign_up_for_plaid?).to be_truthy
+    end
+  end
+
   context '#current_amount_owed' do
     it 'should return a 0 if there is nothing' do
       user = create(:user)

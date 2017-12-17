@@ -1,15 +1,14 @@
 require 'rails_helper'
-
-# Specs in this file have access to a helper object that includes
-# the UserDashboardHelper. For example:
-#
-# describe UserDashboardHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 RSpec.describe UserDashboardHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe '#plaid_card_class' do
+    it 'should return warning class if needs to sign up' do
+      @user = create(:user)
+      expect(plaid_card_class).to eq(described_class::WARNING_CLASS)
+    end
+
+    it 'should return nothing class if not needs to sign up' do
+      @user = create(:user, stripe_account_guid: 'something')
+      expect(plaid_card_class).to eq('')
+    end
+  end
 end

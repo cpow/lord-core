@@ -48,6 +48,10 @@ class User < ApplicationRecord
     @unique_password ||= SecureRandom.base58(24)
   end
 
+  def needs_to_sign_up_for_plaid?
+    !stripe_account_guid.present?
+  end
+
   def current_unit
     units.last.present? ? units.last : NullUnit.new
   end

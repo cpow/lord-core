@@ -19,9 +19,11 @@
       </a>
     </div>
   <% else %>
-    <div class="card-header">
-      You have no images for this property
-      <%= link_to 'Add Images', new_property_property_image_path(@property), class: 'btn btn-primary' %>
+    <div class="card-header alert-warning text-center">
+      <p>
+        You have no images for this property
+      </p>
+      <%= link_to 'Add Images', new_property_property_image_path(@property), class: 'btn btn-warning' %>
     </div>
   <% end %>
 

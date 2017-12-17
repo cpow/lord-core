@@ -23,7 +23,26 @@ class LeasePayment < ApplicationRecord
   belongs_to :lease
   belongs_to :unit
 
+  SECONDS_IN_DAY = 86_400
+
   def amount_due
     lease.payment_amount - payments.sum(:amount)
+  end
+
+  def payment_late?
+    Time.zone.now.beginning_of_day > due_date.beginning_of_day
+  end
+
+  def payment_within_reminder_period?
+    !payment_late? && !payment_due? && \
+      Time.zone.now.beginning_of_day >= reminder_date.beginning_of_day
+  end
+
+  def payment_due?
+    Time.zone.now.beginning_of_day >= due_date.beginning_of_day
+  end
+
+  def due_in_days
+    ((due_date - Time.now) / SECONDS_IN_DAY).floor
   end
 end
