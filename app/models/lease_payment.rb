@@ -25,6 +25,15 @@ class LeasePayment < ApplicationRecord
 
   SECONDS_IN_DAY = 86_400
 
+  def deal_with_payment
+    if amount_due <= 0
+      update_attributes!(active: false)
+      lease.mark_next_active_from_date(self.due_date)
+    else
+      true
+    end
+  end
+
   def amount_due
     lease.payment_amount - payments.sum(:amount)
   end
@@ -43,6 +52,7 @@ class LeasePayment < ApplicationRecord
   end
 
   def due_in_days
-    ((due_date - Time.now) / SECONDS_IN_DAY).floor
+    ((due_date.beginning_of_day - Time.zone.now.beginning_of_day) / SECONDS_IN_DAY)
+      .floor
   end
 end

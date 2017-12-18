@@ -5,12 +5,58 @@ describe LeasePayment do
     Timecop.freeze(Time.zone.now.beginning_of_day)
   end
 
+  describe 'deal_with_payment' do
+    it 'should mark lease_payment as inactive if payments sum amt due' do
+      lease = create(:lease, payment_amount: 100)
+      lease_payment = create(:lease_payment, lease: lease)
+
+      create(:payment, lease_payment: lease_payment, amount: 100)
+
+      lease_payment.deal_with_payment
+
+      expect(lease_payment.active).to be_falsey
+    end
+
+    it 'should leave lease payment as active when total is less than pymt' do
+      lease = create(:lease, payment_amount: 100)
+      lease_payment = create(:lease_payment, lease: lease)
+
+      create(:payment, lease_payment: lease_payment, amount: 25)
+
+      lease_payment.deal_with_payment
+
+      expect(lease_payment.active).to be_truthy
+    end
+
+    it 'should make the next lease payment active' do
+      lease = create(:lease, payment_amount: 100)
+      lease_payment = create(:lease_payment, lease: lease)
+      lease_payment_2 = create(:lease_payment,
+                      lease: lease,
+                      due_date: Time.now.beginning_of_day + 2.days
+                     )
+
+      create(:payment, lease_payment: lease_payment, amount: 100)
+
+      lease_payment.deal_with_payment
+
+      expect(lease_payment_2.active).to be_truthy
+    end
+  end
+
   describe 'due_in_days' do
     it 'should retun number of days due with current time' do
       time = (Time.zone.now + 10.days).end_of_day
 
       payment = build(:lease_payment, due_date: time)
       expect(payment.due_in_days).to eq(10)
+    end
+
+    it 'should gracefully handle 0 days due' do
+      time = Time.zone.now
+
+      payment = build(:lease_payment, due_date: time)
+      expect(payment.due_in_days).to eq(0)
     end
   end
 

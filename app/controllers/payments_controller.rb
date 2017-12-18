@@ -37,16 +37,13 @@ class PaymentsController < ApplicationController
     )
 
     if local.save
+      current_user.current_lease_payment.deal_with_payment
       flash[:success] = 'good job pal!'
       redirect_to payments_path
     end
   end
 
   private
-
-  def destination_amount
-    (amount * 0.9).to_i
-  end
 
   def check_for_stripe_token
     unless current_user.stripe_account_guid.present?

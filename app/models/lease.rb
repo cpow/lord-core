@@ -30,4 +30,13 @@ class Lease < ApplicationRecord
               less_than: 15,
               message: 'must be within two weeks'
             }
+
+  def mark_next_active_from_date(date)
+    lease_payment = next_lease_payment_from_date(date)
+    lease_payment&.update_attributes!(active: true)
+  end
+
+  def next_lease_payment_from_date(date)
+    lease_payments.where("due_date > ?", date).first
+  end
 end
