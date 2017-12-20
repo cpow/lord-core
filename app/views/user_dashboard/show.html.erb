@@ -7,46 +7,38 @@
 <div class="card-deck text-center">
   <div class="card <%= plaid_card_class %>">
     <div class="card-body">
-      <div class="container">
-        <div class="row">
-          <div class="col">
-            <h4>
-              Banking
-            </h4>
-            <p>
-              <i class="fa fa-bank fa-3x text-primary"></i>
-            </p>
-            <p>
-              <%= plaid_account_message %>
-            </p>
-            <p>
-              <%= plaid_card_button %>
-            </p>
-          </div>
+      <h4>
+        Banking
+      </h4>
+      <p>
+      <i class="fa fa-bank fa-3x text-primary"></i>
+      </p>
+      <p>
+      <%= plaid_account_message %>
+      </p>
+    </div>
+    <div class="card-footer">
+      <%= link_to(new_tenant_plaid_account_path) do %>
+        <div class="card-link">
+          Add Bank Account
         </div>
-      </div>
+      <% end %>
     </div>
   </div>
   <div class="card ">
     <div class="card-body">
-      <div class="container">
-        <div class="row">
-          <div class="col">
-            <h4>
-              Account
-            </h4>
-            <p>
-              <i class="fa fa-user fa-3x text-primary"></i>
-            </p>
-            <p>
-              <%= @user.name %>
-            </p>
-            <p>
-              <%= @user.email %>
-            </p>
-          </div>
-        </div>
-      </div>
+      <h4>
+        Account
+      </h4>
+      <p>
+      <i class="fa fa-user fa-3x text-primary"></i>
+      </p>
+      <p>
+      <%= @user.name %>
+      </p>
+      <p>
+      <%= @user.email %>
+      </p>
     </div>
     <div class="card-footer">
       <%= link_to(edit_user_path(@user)) do %>
@@ -56,29 +48,25 @@
       <% end %>
     </div>
   </div>
-  <div class="card <%= lease_payment_style.card_class %>">
+  <div class="card">
     <div class="card-body">
-      <div class="container">
-        <div class="row">
-          <div class="col">
-            <h4>
-              Lease
-            </h4>
-            <p>
-              <i class="fa fa-money fa-3x text-primary"></i>
-            </p>
-            <strong>
-              Current Owed:
-            </strong>
-            <p>
-              <%= number_to_currency(@user.current_human_amount_owed) %>
-            </p>
-            <p>
-              due in <%= pluralize(@lease_payment.due_in_days, 'day') %>
-            </p>
-          </div>
-        </div>
-      </div>
+      <h4>
+        Lease
+      </h4>
+      <p>
+      <i class="fa fa-money fa-3x text-primary"></i>
+      </p>
+      <% if @lease_payment %>
+        <strong>
+          Current Owed:
+        </strong>
+        <p>
+        <%= number_to_currency(@user.current_human_amount_owed) %>
+        </p>
+        <p>
+        due in <%= pluralize(@lease_payment.due_in_days, 'day') %>
+        </p>
+      <% end %>
     </div>
     <div class="card-footer">
       <%= link_to new_payment_path, class: lease_payment_style.card_class do %>
@@ -92,39 +80,39 @@
 
 <% if @user.residencies.present? %>
 
-<h2 class="text-center mt-4">Your Residence</h2>
+  <h2 class="text-center mt-4">Your Residence</h2>
 
-<p class="text-center">
+  <p class="text-center">
   This is your home! Here is some information about it
-</p>
+  </p>
 
   <div class="card">
     <div class="card-body row">
       <div class="col-6">
         <h2>Address Information</h2>
         <p>
-          <strong>Address city:</strong>
-          <%= @property.address_city %>
+        <strong>Address city:</strong>
+        <%= @property.address_city %>
         </p>
         <p>
-          <strong>Address line1:</strong>
-          <%= @property.address_line1 %>
+        <strong>Address line1:</strong>
+        <%= @property.address_line1 %>
         </p>
         <p>
-          <strong>Address state:</strong>
-          <%= @property.address_state %>
+        <strong>Address state:</strong>
+        <%= @property.address_state %>
         </p>
         <p>
-          <strong>Address postal:</strong>
-          <%= @property.address_postal %>
+        <strong>Address postal:</strong>
+        <%= @property.address_postal %>
         </p>
         <p>
-          <strong>Name:</strong>
-          <%= @property.name %>
+        <strong>Name:</strong>
+        <%= @property.name %>
         </p>
         <p>
-          <strong>Description:</strong>
-          <%= @property.description %>
+        <strong>Description:</strong>
+        <%= @property.description %>
         </p>
       </div>
 

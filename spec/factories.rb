@@ -8,8 +8,10 @@ FactoryBot.define do
   factory :lease_payment do
     unit
     lease
-    active true
     due_date (Time.zone.now + 10.days).beginning_of_day
+    reminder_date (Time.zone.now + 2.days).beginning_of_day
+    past_due_date (Time.zone.now + 15.days).beginning_of_day
+    active true
   end
 
   factory :lease do

@@ -23,6 +23,8 @@ class LeasePayment < ApplicationRecord
   belongs_to :lease
   belongs_to :unit
 
+  validates :due_date, :past_due_date, :reminder_date, presence: true
+
   SECONDS_IN_DAY = 86_400
 
   def deal_with_payment
