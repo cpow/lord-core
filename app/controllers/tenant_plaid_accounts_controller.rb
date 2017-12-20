@@ -30,35 +30,34 @@ class TenantPlaidAccountsController < ApplicationController
 
         # Direct the customer to pay
         flash[:success] = 'Your bank account has been connected.'
-        redirect_to new_payment_path
+        redirect_to authenticated_user_root_path
       rescue Stripe::RateLimitError => e
         # Too many requests made to the API too quickly
         flash[:alert] = e.message
-        render 'create'
+        redirect_to authenticated_user_root_path
       rescue Stripe::InvalidRequestError => e
         # Invalid parameters were supplied to Stripe's API
         flash[:alert] = e.message
-        render 'create'
+        redirect_to authenticated_user_root_path
       rescue Stripe::AuthenticationError => e
         # Authentication with Stripe's API failed
         # (maybe you changed API keys recently)
         flash[:alert] = e.message
-        render 'create'
+        redirect_to authenticated_user_root_path
       rescue Stripe::APIConnectionError => e
         # Network communication with Stripe failed
         flash[:alert] = e.message
-        render 'create'
+        redirect_to authenticated_user_root_path
       rescue Stripe::StripeError => e
         # Display a very generic error to the user, and maybe send
         # yourself an email
         flash[:alert] = e.message
-        render 'create'
+        redirect_to authenticated_user_root_path
       end
     else
       flash[:alert] = 'No Plaid token provided'
-      render 'create'
+      redirect_to authenticated_user_root_path
     end
-
   end
 end
 
