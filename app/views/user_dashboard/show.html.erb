@@ -14,49 +14,58 @@
       <i class="fa fa-bank fa-3x text-primary"></i>
       </p>
       <p>
-      <%= plaid_account_message %>
-      </p>
-    </div>
-    <% if @user.needs_to_sign_up_for_plaid? %>
-      <div class="card-footer">
-        <%= link_to('') do %>
-          <div class="card-link" id="linkButton">
-            Add Bank Account
-          </div>
-        <% end %>
-        <form id="ach_form" method="post" action="/tenant_plaid_accounts">
-          <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-        </form>
-      </div>
-    <% end %>
-  </div>
-  <div class="card ">
-    <div class="card-body">
-      <h4>
-        Account
-      </h4>
-      <p>
-      <i class="fa fa-user fa-3x text-primary"></i>
-      </p>
-      <p>
-      <%= @user.name %>
-      </p>
-      <p>
-      <%= @user.email %>
+      <% if @user.needs_to_sign_up_for_plaid? %>
+        You need to add your bank account here in order to pay rent for the month. :)
+      <% else %>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item bg-transparent">
+            <strong class="pull-left"> Bank Name: </strong>
+            <span class="pull-right">
+              <%= @user.bank_account_name %>
+            </span>
+          </li>
+          <li class="list-group-item bg-transparent">
+            <strong class="pull-left">Account:</strong>
+            <span class="pull-right">
+              ...<%= @user.bank_account_last4 %>
+            </span>
+          </li>
+        </ul>
+      <% end %>
       </p>
     </div>
     <div class="card-footer">
-      <%= link_to(edit_user_path(@user)) do %>
-        <div class="card-link">
-          Edit Account
+      <%= link_to('') do %>
+        <div class="card-link font-weight-bold" id="linkButton">
+          <%= plaid_card_link_text %>
         </div>
       <% end %>
+      <form id="ach_form" method="post" action="/tenant_plaid_accounts">
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      </form>
     </div>
   </div>
   <div class="card">
     <div class="card-body">
       <h4>
-        Lease
+        Your Lease
+      </h4>
+      <p>
+      <i class="fa fa-newspaper-o fa-3x text-primary"></i>
+      </p>
+    </div>
+    <div class="card-footer">
+      <%= link_to(user_lease_path(current_user.current_lease)) do %>
+        <div class="card-link font-weight-bold">
+          View Lease Details
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="card <%= lease_payment_style.card_class %>">
+    <div class="card-body">
+      <h4>
+        Pay Rent
       </h4>
       <p>
       <i class="fa fa-money fa-3x text-primary"></i>
@@ -75,7 +84,7 @@
     </div>
     <div class="card-footer">
       <%= link_to new_payment_path, class: lease_payment_style.card_class do %>
-        <div class="card-link">
+        <div class="card-link font-weight-bold">
           <%= lease_payment_style.button_text %>
         </div>
       <% end %>
@@ -146,32 +155,30 @@
   </div>
 <% end %>
 
-<% if @user.needs_to_sign_up_for_plaid? %>
-  <script src="https://cdn.plaid.com/link/v2/stable/link-initialize.js"></script>
-  <script>
-    var linkHandler = Plaid.create({
-      env: "<%= ENV['PLAID_ENV'] %>",
-      clientName: 'LordCore',
-      apiVersion: 'v2',
-      selectAccount: true,
-      key: "<%= ENV['PLAID_PUBLIC_KEY'] %>",
-      product: 'auth',
-      onSuccess: function(public_token, metadata) {
-        // Disable the connect button
-        $('#linkButton').prop('disabled', true).html("<i class='fa fa-spinner fa-spin'></i> Connecting your account...");
-        // Append the public_token and account_id to the form
-        $('#ach_form').append($('<input type="hidden" name="public_token" />').val(public_token));
-        $('#ach_form').append($('<input type="hidden" name="account_id" />').val(metadata.account_id));
+<script src="https://cdn.plaid.com/link/v2/stable/link-initialize.js"></script>
+<script>
+  var linkHandler = Plaid.create({
+    env: "<%= ENV['PLAID_ENV'] %>",
+    clientName: 'LordCore',
+    apiVersion: 'v2',
+    selectAccount: true,
+    key: "<%= ENV['PLAID_PUBLIC_KEY'] %>",
+    product: 'auth',
+    onSuccess: function(public_token, metadata) {
+      // Disable the connect button
+      $('#linkButton').prop('disabled', true).html("<i class='fa fa-spinner fa-spin'></i> Connecting your account...");
+      // Append the public_token and account_id to the form
+      $('#ach_form').append($('<input type="hidden" name="public_token" />').val(public_token));
+      $('#ach_form').append($('<input type="hidden" name="account_id" />').val(metadata.account_id));
 
-        // Submit the form
-        $('#ach_form').submit();
-      },
-    });
+      // Submit the form
+      $('#ach_form').submit();
+    },
+  });
 
-    // Trigger the Link UI
-    document.getElementById('linkButton').onclick = function(event) {
-      event.preventDefault();
-      linkHandler.open();
-    };
-  </script>
-<% end %>
+  // Trigger the Link UI
+  document.getElementById('linkButton').onclick = function(event) {
+    event.preventDefault();
+    linkHandler.open();
+  };
+</script>

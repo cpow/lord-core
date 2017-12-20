@@ -59,7 +59,7 @@ class LeasesController < ApplicationController
   private
 
   def change_lease_amount_to_cents
-    @lease.amount = @lease.amount * 100
+    @lease.payment_amount = @lease.payment_amount * 100
   end
     # Use callbacks to share common setup or constraints between actions.
     def set_lease

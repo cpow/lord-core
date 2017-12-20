@@ -1,4 +1,8 @@
 module ApplicationHelper
+  def human_date(date)
+    date.strftime('%B %d, %Y')
+  end
+
   def states
     [
       ['Alabama', 'AL'],

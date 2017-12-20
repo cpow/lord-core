@@ -14,4 +14,8 @@ class NullLeasePayment
   def payment_within_reminder_period?
     false
   end
+
+  def due_in_days
+    0
+  end
 end

@@ -19,6 +19,12 @@ class Unit < ApplicationRecord
 
   validates :name, :property_id, presence: true
 
+  def current_lease
+    # NOTE: This needs to be refactored with active status and whatnot. like
+    # lease payments
+    leases.last
+  end
+
   def current_lease_payment
     lease_payments.active.last || NullLeasePayment.new
   end

@@ -7,7 +7,6 @@ module UserDashboardHelper
   DANGER_BUTTON_CLASS = 'btn btn-danger'.freeze
   PRIMARY_BUTTON_CLASS = 'btn btn-primary'.freeze
 
-  #returns an object telling the card what to do :)
   def lease_payment_style
     if @lease_payment.payment_late?
       OpenStruct.new(
@@ -40,22 +39,16 @@ module UserDashboardHelper
     hasnt_signed_up? ? WARNING_CLASS : ''
   end
 
-  def plaid_card_button
+  def plaid_card_link_text
     if hasnt_signed_up?
-      link_to "Add Bank Account", new_tenant_plaid_account_path, class: plaid_card_button_class
+      'Add Bank Account'
+    else
+      'Change Account'
     end
   end
 
   def plaid_card_button_class
     hasnt_signed_up? ? WARNING_BUTTON_CLASS : PRIMARY_BUTTON_CLASS
-  end
-
-  def plaid_account_message
-    if @user.needs_to_sign_up_for_plaid?
-      'You need to add your bank account here in order to pay rent for the month. :)'
-    else
-      'Congrats! you added your bank account'
-    end
   end
 
   private

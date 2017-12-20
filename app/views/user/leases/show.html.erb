@@ -1,25 +1,29 @@
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: 'Lease Information',
+  text: 'this is where you can find information about your lease.' }
+%>
+
 <div class="card">
+  <h3 class="card-header text-center">
+    Lease Payments
+  </h3>
   <div class="card-body">
     <table class="table table-striped">
       <thead class="thead-default">
         <tr>
           <th scope="row">ID</th>
-          <th scope="row">Unit ID</th>
           <th scope="row">Due Date</th>
-          <th scope="row">Reminder Date</th>
-          <th scope="row">Past Due Date</th>
-          <th scope="row">Active (yes/no)</th>
+          <th scope="row">Amount Due</th>
+          <th scope="row">Current (true/false)</th>
         </tr>
       </thead>
 
       <tbody>
-        <% lease_payments.each do |lease_payment| %>
+        <% @lease.lease_payments.each do |lease_payment| %>
           <tr>
             <td><%= lease_payment.id %></td>
-            <td><%= lease_payment.unit_id %></td>
             <td><%= human_date(lease_payment.due_date) %></td>
-            <td><%= human_date(lease_payment.reminder_date) %></td>
-            <td><%= human_date(lease_payment.past_due_date) %></td>
+            <td><%= number_to_currency(lease_payment.human_amount_due) %></td>
             <td><%= lease_payment.active %></td>
           </tr>
         <% end %>

@@ -56,6 +56,10 @@ class User < ApplicationRecord
     units.last.present? ? units.last : NullUnit.new
   end
 
+  def current_lease
+    current_unit.current_lease
+  end
+
   def current_lease_payment
     current_unit.current_lease_payment
   end

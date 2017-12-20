@@ -26,7 +26,16 @@ class TenantPlaidAccountsController < ApplicationController
           metadata: { 'plaid_account' => account_id }
         )
 
-        current_user.update_attributes!(stripe_account_guid: customer.id)
+        stripe_bank_token = customer.sources.data.last.id
+        stripe_bank_name = customer.sources.data.last.bank_name
+        stripe_bank_last4 = customer.sources.data.last.last4
+
+        current_user.update_attributes!(
+          stripe_account_guid: customer.id,
+          bank_account_guid: stripe_bank_token,
+          bank_account_name: stripe_bank_name,
+          bank_account_last4: stripe_bank_last4
+        )
 
         # Direct the customer to pay
         flash[:success] = 'Your bank account has been connected.'

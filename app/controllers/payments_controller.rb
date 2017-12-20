@@ -32,7 +32,7 @@ class PaymentsController < ApplicationController
     if local.save
       current_user.current_lease_payment.deal_with_payment
       flash[:success] = 'good job pal!'
-      redirect_to payments_path
+      redirect_to user_lease_path(current_user.current_lease)
     end
   end
 

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   resources :properties do
     resources :residencies
     resources :property_images
@@ -9,8 +10,7 @@ Rails.application.routes.draw do
   end
 
   resources :payments
-
-  resources :tenant_plaid_accounts, only: [:new, :create]
+  resources :tenant_plaid_accounts, only: :create
   resources :companies
   resources :bank_accounts, only: [:new, :create]
   resources :stripe_accounts
@@ -29,6 +29,10 @@ Rails.application.routes.draw do
 
   resources :user do
     resources :invitation_acceptances
+  end
+
+  namespace :user do
+    resources :leases, only: [:show]
   end
 
   authenticated :user do

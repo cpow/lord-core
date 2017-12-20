@@ -1,11 +1,9 @@
-<h1 class="text-center mb-4 mt-4">
-  Pay Your Rent
-</h1>
-<p class="text-center mb-4">
-It's easy to pay your rent online. The amount is already pre-filled out for you.
-If you're sharing the rent with another tenant, feel free to pay less than
-the amount shown
-</p>
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: 'Pay Your Rent',
+  text: 'It\'s easy to pay your rent online. The amount is already pre-filled out for you.
+If you\'re sharing the rent with another tenant, feel free to pay less than
+the amount shown'
+} %>
 
 <div class="row mt-5">
   <div class="col-4 text-center">
@@ -14,7 +12,7 @@ the amount shown
       <li class="list-group-item bg-transparent">
         <strong class="pull-left">due date:</strong>
         <span class="pull-right">
-          <%= current_user.current_lease_payment.formatted_due_date %>
+          <%= human_date(current_user.current_lease_payment.due_date) %>
         </span>
       </li>
       <li class="list-group-item bg-transparent">
