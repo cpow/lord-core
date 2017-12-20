@@ -1,9 +1,15 @@
+  <h1 class="text-center mb-4 mt-4">
+    Pay Your Rent
+  </h1>
+  <p class="text-center mb-4">
+    It's easy to pay your rent online. The amount is already pre-filled out for you.
+    If you're sharing the rent with another tenant, feel free to pay less than
+    the amount shown
+  </p>
+
 <div class="card">
-  <h2 class="card-header">
-    Pay your rent you fuck
-  </h2>
   <div class="card-body">
-    <p>due date: <%= current_user.current_lease_payment.due_date %></p>
+    <p>due date: <%= current_user.current_lease_payment.formatted_due_date %></p>
     <p>amount due: <%= current_user.current_lease_payment.amount_due %></p>
     <%= form_with(model: @payment, local: true) do |f| %>
       <div class="form-group">

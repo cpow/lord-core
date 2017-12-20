@@ -34,6 +34,10 @@ class LeasePayment < ApplicationRecord
     end
   end
 
+  def formatted_due_date
+    due_date.strftime('%B %d, %Y')
+  end
+
   def amount_due
     lease.payment_amount - payments.sum(:amount)
   end

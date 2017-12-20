@@ -3,6 +3,12 @@
 ## Big Stuff!
  *things that will take a while to do, but really need to be done and are essential.*
 
+ *REALLY BIG ONE*
+[ ] HANDLE CURRENCY.
+ * everything needs to be stored in cents. All transactions happen with cents
+   not dollars. currently that is not the case.
+
+
 [ ] Create properties/units for property managers to.... manage
 [ ] Create login portal for users.
 [ ] Allow users to store ACH information through plaid and stripe (example app
