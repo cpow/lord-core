@@ -71,7 +71,7 @@
               Current Owed:
             </strong>
             <p>
-              <%= @user.current_amount_owed %>
+              <%= @user.current_human_amount_owed %>
             </p>
             <p>
               due in <%= pluralize(@lease_payment.due_in_days, 'day') %>

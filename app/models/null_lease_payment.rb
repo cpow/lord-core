@@ -1,5 +1,5 @@
 class NullLeasePayment
-  def amount_due
+  def human_amount_due
     0
   end
 end

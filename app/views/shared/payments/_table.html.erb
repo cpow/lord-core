@@ -10,7 +10,7 @@
     <% payments.each do |payment| %>
       <tr>
         <td><%= payment.id %></td>
-        <td><%= payment.amount %></td>
+        <td><%= number_to_currency(payment.human_amount) %></td>
       </tr>
     <% end %>
   </tbody>

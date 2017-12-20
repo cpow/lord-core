@@ -16,4 +16,8 @@ class Payment < ApplicationRecord
   belongs_to :user
   belongs_to :lease_payment
   belongs_to :unit, optional: true
+
+  def human_amount
+    amount / 100
+  end
 end

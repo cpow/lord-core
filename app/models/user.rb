@@ -60,7 +60,7 @@ class User < ApplicationRecord
     current_unit.current_lease_payment
   end
 
-  def current_amount_owed
-    current_lease_payment.amount_due
+  def current_human_amount_owed
+    current_lease_payment.human_amount_due
   end
 end

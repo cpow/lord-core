@@ -7,10 +7,10 @@ describe LeasePayment do
 
   describe 'deal_with_payment' do
     it 'should mark lease_payment as inactive if payments sum amt due' do
-      lease = create(:lease, payment_amount: 100)
+      lease = create(:lease, payment_amount: 10000)
       lease_payment = create(:lease_payment, lease: lease)
 
-      create(:payment, lease_payment: lease_payment, amount: 100)
+      create(:payment, lease_payment: lease_payment, amount: 10000)
 
       lease_payment.deal_with_payment
 
@@ -18,25 +18,26 @@ describe LeasePayment do
     end
 
     it 'should leave lease payment as active when total is less than pymt' do
-      lease = create(:lease, payment_amount: 100)
+      lease = create(:lease, payment_amount: 10000)
       lease_payment = create(:lease_payment, lease: lease)
 
-      create(:payment, lease_payment: lease_payment, amount: 25)
+      create(:payment, lease_payment: lease_payment, amount: 2500)
 
       lease_payment.deal_with_payment
 
       expect(lease_payment.active).to be_truthy
+      expect(lease_payment.human_amount_due).to eq(75)
     end
 
     it 'should make the next lease payment active' do
-      lease = create(:lease, payment_amount: 100)
+      lease = create(:lease, payment_amount: 10000)
       lease_payment = create(:lease_payment, lease: lease)
       lease_payment_2 = create(:lease_payment,
                       lease: lease,
                       due_date: Time.now.beginning_of_day + 2.days
                      )
 
-      create(:payment, lease_payment: lease_payment, amount: 100)
+      create(:payment, lease_payment: lease_payment, amount: 10000)
 
       lease_payment.deal_with_payment
 

@@ -20,7 +20,7 @@ the amount shown
       <li class="list-group-item bg-transparent">
         <strong class="pull-left">amount due:</strong>
         <span class="pull-right">
-          <%= current_user.current_lease_payment.amount_due %>
+          <%= number_to_currency(current_user.current_lease_payment.human_amount_due) %>
         </span>
       </li>
     </ul>

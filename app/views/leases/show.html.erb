@@ -12,7 +12,7 @@
 
 <p>
   <strong>Payment amount:</strong>
-  <%= @lease.payment_amount %>
+  <%= number_to_currency(@lease.human_amount) %>
 </p>
 
 <p>

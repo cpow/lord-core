@@ -20,6 +20,10 @@ FactoryBot.define do
     payment_days_until_late 3
     payment_reminder_days 3
     unit
+
+    trait :with_payment do
+      lease_payment
+    end
   end
 
   factory :payment do

@@ -9,26 +9,19 @@ class PaymentsController < ApplicationController
 
   def new
     @payment = current_user.payments.new
-    @payment.amount = current_user.current_amount_owed
+    @payment.amount = current_user.current_human_amount_owed
   end
 
   def create
-    # NOTE: refactor this mess
-    company_account = current_user.residencies.last.company.stripe_account_guid
+    payment_stripe_charge = Payment::CreateStripeCharge.new(
+      user: current_user,
+      company: current_user.residencies.last.company,
+      amount: amount
+    )
 
-    token = Stripe::Token.create({
-              customer: current_user.stripe_account_guid,
-            }, {stripe_account: company_account})
-
-    data = {
-      source: token,
-      amount: amount,
-      application_fee: (amount / 10),
-      currency: 'usd'
-    }
-
-    Stripe::Charge
-      .create(data, stripe_account: company_account)
+    # NOTE: we need to store whatever comes out of this.
+    # Also, need specs around this class
+    payment_stripe_charge.create
 
     local = current_user.payments.new(
       amount: amount,
@@ -58,7 +51,7 @@ class PaymentsController < ApplicationController
   end
 
   def amount
-    (payment_params[:amount].to_i * 100).to_i
+    @amount ||= (payment_params[:amount].to_i * 100).to_i
   end
 
   def payment_params

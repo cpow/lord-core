@@ -59,17 +59,17 @@ RSpec.describe User, type: :model do
     end
   end
 
-  context '#current_amount_owed' do
+  context '#current_human_amount_owed' do
     it 'should return a 0 if there is nothing' do
       user = create(:user)
 
-      expect(user.current_amount_owed).to eq(0)
+      expect(user.current_human_amount_owed).to eq(0)
     end
 
     it 'should return lease amount if lease and current payment' do
       user = create(:user)
 
-      expect(user.current_amount_owed).to eq(0)
+      expect(user.current_human_amount_owed).to eq(0)
     end
   end
 end

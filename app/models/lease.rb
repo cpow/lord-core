@@ -31,6 +31,10 @@ class Lease < ApplicationRecord
               message: 'must be within two weeks'
             }
 
+  def human_amount
+    payment_amount / 100
+  end
+
   def mark_next_active_from_date(date)
     lease_payment = next_lease_payment_from_date(date)
     lease_payment&.update_attributes!(active: true)

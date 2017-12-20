@@ -20,7 +20,7 @@
       <tr>
         <td><%= lease.start_date %></td>
         <td><%= lease.end_date %></td>
-        <td><%= lease.payment_amount %></td>
+        <td><%= number_to_currency(lease.human_amount) %></td>
         <td><%= lease.payment_first_date %></td>
         <td><%= lease.payment_days_until_late %></td>
         <td><%= lease.unit_id %></td>
