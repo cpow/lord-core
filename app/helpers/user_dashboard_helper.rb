@@ -1,9 +1,9 @@
 module UserDashboardHelper
-  INFO_CLASS = 'alert alert-info'.freeze
+  INFO_CLASS = 'alert-info'.freeze
   INFO_BUTTON_CLASS = 'btn btn-info'.freeze
-  WARNING_CLASS = 'alert alert-warning'.freeze
+  WARNING_CLASS = 'alert-warning'.freeze
   WARNING_BUTTON_CLASS = 'btn btn-warning'.freeze
-  DANGER_CLASS = 'alert alert-danger'.freeze
+  DANGER_CLASS = 'alert-danger'.freeze
   DANGER_BUTTON_CLASS = 'btn btn-danger'.freeze
   PRIMARY_BUTTON_CLASS = 'btn btn-primary'.freeze
 

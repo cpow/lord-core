@@ -1,5 +1,11 @@
+<h1 class="text-center mb-4 mt-4">
+  Your Account
+</h1>
+<p class="text-center mb-4">
+This is your current information. If you like, you can edit it below.
+</p>
+
 <div class="card">
-  <h3 class="card-header">Editing User</h3>
   <div class="card-body">
     <%= form_with(model: @user, local: true) do |form| %>
       <%= render partial: 'layouts/errors', locals: { object: @user } %>
@@ -25,7 +31,7 @@
       </div>
 
       <div class="actions">
-        <%= form.submit class: 'btn btn-primary' %>
+        <%= form.submit class: 'btn btn-primary btn-block' %>
       </div>
     <% end %>
   </div>

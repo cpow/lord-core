@@ -1,0 +1,13 @@
+<div class="card">
+  <div class="card-header">
+    <%= user.name %>
+  </div>
+  <div class="card-body">
+    <p>
+      <%= user.email %>
+    </p>
+    <%= link_to "back", authenticated_user_root_path, class: 'text-uppercase card-link' %>
+    <%= link_to "edit", edit_user_path(user), class: 'text-uppercase card-link' %>
+  </div>
+</div>
+

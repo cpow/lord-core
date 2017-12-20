@@ -44,14 +44,16 @@
             <p>
               <%= @user.email %>
             </p>
-            <%= link_to(edit_user_path(@user)) do %>
-              <div class="btn btn-light">
-                Edit Account
-              </div>
-            <% end %>
           </div>
         </div>
       </div>
+    </div>
+    <div class="card-footer">
+      <%= link_to(edit_user_path(@user)) do %>
+        <div class="card-link">
+          Edit Account
+        </div>
+      <% end %>
     </div>
   </div>
   <div class="card <%= lease_payment_style.card_class %>">
@@ -74,12 +76,16 @@
             <p>
               due in <%= pluralize(@lease_payment.due_in_days, 'day') %>
             </p>
-            <%= link_to lease_payment_style.button_text,
-              new_payment_path,
-              class: lease_payment_style.button_class %>
           </div>
         </div>
       </div>
+    </div>
+    <div class="card-footer">
+      <%= link_to new_payment_path, class: lease_payment_style.card_class do %>
+        <div class="card-link">
+          <%= lease_payment_style.button_text %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

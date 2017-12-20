@@ -1,12 +1,8 @@
-<div class="card">
-  <div class="card-header">
-    <%= @user.name %>
-  </div>
-  <div class="card-body">
-    <p>
-      <%= @user.email %>
-    </p>
-    <%= link_to "back", authenticated_user_root_path, class: 'text-uppercase card-link' %>
-    <%= link_to "edit", edit_user_path(@user), class: 'text-uppercase card-link' %>
-  </div>
-</div>
+<h1 class="text-center mb-4 mt-4">
+  Your Account
+</h1>
+<p class="text-center mb-4">
+This is your current information. If you like, you can edit it below.
+</p>
+
+<%= render @user %>

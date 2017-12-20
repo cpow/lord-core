@@ -1,23 +1,45 @@
-  <h1 class="text-center mb-4 mt-4">
-    Pay Your Rent
-  </h1>
-  <p class="text-center mb-4">
-    It's easy to pay your rent online. The amount is already pre-filled out for you.
-    If you're sharing the rent with another tenant, feel free to pay less than
-    the amount shown
-  </p>
+<h1 class="text-center mb-4 mt-4">
+  Pay Your Rent
+</h1>
+<p class="text-center mb-4">
+It's easy to pay your rent online. The amount is already pre-filled out for you.
+If you're sharing the rent with another tenant, feel free to pay less than
+the amount shown
+</p>
 
-<div class="card">
-  <div class="card-body">
-    <p>due date: <%= current_user.current_lease_payment.formatted_due_date %></p>
-    <p>amount due: <%= current_user.current_lease_payment.amount_due %></p>
-    <%= form_with(model: @payment, local: true) do |f| %>
-      <div class="form-group">
-        <%= f.label :amount %>
-        <%= f.text_field :amount, class: "form-control" %>
+<div class="row mt-5">
+  <div class="col-4 text-center">
+    <h3>Rent Info</h3>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item bg-transparent">
+        <strong class="pull-left">due date:</strong>
+        <span class="pull-right">
+          <%= current_user.current_lease_payment.formatted_due_date %>
+        </span>
+      </li>
+      <li class="list-group-item bg-transparent">
+        <strong class="pull-left">amount due:</strong>
+        <span class="pull-right">
+          <%= current_user.current_lease_payment.amount_due %>
+        </span>
+      </li>
+    </ul>
+  </div>
+  <div class="col-8">
+    <div class="card">
+      <h3 class="card-header text-center">Payment</h3>
+      <div class="card-body">
+        <%= form_with(model: @payment, local: true) do |f| %>
+          <div class="form-group row">
+            <%= f.label :amount, class: '' %>
+            <%= f.text_field :amount, class: 'form-control col-sm-12' %>
+          </div>
+
+          <div class="row">
+            <%= f.submit class: 'btn btn-primary btn-block' %>
+          </div>
+        <% end %>
       </div>
-
-      <%= f.submit class: 'btn btn-info' %>
-    <% end %>
+    </div>
   </div>
 </div>
