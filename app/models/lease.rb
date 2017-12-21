@@ -35,6 +35,14 @@ class Lease < ApplicationRecord
     payment_amount / 100
   end
 
+  def total_paid
+    (lease_payments.map { |payment| payment.payments.sum(:amount) }.sum) / 100
+  end
+
+  def total_payments
+    human_amount * lease_payments.length
+  end
+
   def mark_next_active_from_date(date)
     lease_payment = next_lease_payment_from_date(date)
     lease_payment&.update_attributes!(active: true)

@@ -19,7 +19,7 @@
       <% else %>
         <ul class="list-group list-group-flush">
           <li class="list-group-item bg-transparent">
-            <strong class="pull-left"> Bank Name: </strong>
+            <strong class="pull-left"> Name: </strong>
             <span class="pull-right">
               <%= @user.bank_account_name %>
             </span>
@@ -53,6 +53,20 @@
       <p>
       <i class="fa fa-newspaper-o fa-3x text-primary"></i>
       </p>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item bg-transparent">
+          <strong class="pull-left"> Start: </strong>
+          <span class="pull-right">
+            <%= human_date(@user.current_lease.start_date) %>
+          </span>
+        </li>
+        <li class="list-group-item bg-transparent">
+          <strong class="pull-left">End:</strong>
+          <span class="pull-right">
+            <%= human_date(@user.current_lease.end_date) %>
+          </span>
+        </li>
+      </ul>
     </div>
     <div class="card-footer">
       <%= link_to(user_lease_path(current_user.current_lease)) do %>
@@ -102,7 +116,7 @@
 
   <div class="card">
     <div class="card-body row">
-      <div class="col-6">
+      <div class="col-lg-6">
         <h2>Address Information</h2>
         <p>
         <strong>Address city:</strong>
@@ -130,7 +144,7 @@
         </p>
       </div>
 
-      <div class="col-6">
+      <div class="col-lg-6 bg-light">
         <% if @property.property_images.present? %>
           <div id="carouselControls" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner bg-dark text-center">

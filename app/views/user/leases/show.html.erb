@@ -4,27 +4,104 @@
 %>
 
 <div class="card">
-  <h3 class="card-header text-center">
-    Lease Payments
-  </h3>
   <div class="card-body">
+    <div class="row mb-5 mt-3">
+      <div class="col-lg-6">
+        <h3>
+          Settings
+        </h3>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item bg-transparent">
+            <strong class="pull-left"> Start: </strong>
+            <span class="pull-right">
+              <%= human_date(@lease.start_date) %>
+            </span>
+          </li>
+          <li class="list-group-item bg-transparent">
+            <strong class="pull-left">End:</strong>
+            <span class="pull-right">
+              <%= human_date(@lease.end_date) %>
+            </span>
+          </li>
+          <li class="list-group-item bg-transparent">
+            <strong class="pull-left"> Days until email: </strong>
+            <span class="pull-right">
+              <%= @lease.payment_reminder_days %>
+            </span>
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-6">
+        <h3>
+          Totals
+        </h3>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item bg-transparent">
+            <strong class="pull-left"> Total Payments: </strong>
+            <span class="pull-right">
+              <%= number_to_currency(@lease.total_payments) %>
+            </span>
+          </li>
+          <li class="list-group-item bg-transparent">
+            <strong class="pull-left">Already Paid:</strong>
+            <span class="pull-right">
+              <%= number_to_currency(@lease.total_paid) %>
+            </span>
+          </li>
+          <li class="list-group-item bg-transparent">
+            <strong class="pull-left"> Payments: </strong>
+            <span class="pull-right">
+              <%= @lease.lease_payments.length %>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <h3>
+      Lease Payments
+    </h3>
     <table class="table table-striped">
+      <div class="row">
+        <div class="col-6">
+          <div class="row mb-2">
+            <div class="col-sm">
+              <i class="fa fa-check text-success"></i> = Paid
+            </div>
+            <div class="col-sm">
+              <i class="fa fa-circle text-info"></i> = Active
+            </div>
+            <div class="col-sm">
+              <i class="fa fa-ban text-alert"></i> = Not Available
+            </div>
+          </div>
+        </div>
+      </div>
+
       <thead class="thead-default">
         <tr>
-          <th scope="row">ID</th>
           <th scope="row">Due Date</th>
           <th scope="row">Amount Due</th>
-          <th scope="row">Current (true/false)</th>
+          <th scope="row">Status</th>
         </tr>
       </thead>
 
       <tbody>
         <% @lease.lease_payments.each do |lease_payment| %>
           <tr>
-            <td><%= lease_payment.id %></td>
             <td><%= human_date(lease_payment.due_date) %></td>
             <td><%= number_to_currency(lease_payment.human_amount_due) %></td>
-            <td><%= lease_payment.active %></td>
+            <td>
+              <% if lease_payment.active %>
+                <i class="fa fa-circle fa-2x text-info">
+                </i>
+              <% elsif lease_payment.paid_in_full? %>
+                <i class="fa fa-check fa-2x text-success">
+                </i>
+              <% else %>
+                <i class="fa fa-ban fa-2x text-muted">
+                </i>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </tbody>

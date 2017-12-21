@@ -44,6 +44,10 @@ class LeasePayment < ApplicationRecord
     amount_due / 100
   end
 
+  def paid_in_full?
+    amount_due <= 0
+  end
+
   def amount_due
     (lease.payment_amount - payments.sum(:amount))
   end
