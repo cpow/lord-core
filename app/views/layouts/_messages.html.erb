@@ -1,6 +1,6 @@
 <% flash.each do |key, value| %>
   <%# NOTE: stupid hack for bootstrap. refactor when you can %>
-  <% klass = key == 'notice' ? 'info' : key %>
+  <% klass = normalize_bootstrap_message_class(key) %>
 
   <div class="alert alert-<%= klass %>">
     <a href="#" data-dismiss="alert" class="close">×</a>
@@ -19,4 +19,3 @@
     </ul>
   </div>
 <% end %>
-

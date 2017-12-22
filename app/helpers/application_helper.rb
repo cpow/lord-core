@@ -1,4 +1,15 @@
 module ApplicationHelper
+  def normalize_bootstrap_message_class(key)
+    case key
+    when 'alert'
+      'danger'
+    when 'notice'
+      'info'
+    else
+      key
+    end
+  end
+
   def human_date(date)
     date.strftime('%B %d, %Y')
   end
