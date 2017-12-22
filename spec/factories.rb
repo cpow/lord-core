@@ -8,16 +8,28 @@ FactoryBot.define do
   factory :lease_payment do
     unit
     lease
-    due_date (Time.zone.now + 10.days).beginning_of_day
-    reminder_date (Time.zone.now + 2.days).beginning_of_day
-    past_due_date (Time.zone.now + 15.days).beginning_of_day
+    due_date { (Time.zone.now + 10.days).beginning_of_day }
+    reminder_date { (Time.zone.now + 2.days).beginning_of_day }
+    past_due_date { (Time.zone.now + 15.days).beginning_of_day }
     active true
+
+    trait :late do
+      due_date { (Time.zone.now - 10.days).beginning_of_day }
+    end
+
+    trait :reminder do
+      reminder_date { (Time.zone.now - 5.days).beginning_of_day }
+    end
+
+    trait :due_today do
+      due_date { (Time.zone.now).beginning_of_day }
+    end
   end
 
   factory :lease do
     start_date DateTime.parse("2017-12-02")
     end_date DateTime.parse("2018-12-02")
-    payment_amount 1550
+    payment_amount 155000
     payment_first_date DateTime.parse("2017-12-02")
     payment_days_until_late 3
     payment_reminder_days 3
@@ -74,6 +86,57 @@ FactoryBot.define do
     name Faker::GameOfThrones.character
     sequence(:email) { |n| "tenant#{n}@example.com" }
     password 'test1234'
+
+    trait :with_residence do
+      after(:create) do |instance|
+        property = create(:property)
+        unit = create(:unit, property: property)
+        create(:residency,
+               property: property,
+               unit: unit,
+               company: property.company,
+               user: instance)
+      end
+    end
+
+    trait :with_late_lease_payment do
+      after(:create) do |instance|
+        property = create(:property)
+        unit = create(:unit, property: property)
+        create(:residency,
+               property: property,
+               unit: unit,
+               company: property.company,
+               user: instance)
+        create(:lease_payment, :late, unit: unit)
+      end
+    end
+
+    trait :with_reminder_lease_payment do
+      after(:create) do |instance|
+        property = create(:property)
+        unit = create(:unit, property: property)
+        create(:residency,
+               property: property,
+               unit: unit,
+               company: property.company,
+               user: instance)
+        create(:lease_payment, :reminder, unit: unit)
+      end
+    end
+
+    trait :with_due_lease_payment do
+      after(:create) do |instance|
+        property = create(:property)
+        unit = create(:unit, property: property)
+        create(:residency,
+               property: property,
+               unit: unit,
+               company: property.company,
+               user: instance)
+        create(:lease_payment, :due_today, unit: unit)
+      end
+    end
   end
 
   factory :company do

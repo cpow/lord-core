@@ -22,7 +22,7 @@ class Unit < ApplicationRecord
   def current_lease
     # NOTE: This needs to be refactored with active status and whatnot. like
     # lease payments
-    leases.last
+    leases.last || NullLease.new
   end
 
   def current_lease_payment

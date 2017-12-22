@@ -1,11 +1,10 @@
-<h2 class="text-center mt-4">Getting Started</h2>
-
-<p class="text-center mb-4">
-  This is your basic information. Handle your banking information and your profile here.
-</p>
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: 'Getting Started',
+  text: 'This is your basic information. Handle your banking information and your profile here.'
+} %>
 
 <div class="card-deck text-center">
-  <div class="card <%= plaid_card_class %>">
+  <div class="card banking <%= plaid_card_class %>">
     <div class="card-body">
       <h4>
         Banking
@@ -45,7 +44,7 @@
       </form>
     </div>
   </div>
-  <div class="card">
+  <div class="card lease-info">
     <div class="card-body">
       <h4>
         Your Lease
@@ -53,20 +52,24 @@
       <p>
       <i class="fa fa-newspaper-o fa-3x text-primary"></i>
       </p>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item bg-transparent">
-          <strong class="pull-left"> Start: </strong>
-          <span class="pull-right">
-            <%= human_date(@user.current_lease.start_date) %>
-          </span>
-        </li>
-        <li class="list-group-item bg-transparent">
-          <strong class="pull-left">End:</strong>
-          <span class="pull-right">
-            <%= human_date(@user.current_lease.end_date) %>
-          </span>
-        </li>
-      </ul>
+      <% if @user.current_lease.kind_of?(NullLease) %>
+        <p class="no-lease alert alert-warning">Your property manager hasn't created a lease for you yet.</p>
+      <% else %>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item bg-transparent">
+            <strong class="pull-left"> Start: </strong>
+            <span class="pull-right">
+              <%= human_date(@user.current_lease.start_date) %>
+            </span>
+          </li>
+          <li class="list-group-item bg-transparent">
+            <strong class="pull-left">End:</strong>
+            <span class="pull-right">
+              <%= human_date(@user.current_lease.end_date) %>
+            </span>
+          </li>
+        </ul>
+      <% end %>
     </div>
     <div class="card-footer">
       <%= link_to(user_lease_path(current_user.current_lease)) do %>
@@ -76,7 +79,7 @@
       <% end %>
     </div>
   </div>
-  <div class="card <%= lease_payment_style.card_class %>">
+  <div class="card rent-info <%= lease_payment_style.card_class %>">
     <div class="card-body">
       <h4>
         Pay Rent
@@ -107,14 +110,12 @@
 </div>
 
 <% if @user.residencies.present? %>
+  <%= render partial: 'layouts/pretty_header', locals: {
+    title: 'Your Home',
+    text: 'This is your home! Here is some information about it.'
+  } %>
 
-  <h2 class="text-center mt-4">Your Residence</h2>
-
-  <p class="text-center">
-  This is your home! Here is some information about it
-  </p>
-
-  <div class="card">
+  <div class="card residence-info">
     <div class="card-body row">
       <div class="col-lg-6">
         <h2>Address Information</h2>
