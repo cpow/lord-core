@@ -27,17 +27,53 @@ the amount shown'
     <div class="card">
       <h3 class="card-header text-center">Payment</h3>
       <div class="card-body">
-        <%= form_with(model: @payment, local: true) do |f| %>
+        <%= form_with(model: @payment, local: true, id: 'paymentForm') do |f| %>
           <div class="form-group row">
             <%= f.label :amount, class: '' %>
-            <%= f.text_field :amount, class: 'form-control col-sm-12' %>
+            <%= f.text_field :amount, id: 'rentAmount', class: 'form-control col-sm-12' %>
           </div>
 
           <div class="row">
-            <%= f.submit class: 'btn btn-primary btn-block' %>
+            <%= f.submit class: 'btn btn-primary btn-block', id: 'submitForm'%>
           </div>
         <% end %>
       </div>
     </div>
   </div>
 </div>
+
+<div class="modal" id="paymentConfirmModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirm Payment</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body alert alert-warning">
+        <p>You are about to submit a payment of $<span id="modalAmount"></span>.</p>
+        <p>Confirm payment?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="submitAfterConfirm" class="btn btn-primary">Submit Payment</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script charset="utf-8" type="text/javascript">
+  $('#submitAfterConfirm').on('click', function() {
+    $('#submitAfterConfirm').prop('disabled', true).html("<i class='fa fa-spinner fa-spin'></i>Submitting");
+    $('#submitForm').prop('disabled', true).html("<i class='fa fa-spinner fa-spin'></i>Submitting");
+    return $('#paymentForm').submit();
+  })
+
+  $('#submitForm').on('click', function(event) {
+    event.preventDefault();
+    $('#modalAmount').text($('#rentAmount').val());
+    $('#paymentConfirmModal').modal('show');
+  })
+</script>
+
