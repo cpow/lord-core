@@ -80,6 +80,8 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
     crass (1.0.3)
+    css_parser (1.6.0)
+      addressable
     devise (4.3.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -108,6 +110,7 @@ GEM
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     high_voltage (3.0.0)
+    htmlentities (4.3.4)
     i18n (0.9.1)
       concurrent-ruby (~> 1.0)
     jbuilder (2.7.0)
@@ -165,6 +168,13 @@ GEM
     plaid (4.0.0)
     popper_js (1.12.5)
     powerpack (0.1.1)
+    premailer (1.11.1)
+      addressable
+      css_parser (>= 1.6.0)
+      htmlentities (>= 4.0.0)
+    premailer-rails (1.10.1)
+      actionmailer (>= 3, < 6)
+      premailer (~> 1.7, >= 1.7.9)
     pry (0.11.3)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
@@ -308,6 +318,7 @@ DEPENDENCIES
   paperclip
   pg
   plaid
+  premailer-rails
   pry
   puma (~> 3.7)
   rails (~> 5.1.4)

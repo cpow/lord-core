@@ -1,12 +1,12 @@
-<div class="card">
-  <h1 class="card-header">
-    USER: <%= @user.email %>
-  </h1>
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: 'Welcome to the Neighborhood',
+  text: 'To accept this invitation, please create a new password.'
+} %>
 
+<div class="card">
   <div class="card-body">
     <%= form_with(model: @user, local: true, url: user_invitation_acceptances_path, method: :post) do |f| %>
       <%= render partial: 'layouts/errors', locals: { object: @user } %>
-      <p class"alert alert-notice">To accept the invitation, please create a password</p>
 
       <div class="form-group">
         <%= f.label :password %>
@@ -19,7 +19,7 @@
       </div>
 
       <div class="form-group">
-        <%= f.submit 'Accept Invitation', class: "btn btn-primary" %>
+        <%= f.submit 'Accept Invitation', class: "btn btn-primary btn-block" %>
       </div>
     <% end %>
   </div>

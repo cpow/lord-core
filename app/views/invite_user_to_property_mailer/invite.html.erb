@@ -1,7 +1,34 @@
-<h1>Welcome to the neighborhood.</h1>
+<div class="container">
+  <h1>Welcome to the neighborhood.</h1>
 
-<p>You have been invited to the <%= @unit.name %> in the property <%= @property.name %>.</p>
+  <p>You have been invited to the <%= @unit.name %> in the property <%= @property.name %>. </p>
 
-<p>Here is some move-in information</p>
+  <p>LordCore is a way for property managers to give the best service to tenants.
+  With LordCore, you can:
+  <ul>
+    <li>
+      pay your rent online
+    </li>
+    <li>
+      check out lease and property information
+    </li>
+    <li>
+      report issues with the property
+    </li>
+    <li>
+      and communicate directly to the property managers!
+    </li>
+  </ul>
+  </p>
 
-<%= link_to "Accept invitation", new_user_invitation_acceptance_url(@user.invite_token) %>
+  <p>
+  When you accept the invitation, you'll need to enter a new password, and that's it! Once you link your bank account online, you'll be able to pay your rent immediately through our portal.
+  </p>
+
+  <hr>
+
+  <%= link_to "Accept invitation",
+    new_user_invitation_acceptance_url(@user.invite_token),
+    class: 'btn btn-primary btn-block'
+  %>
+</div>

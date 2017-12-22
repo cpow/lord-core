@@ -28,6 +28,7 @@ gem 'devise'
 gem 'stripe'
 gem 'plaid'
 gem 'paperclip'
+gem 'premailer-rails'
 gem 'kaminari'
 
 # Use CoffeeScript for .coffee assets and views

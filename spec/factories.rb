@@ -86,6 +86,7 @@ FactoryBot.define do
     name Faker::GameOfThrones.character
     sequence(:email) { |n| "tenant#{n}@example.com" }
     password 'test1234'
+    password_confirmation 'test1234'
 
     trait :with_residence do
       after(:create) do |instance|
