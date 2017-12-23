@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   resources :properties do
     resources :residencies
     resources :property_images
