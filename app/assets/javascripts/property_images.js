@@ -11,7 +11,7 @@ $(function() {
     progress: function(e, data) {
       if (data.element) {
         var progress = parseInt((data.loaded / data.total * 100), 10);
-        data.element.find('.progress-bar').attr('aria-valuenow', progress).css('width', `${progress}%`).text(`${progress}%`);
+        data.element.find('.progress-bar').attr('aria-valuenow', progress).css('width', progress).text(progress);
       }
     },
     done: function(e, data) {
