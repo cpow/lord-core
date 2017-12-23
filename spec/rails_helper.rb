@@ -23,6 +23,14 @@ RSpec.configure do |config|
   config.include Devise::Test::IntegrationHelpers, type: :feature
 end
 
+# Heroku build packs need to put the chromedriver binary in a non-standard
+# location specified by GOOGLE_CHROME_SHIM
+chrome_bin = ENV.fetch('GOOGLE_CHROME_SHIM', nil)
+
+options = {}
+options[:args] = ['headless', 'disable-gpu', 'window-size=1280,1024']
+options[:binary] = chrome_bin if chrome_bin
+
 Capybara.register_driver :chrome do |app|
   Capybara::Selenium::Driver.new(app, browser: :chrome)
 end
@@ -34,7 +42,8 @@ Capybara.register_driver :headless_chrome do |app|
 
   Capybara::Selenium::Driver.new app,
     browser: :chrome,
-    desired_capabilities: capabilities
+    desired_capabilities: capabilities,
+    options: Selenium::WebDriver::Chrome::Options.new(options)
 end
 
 Capybara.javascript_driver = :headless_chrome
