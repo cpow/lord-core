@@ -1,24 +1,24 @@
-<li class="nav-item">
+<li class="nav-item mr-1">
   <%= link_to authenticated_user_root_path, class: "nav-link #{'active' if current_page?(authenticated_user_root_path)}" do  %>
-    <i class="fa fa-home ml-1 mr-1"></i>
+    <i class="fa fa-home"></i>
     Home
   <% end %>
 </li>
-<li class="nav-item">
+<li class="nav-item mr-1">
   <%= link_to user_path(current_user), class: "nav-link #{'active' if current_page?(user_path(current_user))}" do %>
-    <i class="fa fa-user ml-1 mr-1"></i>
+    <i class="fa fa-user"></i>
     Account
   <% end %>
 </li>
-<li class="nav-item">
+<li class="nav-item mr-1">
   <%= link_to new_payment_path, class: "nav-link #{'active' if current_page?(new_payment_path)}" do %>
-    <i class="fa fa-money ml-1 mr-1"></i>
+    <i class="fa fa-money"></i>
     New Payment
   <% end %>
 </li>
-<li class="nav-item">
+<li class="nav-item mr-1">
   <%= link_to user_lease_path(current_user.current_lease), class: "nav-link #{'active' if current_page?(user_lease_path(current_user.current_lease))}" do %>
-    <i class="fa fa-newspaper-o ml-1 mr-1"></i>
+    <i class="fa fa-newspaper-o"></i>
     Lease Info
   <% end %>
 </li>
@@ -27,5 +27,5 @@
   <%= link_to 'Sign Out',
     destroy_user_session_path,
     method: :delete,
-    class: 'nav-link ml-1 mr-1' %>
+    class: 'nav-link mr-1' %>
 </li>
