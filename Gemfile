@@ -30,6 +30,7 @@ gem 'plaid'
 gem 'paperclip'
 gem 'premailer-rails'
 gem 'kaminari'
+gem 'webpacker'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'

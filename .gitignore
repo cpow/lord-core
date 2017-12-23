@@ -25,3 +25,6 @@
 .byebug_history
 .tool-versions
 public/system
+/public/packs
+/public/packs-test
+/node_modules
