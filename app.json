@@ -3,12 +3,14 @@
     "test": {
       "buildpacks": [
         { "url": "https://github.com/heroku/heroku-buildpack-chromedriver" },
-        { "url": "https://github.com/heroku/heroku-buildpack-google-chrome" }
+        { "url": "https://github.com/heroku/heroku-buildpack-google-chrome" },
+        { "url": "https://github.com/heroku/heroku-buildpack-ruby" }
       ],
       "addons": [
         "heroku-postgresql:hobby-dev"
       ],
       "scripts": {
+        "test-setup": "gem install bundler; bundle",
         "test": "bundle exec rspec spec"
       }
     }
