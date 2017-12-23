@@ -7,7 +7,10 @@
       ],
       "addons": [
         "heroku-postgresql:hobby-dev"
-      ]
+      ],
+      "scripts": {
+        "test": "bundle exec rspec spec"
+      }
     }
   }
 }
