@@ -1,0 +1,11 @@
+{
+  "environments": {
+    "test": {
+      "scripts": {
+        "test-setup": "gem install bundler",
+        "test-setup": "bundle",
+        "test": "bundle exec rspec spec rspec spec"
+      }
+    }
+  }
+}
