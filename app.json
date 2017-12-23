@@ -7,12 +7,7 @@
       ],
       "addons": [
         "heroku-postgresql:hobby-dev"
-      ],
-      "scripts": {
-        "test-setup": "gem install bundler",
-        "test-setup": "bundle",
-        "test": "bundle exec rspec spec"
-      }
+      ]
     }
   }
 }
