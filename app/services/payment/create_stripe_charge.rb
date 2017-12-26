@@ -17,7 +17,13 @@ class Payment::CreateStripeCharge
     data = {
       source: token,
       amount: @amount,
-      application_fee: (@amount / 10),
+      # NOTE: need to handle subscriptions at some point for fees.
+      # Perhaps each account has an account type, and that type can dictate what
+      # your fees are? Maybe its just computed based on the # of units a
+      # property has with payments. but then you'd have to account fo that
+      # (imagine a company creates 100 blank units to get around the tiers...)
+      # food for thought
+      application_fee: StripeApplicationFee.for_amount(@amount),
       currency: 'usd'
     }
 
