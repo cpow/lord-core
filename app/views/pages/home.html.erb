@@ -2,48 +2,52 @@
   <h1 class="display-4">Welcome To LordCore</h1>
   <h4 class="text-secondary mb-4">We've been waiting for you</h4>
 </div>
-<div class="card-deck">
-  <div class="card text-center">
-    <div class="card-body">
-      <h4 class="mb-4">Managers</h4>
-      <i class="fa fa-newspaper-o fa-3x text-primary mb-4"></i>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-          Manager your properties
-        </li>
-        <li class="list-group-item">
-          Never miss a rent payment again
-        </li>
-        <li class="list-group-item">
-          Easy to use lease management tools
-        </li>
-      </ul>
-    </div>
-    <div class="card-footer">
-      <%= link_to "Manager sign in", new_property_manager_session_path,
-        class: 'font-weight-bold card-link' %>
-    </div>
-  </div>
-  <div class="card text-center">
-    <div class="card-body">
-      <h4 class="mb-4">Tenants</h4>
-      <i class="fa fa-user-o fa-3x text-primary mb-4"></i>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-          World class payment software
-        </li>
-        <li class="list-group-item">
-          Track your payments and disputes
-        </li>
-        <li class="list-group-item">
-          Easily report problems directly to management
-        </li>
-      </ul>
-    </div>
+<div class="row equal-height">
+  <div class="col-sm-12 col-md-12 col-lg-6 mb-4">
+    <div class="card text-center">
+      <div class="card-body">
+        <h4 class="mb-4">Managers</h4>
+        <i class="fa fa-newspaper-o fa-3x text-primary mb-4"></i>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            Manager your properties
+          </li>
+          <li class="list-group-item">
+            Never miss a rent payment again
+          </li>
+          <li class="list-group-item">
+            Easy to use lease management tools
+          </li>
+        </ul>
+      </div>
       <div class="card-footer">
-        <%= link_to "Tenant sign in", new_user_session_path,
+        <%= link_to "Manager sign in", new_property_manager_session_path,
           class: 'font-weight-bold card-link' %>
       </div>
+    </div>
+  </div>
+  <div class="col-sm-12 col-md-12 col-lg-6 mb-4">
+    <div class="card text-center">
+      <div class="card-body">
+        <h4 class="mb-4">Tenants</h4>
+        <i class="fa fa-user-o fa-3x text-primary mb-4"></i>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            World class payment software
+          </li>
+          <li class="list-group-item">
+            Track your payments and disputes
+          </li>
+          <li class="list-group-item">
+            Easily report problems directly to management
+          </li>
+        </ul>
+      </div>
+        <div class="card-footer">
+          <%= link_to "Tenant sign in", new_user_session_path,
+            class: 'font-weight-bold card-link' %>
+        </div>
+    </div>
   </div>
 </div>
 

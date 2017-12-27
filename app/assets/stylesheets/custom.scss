@@ -1,6 +1,21 @@
 $primary: #4281B2;
 @import "bootstrap";
 
+// NOTE: This makes card decks responsive https://github.com/twbs/bootstrap/issues/20321
+.row.equal-height {
+    display: flex;
+    flex-wrap: wrap;
+}
+.row.equal-height > [class*='col-'] {
+    display: flex;
+    flex-direction: column;
+}
+
+.card {
+    flex: 1;
+}
+
+// end
 
 .datepicker {
   padding: 1.2em;
