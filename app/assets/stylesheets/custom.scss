@@ -6,6 +6,7 @@ $primary: #4281B2;
     display: flex;
     flex-wrap: wrap;
 }
+
 .row.equal-height > [class*='col-'] {
     display: flex;
     flex-direction: column;
@@ -14,11 +15,80 @@ $primary: #4281B2;
 .card {
     flex: 1;
 }
-
 // end
 
+html {
+  font-size: 1rem;
+}
+
+@include media-breakpoint-up(xs) {
+  .container {
+    width: 100%;
+    padding: 0;
+    margin: auto;
+  }
+
+  h1.display-4 {
+    font-size: 2.2rem;
+  }
+
+  nav {
+    font-size: 1rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+  html {
+    font-size: 1.4rem;
+  }
+
+  h4 {
+    font-size: 1.4rem;
+  }
+
+  .card-body {
+    font-size: 1.1rem;
+  }
+
+  .card-footer a {
+    font-size: 1.2rem;
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  html {
+    font-size: 1.4rem;
+  }
+
+  .card-footer a {
+    font-size: 1.2rem;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  html {
+    font-size: 1.2rem;
+  }
+
+  h4 {
+    font-size: 1.4rem;
+  }
+
+  .card-footer a {
+    font-size: 1rem;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  html {
+    font-size: 1rem;
+  }
+}
+
 .datepicker {
-  padding: 1.2em;
+  padding: 1.8em;
 }
 
 .nav-link.active {
@@ -35,7 +105,6 @@ a.text-uppercase {
 }
 
 html {
-  position: relative;
   min-height: 100%;
   font-family: 'Roboto Slab', serif !important;
 }
@@ -47,7 +116,7 @@ a {
 }
 
 body {
-  padding-top: 60px;
+  padding-top: 80px;
   font-size: 16px;
   font-family: 'Roboto Slab', serif !important;
   margin-bottom: 220px;
