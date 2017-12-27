@@ -22,68 +22,8 @@ html {
 }
 
 @include media-breakpoint-up(xs) {
-  .container {
-    width: 100%;
-    padding: 0;
-    margin: auto;
-  }
-
   h1.display-4 {
-    font-size: 2.2rem;
-  }
-
-  nav {
-    font-size: 1rem;
-  }
-
-  p {
-    font-size: 1rem;
-  }
-
-  html {
-    font-size: 1.4rem;
-  }
-
-  h4 {
-    font-size: 1.4rem;
-  }
-
-  .card-body {
-    font-size: 1.1rem;
-  }
-
-  .card-footer a {
-    font-size: 1.2rem;
-  }
-}
-
-@include media-breakpoint-up(sm) {
-  html {
-    font-size: 1.4rem;
-  }
-
-  .card-footer a {
-    font-size: 1.2rem;
-  }
-}
-
-@include media-breakpoint-up(md) {
-  html {
-    font-size: 1.2rem;
-  }
-
-  h4 {
-    font-size: 1.4rem;
-  }
-
-  .card-footer a {
-    font-size: 1rem;
-  }
-}
-
-@include media-breakpoint-up(lg) {
-  html {
-    font-size: 1rem;
+    font-size: 1.6rem;
   }
 }
 

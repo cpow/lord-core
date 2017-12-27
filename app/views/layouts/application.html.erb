@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>LordCore</title>
     <%= csrf_meta_tags %>
 
@@ -11,7 +13,7 @@
 
   <body>
     <%= render 'shared/navs/main_nav' %>
-    <div class="container-fluid container-md">
+    <div class="container">
       <%= render 'layouts/messages' %>
       <%= yield %>
     </div>
