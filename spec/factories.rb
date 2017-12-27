@@ -1,6 +1,11 @@
 require 'faker'
 
 FactoryBot.define do
+  factory :lease_payment_reminder do
+    email_text "MyText"
+    lease_payment
+  end
+
   factory :property_image do
     property_id 1
   end
@@ -23,6 +28,12 @@ FactoryBot.define do
 
     trait :due_today do
       due_date { (Time.zone.now).beginning_of_day }
+    end
+
+    trait :has_been_reminded do
+      after(:create) do |instance|
+        create(:lease_payment_reminder, lease_payment: instance)
+      end
     end
   end
 

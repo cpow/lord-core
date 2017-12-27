@@ -19,6 +19,7 @@ class LeasePayment < ApplicationRecord
 
   has_many :payments
   has_many :users, through: :payment
+  has_many :lease_payment_reminders
 
   belongs_to :lease
   belongs_to :unit
