@@ -17,6 +17,19 @@ $primary: #4281B2;
 
 // end
 
+@media (max-width: 978px) {
+  .container {
+    padding:0;
+  }
+}
+
+@media (min-width: 576px) {
+  .container {
+    padding:0;
+    max-width: 575px;
+  }
+}
+
 .datepicker {
   padding: 1.2em;
 }
