@@ -18,7 +18,7 @@ class LeasePayment < ApplicationRecord
   scope :active, -> { where(active: true) }
 
   has_many :payments
-  has_many :users, through: :payment
+  has_many :users, through: :unit
   has_many :lease_payment_reminders
 
   belongs_to :lease
@@ -35,6 +35,10 @@ class LeasePayment < ApplicationRecord
     else
       true
     end
+  end
+
+  def users
+    unit.users
   end
 
   def formatted_due_date

@@ -16,6 +16,8 @@ class Unit < ApplicationRecord
   has_many :lease_payments
   has_many :payments
   has_many :leases
+  has_many :residencies
+  has_many :users, through: :residencies
 
   validates :name, :property_id, presence: true
 
