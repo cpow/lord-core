@@ -1,7 +1,9 @@
 <div class="card-deck">
   <% properties.each do |property| %>
     <div class="card">
-      <%= image_tag "house-stock.jpg", class: "card-img-top" %>
+      <% if property.property_images.present? %>
+        <%= image_tag property.property_images.first.image.url(:large), class: "card-img-top" %>
+      <% end %>
       <div class="card-body">
         <h4 class="card-title">
           <%= property.name %>
