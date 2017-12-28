@@ -105,7 +105,7 @@
         <% end %>
       </div>
       <div class="card-footer">
-        <%= link_to new_payment_path, class: lease_payment_style.card_class do %>
+        <%= link_to new_payment_path, class: lease_payment_style.card_class, id: 'pay-lease__link' do %>
           <div class="card-link font-weight-bold">
             <%= lease_payment_style.button_text %>
           </div>

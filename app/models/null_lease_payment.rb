@@ -3,6 +3,14 @@ class NullLeasePayment
     0
   end
 
+  def id
+    nil
+  end
+
+  def due_date
+    Time.zone.now
+  end
+
   def payment_late?
     false
   end

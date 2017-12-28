@@ -26,13 +26,20 @@ class PaymentsController < ApplicationController
     local = current_user.payments.new(
       amount: amount,
       unit: current_user.current_unit,
-      lease_payment: current_user.current_lease_payment
+      lease_payment_id: current_user.current_lease_payment.id
     )
 
     if local.save
-      current_user.current_lease_payment.deal_with_payment
       flash[:success] = 'Success! You\'ve submitted your payment'
-      redirect_to user_lease_path(current_user.current_lease)
+      if current_user.current_lease.instance_of?(NullLease)
+        redirect_to authenticated_user_root_path
+      else
+        current_user.current_lease_payment.deal_with_payment
+        redirect_to user_lease_path(current_user.current_lease)
+      end
+    else
+      flash[:danger] = 'We\'re sorry, something went wrong'
+      render :new
     end
   end
 

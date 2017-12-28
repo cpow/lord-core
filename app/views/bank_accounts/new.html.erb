@@ -1,5 +1,6 @@
 <%= content_for :page_title, "Add a new bank account" %>
-<script src="https://js.stripe.com/v3/"></script>
+<%= javascript_include_tag "#{STRIPE_JS_HOST}/v3/" %>
+
 <script>
   var stripe = Stripe("<%= ENV['PUBLISHABLE_KEY'] %>");
 
