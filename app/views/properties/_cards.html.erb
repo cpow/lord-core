@@ -1,9 +1,17 @@
 <div class="card-deck">
   <% properties.each do |property| %>
     <div class="card">
-      <% if property.property_images.present? %>
-        <%= image_tag property.property_images.first.image.url(:large), class: "card-img-top" %>
-      <% end %>
+  <% if property.property_images.present? %>
+    <div id="carouselControls" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner bg-dark text-center">
+        <div class="carousel-item active">
+          <%= image_tag property.property_images.first.image.url(:large),
+            class: 'd-block',
+            style: 'margin: 0 auto;height: 250px; max-width: 100%' %>
+        </div>
+      </div>
+    </div>
+  <% end %>
       <div class="card-body">
         <h4 class="card-title">
           <%= property.name %>
