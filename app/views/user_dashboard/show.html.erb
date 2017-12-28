@@ -157,7 +157,7 @@
             <div class="carousel-inner bg-dark text-center">
               <% @property.property_images.each_with_index do |image, index| %>
                 <div class="carousel-item <%= 'active' if index == 0 %>">
-                  <%= image_tag image.image.url, class: 'd-block', style: 'margin: 0 auto;max-height: 400px; width: 100%' %>
+                  <%= image_tag image.image.url(:large), class: 'd-block', style: 'margin: 0 auto;max-height: 400px; width: 100%' %>
                 </div>
               <% end %>
             </div>
