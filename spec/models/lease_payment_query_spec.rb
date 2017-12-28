@@ -35,6 +35,35 @@ describe LeasePaymentQuery do
       end
     end
 
+    describe '#for_no_reminders_of_type' do
+      it 'should not return lease payments that have reminders of a type' do
+        reminder_type = LeasePaymentReminder::REMINDER_TYPE_DUE_SOON
+        lease_payment = create(:lease_payment)
+        create(:lease_payment_reminder,
+               reminder_type: reminder_type,
+               lease_payment: lease_payment)
+
+        query = described_class.new
+        result = query.search.for_no_reminders_of_type(reminder_type)
+
+        expect(result.length).to eq(0)
+      end
+
+      it 'should return lease payments that don\'t have the reminder type' do
+        reminder_type = LeasePaymentReminder::REMINDER_TYPE_DUE_NOW
+        search_type = LeasePaymentReminder::REMINDER_TYPE_DUE_SOON
+        lease_payment = create(:lease_payment)
+        create(:lease_payment_reminder,
+               reminder_type: reminder_type,
+               lease_payment: lease_payment)
+
+        query = described_class.new
+        result = query.search.for_no_reminders_of_type(search_type)
+
+        expect(result.length).to eq(1)
+      end
+    end
+
     describe '#for_no_reminders' do
       it 'should return 1 lease payment with no reminder' do
         lease_payment = create(:lease_payment)

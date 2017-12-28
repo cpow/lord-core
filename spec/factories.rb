@@ -2,7 +2,8 @@ require 'faker'
 
 FactoryBot.define do
   factory :lease_payment_reminder do
-    email_text "MyText"
+    email_text 'MyText'
+    reminder_type LeasePaymentReminder::REMINDER_TYPE_DUE_NOW
     lease_payment
   end
 

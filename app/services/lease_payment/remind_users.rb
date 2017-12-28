@@ -1,20 +1,49 @@
 class LeasePayment::RemindUsers
   def self.rent_is_due
+    reminder_type = LeasePaymentReminder::REMINDER_TYPE_DUE_NOW
+
     @lease_payments = LeasePaymentQuery
                       .new
                       .search
                       .for_currently_due
-                      .for_no_reminders
+                      .for_no_reminders_of_type(reminder_type)
 
     @lease_payments.each do |lease_payment|
-      send_reminder_email(lease_payment)
-      LeasePaymentReminder.create!(lease_payment: lease_payment)
+      send_rent_due_email(lease_payment)
+      LeasePaymentReminder.create!(
+        lease_payment: lease_payment,
+        reminder_type: reminder_type
+      )
     end
   end
 
-  def self.send_reminder_email(lease_payment)
+  def self.rent_is_coming_up
+    reminder_type = LeasePaymentReminder::REMINDER_TYPE_DUE_SOON
+
+    @lease_payments = LeasePaymentQuery
+                      .new
+                      .search
+                      .for_payments_due_soon
+                      .for_no_reminders_of_type(reminder_type)
+
+    @lease_payments.each do |lease_payment|
+      send_rent_reminder_email(lease_payment)
+      LeasePaymentReminder.create!(
+        lease_payment: lease_payment,
+        reminder_type: reminder_type
+      )
+    end
+  end
+
+  def self.send_rent_due_email(lease_payment)
     LeasePaymentMailer
       .remind_tenants_lease_is_due(lease_payment)
+      .deliver_later
+  end
+
+  def self.send_rent_reminder_email(lease_payment)
+    LeasePaymentMailer
+      .remind_tenants_lease_is_due_soon(lease_payment)
       .deliver_later
   end
 end

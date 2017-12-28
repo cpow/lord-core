@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20171227222407) do
 
   create_table "lease_payment_reminders", force: :cascade do |t|
     t.text "email_text"
+    t.string "reminder_type", null: false
     t.integer "lease_payment_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

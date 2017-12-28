@@ -22,6 +22,12 @@ class LeasePaymentQuery
         .group('lease_payment_reminders.id')
     end
 
+    def for_no_reminders_of_type(reminder_type)
+      includes(:lease_payment_reminders)
+        .where
+        .not(lease_payment_reminders: { reminder_type: reminder_type })
+    end
+
     def active_lease_payments
       active
     end

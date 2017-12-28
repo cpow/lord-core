@@ -1,0 +1,5 @@
+<div class="container text-center">
+  <h1>Friendly reminder that your rent is due very soon</h1>
+  <p>From <%= @lease_payment.unit.property.company.name %>. You are being reminded that your rent is due soon. Here are the details: </p>
+  <%= render partial: 'rent_card', locals: { lease_payment: @lease_payment } %>
+</div>
