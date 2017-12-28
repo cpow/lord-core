@@ -14,6 +14,10 @@ class LeasePaymentQuery
       where('due_date = ?', Time.zone.now.beginning_of_day)
     end
 
+    def for_payments_due_soon
+      where('reminder_date = ?', Time.zone.now.beginning_of_day)
+    end
+
     def for_no_reminders
       includes(:lease_payment_reminders)
         .having('lease_payment_reminders.count <= ?', 0)
