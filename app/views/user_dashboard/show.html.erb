@@ -1,3 +1,24 @@
+<% unless @user.stripe_account_guid.present? %>
+  <div class="card alert alert-warning text-center">
+    <div class="card-body">
+      <h4 class="card-title">
+        Add your checking account
+      </h4>
+      <p class="card-text">
+      Add your checking account to pay rent online. Your information is secure with our partner <a href="https://stripe.com/">stripe</a>.
+      </p>
+      <%= link_to('') do %>
+        <div class="btn btn-warning" id="linkButton">
+          <%= plaid_card_link_text %>
+        </div>
+      <% end %>
+      <form id="ach_form" method="post" action="/tenant_plaid_accounts">
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      </form>
+    </div>
+  </div>
+<% end %>
+
 <%= render partial: 'layouts/pretty_header', locals: {
   title: 'Getting Started',
   text: 'This is your basic information. Handle your banking information and your profile here.'
@@ -33,16 +54,6 @@
           </ul>
         <% end %>
         </p>
-      </div>
-      <div class="card-footer">
-        <%= link_to('') do %>
-          <div class="card-link font-weight-bold" id="linkButton">
-            <%= plaid_card_link_text %>
-          </div>
-        <% end %>
-        <form id="ach_form" method="post" action="/tenant_plaid_accounts">
-          <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-        </form>
       </div>
     </div>
   </div>
