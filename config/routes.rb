@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  require 'sidekiq/web'
+
+  devise_for :admins
+
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+
+  authenticate :admin do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
   resources :properties do
     resources :residencies
     resources :property_images

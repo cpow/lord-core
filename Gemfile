@@ -33,6 +33,7 @@ gem 'premailer-rails'
 gem 'kaminari'
 gem 'webpacker'
 gem 'sidekiq'
+gem 'rails_admin'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
