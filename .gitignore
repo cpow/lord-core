@@ -28,3 +28,5 @@ public/system
 /public/packs
 /public/packs-test
 /node_modules
+
+dump.rdb
