@@ -7,6 +7,6 @@ class InviteUserToPropertyMailer < ApplicationMailer
 
     subject = "Welcome to the neighborhood. From #{@company.name}"
 
-    mail to: @user.email, subject: subject
+    mail to: @user.email, subject: subject, from: 'chris@browntreelabs.com'
   end
 end
