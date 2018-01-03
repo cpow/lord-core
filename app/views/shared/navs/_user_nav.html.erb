@@ -11,9 +11,11 @@
   <% end %>
 </li>
 <li class="nav-item mr-1">
-  <%= link_to new_payment_path, class: "nav-link #{'active' if current_page?(new_payment_path)}" do %>
-    <i class="fa fa-money"></i>
-    New Payment
+  <% unless current_user.current_lease.kind_of?(NullLease) %>
+    <%= link_to new_payment_path, class: "nav-link #{'active' if current_page?(new_payment_path)}" do %>
+      <i class="fa fa-money"></i>
+      New Payment
+    <% end %>
   <% end %>
 </li>
 <li class="nav-item mr-1">

@@ -18,6 +18,11 @@ feature 'user sees dashboard', js: true do
       expect(page).to have_css('.card.rent-info')
     end
 
+    scenario 'the user will not see the lease info link' do
+      expect(page).to_not have_css('.lease-info__link')
+    end
+
+
     scenario 'the user will see message saying no lease yet' do
       expect(page).to have_content('Your property manager hasn\'t')
     end
@@ -31,6 +36,17 @@ feature 'user sees dashboard', js: true do
       visit root_path
 
       expect(page).to have_css('.card.residence-info')
+    end
+  end
+
+  context 'lease info' do
+    scenario 'should be visible when user has lease' do
+      user = create(:user, :with_late_lease_payment)
+
+      login_as(user, scope: :user)
+      visit root_path
+
+      expect(page).to have_css('.lease-info__link')
     end
   end
 

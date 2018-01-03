@@ -124,7 +124,8 @@ FactoryBot.define do
                unit: unit,
                company: property.company,
                user: instance)
-        create(:lease_payment, :late, unit: unit)
+        lease = create(:lease, unit: unit)
+        create(:lease_payment, :late, unit: unit, lease: lease)
       end
     end
 
@@ -137,7 +138,8 @@ FactoryBot.define do
                unit: unit,
                company: property.company,
                user: instance)
-        create(:lease_payment, :reminder, unit: unit)
+        lease = create(:lease, unit: unit)
+        create(:lease_payment, :reminder, unit: unit, lease: lease)
       end
     end
 
@@ -150,7 +152,8 @@ FactoryBot.define do
                unit: unit,
                company: property.company,
                user: instance)
-        create(:lease_payment, :due_today, unit: unit)
+        lease = create(:lease, unit: unit)
+        create(:lease_payment, :due_today, unit: unit, lease: lease)
       end
     end
   end
