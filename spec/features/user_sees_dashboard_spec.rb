@@ -20,6 +20,7 @@ feature 'user sees dashboard', js: true do
 
     scenario 'the user will not see the lease info link' do
       expect(page).to_not have_css('.lease-info__link')
+      expect(page).to_not have_css('.nav-link.lease-info__link')
     end
 
 
@@ -47,6 +48,7 @@ feature 'user sees dashboard', js: true do
       visit root_path
 
       expect(page).to have_css('.lease-info__link')
+      expect(page).to have_css('.nav-link.lease-info__link')
     end
   end
 
