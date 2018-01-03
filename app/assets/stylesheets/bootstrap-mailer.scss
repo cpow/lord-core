@@ -1,0 +1,12 @@
+$primary: #4281B2;
+
+@import "bootstrap/functions";
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+@import "bootstrap/root";
+@import "bootstrap/type";
+@import "bootstrap/buttons";
+
+body {
+  background-color: #f5efe6;
+}
