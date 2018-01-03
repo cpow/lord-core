@@ -32,6 +32,7 @@ gem 'aws-sdk'
 gem 'premailer-rails'
 gem 'kaminari'
 gem 'webpacker'
+gem 'sidekiq'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
