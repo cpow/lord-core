@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180103044745) do
+ActiveRecord::Schema.define(version: 20180107202541) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -132,6 +132,8 @@ ActiveRecord::Schema.define(version: 20180103044745) do
     t.integer "unit_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "active"
+    t.index ["active"], name: "index_residencies_on_active"
     t.index ["company_id"], name: "index_residencies_on_company_id"
     t.index ["property_id"], name: "index_residencies_on_property_id"
     t.index ["unit_id"], name: "index_residencies_on_unit_id"

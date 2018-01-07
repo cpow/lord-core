@@ -66,6 +66,7 @@ FactoryBot.define do
     property
     company
     user
+    active true
   end
 
   factory :unit do

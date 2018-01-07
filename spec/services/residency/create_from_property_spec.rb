@@ -26,8 +26,8 @@ describe Residency::CreateFromProperty do
         email = 'hello@kitty.com'
         residency = prop.residencies.new(unit: unit, user_email: email)
         creator = described_class.new(property: prop, residency: residency)
-        creator.save
 
+        expect(creator.save).to eq(Residency::SUCCESS)
         expect(creator.residency).to be_valid
       end
 
@@ -42,6 +42,23 @@ describe Residency::CreateFromProperty do
           creator.save
         end.to have_enqueued_job(ActionMailer::DeliveryJob)
       end
+
+      it 'will not save a new residency if the user/residency already exists' do
+        prop = create(:property)
+        unit = create(:unit, property: prop)
+        email = 'hello@kitty.com'
+        user = create(:user, email: email)
+
+        create(:residency, user: user, property: unit.property, unit: unit)
+
+        expect(Residency.count).to eq(1)
+
+        residency = prop.residencies.new(unit: unit, user_email: email)
+        creator = described_class.new(property: prop, residency: residency)
+
+        expect(creator.save).to eq(Residency::EXISTS)
+        expect(Residency.count).to eq(1)
+      end
     end
 
     context 'with errors' do
@@ -49,7 +66,7 @@ describe Residency::CreateFromProperty do
         prop = create(:property)
         res = Residency.new
         creator = described_class.new(property: prop, residency: res)
-        expect(creator.save).to be_falsey
+        expect(creator.save).to eq(Residency::ERROR)
         expect(creator.residency.errors).to_not be_nil
       end
     end

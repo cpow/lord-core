@@ -10,8 +10,13 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
-
 class Residency < ApplicationRecord
+  EXISTS = 'exists'.freeze
+  ERROR = 'error'.freeze
+  SUCCESS = 'success'.freeze
+
+  scope :active, -> { where(active: true) }
+
   attr_accessor :user_email
 
   belongs_to :property

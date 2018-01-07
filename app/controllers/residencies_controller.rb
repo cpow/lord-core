@@ -12,10 +12,21 @@ class ResidenciesController < ApplicationController
     creator = Residency::CreateFromProperty
               .new(property: current_property, residency: @residency)
 
-    if creator.save
-      redirect_to current_property, success: 'New resident has been added! They will be invited by email.'
+    return_value = creator.save
+
+    case return_value
+    when Residency::ERROR
+      return render :new, danger: 'There were errors'
+    when Residency::EXISTS
+      return render(
+        :new,
+        info: 'this resident already exists for your property.'
+      )
     else
-      render :new, danger: 'There were errors'
+      return redirect_to(
+        current_property,
+        success: 'New resident has been added! They will be invited by email.'
+      )
     end
   end
 
