@@ -53,13 +53,16 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'capybara-selenium'
-  gem 'fake_stripe'
   gem 'timecop'
   gem 'dotenv-rails'
   gem 'selenium-webdriver'
   gem 'rspec-rails', '~> 3.6'
   gem 'factory_bot_rails'
   gem 'faker'
+end
+
+group :test do
+  gem 'fake_stripe'
 end
 
 group :development do

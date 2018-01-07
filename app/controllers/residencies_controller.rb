@@ -16,17 +16,14 @@ class ResidenciesController < ApplicationController
 
     case return_value
     when Residency::ERROR
-      return render :new, danger: 'There were errors'
+      flash[:danger] = 'There were errors'
+      return render :new
     when Residency::EXISTS
-      return render(
-        :new,
-        info: 'this resident already exists for your property.'
-      )
+      flash[:info] = 'this resident already exists for your property.'
+      return render :new
     else
-      return redirect_to(
-        current_property,
-        success: 'New resident has been added! They will be invited by email.'
-      )
+      flash[:success] = 'New resident has been added! They will be invited by email.'
+      return redirect_to current_property
     end
   end
 
