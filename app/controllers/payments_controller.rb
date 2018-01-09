@@ -21,10 +21,11 @@ class PaymentsController < ApplicationController
 
     # NOTE: we need to store whatever comes out of this.
     # Also, need specs around this class
-    payment_stripe_charge.create
+    stripe_charge = payment_stripe_charge.create
 
     local = current_user.payments.new(
       amount: amount,
+      stripe_charge_id: stripe_charge.id,
       unit: current_user.current_unit,
       lease_payment_id: current_user.current_lease_payment.id
     )

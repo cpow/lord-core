@@ -58,6 +58,7 @@ FactoryBot.define do
   factory :payment do
     unit
     user
+    stripe_charge_id '123charge'
     amount 10000
   end
 
@@ -104,14 +105,19 @@ FactoryBot.define do
     password 'test1234'
     password_confirmation 'test1234'
 
+    trait :with_stripe_account do
+      stripe_account_guid '123stripe'
+    end
+
     trait :with_residence do
       after(:create) do |instance|
-        property = create(:property)
+        company = create(:company, :with_stripe_account)
+        property = create(:property, company: company)
         unit = create(:unit, property: property)
         create(:residency,
                property: property,
                unit: unit,
-               company: property.company,
+               company: company,
                user: instance)
       end
     end
@@ -161,5 +167,8 @@ FactoryBot.define do
 
   factory :company do
     name 'property management company'
+    trait :with_stripe_account do
+      stripe_account_guid '123stripe'
+    end
   end
 end

@@ -17,6 +17,8 @@ class Payment < ApplicationRecord
   belongs_to :lease_payment, optional: true
   belongs_to :unit, optional: true
 
+  validates :stripe_charge_id, presence: true
+
   def human_amount
     amount / 100
   end

@@ -11,11 +11,27 @@ RSpec.describe PaymentsController, type: :controller do
 
     context 'when signed in' do
       it 'should multiple entered payment by 100 (for cents)' do
-        sign_in(create(:user))
+        user = create(:user, :with_residence, :with_stripe_account)
+        sign_in(user)
+        amount_paid = 100
         lease = create(:lease)
         lp = create(:lease_payment, lease: lease)
 
-        post :create, params: { payment: { amount: 100, lease_payment_id: lp.id } }
+        post :create, params: { payment: { amount: amount_paid, lease_payment_id: lp.id } }
+
+        expect(Payment.last.amount).to eq(amount_paid * 100)
+      end
+
+      it 'should store the stripe charge id locally' do
+        user = create(:user, :with_residence, :with_stripe_account)
+        sign_in(user)
+        amount_paid = 100
+        lease = create(:lease)
+        lp = create(:lease_payment, lease: lease)
+
+        post :create, params: { payment: { amount: amount_paid, lease_payment_id: lp.id } }
+
+        expect(Payment.last.stripe_charge_id).to_not be_empty
       end
     end
   end
