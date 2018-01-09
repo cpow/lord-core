@@ -61,22 +61,6 @@
       Lease Payments
     </h3>
     <table class="table table-striped">
-      <div class="row">
-        <div class="col-6">
-          <div class="row mb-2">
-            <div class="col-sm">
-              <i class="fa fa-check text-success"></i> = Paid
-            </div>
-            <div class="col-sm">
-              <i class="fa fa-circle text-info"></i> = Active
-            </div>
-            <div class="col-sm">
-              <i class="fa fa-ban text-alert"></i> = Not Available
-            </div>
-          </div>
-        </div>
-      </div>
-
       <thead class="thead-default">
         <tr>
           <th scope="row">Due Date</th>
@@ -92,20 +76,16 @@
             <td><%= number_to_currency(lease_payment.human_amount_due) %></td>
             <td>
               <% if lease_payment.active %>
-                <i class="fa fa-circle fa-2x text-info">
-                </i>
+                <span class="badge badge-info">active</span>
               <% elsif lease_payment.paid_in_full? %>
-                <i class="fa fa-check fa-2x text-success">
-                </i>
+                <span class="badge badge-primary">success</span>
               <% else %>
-                <i class="fa fa-ban fa-2x text-muted">
-                </i>
+                <span class="badge badge-secondary">N/A</span>
               <% end %>
             </td>
           </tr>
         <% end %>
       </tbody>
     </table>
-
   </div>
 </div>
