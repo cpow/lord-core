@@ -44,6 +44,16 @@ Rails.application.routes.draw do
     resources :leases, only: [:show]
   end
 
+  namespace :api, defaults: { format: 'json' } do
+    namespace :v1 do
+      namespace :stripe do
+        namespace :webhooks do
+          resources :charges, only: :create
+        end
+      end
+    end
+  end
+
   authenticated :user do
     root 'user_dashboard#show', as: :authenticated_user_root
   end

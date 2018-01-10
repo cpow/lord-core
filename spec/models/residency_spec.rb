@@ -9,6 +9,7 @@
 #  unit_id     :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  active      :boolean
 #
 
 require 'rails_helper'

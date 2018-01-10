@@ -1,6 +1,14 @@
 require 'faker'
 
 FactoryBot.define do
+  factory :charge_event do
+    stripe_charge_id "MyString"
+    event_type "MyString"
+    stripe_event_id "MyString"
+    failure_code "MyString"
+    failure_message "MyString"
+    payment_id ""
+  end
   factory :admin do
     
   end

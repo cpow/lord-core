@@ -9,7 +9,9 @@
 #  unit_id     :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  active      :boolean
 #
+
 class Residency < ApplicationRecord
   EXISTS = 'exists'.freeze
   ERROR = 'error'.freeze

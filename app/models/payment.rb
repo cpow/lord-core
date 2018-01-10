@@ -10,6 +10,7 @@
 #  user_id          :integer
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  stripe_charge_id :string
 #
 
 class Payment < ApplicationRecord

@@ -21,6 +21,9 @@
 #  stripe_account_guid    :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  bank_account_guid      :string
+#  bank_account_last4     :string
+#  bank_account_name      :string
 #
 
 class User < ApplicationRecord
