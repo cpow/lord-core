@@ -1,5 +1,5 @@
-module Api::V1
-  class Stripe::Webhooks::ChargesController < ApplicationController
+module Api::V1::Stripe::Webhooks
+  class ChargesController < ApplicationController
     protect_from_forgery except: :create
     before_action :payment_from_stripe
 
