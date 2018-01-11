@@ -1,0 +1,53 @@
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: 'Lease Payment Information',
+  text: 'Here is some information regardinig a lease payment. A lease payment may have already been paid, it may be due soon, or it may be late.' }
+%>
+
+<hr>
+
+<div class="card mb-4">
+  <div class="card-body">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item bg-transparent">
+        <strong class="pull-left">Due Date:</strong>
+        <span class="pull-right">
+          <%= human_date(@lease_payment.due_date) %>
+        </span>
+      </li>
+      <li class="list-group-item bg-transparent">
+        <strong class="pull-left">Amount Due:</strong>
+        <span class="pull-right">
+          <%= number_to_currency(@lease_payment.human_amount_due) %>
+        </span>
+      </li>
+      <li class="list-group-item bg-transparent">
+        <strong class="pull-left">Status</strong>
+        <span class="pull-right">
+          <% if @lease_payment.active %>
+            <span class="badge badge-info">active</span>
+          <% elsif @lease_payment.paid_in_full? %>
+            <span class="badge badge-primary">success</span>
+          <% else %>
+            <span class="badge badge-secondary">N/A</span>
+          <% end %>
+        </span>
+      </li>
+    </ul>
+  </div>
+  <div class="card-footer">
+    <%= link_to 'Back to Lease', user_lease_path(@lease_payment.lease), class: 'card-link font-weight-bold' %>
+  </div>
+</div>
+
+<h3 class="text-center">Payments Already Made</h3>
+<% if @lease_payment.payments.present? %>
+  <% @lease_payment.payments.each do |payment| %>
+    <div class="card">
+      <div class="card-body">
+        payment.amount
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <div class="alert alert-info">No payments have been made yet</div>
+<% end %>

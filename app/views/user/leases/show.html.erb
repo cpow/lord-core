@@ -73,7 +73,11 @@
         <% @lease.lease_payments.each do |lease_payment| %>
           <tr>
             <td><%= human_date(lease_payment.due_date) %></td>
-            <td><%= number_to_currency(lease_payment.human_amount_due) %></td>
+            <td>
+              <%= link_to(user_lease_payment_path(lease_payment.id)) do %>
+                <%= number_to_currency(lease_payment.human_amount_due) %>
+              <% end %>
+            </td>
             <td>
               <% if lease_payment.active %>
                 <span class="badge badge-info">active</span>

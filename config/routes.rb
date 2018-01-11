@@ -41,7 +41,8 @@ Rails.application.routes.draw do
   end
 
   namespace :user do
-    resources :leases, only: [:show]
+    resources :leases, only: :show
+    resources :lease_payments, only: :show
   end
 
   namespace :api, defaults: { format: 'json' } do
