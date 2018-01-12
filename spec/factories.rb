@@ -9,9 +9,10 @@ FactoryBot.define do
     failure_message "MyString"
     payment_id ""
   end
+
   factory :admin do
-    
   end
+
   factory :lease_payment_reminder do
     email_text 'MyText'
     reminder_type LeasePaymentReminder::REMINDER_TYPE_DUE_NOW
@@ -67,7 +68,20 @@ FactoryBot.define do
     unit
     user
     stripe_charge_id '123charge'
+    latest_event_type ChargeEvent::CREATED_TYPE
     amount 10000
+
+    trait :error do
+      latest_event_type ChargeEvent::FAILURE_TYPE
+    end
+
+    trait :successful do
+      latest_event_type ChargeEvent::SUCCEEDED_TYPE
+    end
+
+    trait :pending do
+      latest_event_type ChargeEvent::PENDING_TYPE
+    end
   end
 
   factory :residency do

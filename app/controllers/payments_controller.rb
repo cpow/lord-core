@@ -25,6 +25,7 @@ class PaymentsController < ApplicationController
 
     local = current_user.payments.new(
       amount: amount,
+      latest_event_type: 'charge.created',
       stripe_charge_id: stripe_charge.id,
       unit: current_user.current_unit,
       lease_payment_id: current_user.current_lease_payment.id

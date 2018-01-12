@@ -17,8 +17,12 @@ class ChargeEvent < ApplicationRecord
   PENDING_TYPE = 'charge.pending'.freeze
   FAILURE_TYPE = 'charge.failed'.freeze
   SUCCEEDED_TYPE = 'charge.succeeded'.freeze
+  CREATED_TYPE = 'charge.created'.freeze
 
-  EVENT_TYPES = [PENDING_TYPE, FAILURE_TYPE, SUCCEEDED_TYPE].freeze
+  EVENT_TYPES = [PENDING_TYPE,
+                 FAILURE_TYPE,
+                 SUCCEEDED_TYPE,
+                 CREATED_TYPE].freeze
 
   validates :event_type, inclusion: { in: EVENT_TYPES }
   validates :stripe_charge_id, presence: true

@@ -29,6 +29,10 @@ residency = FactoryBot.create(:residency, user: user, company: manager.company, 
 lease = FactoryBot.create(:lease, unit: unit)
 
 lease_payment = FactoryBot.create(:lease_payment, lease: lease, unit: unit)
+FactoryBot.create(:payment, unit: unit, user: user, lease_payment: lease_payment)
+FactoryBot.create(:payment, :error, unit: unit, user: user, lease_payment: lease_payment, amount: 100000)
+FactoryBot.create(:payment, :successful, unit: unit, user: user, lease_payment: lease_payment, amount: 25000)
+FactoryBot.create(:payment, :pending, unit: unit, user: user, lease_payment: lease_payment, amount: 25000)
 
 FactoryBot.create(:residency, user: user, property: property, unit: unit, company: manager.company)
 
