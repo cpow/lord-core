@@ -2,37 +2,32 @@
   <%= render partial: 'layouts/errors', locals: { object: property } %>
 
   <div class="form-group">
-    <%= form.label :address_city %>
-    <%= form.text_field :address_city, id: :property_address_city, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :address_line1 %>
-    <%= form.text_field :address_line1, id: :property_address_line1, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :address_state %>
-    <%= form.select(:address_state, options_for_select(states, property[:address_state]), {}, { class: "form-control input-lg" }) %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :address_postal %>
-    <%= form.text_field :address_postal, id: :property_address_postal, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :name %>
+    <%= form.label :name, "Property Name" %>
     <%= form.text_field :name, id: :property_name, class: 'form-control' %>
   </div>
 
   <div class="form-group">
-    <%= form.label :description %>
-    <%= form.text_area :description, id: :property_description, class: 'form-control' %>
+    <%= form.label :address_line1, "Address" %>
+    <%= form.text_field :address_line1, id: :property_address_line1, class: 'form-control' %>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-lg-8 col-md-4 col-sm-12">
+      <%= form.label :address_city, "City" %>
+      <%= form.text_field :address_city, id: :property_address_city, class: 'form-control' %>
+    </div>
+    <div class="form-group col-lg-2 col-md-4 col-sm-12">
+      <%= form.label :address_state, "State" %>
+      <%= form.select(:address_state, options_for_select(states, property[:address_state]), {}, { class: "form-control input-lg" }) %>
+    </div>
+    <div class="form-group col-lg-2 col-md-4 col-sm-12">
+      <%= form.label :address_postal, "Zip Code" %>
+      <%= form.text_field :address_postal, id: :property_address_postal, class: 'form-control' %>
+    </div>
   </div>
 
   <div class="actions">
-    <%= form.submit class: 'btn btn-primary' %>
+    <%= form.submit class: 'btn btn-primary btn-block' %>
   </div>
 <% end %>
 

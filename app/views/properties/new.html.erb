@@ -1,10 +1,10 @@
-<div class="container">
-  <div class="card">
-    <h1 class="card-header">New Property</h1>
-    <div class="card-body">
-      <%= render 'form', property: @property %>
-      <%= link_to 'Back', properties_path %>
-    </div>
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: 'Create a New Property',
+  text: 'So you want to add a new property? Great! Lets start with the basics.' }
+%>
+
+<div class="card">
+  <div class="card-body">
+    <%= render 'form', property: @property %>
   </div>
 </div>
-
