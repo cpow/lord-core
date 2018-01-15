@@ -27,9 +27,12 @@ class LeasePaymentQuery
     end
 
     def for_no_reminders_of_type(reminder_type)
-      includes(:lease_payment_reminders)
-        .where
-        .not(lease_payment_reminders: { reminder_type: reminder_type })
+      with_reminders_but_not_of_type(reminder_type) + for_no_reminders
+    end
+
+    def with_reminders_but_not_of_type(reminder_type)
+      joins(:lease_payment_reminders)
+        .where('lease_payment_reminders.reminder_type != ?', reminder_type)
     end
 
     def active_lease_payments

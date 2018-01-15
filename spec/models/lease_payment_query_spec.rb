@@ -62,6 +62,16 @@ describe LeasePaymentQuery do
 
         expect(result.length).to eq(1)
       end
+
+      it 'should return lease payments without reminders' do
+        search_type = LeasePaymentReminder::REMINDER_TYPE_DUE_SOON
+        lease_payment = create(:lease_payment)
+
+        query = described_class.new
+        result = query.search.for_no_reminders_of_type(search_type)
+
+        expect(result.length).to eq(1)
+      end
     end
 
     describe '#for_no_reminders' do
