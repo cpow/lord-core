@@ -1,11 +1,15 @@
 {
   "dependencies": {
     "@rails/webpacker": "^3.2.0",
+    "axios": "^0.17.1",
     "babel-preset-react": "^6.24.1",
     "coffeescript": "1.12.7",
+    "postcss-smart-import": "^0.7.6",
     "prop-types": "^15.6.0",
+    "query-string": "^5.0.1",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "react-table": "^6.7.6"
   },
   "devDependencies": {
     "webpack-dev-server": "^2.10.0"

@@ -1,10 +1,8 @@
-<div class="card">
-  <h1 class="card-header">Units</h1>
-  <div class="card-body">
-    <%= render 'units/table', units: @units %>
-  </div>
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: 'Units',
+  text: ''
+} %>
 
-  <br>
+<%= link_to 'New Unit', new_property_unit_path(params[:property_id]) %>
 
-  <%= link_to 'New Unit', new_property_unit_path(params[:property_id]) %>
-</div>
+<%= javascript_pack_tag 'unit_filter_table' %>

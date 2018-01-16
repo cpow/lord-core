@@ -3,6 +3,10 @@ class NullLeasePayment
     0
   end
 
+  def active
+    true
+  end
+
   def id
     nil
   end

@@ -47,6 +47,10 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
+      resources :properties, only: [] do
+        resources :units, only: :index, controller: :property_units
+      end
+
       namespace :stripe do
         namespace :webhooks do
           resources :charges, only: :create
@@ -58,12 +62,9 @@ Rails.application.routes.draw do
   authenticated :user do
     root 'user_dashboard#show', as: :authenticated_user_root
   end
-
   authenticated :property_manager do
     root 'high_voltage/pages#show', id: 'property_manager_home', as: :authenticated_property_manager_root
   end
-
-
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   HighVoltage.configure do |config|
     config.home_page = 'home'
