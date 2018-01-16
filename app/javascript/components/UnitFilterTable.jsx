@@ -10,6 +10,7 @@ class UnitFilterTable extends Component {
     super(props);
     this.state = { units: [], filteredUnits: [] };
     this.filterStatus = this.filterStatus.bind(this);
+    this.fuzzyFilterName = this.fuzzyFilterName.bind(this);
   }
 
   componentDidMount() {
@@ -30,12 +31,26 @@ class UnitFilterTable extends Component {
     }
   }
 
+  fuzzyFilterName(e) {
+    let str = e.target.value;
+    let pattern = str.replace(/[^a-zA-Z0-9_-]/, '').split('').join('.*');
+    let matcher = new RegExp(pattern, 'i');
+
+    if ( str === '' ) {
+      this.setState({ filteredUnits: this.state.units });
+    } else {
+      this.setState({ filteredUnits: this.state.units.filter(unit => matcher.test(unit.name))});
+    }
+  }
+
   render() {
     return (
       <div className="container">
         <div className="card">
           <div className="card-body">
-            <FilterUnits filterStatus={this.filterStatus} />
+            <FilterUnits
+              filterStatus={this.filterStatus}
+              fuzzyFilterName={this.fuzzyFilterName} />
             <UnitList units={this.state.filteredUnits} />
           </div>
         </div>
