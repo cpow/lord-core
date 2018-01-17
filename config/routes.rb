@@ -49,6 +49,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :properties, only: [] do
         resources :units, only: :index, controller: :property_units
+        resources :residencies, only: :index, controller: :property_residencies
       end
 
       namespace :stripe do

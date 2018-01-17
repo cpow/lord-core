@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
-import UnitList from 'components/UnitList';
-import FilterUnits from 'components/FilterUnits';
+import UnitList from 'components/units/UnitList';
+import FilterUnits from 'components/units/FilterUnits';
 
 const { Component } = React;
 
@@ -14,7 +15,9 @@ class UnitFilterTable extends Component {
   }
 
   componentDidMount() {
-    axios.get('/api/v1/properties/1/units').then(resp => {
+    let propertyId = this.props.propertyId;
+
+    axios.get(`/api/v1/properties/${propertyId}/units`).then(resp => {
       let units = resp.data.units;
       this.setState({ units, filteredUnits: resp.data.units });
     }).catch(error => {
@@ -44,19 +47,36 @@ class UnitFilterTable extends Component {
   }
 
   render() {
+    let output = null;
+
+    if ( this.state.units.length > 0 ) {
+      output =
+        <div>
+          <FilterUnits
+            filterStatus={this.filterStatus}
+            fuzzyFilterName={this.fuzzyFilterName} />
+          <UnitList units={this.state.filteredUnits} />
+        </div>;
+    } else {
+      output =
+        <div className="alert alert-warning">
+          You don't have any units associated to this property.
+        </div>
+    }
     return (
       <div className="container">
         <div className="card">
           <div className="card-body">
-            <FilterUnits
-              filterStatus={this.filterStatus}
-              fuzzyFilterName={this.fuzzyFilterName} />
-            <UnitList units={this.state.filteredUnits} />
+            {output}
           </div>
         </div>
       </div>
     )
   }
+}
+
+UnitFilterTable.propTypes = {
+  propertyId: PropTypes.number
 }
 
 export default UnitFilterTable;

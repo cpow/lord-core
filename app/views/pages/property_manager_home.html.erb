@@ -19,75 +19,82 @@
 <h3 class="text-center mt-3">Getting Started</h3>
 <p class="text-center">Here is all the information you need for your company. Please edit this as you see fit</p>
 
-<div class="card-deck text-center">
-  <div class="card ">
-    <div class="card-body">
-      <div class="container">
-        <div class="row">
-          <div class="col">
-            <h4>
-              Banking
-            </h4>
-            <p>
-            <i class="fa fa-bank fa-3x text-info"></i>
-            </p>
-            <p>
-            <%= current_property_manager.name %>
-            </p>
-            <%= link_to(edit_company_path(current_property_manager.company)) do %>
-              <div class="btn btn-light">
-                Edit Bank Account
-              </div>
-            <% end %>
+
+<div class="row equal-height text-center">
+  <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+    <div class="card ">
+      <div class="card-body">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <h4>
+                Banking
+              </h4>
+              <p>
+              <i class="fa fa-bank fa-3x text-info"></i>
+              </p>
+              <p>
+              <%= current_property_manager.name %>
+              </p>
+              <%= link_to(edit_company_path(current_property_manager.company)) do %>
+                <div class="btn btn-light">
+                  Edit Bank Account
+                </div>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="card ">
-    <div class="card-body">
-      <div class="container">
-        <div class="row">
-          <div class="col">
-            <h4>
-              Account
-            </h4>
-            <p>
-            <i class="fa fa-user fa-3x text-info"></i>
-            </p>
-            <p>
-            <%= current_property_manager.name %>
-            </p>
-            <%= link_to(edit_company_path(current_property_manager.company)) do %>
-              <div class="btn btn-light">
-                Edit Account
-              </div>
-            <% end %>
+  <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+    <div class="card ">
+      <div class="card-body">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <h4>
+                Account
+              </h4>
+              <p>
+              <i class="fa fa-user fa-3x text-info"></i>
+              </p>
+              <p>
+              <%= current_property_manager.name %>
+              </p>
+              <%= link_to(edit_company_path(current_property_manager.company)) do %>
+                <div class="btn btn-light">
+                  Edit Account
+                </div>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="card">
-    <div class="card-body">
-      <div class="container">
-        <div class="row">
-          <div class="col">
-            <h4>
-              Company
-            </h4>
-            <p>
-            <i class="fa fa-drivers-license-o fa-3x text-info">
-            </i>
-            </p>
-            <p>
-            <%= current_property_manager.company.name %>
-            </p>
-            <%= link_to(edit_company_path(current_property_manager.company)) do %>
-              <div class="btn btn-light">
-                Edit Company
-              </div>
-            <% end%>
+  <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+    <div class="card">
+      <div class="card-body">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <h4>
+                Company
+              </h4>
+              <p>
+              <i class="fa fa-drivers-license-o fa-3x text-info">
+              </i>
+              </p>
+              <p>
+              <%= current_property_manager.company.name %>
+              </p>
+              <%= link_to(edit_company_path(current_property_manager.company)) do %>
+                <div class="btn btn-light">
+                  Edit Company
+                </div>
+              <% end%>
+            </div>
           </div>
         </div>
       </div>

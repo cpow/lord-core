@@ -1,0 +1,10 @@
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: 'Residencies',
+  text: ''
+} %>
+
+<%= link_to 'New Resident', new_property_residency_path(params[:property_id]) %>
+
+<div id="propertyId" data-property-id="<%= params[:property_id] %>" />
+
+<%= javascript_pack_tag 'residency_filter_table' %>

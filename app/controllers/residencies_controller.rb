@@ -6,6 +6,10 @@ class ResidenciesController < ApplicationController
     @residency = current_property.residencies.new
   end
 
+  def index
+    @residencies = current_property.residencies
+  end
+
   def create
     @residency = current_property.residencies.new(residency_params)
 

@@ -5,4 +5,6 @@
 
 <%= link_to 'New Unit', new_property_unit_path(params[:property_id]) %>
 
+<div id="propertyId" data-property-id="<%= params[:property_id] %>" />
+
 <%= javascript_pack_tag 'unit_filter_table' %>
