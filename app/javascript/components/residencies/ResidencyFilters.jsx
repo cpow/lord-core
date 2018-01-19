@@ -12,6 +12,12 @@ class  ResidencyFilters extends Component {
             className="form-control"
             onChange={this.props.fuzzyFilterName} />
         </div>
+        <div className="col-lg-4 col-sm-12">
+          <label htmlFor="fuzzyFilterEmail">Search Email</label>
+          <input id="fuzzyFilterEmail"
+            className="form-control"
+            onChange={this.props.fuzzyFilterEmail} />
+        </div>
       </div>
     )
   }

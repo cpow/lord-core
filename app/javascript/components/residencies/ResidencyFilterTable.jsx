@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import getProperty from 'util/dynamic-property';
 import axios from 'axios';
 import ResidencyTable from 'components/residencies/ResidencyTable';
 import ResidencyFilters from 'components/residencies/ResidencyFilters';
@@ -11,6 +12,7 @@ class ResidencyFilterTable extends Component {
     super(props);
     this.state = { residencies: [], filteredResidencies: [] };
     this.fuzzyFilterName = this.fuzzyFilterName.bind(this);
+    this.fuzzyFilterEmail = this.fuzzyFilterEmail.bind(this);
   }
 
   componentDidMount() {
@@ -24,20 +26,28 @@ class ResidencyFilterTable extends Component {
     });
   }
 
-  fuzzyFilterName(e) {
+  filterBy(property, e) {
     let str = e.target.value;
     let pattern = str.replace(/[^a-zA-Z0-9_-]/, '').split('').join('.*');
     let matcher = new RegExp(pattern, 'i');
 
     if ( str === '' ) {
-      this.setState({ filteredUnits: this.state.residencies });
+      this.setState({ filteredResidencies: this.state.residencies });
     } else {
       let filtered = this.state.residencies.filter(residency => {
-        return matcher.test(residency.user.name);
+        return matcher.test(getProperty(residency, property));
       })
 
       this.setState({ filteredResidencies: filtered});
     }
+  }
+
+  fuzzyFilterName(e) {
+    return this.filterBy('user.name', e);
+  }
+
+  fuzzyFilterEmail(e) {
+    return this.filterBy('user.email', e);
   }
 
   render() {
@@ -47,7 +57,8 @@ class ResidencyFilterTable extends Component {
       output =
         <div>
           <ResidencyFilters
-            fuzzyFilterName={this.fuzzyFilterName} />
+            fuzzyFilterName={this.fuzzyFilterName}
+            fuzzyFilterEmail={this.fuzzyFilterEmail} />
           <ResidencyTable residencies={this.state.filteredResidencies} />
         </div>;
     } else {
