@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
+  resources :residencies, only: [:show]
+
   resources :properties do
     resources :residencies
     resources :property_images

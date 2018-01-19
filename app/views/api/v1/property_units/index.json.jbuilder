@@ -4,13 +4,15 @@ json.units @units do |unit|
   json.url property_unit_path(@property, unit)
   json.badge do
     lease_payment = unit.current_lease_payment
-
     if lease_payment.active
       json.class 'info'
       json.value 'active'
     elsif lease_payment.paid_in_full?
       json.class 'success'
       json.value 'paid'
+    elsif lease_payment.late?
+      json.class 'danger'
+      json.value 'late'
     else
       json.class 'secondary'
       json.value 'N/A'

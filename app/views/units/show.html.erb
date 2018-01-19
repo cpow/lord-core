@@ -7,10 +7,21 @@
   </ol>
 </nav>
 
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: "Current Residents",
+  text: 'The list of current active residents for this unit' }
+%>
+
+<%= render partial: 'residencies/cards',
+  locals: { residencies: @property.residencies }
+%>
+
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: "Information For #{@unit.name}",
+  text: '' }
+%>
+
 <div class="card">
-  <h2 class="card-header">
-    <%= @unit.name %>
-  </h2>
   <div class="card-body">
     <p>
       <strong>Property:</strong>
@@ -28,17 +39,19 @@
     </p>
 
 
-    <%= link_to 'Edit', edit_property_unit_path(@unit.property, @unit) %> |
-    <%= link_to 'Back', property_units_path(@unit.property) %> |
-    <%= link_to 'Back To Property', property_path(@unit.property) %>
+    <%= link_to 'Edit', edit_property_unit_path(@unit.property, @unit),
+      class: 'card-link text-uppercase'
+    %>
   </div>
 </div>
 
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: "Recent Payments",
+  text: '' }
+%>
+
 <% if @unit.payments %>
   <div class="card">
-    <h2 class="card-header">
-      Payments
-    </h2>
     <div class="card-body">
       <%= render 'shared/payments/table', payments: @unit.payments %>
     </div>

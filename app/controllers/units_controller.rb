@@ -33,7 +33,7 @@ class UnitsController < ApplicationController
   def update
     respond_to do |format|
       if @unit.update(unit_params)
-        format.html { redirect_to current_property, notice: 'Unit was successfully updated.' }
+        format.html { redirect_to [current_property, @unit], notice: 'Unit was successfully updated.' }
       else
         format.html { render :edit }
       end

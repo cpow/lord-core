@@ -10,6 +10,10 @@ class ResidenciesController < ApplicationController
     @residencies = current_property.residencies
   end
 
+  def show
+    @residency = Residency.find(params[:id])
+  end
+
   def create
     @residency = current_property.residencies.new(residency_params)
 
