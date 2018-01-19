@@ -7,6 +7,10 @@ $primary: #4281B2;
     flex-wrap: wrap;
 }
 
+.breadcrumb-nav.sticky-top {
+  top: 3.5em;
+}
+
 .row.equal-height > [class*='col-'] {
     display: flex;
     flex-direction: column;
