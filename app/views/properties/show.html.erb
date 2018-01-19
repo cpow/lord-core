@@ -1,6 +1,6 @@
 <nav aria-label="breadcrumb" class="sticky-top bg-white">
   <ol class="breadcrumb bg-white">
-    <li class="breadcrumb-item"><%= link_to @company.name, company_path(@company) %></li>
+    <li class="breadcrumb-item"><%= link_to @company.name, authenticated_property_manager_root_path %></li>
     <li class="breadcrumb-item active" aria-current="page"><%= @property.name %></li>
   </ol>
 </nav>

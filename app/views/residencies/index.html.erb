@@ -3,7 +3,9 @@
   text: ''
 } %>
 
-<%= link_to 'New Resident', new_property_residency_path(params[:property_id]) %>
+<div class="text-center mb-4">
+  <%= link_to 'Create New', new_property_residency_path(params[:property_id]) %>
+</div>
 
 <div id="propertyId" data-property-id="<%= params[:property_id] %>" />
 

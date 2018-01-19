@@ -1,6 +1,6 @@
 <nav aria-label="breadcrumb" class="sticky-top bg-white">
   <ol class="breadcrumb bg-white">
-    <li class="breadcrumb-item"><%= link_to @company.name, company_path(@company) %></li>
+    <li class="breadcrumb-item"><%= link_to @company.name, authenticated_property_manager_root_path %></li>
     <li class="breadcrumb-item"><%= link_to @property.name, property_path(@property) %></li>
     <li class="breadcrumb-item active" aria-current="page">Units</li>
   </ol>
@@ -8,10 +8,12 @@
 
 <%= render partial: 'layouts/pretty_header', locals: {
   title: 'Units',
-  text: ''
+  text: 'Manage your units. Use the table below to filter units, and click into any unit to see more details'
 } %>
 
-<%= link_to 'New Unit', new_property_unit_path(params[:property_id]) %>
+<div class="text-center mb-4 mt-0">
+  <%= link_to 'Create New', new_property_unit_path(params[:property_id]), class: '' %>
+</div>
 
 <div id="propertyId" data-property-id="<%= params[:property_id] %>" />
 
