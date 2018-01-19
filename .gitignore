@@ -24,6 +24,8 @@
 
 .byebug_history
 .tool-versions
+.rbenv-*
+.ruby-*
 public/system
 /public/packs
 /public/packs-test
