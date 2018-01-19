@@ -1,5 +1,7 @@
 class UnitsController < ApplicationController
   before_action :set_unit, only: [:show, :edit, :update, :destroy]
+  before_action :set_property
+  before_action :set_company
   before_action :authenticate_property_manager!
 
   def index
@@ -46,6 +48,14 @@ class UnitsController < ApplicationController
   end
 
   private
+
+  def set_property
+    @property = current_property
+  end
+
+  def set_company
+    @company = current_company
+  end
 
   def current_property
     @property ||= Property.find(params[:property_id])

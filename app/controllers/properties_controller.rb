@@ -11,6 +11,7 @@ class PropertiesController < ApplicationController
   # GET /properties/1
   # GET /properties/1.json
   def show
+    @company = current_company
   end
 
   # GET /properties/new

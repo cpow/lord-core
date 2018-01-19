@@ -1,3 +1,12 @@
+<nav aria-label="breadcrumb" class="bg-white">
+  <ol class="breadcrumb bg-white">
+    <li class="breadcrumb-item"><%= link_to @company.name, company_path(@company) %></li>
+    <li class="breadcrumb-item"><%= link_to @property.name, property_path(@property) %></li>
+    <li class="breadcrumb-item"><%= link_to "Units", property_units_path(@property) %></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= @unit.name %></li>
+  </ol>
+</nav>
+
 <div class="card">
   <h2 class="card-header">
     <%= @unit.name %>

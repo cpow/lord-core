@@ -1,3 +1,10 @@
+<nav aria-label="breadcrumb" class="bg-white">
+  <ol class="breadcrumb bg-white">
+    <li class="breadcrumb-item"><%= link_to @company.name, company_path(@company) %></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= @property.name %></li>
+  </ol>
+</nav>
+
 <%= render partial: 'layouts/pretty_header', locals: {
   title: "Property #{@property.name}",
   text: '' }
