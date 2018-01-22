@@ -10,6 +10,18 @@ class ApplicationController < ActionController::Base
     current_property_manager.company
   end
 
+  def set_company
+    @company ||= current_company
+  end
+
+  def current_property
+    @property ||= Property.find(params[:property_id])
+  end
+
+  def set_property
+    @property = current_property
+  end
+
   private
 
   def can_manage_company!

@@ -1,6 +1,8 @@
 class ResidenciesController < ApplicationController
   before_action :authenticate_property_manager!
   before_action :verify_units_available
+  before_action :set_property
+  before_action :set_company
 
   def new
     @residency = current_property.residencies.new
