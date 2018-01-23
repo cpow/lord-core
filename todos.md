@@ -3,12 +3,33 @@
 ## Big Stuff!
  *things that will take a while to do, but really need to be done and are essential.*
 
-[ ] make a nice stepper for creating a property.
+[ ] CHAT
+ * on a per unit basis. would be nice to have chats with tenants. They can get
+*this should be handled for now. may not need anything else around this*
+   updates/alerts/etc...
+ * all tenants in a unit can see a chat, and can chat with property management
+ * chat is only visible to management, and residents of a particular unit. If a
+   new resident joins, they can't view the past chats...
+  * what does this mean? Do we create a new record for only tenants in a current
+    unit? or do we timestamp these messages, and depending on residency
+    creation, only allow residents to see certain thigns? hmm...
+    * yeah. create chats only to residents in a unit. Then residents can only
+      see their chats. and not chats for any other resident... that makes sense
+
+[ ] NOTIFICATIONS
+ * notify users on a per-unit and per-property basis
+ * maybe this is very similar to chat?????
+ * potentially: for every unit in a property, you create a new chat message.
+   Then all units and tenants can see a property-wide message. and can respond
+   in their own self-contained tenant/unit chat to property management.
+
+[x] make a nice stepper for creating a property.
  * maybe only do this for a first property? Either way, would be nice.
  * think of ways to gamify this, make a list that displays differently when you
    finished the step?
  * maintain a very small barrier to entry. don't just display a massvie list of
    TODOs to a person. might be overwhelming
+*this should be handled for now. may not need anything else around this*
 
 [ ] get more information to tables displaying transactions.
  * Get more information into the objects that store local transactions.
