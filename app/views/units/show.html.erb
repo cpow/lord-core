@@ -8,52 +8,84 @@
 </nav>
 
 <%= render partial: 'layouts/pretty_header', locals: {
+  title: "#{@unit.name}",
+  text: '' }
+%>
+
+<div class="row equal-height">
+  <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+    <div class="card property-info">
+      <div class="card-body">
+        <h4>
+          Unit Information
+        </h4>
+        <p>
+          <strong>Property:</strong>
+          <%= @unit.property_id %>
+        </p>
+
+        <p>
+          <strong>Description:</strong>
+          <%= @unit.description %>
+        </p>
+
+        <p>
+          <strong>Name:</strong>
+          <%= @unit.name %>
+        </p>
+      </div>
+      <div class="card-footer bg-white">
+        <%= link_to 'Edit', edit_property_unit_path(@unit.property, @unit),
+          class: 'card-link text-uppercase'
+        %>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+    <div class="card property-info">
+      <div class="card-body">
+        <h4>
+          Lease Information
+        </h4>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item border-bottom-0 border-top-0">
+            <strong class="pull-left"> Total Payments: </strong>
+            <span class="pull-right">
+              <%= number_to_currency(@unit.current_lease.total_payments) %>
+            </span>
+          </li>
+          <li class="list-group-item border-bottom-0 border-top-0">
+            <strong class="pull-left">Already Paid:</strong>
+            <span class="pull-right">
+              <%= number_to_currency(@unit.current_lease.total_paid) %>
+            </span>
+          </li>
+          <li class="list-group-item border-bottom-0 border-top-0">
+            <strong class="pull-left"> Payments: </strong>
+            <span class="pull-right">
+              <%= @unit.current_lease.lease_payments.length %>
+            </span>
+          </li>
+        </ul>
+      </div>
+      <div class="card-footer bg-white">
+        <%= link_to 'View', property_unit_lease_path(@unit.property, @unit, @unit.leases.last),
+          class: 'card-link text-uppercase'
+        %>
+
+        <%= link_to 'New Lease', new_property_unit_lease_path(@unit.property, @unit),
+          class: 'card-link text-uppercase'
+        %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= render partial: 'layouts/pretty_header', locals: {
   title: "Current Residents",
   text: 'The list of current active residents for this unit' }
 %>
 
 <%= render partial: 'residencies/cards',
-  locals: { residencies: @property.residencies }
+  locals: { residencies: @property.residencies, property: @property }
 %>
-
-<%= render partial: 'layouts/pretty_header', locals: {
-  title: "Information For #{@unit.name}",
-  text: '' }
-%>
-
-<div class="card">
-  <div class="card-body">
-    <p>
-      <strong>Property:</strong>
-      <%= @unit.property_id %>
-    </p>
-
-    <p>
-      <strong>Description:</strong>
-      <%= @unit.description %>
-    </p>
-
-    <p>
-      <strong>Name:</strong>
-      <%= @unit.name %>
-    </p>
-
-
-    <%= link_to 'Edit', edit_property_unit_path(@unit.property, @unit),
-      class: 'card-link text-uppercase'
-    %>
-  </div>
-</div>
-
-<%= render partial: 'layouts/pretty_header', locals: {
-  title: "Recent Payments",
-  text: '' }
-%>
-
-<% if @unit.payments %>
-  <div class="card">
-    <div class="card-body">
-      <%= render 'shared/payments/table', payments: @unit.payments %>
-    </div>
-  </div>
-<% end %>

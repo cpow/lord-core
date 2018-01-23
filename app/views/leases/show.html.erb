@@ -1,40 +1,95 @@
-<p id="notice"><%= notice %></p>
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: 'Lease Information',
+  text: '' }
+%>
 
-<p>
-  <strong>Start date:</strong>
-  <%= @lease.start_date %>
-</p>
+<div class="card">
+  <div class="card-body">
+    <div class="row mb-5 mt-3">
+      <div class="col-lg-6 mb-4">
+        <h3>
+          Settings
+        </h3>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item bg-transparent">
+            <strong class="pull-left"> Start: </strong>
+            <span class="pull-right">
+              <%= human_date(@lease.start_date) %>
+            </span>
+          </li>
+          <li class="list-group-item bg-transparent">
+            <strong class="pull-left">End:</strong>
+            <span class="pull-right">
+              <%= human_date(@lease.end_date) %>
+            </span>
+          </li>
+          <li class="list-group-item bg-transparent">
+            <strong class="pull-left"> Days until email: </strong>
+            <span class="pull-right">
+              <%= @lease.payment_reminder_days %>
+            </span>
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-6 mb-4">
+        <h3>
+          Totals
+        </h3>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item bg-transparent">
+            <strong class="pull-left"> Total Payments: </strong>
+            <span class="pull-right">
+              <%= number_to_currency(@lease.total_payments) %>
+            </span>
+          </li>
+          <li class="list-group-item bg-transparent">
+            <strong class="pull-left">Already Paid:</strong>
+            <span class="pull-right">
+              <%= number_to_currency(@lease.total_paid) %>
+            </span>
+          </li>
+          <li class="list-group-item bg-transparent">
+            <strong class="pull-left"> Payments: </strong>
+            <span class="pull-right">
+              <%= @lease.lease_payments.length %>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <h3>
+      Lease Payments
+    </h3>
+    <table class="table table-striped">
+      <thead class="thead-default">
+        <tr>
+          <th scope="row">Due Date</th>
+          <th scope="row">Amount Due</th>
+          <th scope="row">Status</th>
+        </tr>
+      </thead>
 
-<p>
-  <strong>End date:</strong>
-  <%= @lease.end_date %>
-</p>
-
-<p>
-  <strong>Payment amount:</strong>
-  <%= number_to_currency(@lease.human_amount) %>
-</p>
-
-<p>
-  <strong>Payment due day of month:</strong>
-  <%= @lease.payment_first_date %>
-</p>
-
-<p>
-  <strong>Payment days until late:</strong>
-  <%= @lease.payment_days_until_late %>
-</p>
-
-<p>
-  <strong>Unit:</strong>
-  <%= @lease.unit_id %>
-</p>
-
-<%= link_to 'Edit', edit_property_unit_lease_path(@property, @unit, @lease) %> |
-<%= link_to 'Back', property_unit_leases_path(@property, @unit) %>
-
-<hr>
-
-<h2>Scheduled payments</h2>
-
-<%= render partial: 'lease_payments/table', locals: { lease_payments: @lease.lease_payments } %>
+      <tbody>
+        <% @lease.lease_payments.each do |lease_payment| %>
+          <tr>
+            <td><%= human_date(lease_payment.due_date) %></td>
+            <td>
+              <%= link_to(user_lease_payment_path(lease_payment.id)) do %>
+                <%= number_to_currency(lease_payment.human_amount_due) %>
+              <% end %>
+            </td>
+            <td>
+              <% if lease_payment.active %>
+                <span class="badge badge-info">active</span>
+              <% elsif lease_payment.paid_in_full? %>
+                <span class="badge badge-primary">success</span>
+              <% else %>
+                <span class="badge badge-secondary">N/A</span>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

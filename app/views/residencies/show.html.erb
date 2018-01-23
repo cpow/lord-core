@@ -1,1 +1,28 @@
-<h1>THIS Is A RESiDEncyu</h1>
+<nav aria-label="breadcrumb" class="breadcrumb-nav sticky-top bg-white">
+  <ol class="breadcrumb bg-white">
+    <li class="breadcrumb-item"><%= link_to @residency.company.name, authenticated_property_manager_root_path %></li>
+    <li class="breadcrumb-item"><%= link_to @residency.property.name, property_path(@residency.property) %></li>
+    <li class="breadcrumb-item"><%= link_to "Units", property_units_path(@residency.property) %></li>
+    <li class="breadcrumb-item"><%= link_to @residency.unit.name, property_unit_path(@residency.property, @residency.unit) %></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= @residency.user.name %></li>
+  </ol>
+</nav>
+
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: "Resident: #{@residency.user.name}",
+  text: 'Resident information page.' }
+%>
+
+<div class="card">
+  <div class="card-body">
+
+    <%= render partial: 'layouts/pretty_header', locals: {
+      title: "Recent payments for this resident",
+      text: '' }
+    %>
+
+    <% if @residency.payments %>
+      <%= render 'shared/payments/table', payments: @residency.payments %>
+    <% end %>
+  </div>
+</div>

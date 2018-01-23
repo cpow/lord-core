@@ -27,4 +27,8 @@ class Residency < ApplicationRecord
   belongs_to :company
 
   attribute :user_email, :string
+
+  def payments
+    unit.payments.where(user_id: user_id)
+  end
 end

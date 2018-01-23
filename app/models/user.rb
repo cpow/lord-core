@@ -43,6 +43,10 @@ class User < ApplicationRecord
 
   scope :inactive, -> { where(activated: false) }
 
+  def status
+    activated ? 'active' : 'pending'
+  end
+
   def set_placeholder_password
     self.password = unique_password
   end
