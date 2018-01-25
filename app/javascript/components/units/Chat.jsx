@@ -37,7 +37,9 @@ class Chat extends Component {
   componentDidUpdate() {
     let listElements = document.getElementsByClassName('message');
     let lastElement = listElements[listElements.length - 1];
-    lastElement.scrollIntoView(true);
+    if (lastElement) {
+      lastElement.scrollIntoView(true);
+    }
   }
 
   componentDidMount() {
