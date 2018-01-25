@@ -27,6 +27,7 @@ class PropertyManager < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   belongs_to :company, optional: true
+  has_many :messages, as: :messageable
 
   def has_company?
     company.present?

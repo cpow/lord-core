@@ -79,6 +79,30 @@
       </div>
     </div>
   </div>
+  <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+    <div class="card property-info">
+      <div class="card-body">
+        <h4>
+          Tenant Chat
+        </h4>
+        <div class="row mt-4">
+          <div class="col-lg-3 col-sm-0 mt-2">
+            <i class="fa fa-comments fa-3x text-primary"></i>
+          </div>
+          <div class="col-lg-9 col-sm-12">
+            <p>
+            Chat with your tenants. Respond to issues, and answer questions
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer bg-white">
+        <%= link_to 'go to chat', property_unit_messages_path(@unit.property, @unit),
+          class: 'card-link text-uppercase'
+        %>
+      </div>
+    </div>
+  </div>
 </div>
 
 <%= render partial: 'layouts/pretty_header', locals: {

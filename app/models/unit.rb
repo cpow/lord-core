@@ -18,6 +18,7 @@ class Unit < ApplicationRecord
   has_many :leases
   has_many :residencies
   has_many :users, through: :residencies
+  has_many :messages
 
   validates :name, :property_id, presence: true
 

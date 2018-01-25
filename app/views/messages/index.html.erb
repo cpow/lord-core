@@ -1,0 +1,12 @@
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: "Unit Chatroom for #{@unit.name}",
+  text: 'Chat with management :)' }
+%>
+
+<div id="unitId" data-unit-id="<%= @unit.id %>" />
+
+<div id="messageable" data-id="<%= current_user.id %>"
+                      data-type="User" />
+
+<%= javascript_pack_tag 'unit_chat' %>
+

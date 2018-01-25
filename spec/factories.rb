@@ -1,6 +1,10 @@
 require 'faker'
 
 FactoryBot.define do
+  factory :message do
+    unit nil
+    body "MyText"
+  end
   factory :charge_event do
     stripe_charge_id "MyString"
     event_type "MyString"

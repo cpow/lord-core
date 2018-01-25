@@ -11,12 +11,17 @@ Rails.application.routes.draw do
 
   resources :residencies, only: [:show]
 
+  resources :units do
+    resources :messages, only: [:index]
+  end
+
   resources :properties do
     resources :residencies
     resources :property_images
 
     resources :units do
       resources :leases
+      resources :messages, controller: :property_messages
     end
   end
 
@@ -52,6 +57,10 @@ Rails.application.routes.draw do
       resources :properties, only: [] do
         resources :units, only: :index, controller: :property_units
         resources :residencies, only: :index, controller: :property_residencies
+      end
+
+      resources :units, only: [] do
+        resources :messages, only: [:index, :show], controller: :unit_messages
       end
 
       namespace :stripe do
