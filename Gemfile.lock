@@ -907,6 +907,7 @@ DEPENDENCIES
   puma (~> 3.7)
   rails (~> 5.1.4)
   rails_admin
+  redis
   rspec-rails (~> 3.6)
   rubocop
   sass-rails (~> 5.0)
