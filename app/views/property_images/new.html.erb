@@ -22,11 +22,6 @@
       </div>
     <% end %>
 
-    <br>
-    <%= link_to property_path(@property), class: 'btn btn-primary' do %>
-      <i class="fa fa-chevron-left"></i>
-      Back to Property
-    <% end %>
   </div>
 </div>
 
@@ -39,7 +34,7 @@
 </script>
 <hr>
 
-<div id="images" class="row">
+<div id="images" class="row equal-height text-center">
   <%= render @property.property_images %>
 </div>
 

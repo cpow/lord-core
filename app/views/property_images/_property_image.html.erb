@@ -1,11 +1,12 @@
-<div class="card text-center col-4 image-id-<%= property_image.id %>">
-  <div class="card-body">
-    <%= image_tag property_image.image.url(:medium) %>
-    <hr>
-    <p class="text-left">
+<div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+  <div class="card image-id-<%= property_image.id %>">
+    <div class="card-body">
+      <%= image_tag property_image.image.url(:medium) %>
+    </div>
+    <div class="card-footer bg-white">
       <%= link_to "Delete", [property_image.property, property_image],
         method: :delete, class: 'btn btn-danger text-left', remote: true
       %>
-    </p>
+    </div>
   </div>
 </div>
