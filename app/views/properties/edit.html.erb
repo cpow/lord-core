@@ -1,3 +1,11 @@
+<nav aria-label="breadcrumb" class="sticky-top bg-white">
+  <ol class="breadcrumb bg-white">
+    <li class="breadcrumb-item"><%= link_to @property.company.name, authenticated_property_manager_root_path %></li>
+    <li class="breadcrumb-item"><%= link_to @property.name, property_path(@property) %></li>
+    <li class="breadcrumb-item active" aria-current="page">Edit</li>
+  </ol>
+</nav>
+
 <%= render partial: 'layouts/pretty_header', locals: {
   title: 'Details',
   text: '' }
@@ -6,11 +14,6 @@
 <div class="card">
   <div class="card-body">
     <%= render 'form', property: @property %>
-  </div>
-
-  <div class="card-footer">
-    <%= link_to 'Show', @property, class: 'card-link' %>
-    <%= link_to 'Back', properties_path, class: 'card-link' %>
   </div>
 </div>
 

@@ -16,7 +16,8 @@ class ResidencyTable extends Component {
             <tr>
               <th scope="row">Name</th>
               <th scope="row">Email</th>
-              <th scope="row">Unit Name</th>
+              <th scope="row">Status</th>
+              <th scope="row">Links</th>
             </tr>
           </thead>
 
@@ -25,7 +26,14 @@ class ResidencyTable extends Component {
               <tr key={residency.id}>
                 <td>{residency.user.name}</td>
                 <td>{residency.user.email}</td>
-                <td>{residency.unit.name}</td>
+                <td>
+                  <span className={`badge badge-${residency.badge.class}`}>
+                    {residency.badge.value}
+                  </span>
+                </td>
+                <td>
+                  <a href={`/properties/${residency.property_id}/residencies/${residency.id}`}>Show</a>
+                </td>
               </tr>
             ))}
           </tbody>

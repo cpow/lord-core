@@ -17,8 +17,9 @@ class UnitList extends Component {
           <thead className="thead-default">
             <tr>
               <th scope="row">Name</th>
-              <th scope="row">Description</th>
               <th scope="row"># of tenants</th>
+              <th scope="row">Status</th>
+              <th scope="row">Links</th>
             </tr>
           </thead>
 
@@ -26,7 +27,6 @@ class UnitList extends Component {
             {this.props.units.map(unit => (
               <tr key={unit.id}>
                 <td>{unit.name}</td>
-                <td>{unit.description}</td>
                 <td>{unit.number_of_tenants}</td>
                 <td>
                   <span className={`badge badge-${unit.badge.class}`}>

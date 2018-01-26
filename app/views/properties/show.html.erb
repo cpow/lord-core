@@ -82,14 +82,14 @@
   </div>
 </div>
 
-<%= render partial: 'layouts/pretty_header', locals: {
-  title: "Manage",
-  text: 'Manage units, tenants, and everything from this section.' }
-%>
+<%# <%= render partial: 'layouts/pretty_header', locals: {
+<%#   title: "Manage",
+<%#   text: 'Manage units, tenants, and everything from this section.' }
+<%# %>
 
 <div class="card property-info mb-4">
   <div class="card-body">
-    <div id="property_information"> </div>
+    <div id="property_information"></div>
     <div id="propertyId" data-property-id="<%= @property.id %>" />
     <%= javascript_pack_tag "property_information" %>
 

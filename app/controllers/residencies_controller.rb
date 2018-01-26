@@ -6,6 +6,8 @@ class ResidenciesController < ApplicationController
 
   def new
     @residency = current_property.residencies.new
+    @property = current_property
+    @company = current_property.company
   end
 
   def index
@@ -26,11 +28,13 @@ class ResidenciesController < ApplicationController
 
     case return_value
     when Residency::ERROR
-      flash[:danger] = 'There were errors'
+      flash[:danger] = 'There was an error with this submission. Please make sure you filled out the form correctly'
       return render :new
     when Residency::EXISTS
       flash[:info] = 'this resident already exists for your property.'
       return render :new
+    when is_a?(Residency)
+
     else
       flash[:success] = 'New resident has been added! They will be invited by email.'
       return redirect_to current_property

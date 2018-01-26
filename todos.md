@@ -3,7 +3,7 @@
 ## Big Stuff!
  *things that will take a while to do, but really need to be done and are essential.*
 
-[ ] CHAT
+[x] CHAT
  * on a per unit basis. would be nice to have chats with tenants. They can get
 *this should be handled for now. may not need anything else around this*
    updates/alerts/etc...
@@ -16,9 +16,16 @@
     * yeah. create chats only to residents in a unit. Then residents can only
       see their chats. and not chats for any other resident... that makes sense
 
+[ ] EVENTS
+ * need events so managers can see what is going on with their property.
+ * CRUD actions on all models for events
+ * type == CRUD stuff
+ * eventable fucking ... ... polymorphic association for all things
+
 [ ] NOTIFICATIONS
  * notify users on a per-unit and per-property basis
  * maybe this is very similar to chat?????
+ * maybe notifications rely on events.
  * potentially: for every unit in a property, you create a new chat message.
    Then all units and tenants can see a property-wide message. and can respond
    in their own self-contained tenant/unit chat to property management.
