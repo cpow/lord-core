@@ -20,25 +20,33 @@ class PropertyInformation extends Component {
 
         <div className="tab-content" id="pills-tabContent" style={{minHeight: '500px'}}>
           <div className="tab-pane fade show active mt-4" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-              <h2 className="text-center mt-4">
-                Units
-              </h2>
-              <p className="text-center mb-4">
-                <a href={`/properties/${this.props.propertyId}/units/new`} className='btn btn-primary text-center mb-2'>
+            <div className="row mb-2 border-bottom align-items-end">
+              <div className="col-3">
+                <h3>
+                  Units
+                </h3>
+              </div>
+              <div className="col-8 text-right">
+                <a href={`/properties/${this.props.propertyId}/units/new`} className='text-uppercase text-success'>
                   Create New
                 </a>
-              </p>
+              </div>
+            </div>
             <UnitFilterTable propertyId={this.props.propertyId}/>
           </div>
           <div className="tab-pane fade mt-4" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-            <h2 className="text-center mt-4">
-              Residents
-            </h2>
-            <p className="text-center mb-4">
-              <a href={`/properties/${this.props.propertyId}/residencies/new`} className='btn btn-primary text-center'>
-                Create New
-              </a>
-            </p>
+            <div className="row mb-2 border-bottom align-items-end">
+              <div className="col-3">
+                <h3>
+                  Residents
+                </h3>
+              </div>
+              <div className="col-8 text-right">
+                <a href={`/properties/${this.props.propertyId}/residencies/new`} className='text-uppercase text-success'>
+                  Create New
+                </a>
+              </div>
+            </div>
             <ResidencyFilterTable propertyId={this.props.propertyId}/>
           </div>
         </div>
