@@ -23,7 +23,7 @@ class UnitsController < ApplicationController
 
     respond_to do |format|
       if @unit.save
-        format.html { redirect_to current_property, notice: 'Unit was successfully created.' }
+        format.html { redirect_to [current_property, @unit], notice: 'Unit was successfully created.' }
       else
         format.html { render :new }
       end
