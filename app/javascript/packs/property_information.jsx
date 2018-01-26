@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ResidencyFilterTable from 'components/residencies/ResidencyFilterTable';
+import PropertyInformation from 'components/PropertyInformation';
 
 document.addEventListener('DOMContentLoaded', () => {
   const node = document.getElementById('propertyId');
   const propertyId = JSON.parse(node.getAttribute('data-property-id'));
 
   ReactDOM.render(
-    <ResidencyFilterTable propertyId={propertyId}/>,
-    document.getElementById('residency_table')
+    <PropertyInformation propertyId={propertyId}/>,
+    document.getElementById('property_information')
   )
 })
+

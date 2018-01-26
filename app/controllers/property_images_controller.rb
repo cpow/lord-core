@@ -5,6 +5,7 @@ class PropertyImagesController < ApplicationController
 
   def new
     @property_image = PropertyImage.new
+    @company = @property.company
   end
 
   def create

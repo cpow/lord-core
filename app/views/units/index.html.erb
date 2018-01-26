@@ -5,16 +5,3 @@
     <li class="breadcrumb-item active" aria-current="page">Units</li>
   </ol>
 </nav>
-
-<%= render partial: 'layouts/pretty_header', locals: {
-  title: 'Units',
-  text: 'Manage your units. Use the table below to filter units, and click into any unit to see more details'
-} %>
-
-<div class="text-center mb-4 mt-0">
-  <%= link_to 'Create New', new_property_unit_path(params[:property_id]), class: '' %>
-</div>
-
-<div id="propertyId" data-property-id="<%= params[:property_id] %>" />
-
-<%= javascript_pack_tag 'unit_filter_table' %>

@@ -1,3 +1,11 @@
+<nav aria-label="breadcrumb" class="sticky-top bg-white">
+  <ol class="breadcrumb bg-white">
+    <li class="breadcrumb-item"><%= link_to @company.name, authenticated_property_manager_root_path %></li>
+    <li class="breadcrumb-item"><%= link_to @property.name, property_path(@property) %></li>
+    <li class="breadcrumb-item active" aria-current="page">Images</li>
+  </ol>
+</nav>
+
 <h2 class="text-center m-4">Images for Property <%= @property.name %></h2>
 <div class="card">
   <div class="card-body">

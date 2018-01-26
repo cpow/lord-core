@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   ReactDOM.render(
     <UnitFilterTable propertyId={propertyId}/>,
-    document.body.appendChild(document.createElement('div')),
+    document.getElementById('unit_table')
   )
 })
 

@@ -68,12 +68,8 @@ class ResidencyFilterTable extends Component {
         </div>
     }
     return (
-      <div className="container">
-        <div className="card">
-          <div className="card-body">
-            {output}
-          </div>
-        </div>
+      <div>
+        {output}
       </div>
     )
   }
