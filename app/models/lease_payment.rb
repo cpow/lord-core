@@ -28,6 +28,10 @@ class LeasePayment < ApplicationRecord
 
   SECONDS_IN_DAY = 86_400
 
+  def payment_amount
+    local_amount || lease.payment_amount
+  end
+
   def deal_with_payment
     if human_amount_due <= 0
       update_attributes!(active: false)
@@ -54,7 +58,7 @@ class LeasePayment < ApplicationRecord
   end
 
   def amount_due
-    (lease.payment_amount - payments.sum(:amount))
+    (payment_amount - payments.sum(:amount))
   end
 
   def payment_late?

@@ -1,0 +1,88 @@
+<nav aria-label="breadcrumb" class="breadcrumb-nav sticky-top bg-white">
+  <ol class="breadcrumb bg-white">
+    <li class="breadcrumb-item"><%= link_to @property.company.name, authenticated_property_manager_root_path %></li>
+    <li class="breadcrumb-item"><%= link_to @property.name, property_path(@property) %></li>
+    <li class="breadcrumb-item"><%= link_to @unit.name, [@property, @unit] %></li>
+    <li class="breadcrumb-item"><%= link_to 'Lease', [@property, @unit, @lease_payment.lease] %></li>
+    <li class="breadcrumb-item active" aria-current="page">Payments</li>
+  </ol>
+</nav>
+
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: 'Lease Payment Information',
+  text: 'Here is some information regardinig a lease payment. A lease payment may have already been paid, it may be due soon, or it may be late.' }
+%>
+
+<hr>
+
+<div class="card mb-4">
+  <div class="card-body">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item bg-transparent">
+        <strong class="pull-left">Due Date:</strong>
+        <span class="pull-right">
+          <%= human_date(@lease_payment.due_date) %>
+        </span>
+      </li>
+      <li class="list-group-item bg-transparent">
+        <strong class="pull-left">Amount Due:</strong>
+        <span class="pull-right">
+          <%= number_to_currency(@lease_payment.human_amount_due) %>
+        </span>
+      </li>
+      <li class="list-group-item bg-transparent">
+        <strong class="pull-left">Status</strong>
+        <span class="pull-right">
+          <% if @lease_payment.active %>
+            <span class="badge badge-info">active</span>
+          <% elsif @lease_payment.paid_in_full? %>
+            <span class="badge badge-primary">success</span>
+          <% else %>
+            <span class="badge badge-secondary">N/A</span>
+          <% end %>
+        </span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<h3 class="text-center mb-4">Payments Already Made</h3>
+
+<% if @lease_payment.payments.present? %>
+  <div class="row equal-height text-center">
+  <% @lease_payment.payments.each do |payment| %>
+      <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+        <div class="card payment">
+          <div class="card-body">
+            <h4>
+              Paid
+            </h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item bg-transparent">
+                <strong class="pull-left">Payment:</strong>
+                <span class="pull-right">
+                <%= number_to_currency(payment.human_amount) %>
+                </span>
+              </li>
+              <li class="list-group-item bg-transparent">
+                <strong class="pull-left">User Email:</strong>
+                <span class="pull-right">
+                  <%= payment.user.email %>
+                </span>
+              </li>
+              <li class="list-group-item bg-transparent">
+                <strong class="pull-left">Status:</strong>
+                <span class="pull-right badge <%= payment_badge(payment) %>">
+                  <%= payment.human_event_type %>
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+  <% end %>
+  </div>
+<% else %>
+  <div class="alert alert-info">No payments have been made yet</div>
+<% end %>
+

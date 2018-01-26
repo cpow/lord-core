@@ -38,8 +38,10 @@ class LeasesController < ApplicationController
   # PATCH/PUT /leases/1
   # PATCH/PUT /leases/1.json
   def update
-    change_lease_amount_to_cents if @lease.amount_changed?
-    if @lease.update(lease_params)
+    @lease.assign_attributes(lease_params)
+    change_lease_amount_to_cents if @lease.payment_amount_changed?
+
+    if @lease.save
       redirect_to [@property, @unit, @lease], notice: 'Lease was successfully updated.'
     else
       render :edit
@@ -58,9 +60,9 @@ class LeasesController < ApplicationController
 
   private
 
-  def change_lease_amount_to_cents
-    @lease.payment_amount = @lease.payment_amount * 100
-  end
+    def change_lease_amount_to_cents
+      @lease.payment_amount = @lease.payment_amount * 100
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_lease
       @lease = @unit.leases.find(params[:id])

@@ -33,7 +33,12 @@ class UnitList extends Component {
                     {unit.badge.value}
                   </span>
                 </td>
-                <td><a href={unit.url}>Show</a></td>
+                <td>
+                  <a href={unit.url}>Show</a>
+                  <a href={`${unit.url}/messages`} className="ml-3">
+                    Chat
+                  </a>
+                </td>
               </tr>
             ))}
           </tbody>

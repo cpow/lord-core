@@ -18,4 +18,19 @@
 //= require file-upload/vendor/jquery.ui.widget
 //= require file-upload/jquery.fileupload
 //= require handlebars-v4.0.11
-//= require_tree .
+//= require bootstrap-datepicker.min
+//= require property_images
+
+$(function () {
+  console.log("SHIT");
+  $(".datepicker").datepicker({
+      format: "yyyy/mm/dd",
+      showOtherMonths: true,
+      selectOtherMonths: true,
+      autoclose: true,
+      changeMonth: true,
+      changeYear: true,
+      //gotoCurrent: true,
+      orientation: "bottom" // add this
+  });
+});

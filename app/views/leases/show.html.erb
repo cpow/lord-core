@@ -1,3 +1,12 @@
+<nav aria-label="breadcrumb" class="breadcrumb-nav sticky-top bg-white">
+  <ol class="breadcrumb bg-white">
+    <li class="breadcrumb-item"><%= link_to @property.company.name, authenticated_property_manager_root_path %></li>
+    <li class="breadcrumb-item"><%= link_to @property.name, property_path(@property) %></li>
+    <li class="breadcrumb-item"><%= link_to @unit.name, [@property, @unit] %></li>
+    <li class="breadcrumb-item active" aria-current="page">Lease</li>
+  </ol>
+</nav>
+
 <%= render partial: 'layouts/pretty_header', locals: {
   title: 'Lease Information',
   text: '' }
@@ -66,6 +75,7 @@
           <th scope="row">Due Date</th>
           <th scope="row">Amount Due</th>
           <th scope="row">Status</th>
+          <th scope="row">actions</th>
         </tr>
       </thead>
 
@@ -74,7 +84,7 @@
           <tr>
             <td><%= human_date(lease_payment.due_date) %></td>
             <td>
-              <%= link_to(user_lease_payment_path(lease_payment.id)) do %>
+              <%= link_to(property_unit_lease_payment_path(@property, @unit, lease_payment)) do %>
                 <%= number_to_currency(lease_payment.human_amount_due) %>
               <% end %>
             </td>
@@ -86,6 +96,9 @@
               <% else %>
                 <span class="badge badge-secondary">N/A</span>
               <% end %>
+            </td>
+            <td>
+              <%= link_to "Edit Amount", edit_property_unit_lease_payment_path(@property, @unit, lease_payment) %>
             </td>
           </tr>
         <% end %>

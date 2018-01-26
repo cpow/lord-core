@@ -20,6 +20,22 @@ describe LeasePayment do
     Timecop.freeze(Time.zone.now.beginning_of_day)
   end
 
+  describe 'local_amount' do
+    it 'should override the amount of lease' do
+      lease = create(:lease, payment_amount: 10000)
+      lease_payment = create(:lease_payment, lease: lease, local_amount: 50)
+
+      expect(lease_payment.payment_amount).to eq(50)
+    end
+
+    it 'should be nil and rever to lease amount' do
+      lease = create(:lease, payment_amount: 10000)
+      lease_payment = create(:lease_payment, lease: lease)
+
+      expect(lease_payment.payment_amount).to eq(10000)
+    end
+  end
+
   describe 'deal_with_payment' do
     it 'should mark lease_payment as inactive if payments sum amt due' do
       lease = create(:lease, payment_amount: 10000)

@@ -1,49 +1,68 @@
 <%= form_with(model: lease, local: true, url: property_unit_leases_path) do |form| %>
   <%= render partial: 'layouts/errors', locals: { object: lease } %>
-  <div class="form-group">
-    <%= form.label :start_date %>
-    <%= form.text_field :start_date,
-      id: :lease_start_date,
-      class: 'form-control',
-      data: { provide: "datepicker", 'date-format': 'yyyy/mm/dd' } %>
+  <div class="row">
+    <div class="form-group col-6">
+      <%= form.label :start_date %>
+      <%= form.text_field :start_date,
+        id: :lease_start_date,
+        class: 'form-control datepicker' %>
+      <small class='form-text text-muted'>Select the start date of this lease.</small>
+    </div>
+
+    <div class="form-group col-6">
+      <%= form.label :end_date %>
+      <%= form.text_field :end_date,
+        id: :lease_end_date,
+        class: 'form-control datepicker' %>
+      <small class='form-text text-muted'>The end date for this lease. The last payment</small>
+    </div>
   </div>
 
-  <div class="form-group">
-    <%= form.label :end_date %>
-    <%= form.text_field :end_date,
-      id: :lease_end_date,
-      class: 'form-control',
-      data: { provide: "datepicker", 'date-format': 'yyyy/mm/dd' } %>
+  <div class="card mb-4">
+    <h4 class="card-header">
+      The Important Stuff
+    </h4>
+    <div class="card-body">
+      <p class="text-muted">
+      Enter payment information here.
+      </p>
+      <div class="row">
+        <div class="form-group col-12 alert alert-success">
+          <%= form.label :payment_amount, "Payment amount per month" %>
+          <%= form.number_field :payment_amount, id: :lease_payment_amount, class: 'form-control' %>
+        </div>
+        <div class="form-group col-6">
+          <%= form.label :payment_first_date, "First Payment Date" %>
+          <%= form.text_field :payment_first_date,
+            id: :lease_payment_first_date,
+            class: 'form-control datepicker' %>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="form-group">
-    <%= form.label :payment_first_date %>
-    <%= form.text_field :payment_first_date,
-      id: :lease_payment_first_date,
-      class: 'form-control',
-      data: { provide: 'datepicker', 'date-format': 'yyyy/mm/dd' } %>
+  <div class="card mb-4">
+    <h4 class="card-header">
+      Reminders
+    </h4>
+    <div class="card-body">
+      <p class="text-muted">
+      When you want your tenants to be reminded about paying rent. and when rent is late.
+      </p>
+      <div class="row">
+        <div class="form-group col-6 alert alert-warning">
+          <%= form.label :payment_days_until_late, "Days until late reminder is sent" %>
+          <%= form.number_field :payment_days_until_late, id: :lease_payment_days_until_late, class: 'form-control' %>
+        </div>
+
+        <div class="form-group col-6 alert alert-info">
+          <%= form.label :payment_reminder_days, "Days until reminder email is sent" %>
+          <%= form.number_field :payment_reminder_days, id: :lease_payment_reminder_days, class: 'form-control' %>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="form-group">
-    <%= form.label :payment_amount %>
-    <%= form.number_field :payment_amount, id: :lease_payment_amount, class: 'form-control' %>
-  </div>
-
-
-  <div class="form-group">
-    <%= form.label :payment_days_until_late %>
-    <%= form.number_field :payment_days_until_late, id: :lease_payment_days_until_late, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :payment_reminder_days %>
-    <%= form.number_field :payment_reminder_days, id: :lease_payment_reminder_days, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :unit_id %>
-    <%= form.number_field :unit_id, id: :lease_unit_id, class: 'form-control' %>
-  </div>
 
   <div class="actions">
     <%= form.submit class: 'btn btn-primary' %>

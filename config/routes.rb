@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
     resources :units do
       resources :leases
+      resources :lease_payments
       resources :messages, controller: :property_messages
     end
   end
