@@ -68,10 +68,11 @@
         </ul>
       </div>
       <div class="card-footer bg-white">
-        <%= link_to 'View', property_unit_lease_path(@unit.property, @unit, @unit.leases.last),
-          class: 'card-link text-uppercase'
-        %>
-
+        <% unless @unit.current_lease.is_a?(NullLease) %>
+          <%= link_to 'View', property_unit_lease_path(@unit.property, @unit, @unit.leases.last),
+            class: 'card-link text-uppercase'
+          %>
+        <% end %>
         <%= link_to 'New Lease', new_property_unit_lease_path(@unit.property, @unit),
           class: 'card-link text-uppercase'
         %>
@@ -110,5 +111,5 @@
 %>
 
 <%= render partial: 'residencies/cards',
-  locals: { residencies: @property.residencies, property: @property }
+  locals: { residencies: @unit.residencies, property: @property }
 %>

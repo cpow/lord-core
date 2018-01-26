@@ -1,4 +1,17 @@
 <div class="row equal-height">
+  <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+    <div class="card text-center align-middle alert alert-info">
+      <div class="card-body">
+        <h4 class="mb-4">
+          Something New
+        </h4>
+        <p>
+        Add a new resident! Creating a resident is free. When you add a resident they'll be emailed a link to login, and they can start paying you directly right away!
+        </p>
+          <%= link_to "New Resident", new_property_residency_path, class: 'btn btn-info' %>
+        </div>
+    </div>
+  </div>
   <% residencies.each do |residency| %>
     <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
       <div class="card">
