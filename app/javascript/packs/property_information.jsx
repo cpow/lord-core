@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import PropertyInformation from 'components/PropertyInformation';
+import PropertyInformation from 'components/properties/PropertyInformation';
 
 document.addEventListener('DOMContentLoaded', () => {
   const node = document.getElementById('propertyId');
