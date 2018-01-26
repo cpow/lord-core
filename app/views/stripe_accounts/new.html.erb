@@ -1,9 +1,11 @@
-<%= content_for :page_title, 'Fundraising Marketplace | Get Paid' %>
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: 'Get Paid',
+  text: 'Enter your banking information so tenants can pay you directly!' }
+%>
+
 <div class="container">
   <div class="card">
-    <h1 class="card-header">Get Paid</h1>
     <div class="card-body">
-      <p>Create a stripe account with us in order to process payments. Everything is stored on stripe and is all good. yo</p>
       <%= render 'account_form' %>
     </div>
   </div>

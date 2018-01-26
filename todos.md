@@ -16,6 +16,13 @@
     * yeah. create chats only to residents in a unit. Then residents can only
       see their chats. and not chats for any other resident... that makes sense
 
+[ ] Banking Information
+ * need better TOS and better information around the banking information
+
+[ ] Property Manager Home Page
+ * handle all links on the first page. Actually be able to edit the things I say
+   you can edit.
+
 [ ] EVENTS
  * need events so managers can see what is going on with their property.
  * CRUD actions on all models for events
