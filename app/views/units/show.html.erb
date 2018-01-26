@@ -41,7 +41,24 @@
     </div>
   </div>
   <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-    <div class="card property-info">
+    <% if @unit.current_lease.is_a?(NullLease) %>
+      <div class="card alert alert-warning text-center">
+        <div class="card-body">
+          <h4>
+            Lease Information
+          </h4>
+          <p>
+            You don't have a lease for this unit. Please add a lease now.
+          </p>
+          <p>
+            <%= link_to 'New Lease', new_property_unit_lease_path(@unit.property, @unit),
+              class: 'btn btn-warning'
+            %>
+          </p>
+        </div>
+      </div>
+    <% else %>
+    <div class="card lease-info">
       <div class="card-body">
         <h4>
           Lease Information
@@ -68,16 +85,15 @@
         </ul>
       </div>
       <div class="card-footer bg-white">
-        <% unless @unit.current_lease.is_a?(NullLease) %>
           <%= link_to 'View', property_unit_lease_path(@unit.property, @unit, @unit.leases.last),
             class: 'card-link text-uppercase'
           %>
-        <% end %>
         <%= link_to 'New Lease', new_property_unit_lease_path(@unit.property, @unit),
           class: 'card-link text-uppercase'
         %>
       </div>
     </div>
+  <% end %>
   </div>
   <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
     <div class="card property-info">
@@ -110,6 +126,22 @@
   text: 'The list of current active residents for this unit' }
 %>
 
-<%= render partial: 'residencies/cards',
-  locals: { residencies: @unit.residencies, property: @property }
-%>
+
+<div class="row equal-height">
+  <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+    <div class="card text-center align-middle alert alert-info">
+      <div class="card-body">
+        <h4 class="mb-4">
+          Something New
+        </h4>
+        <p>
+        Add a new resident! Creating a resident is free. When you add a resident they'll be emailed a link to login, and they can start paying you directly right away!
+        </p>
+          <%= link_to "New Resident", new_property_residency_path, class: 'btn btn-info' %>
+        </div>
+    </div>
+  </div>
+  <%= render partial: 'residencies/cards',
+    locals: { residencies: @unit.residencies, property: @property }
+  %>
+</div>

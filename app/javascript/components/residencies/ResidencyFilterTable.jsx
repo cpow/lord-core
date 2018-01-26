@@ -12,6 +12,7 @@ class ResidencyFilterTable extends Component {
     super(props);
     this.state = { residencies: [], filteredResidencies: [] };
     this.fuzzyFilterName = this.fuzzyFilterName.bind(this);
+    this.fuzzyFilterUnitName = this.fuzzyFilterUnitName.bind(this);
     this.fuzzyFilterEmail = this.fuzzyFilterEmail.bind(this);
   }
 
@@ -46,6 +47,10 @@ class ResidencyFilterTable extends Component {
     return this.filterBy('user.name', e);
   }
 
+  fuzzyFilterUnitName(e) {
+    return this.filterBy('unit.name', e);
+  }
+
   fuzzyFilterEmail(e) {
     return this.filterBy('user.email', e);
   }
@@ -58,6 +63,7 @@ class ResidencyFilterTable extends Component {
         <div>
           <ResidencyFilters
             fuzzyFilterName={this.fuzzyFilterName}
+            fuzzyFilterUnitName={this.fuzzyFilterUnitName}
             fuzzyFilterEmail={this.fuzzyFilterEmail} />
           <ResidencyTable residencies={this.state.filteredResidencies} />
         </div>;

@@ -1,44 +1,29 @@
-<div class="row equal-height">
+<% residencies.each do |residency| %>
   <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-    <div class="card text-center align-middle alert alert-info">
+    <div class="card">
+      <h4 class="card-header">
+        <%= residency.user.name %>
+      </h4>
       <div class="card-body">
-        <h4 class="mb-4">
-          Something New
-        </h4>
-        <p>
-        Add a new resident! Creating a resident is free. When you add a resident they'll be emailed a link to login, and they can start paying you directly right away!
-        </p>
-          <%= link_to "New Resident", new_property_residency_path, class: 'btn btn-info' %>
-        </div>
-    </div>
-  </div>
-  <% residencies.each do |residency| %>
-    <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-      <div class="card">
-        <h4 class="card-header">
-          <%= residency.user.name %>
-        </h4>
-        <div class="card-body">
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item border-bottom-0">
-              <strong class="pull-left"> Status: </strong>
-              <span class="pull-right">
-              <span class="<%= status_badge(residency) %>">
-                <%= residency.user.status %>
-              </span>
-            </li>
-            <li class="list-group-item border-bottom-0 border-top-0">
-              <strong class="pull-left">Email:</strong>
-              <span class="pull-right">
-                <%= residency.user.email %>
-              </span>
-            </li>
-          </ul>
-        </div>
-        <div class="card-footer bg-white">
-          <%= link_to "Show", property_residency_path(property, residency), class: 'card-link text-uppercase' %>
-        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item border-bottom-0">
+            <strong class="pull-left"> Status: </strong>
+            <span class="pull-right">
+            <span class="<%= status_badge(residency) %>">
+              <%= residency.user.status %>
+            </span>
+          </li>
+          <li class="list-group-item border-bottom-0 border-top-0">
+            <strong class="pull-left">Email:</strong>
+            <span class="pull-right">
+              <%= residency.user.email %>
+            </span>
+          </li>
+        </ul>
+      </div>
+      <div class="card-footer bg-white">
+        <%= link_to "Show", property_residency_path(property, residency), class: 'card-link text-uppercase' %>
       </div>
     </div>
-  <% end %>
-</div>
+  </div>
+<% end %>

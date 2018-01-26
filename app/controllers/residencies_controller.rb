@@ -3,9 +3,11 @@ class ResidenciesController < ApplicationController
   before_action :verify_units_available
   before_action :set_property
   before_action :set_company
+  before_action :set_unit
 
   def new
     @residency = current_property.residencies.new
+    @residency.unit = @unit if @unit
     @property = current_property
     @company = current_property.company
   end
@@ -37,7 +39,7 @@ class ResidenciesController < ApplicationController
 
     else
       flash[:success] = 'New resident has been added! They will be invited by email.'
-      return redirect_to current_property
+      return redirect_to [@residency.property, @residency.unit]
     end
   end
 
@@ -45,6 +47,10 @@ class ResidenciesController < ApplicationController
 
   def current_property
     @property ||= Property.find(params[:property_id])
+  end
+
+  def set_unit
+    @unit = params[:unit_id] ? Unit.find(params[:unit_id]) : nil
   end
 
   def residency_params
