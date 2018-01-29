@@ -28,6 +28,7 @@ class PropertyManager < ApplicationRecord
 
   belongs_to :company, optional: true
   has_many :messages, as: :messageable
+  has_many :events, as: :eventable
 
   def has_company?
     company.present?

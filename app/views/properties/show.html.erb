@@ -10,7 +10,7 @@
   text: '' }
 %>
 <div class="row equal-height">
-  <div class="col-sm-12 col-md-6 col-lg-6 mb-4">
+  <div class="col-sm-12 col-md-4 col-lg-4 mb-4">
     <div class="card property-info">
       <div class="card-body">
         <h4>
@@ -33,7 +33,30 @@
     </div>
   </div>
 
-  <div class="col-sm-12 col-md-6 col-lg-6 mb-4">
+  <div class="col-sm-12 col-md-4 col-lg-4 mb-4">
+    <div class="card property-info">
+      <div class="card-body">
+        <h4>
+          Property Information
+        </h4>
+        <div class="row mt-4">
+          <div class="col-lg-3 col-sm-0 mt-2">
+            <i class="fa fa-home fa-3x text-primary"></i>
+          </div>
+          <div class="col-lg-9 col-sm-12">
+            <p>
+              Edit your property information. Add pictures, update description.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer bg-white">
+        <%= link_to 'edit', edit_property_path(@property), class: 'card-link text-uppercase' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-12 col-md-4 col-lg-4 mb-4">
     <div class="card property-images">
       <% if @property.property_images.present? %>
         <div class="card-body">

@@ -32,6 +32,9 @@ class PaymentsController < ApplicationController
     )
 
     if local.save
+      Event.create!(eventable: local,
+                    event_type: Event::EVENT_CREATED,
+                    createable: current_user)
       flash[:success] = 'Success! You\'ve submitted your payment'
       if current_user.current_lease.instance_of?(NullLease)
         redirect_to authenticated_user_root_path

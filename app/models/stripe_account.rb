@@ -25,6 +25,7 @@
 #
 
 class StripeAccount < ApplicationRecord
+  has_many :events, as: :eventable
   validates :first_name,
     presence: true, length: { minimum: 1, maximum: 40 }
 

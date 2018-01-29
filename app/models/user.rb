@@ -39,6 +39,7 @@ class User < ApplicationRecord
   has_many :properties, through: :residencies
   has_many :companies,  through: :residencies
   has_many :messages, as: :messageable
+  has_many :events, as: :eventable
 
   has_many :payments
 

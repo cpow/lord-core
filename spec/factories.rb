@@ -1,6 +1,11 @@
 require 'faker'
 
 FactoryBot.define do
+  factory :event do
+    eventable nil
+    event_type "MyString"
+    createable nil
+  end
   factory :message do
     unit nil
     body "MyText"

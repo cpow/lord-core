@@ -27,7 +27,9 @@ class ResidencyTable extends Component {
               <tr key={residency.id}>
                 <td>{residency.user.name}</td>
                 <td>{residency.user.email}</td>
-                <td>{residency.unit.name}</td>
+                <a href={`/properties/${residency.property_id}/units/${residency.unit.id}`}>
+                  <td>{residency.unit.name}</td>
+                </a>
                 <td>
                   <span className={`badge badge-${residency.badge.class}`}>
                     {residency.badge.value}

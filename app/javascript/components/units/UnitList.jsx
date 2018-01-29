@@ -26,7 +26,9 @@ class UnitList extends Component {
           <tbody>
             {this.props.units.map(unit => (
               <tr key={unit.id}>
-                <td>{unit.name}</td>
+                <a href={unit.url}>
+                  <td>{unit.name}</td>
+                </a>
                 <td>{unit.number_of_tenants}</td>
                 <td>
                   <span className={`badge badge-${unit.badge.class}`}>
@@ -34,7 +36,6 @@ class UnitList extends Component {
                   </span>
                 </td>
                 <td>
-                  <a href={unit.url}>Show</a>
                   <a href={`${unit.url}/messages`} className="ml-3">
                     Chat
                   </a>

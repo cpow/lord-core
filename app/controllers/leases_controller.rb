@@ -28,6 +28,9 @@ class LeasesController < ApplicationController
     @lease = @unit.leases.new(lease_params)
     change_lease_amount_to_cents
     if @lease.save
+      Event.create(eventable: @lease,
+                  createable: current_property_manager,
+                  event_type: Event::EVENT_CREATED)
       create_lease_payments_for_lease
       redirect_to [@property, @unit, @lease], notice: 'Lease was successfully created.'
     else

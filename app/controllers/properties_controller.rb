@@ -30,6 +30,9 @@ class PropertiesController < ApplicationController
 
     respond_to do |format|
       if @property.save
+        Event.create!(eventable: @property,
+                      event_type: Event::EVENT_CREATED,
+                      createable: current_property_manager)
         format.html { redirect_to @property, notice: 'Property was successfully created.' }
         format.json { render :show, status: :created, location: @property }
       else

@@ -20,6 +20,7 @@ class Lease < ApplicationRecord
 
   has_many :payments
   has_many :lease_payments
+  has_many :events, as: :eventable
 
   validates :payment_first_date,
             :payment_days_until_late,

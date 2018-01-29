@@ -19,6 +19,7 @@ class Payment < ApplicationRecord
   belongs_to :lease_payment, optional: true
   belongs_to :unit, optional: true
   has_many :charge_events
+  has_many :events, as: :eventable
 
   validates :stripe_charge_id, presence: true
 

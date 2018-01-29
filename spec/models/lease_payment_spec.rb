@@ -11,6 +11,7 @@
 #  active        :boolean          default(FALSE)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  local_amount  :integer
 #
 
 require 'rails_helper'

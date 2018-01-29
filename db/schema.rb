@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180126210325) do
+ActiveRecord::Schema.define(version: 20180127142918) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,21 @@ ActiveRecord::Schema.define(version: 20180126210325) do
     t.string "stripe_account_guid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "eventable_type"
+    t.bigint "eventable_id"
+    t.string "event_type"
+    t.jsonb "serialized_changes"
+    t.string "object_type"
+    t.jsonb "serialized_record"
+    t.string "createable_type"
+    t.bigint "createable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["createable_type", "createable_id"], name: "index_events_on_createable_type_and_createable_id"
+    t.index ["eventable_type", "eventable_id"], name: "index_events_on_eventable_type_and_eventable_id"
   end
 
   create_table "lease_payment_reminders", force: :cascade do |t|

@@ -8,7 +8,7 @@
 #  address_state  :string           not null
 #  address_postal :string           not null
 #  name           :string           not null
-#  description    :text             not null
+#  description    :text
 #  company_id     :integer          not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null

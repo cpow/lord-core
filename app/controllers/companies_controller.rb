@@ -8,6 +8,9 @@ class CompaniesController < ApplicationController
 
   def edit
     @company = Company.find(params[:id])
+    Event.create(eventable: @company,
+                 createable: current_property_manager,
+                 event_type: Event::EVENT_EDITED)
   end
 
   def show

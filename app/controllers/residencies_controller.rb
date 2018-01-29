@@ -24,7 +24,10 @@ class ResidenciesController < ApplicationController
     @residency = current_property.residencies.new(residency_params)
 
     creator = Residency::CreateFromProperty
-              .new(property: current_property, residency: @residency)
+              .new(property: current_property,
+                   residency: @residency,
+                   manager: current_property_manager
+                  )
 
     return_value = creator.save
 

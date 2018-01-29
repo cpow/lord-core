@@ -25,6 +25,7 @@ class Residency < ApplicationRecord
   belongs_to :user
   belongs_to :unit
   belongs_to :company
+  has_many :events, as: :eventable
 
   attribute :user_email, :string
 

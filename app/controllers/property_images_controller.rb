@@ -10,10 +10,16 @@ class PropertyImagesController < ApplicationController
 
   def create
     @property_image = @property.property_images.create(image_params)
+    Event.create!(eventable: @property_image,
+                  event_type: Event::EVENT_CREATED,
+                  createable: current_property_manager)
   end
 
   def destroy
     @property_image_id = @property_image.id
+    Event.create!(eventable: @property_image,
+                  event_type: Event::EVENT_DESTROYED,
+                  createable: current_property_manager)
     @property_image.destroy
   end
 

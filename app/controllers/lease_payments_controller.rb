@@ -21,6 +21,9 @@ class LeasePaymentsController < ApplicationController
     change_local_amount_to_cents if @lease_payment.local_amount_changed?
 
     if @lease_payment.save
+      Event.create(eventable: @lease_payment,
+                  createable: current_property_manager,
+                  event_type: Event::EVENT_EDITED)
       redirect_to [@property, @unit, @lease_payment.lease], notice: 'Lease payment was successfully updated.'
     else
       render :edit

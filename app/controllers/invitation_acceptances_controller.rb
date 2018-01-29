@@ -7,6 +7,9 @@ class InvitationAcceptancesController < ApplicationController
   def create
     @user.update_attributes(user_params)
     @user.activated = true
+    Event.create!(eventable: @user,
+                 event_type: Event::ACCEPTED_INVITE,
+                 createable: @user)
 
     if @user.save
       flash[:success] = 'Thank you for accepting the invitation! Now Log In'

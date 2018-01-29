@@ -19,6 +19,7 @@ class Unit < ApplicationRecord
   has_many :residencies
   has_many :users, through: :residencies
   has_many :messages
+  has_many :events, as: :eventable
 
   validates :name, :property_id, presence: true
 

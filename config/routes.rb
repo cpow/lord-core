@@ -59,6 +59,7 @@ Rails.application.routes.draw do
       resources :properties, only: [] do
         resources :units, only: :index, controller: :property_units
         resources :residencies, only: :index, controller: :property_residencies
+        resources :events, only: :index, controller: :property_events
       end
 
       resources :units, only: [] do

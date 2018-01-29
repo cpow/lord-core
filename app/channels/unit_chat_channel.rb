@@ -17,12 +17,18 @@ class UnitChatChannel < ApplicationCable::Channel
   end
 
   def create_message(data)
-    Message.create!(
+    message = Message.create!(
       unit_id: params[:unitId],
       body: data['body'],
       messageable_id: data['messageableId'],
       messageable_type: data['messageableType']
     )
+
+    Event.create!(eventable: message,
+                  createable: message.messageable,
+                  event_type: Event::EVENT_CREATED,
+                 )
+    message
   end
 
   def channel_name

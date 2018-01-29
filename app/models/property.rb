@@ -8,7 +8,7 @@
 #  address_state  :string           not null
 #  address_postal :string           not null
 #  name           :string           not null
-#  description    :text             not null
+#  description    :text
 #  company_id     :integer          not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
@@ -20,6 +20,7 @@ class Property < ApplicationRecord
   has_many :property_images
   has_many :residencies
   has_many :users, through: :residencies
+  has_many :events, as: :eventable
 
   def payments
     Payment.where(unit_id: units.pluck(:id))

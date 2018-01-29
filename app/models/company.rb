@@ -14,4 +14,5 @@ class Company < ApplicationRecord
   has_many :property_managers
   has_many :properties
   validates :name, presence: true
+  has_many :events, as: :eventable
 end

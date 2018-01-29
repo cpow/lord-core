@@ -20,6 +20,7 @@ class LeasePaymentReminder < ApplicationRecord
   ].freeze
 
   belongs_to :lease_payment
+  has_many :events, as: :eventable
 
   validates :reminder_type, presence: true, inclusion: { in: REMINDER_TYPES }
 end

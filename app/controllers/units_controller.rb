@@ -23,6 +23,9 @@ class UnitsController < ApplicationController
 
     respond_to do |format|
       if @unit.save
+        Event.create!(eventable: @unit,
+                      event_type: Event::EVENT_CREATED,
+                      createable: current_property_manager)
         format.html { redirect_to [current_property, @unit], notice: 'Unit was successfully created.' }
       else
         format.html { render :new }
@@ -33,6 +36,9 @@ class UnitsController < ApplicationController
   def update
     respond_to do |format|
       if @unit.update(unit_params)
+        Event.create!(eventable: @unit,
+                      event_type: Event::EVENT_EDITED,
+                      createable: current_property_manager)
         format.html { redirect_to [current_property, @unit], notice: 'Unit was successfully updated.' }
       else
         format.html { render :edit }

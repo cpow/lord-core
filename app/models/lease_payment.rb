@@ -11,6 +11,7 @@
 #  active        :boolean          default(FALSE)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  local_amount  :integer
 #
 
 class LeasePayment < ApplicationRecord
@@ -20,6 +21,7 @@ class LeasePayment < ApplicationRecord
   has_many :payments
   has_many :users, through: :unit
   has_many :lease_payment_reminders
+  has_many :events, as: :eventable
 
   belongs_to :lease
   belongs_to :unit
