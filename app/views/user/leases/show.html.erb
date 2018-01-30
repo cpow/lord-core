@@ -60,36 +60,38 @@
     <h3>
       Lease Payments
     </h3>
-    <table class="table table-striped table-responsive">
-      <thead class="thead-default">
-        <tr>
-          <th scope="row">Due Date</th>
-          <th scope="row">Amount Due</th>
-          <th scope="row">Status</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @lease.lease_payments.each do |lease_payment| %>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead class="thead-default">
           <tr>
-            <td><%= human_date(lease_payment.due_date) %></td>
-            <td>
-              <%= link_to(user_lease_payment_path(lease_payment.id)) do %>
-                <%= number_to_currency(lease_payment.human_amount_due) %>
-              <% end %>
-            </td>
-            <td>
-              <% if lease_payment.active %>
-                <span class="badge badge-info">active</span>
-              <% elsif lease_payment.paid_in_full? %>
-                <span class="badge badge-primary">success</span>
-              <% else %>
-                <span class="badge badge-secondary">N/A</span>
-              <% end %>
-            </td>
+            <th scope="row">Due Date</th>
+            <th scope="row">Amount Due</th>
+            <th scope="row">Status</th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+
+        <tbody>
+          <% @lease.lease_payments.each do |lease_payment| %>
+            <tr>
+              <td><%= human_date(lease_payment.due_date) %></td>
+              <td>
+                <%= link_to(user_lease_payment_path(lease_payment.id)) do %>
+                  <%= number_to_currency(lease_payment.human_amount_due) %>
+                <% end %>
+              </td>
+              <td>
+                <% if lease_payment.active %>
+                  <span class="badge badge-info">active</span>
+                <% elsif lease_payment.paid_in_full? %>
+                  <span class="badge badge-primary">success</span>
+                <% else %>
+                  <span class="badge badge-secondary">N/A</span>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

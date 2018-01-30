@@ -19,6 +19,11 @@
 [ ] Banking Information
  * need better TOS and better information around the banking information
 
+[ ] Bank lifecycle
+ * handle displaying when funds get transferred to bank account
+
+[ ] handle webhooks in production. need the CSRF section in stripe docs
+
 [ ] Property Manager Home Page
  * handle all links on the first page. Actually be able to edit the things I say
    you can edit.

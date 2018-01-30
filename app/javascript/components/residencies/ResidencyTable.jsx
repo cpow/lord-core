@@ -10,8 +10,8 @@ class ResidencyTable extends Component {
 
   render() {
     return (
-      <div>
-        <table className="table table-striped table-responsive">
+      <div className="table-responsive">
+        <table className="table table-striped">
           <thead className="thead-default">
             <tr>
               <th scope="row">Name</th>
