@@ -23,7 +23,15 @@
  * handle all links on the first page. Actually be able to edit the things I say
    you can edit.
 
-[ ] EVENTS
+[ ] Paginate the tables. you shouldn't have more than X records on one table
+
+[ ] Multi step form for lease. Just makes sense
+
+[ ] Month-to-month leases
+ * maybe need to make a special kind of lease with no end. and you just run a
+   cron job that updates these leases with more lease payments. every 6 months?
+
+[x] EVENTS
  * need events so managers can see what is going on with their property.
  * CRUD actions on all models for events
  * type == CRUD stuff
@@ -65,8 +73,17 @@ for this)
 [x] Set up recurring payments so users can pay rent to property manager's
 company
 
+## Little bugzzz to fix
+ *small things that need to be fixed but aren't completely dealbreakers*
+
+[ ] chat scrolls down too far
+ * need to fix the small thing with the scrolling to the last LI. not sure yet.
+
 ## Smaller Stuff!
  *stuff that wont take as much time to do. and are mostly just bugs or refactors.*
+
+[ ] Links in property management nav
+ * currently there is nothing there and is a joke
 
 [x] add simple_form with bootstrap initializer for form stuff
 * this will make everything look 1 million x better in forms

@@ -11,7 +11,7 @@ class ResidencyTable extends Component {
   render() {
     return (
       <div>
-        <table className="table table-striped">
+        <table className="table table-striped table-responsive">
           <thead className="thead-default">
             <tr>
               <th scope="row">Name</th>
