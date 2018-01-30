@@ -26,8 +26,9 @@ class LeasesController < ApplicationController
   # POST /leases.json
   def create
     @lease = @unit.leases.new(lease_params)
-    change_lease_amount_to_cents
-    if @lease.save
+    if @lease.valid?
+      change_lease_amount_to_cents
+      @lease.save
       Event.create(eventable: @lease,
                   createable: current_property_manager,
                   event_type: Event::EVENT_CREATED)
@@ -66,6 +67,7 @@ class LeasesController < ApplicationController
     def change_lease_amount_to_cents
       @lease.payment_amount = @lease.payment_amount * 100
     end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_lease
       @lease = @unit.leases.find(params[:id])

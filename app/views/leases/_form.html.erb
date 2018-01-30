@@ -31,7 +31,7 @@
           <%= form.label :payment_amount, "Payment amount per month" %>
           <%= form.number_field :payment_amount, id: :lease_payment_amount, class: 'form-control' %>
         </div>
-        <div class="form-group col-6">
+        <div class="form-group col-lg-6 col-sm-12">
           <%= form.label :payment_first_date, "First Payment Date" %>
           <%= form.text_field :payment_first_date,
             id: :lease_payment_first_date,
@@ -50,12 +50,12 @@
       When you want your tenants to be reminded about paying rent. and when rent is late.
       </p>
       <div class="row">
-        <div class="form-group col-6 alert alert-warning">
+        <div class="form-group col-lg-6 col-sm-12 alert alert-warning">
           <%= form.label :payment_days_until_late, "Days until late reminder is sent" %>
           <%= form.number_field :payment_days_until_late, id: :lease_payment_days_until_late, class: 'form-control' %>
         </div>
 
-        <div class="form-group col-6 alert alert-info">
+        <div class="form-group col-lg-6 col-sm-12 alert alert-info">
           <%= form.label :payment_reminder_days, "Days until reminder email is sent" %>
           <%= form.number_field :payment_reminder_days, id: :lease_payment_reminder_days, class: 'form-control' %>
         </div>
