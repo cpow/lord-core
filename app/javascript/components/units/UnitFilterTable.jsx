@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import UnitList from 'components/units/UnitList';
+import Loader from 'components/Loader';
 import FilterUnits from 'components/units/FilterUnits';
 
 const { Component } = React;
@@ -62,9 +63,7 @@ class UnitFilterTable extends Component {
           <UnitList units={this.state.filteredUnits} />
         </div>;
     } else if ( this.state.loading === true ) {
-      <div>
-        <i className="fa fa-spinner fa-3x"></i>
-      </div>
+      output = <Loader />
     } else {
       output =
         <div className="alert alert-warning">

@@ -22,7 +22,6 @@
 //= require property_images
 
 $(function () {
-  console.log("SHIT");
   $(".datepicker").datepicker({
       format: "yyyy/mm/dd",
       showOtherMonths: true,

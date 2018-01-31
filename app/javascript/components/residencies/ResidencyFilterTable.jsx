@@ -4,6 +4,7 @@ import getProperty from 'util/dynamic-property';
 import axios from 'axios';
 import ResidencyTable from 'components/residencies/ResidencyTable';
 import ResidencyFilters from 'components/residencies/ResidencyFilters';
+import Loader from 'components/Loader';
 
 const { Component } = React;
 
@@ -72,9 +73,7 @@ class ResidencyFilterTable extends Component {
           <ResidencyTable residencies={this.state.filteredResidencies} />
         </div>;
     } else if (this.state.loading === true) {
-      <div>
-        <i className="fa fa-spinner fa-3x"></i>
-      </div>
+      output = <Loader />
     } else {
       output =
         <div className="alert alert-warning">
