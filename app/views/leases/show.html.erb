@@ -90,7 +90,11 @@
                 <% end %>
               </td>
               <td>
-                <% if lease_payment.active %>
+                <% if lease_payment.payment_late? %>
+                  <span class="badge badge-danger">late</span>
+                <% elsif lease_payment.payment_within_reminder_period? %>
+                  <span class="badge badge-warning">due soon</span>
+                <% elsif lease_payment.active %>
                   <span class="badge badge-info">active</span>
                 <% elsif lease_payment.paid_in_full? %>
                   <span class="badge badge-primary">success</span>

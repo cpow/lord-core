@@ -22,28 +22,43 @@
 
 <div class="row equal-height text-center">
   <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-    <div class="card ">
-      <div class="card-body">
-        <div class="container">
-          <div class="row">
-            <div class="col">
+    <% if !current_property_manager.company.stripe_account_guid.present? %>
+      <div class="card alert alert-warning">
+        <div class="card-body">
+          <h4>
+            Bank Account
+          </h4>
+          <p>
+            You must add payment processing in order to receive payments from tenants
+          </p>
+          <%= link_to(new_stripe_account_path) do %>
+            <div class="btn btn-warning">
+              Add Payment Processing
+            </div>
+          <% end %>
+        <% else %>
+          <div class="card">
+            <div class="card-body">
               <h4>
-                Banking
+                Bank Account
               </h4>
-              <p>
-              <i class="fa fa-bank fa-3x text-info"></i>
-              </p>
-              <p>
-              <%= current_property_manager.name %>
-              </p>
-              <%= link_to(edit_company_path(current_property_manager.company)) do %>
-                <div class="btn btn-light">
-                  Edit Bank Account
-                </div>
-              <% end %>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item bg-transparent">
+                  <strong class="pull-left"> Name: </strong>
+                  <span class="pull-right">
+                    Bank account name
+                  </span>
+                </li>
+                <li class="list-group-item bg-transparent">
+                  <strong class="pull-left">Account:</strong>
+                  <span class="pull-right">
+                    bank account XYZ
+                  </span>
+                </li>
+              </ul>
             </div>
           </div>
-        </div>
+        <% end %>
       </div>
     </div>
   </div>
