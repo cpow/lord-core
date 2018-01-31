@@ -10,7 +10,7 @@ const { Component } = React;
 class ResidencyFilterTable extends Component {
   constructor(props) {
     super(props);
-    this.state = { residencies: [], filteredResidencies: [] };
+    this.state = { residencies: [], filteredResidencies: [], loading: true };
     this.fuzzyFilterName = this.fuzzyFilterName.bind(this);
     this.fuzzyFilterUnitName = this.fuzzyFilterUnitName.bind(this);
     this.fuzzyFilterEmail = this.fuzzyFilterEmail.bind(this);
@@ -21,7 +21,11 @@ class ResidencyFilterTable extends Component {
 
     axios.get(`/api/v1/properties/${propertyId}/residencies`).then(resp => {
       let residencies = resp.data.residencies;
-      this.setState({ residencies, filteredResidencies: residencies });
+      this.setState({
+        residencies,
+        filteredResidencies: residencies,
+        loading: false
+      });
     }).catch(error => {
       console.log(error)
     });
@@ -67,6 +71,10 @@ class ResidencyFilterTable extends Component {
             fuzzyFilterEmail={this.fuzzyFilterEmail} />
           <ResidencyTable residencies={this.state.filteredResidencies} />
         </div>;
+    } else if (this.state.loading === true) {
+      <div>
+        <i className="fa fa-spinner fa-3x"></i>
+      </div>
     } else {
       output =
         <div className="alert alert-warning">

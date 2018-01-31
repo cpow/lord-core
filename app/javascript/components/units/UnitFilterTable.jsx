@@ -9,7 +9,7 @@ const { Component } = React;
 class UnitFilterTable extends Component {
   constructor(props) {
     super(props);
-    this.state = { units: [], filteredUnits: [] };
+    this.state = { units: [], filteredUnits: [], loading: true };
     this.filterStatus = this.filterStatus.bind(this);
     this.fuzzyFilterName = this.fuzzyFilterName.bind(this);
   }
@@ -19,7 +19,11 @@ class UnitFilterTable extends Component {
 
     axios.get(`/api/v1/properties/${propertyId}/units`).then(resp => {
       let units = resp.data.units;
-      this.setState({ units, filteredUnits: resp.data.units });
+      this.setState({
+        units,
+        filteredUnits: resp.data.units,
+        loading: false
+      });
     }).catch(error => {
       console.log(error)
     });
@@ -57,6 +61,10 @@ class UnitFilterTable extends Component {
             fuzzyFilterName={this.fuzzyFilterName} />
           <UnitList units={this.state.filteredUnits} />
         </div>;
+    } else if ( this.state.loading === true ) {
+      <div>
+        <i className="fa fa-spinner fa-3x"></i>
+      </div>
     } else {
       output =
         <div className="alert alert-warning">
