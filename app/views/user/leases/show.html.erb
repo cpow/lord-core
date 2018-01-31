@@ -80,13 +80,7 @@
                 <% end %>
               </td>
               <td>
-                <% if lease_payment.active %>
-                  <span class="badge badge-info">active</span>
-                <% elsif lease_payment.paid_in_full? %>
-                  <span class="badge badge-primary">success</span>
-                <% else %>
-                  <span class="badge badge-secondary">N/A</span>
-                <% end %>
+                <%= badge_for_lease_payment_status(lease_payment) %>
               </td>
             </tr>
           <% end %>

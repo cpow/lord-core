@@ -132,18 +132,14 @@
         <h4>
           Tenant Chat
         </h4>
-        <div class="row mt-4">
-          <div class="col-lg-3 col-sm-0 mt-2">
-            <i class="fa fa-comments fa-3x text-primary"></i>
-          </div>
-          <div class="col-lg-9 col-sm-12">
-            <p>
-            Chat with property management. Get answers to your questions
-            </p>
-          </div>
-        </div>
+        <p>
+          <i class="fa fa-comments fa-3x text-primary"></i>
+        </p>
+        <p>
+        Chat with property management. Get answers to your questions
+        </p>
       </div>
-      <div class="card-footer bg-white">
+      <div class="card-footer">
         <%= link_to 'go to chat', unit_messages_path(@user.current_unit),
           class: 'card-link text-uppercase'
         %>
