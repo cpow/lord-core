@@ -4,7 +4,7 @@ json.residencies @residencies do |residency|
 
   json.badge do
     status = residency.user.status
-    if status == 'activated'
+    if status == 'active'
       json.class 'success'
       json.value 'activated'
     else
