@@ -1,7 +1,17 @@
+<nav aria-label="breadcrumb" class="breadcrumb-nav sticky-top bg-white">
+  <ol class="breadcrumb bg-white">
+    <li class="breadcrumb-item"><%= link_to @company.name, authenticated_property_manager_root_path %></li>
+    <li class="breadcrumb-item active" aria-current="page">Edit</li>
+  </ol>
+</nav>
+
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: 'Edit Your Company',
+  text: 'This is your current company information. If you like, you can edit it below.'
+} %>
+
 <div class="card">
-  <h1 class="card-header">Editing Company</h1>
   <div class="card-body">
     <%= render 'form' %>
   </div>
 </div>
-

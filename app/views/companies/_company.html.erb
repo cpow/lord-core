@@ -1,0 +1,10 @@
+<div class="card">
+  <div class="card-body">
+    <p>
+      <%= company.name %>
+    </p>
+    <%= link_to "back", authenticated_property_manager_root_path, class: 'text-uppercase card-link' %>
+    <%= link_to "edit", edit_company_path(company), class: 'text-uppercase card-link' %>
+  </div>
+</div>
+

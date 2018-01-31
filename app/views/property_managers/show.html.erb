@@ -1,0 +1,14 @@
+<nav aria-label="breadcrumb" class="breadcrumb-nav sticky-top bg-white">
+  <ol class="breadcrumb bg-white">
+    <li class="breadcrumb-item"><%= link_to @property_manager.company.name, authenticated_property_manager_root_path %></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= @property_manager.email %></li>
+  </ol>
+</nav>
+
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: 'Your Account',
+  text: 'This is your current information. If you like, you can edit it below.'
+} %>
+
+<%= render @property_manager %>
+

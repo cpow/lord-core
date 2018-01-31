@@ -1,4 +1,13 @@
-<h1>Company <%= @company.name %></h1>
+<nav aria-label="breadcrumb" class="breadcrumb-nav sticky-top bg-white">
+  <ol class="breadcrumb bg-white">
+    <li class="breadcrumb-item"><%= link_to @company.name, authenticated_property_manager_root_path %></li>
+    <li class="breadcrumb-item active" aria-current="page">Company</li>
+  </ol>
+</nav>
 
-<h2>Create new properties for this company</h2>
-<h2>Add employees of this company</h2>
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: 'Company Information',
+  text: 'This is your current company information. If you like, you can edit it below.'
+} %>
+
+<%= render @company %>

@@ -1,0 +1,14 @@
+<div class="card">
+  <div class="card-header">
+    <%= property_manager.name %>
+  </div>
+  <div class="card-body">
+    <p>
+      <%= property_manager.email %>
+    </p>
+    <%= link_to "back", authenticated_property_manager_root_path, class: 'text-uppercase card-link' %>
+    <%= link_to "edit", edit_property_manager_path(property_manager), class: 'text-uppercase card-link' %>
+  </div>
+</div>
+
+

@@ -45,6 +45,8 @@ Rails.application.routes.draw do
 
   resources :users
 
+  resources :property_managers
+
   resources :user do
     resources :invitation_acceptances
   end
