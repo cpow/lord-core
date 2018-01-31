@@ -3,6 +3,7 @@ class StripeAccountsController < ApplicationController
   before_action :can_manage_company!
 
   def new
+    redirect_to new_bank_account_path if current_company.stripe_account_guid.present?
     @account = StripeAccount.new
   end
 

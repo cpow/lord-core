@@ -53,8 +53,13 @@
     };
   };
 </script>
+
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: 'Add a bank Account',
+  text: 'Enter your banking information so tenants can pay you directly!!' }
+%>
+
 <div class="card">
-  <h1 class="card-header">Add a bank account</h1>
   <div class="card-body">
     <%= render 'bank_account_form' %>
     <div class="hint">

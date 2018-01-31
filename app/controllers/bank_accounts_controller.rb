@@ -34,7 +34,12 @@ class BankAccountsController < ApplicationController
 
       # Create the bank account
       token = params[:stripeToken]
-      account.external_accounts.create({ external_account: token })
+      bank_account = account.external_accounts.create({ external_account: token })
+
+      # update attrs in company
+      current_company.update_attributes!(bank_account_name: bank_account.bank_name,
+                                         bank_account_last4: bank_account.last4
+                                        )
 
       # Success, send on to the dashboard
       flash[:success] = 'Your bank account has been added!'

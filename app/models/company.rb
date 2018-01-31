@@ -15,4 +15,8 @@ class Company < ApplicationRecord
   has_many :properties
   validates :name, presence: true
   has_many :events, as: :eventable
+
+  def has_banking_information?
+    bank_account_name.present? && bank_account_last4.present?
+  end
 end
