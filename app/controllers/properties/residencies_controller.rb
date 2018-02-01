@@ -1,4 +1,4 @@
-class Properties::Units::ResidenciesController < ApplicationController
+class Properties::ResidenciesController < ApplicationController
   before_action :authenticate_property_manager!
   before_action :verify_units_available
   before_action :set_property
@@ -7,7 +7,6 @@ class Properties::Units::ResidenciesController < ApplicationController
 
   def new
     @residency = current_property.residencies.new
-    @residency.unit = @unit if @unit
     @property = current_property
     @company = current_property.company
   end
@@ -40,7 +39,7 @@ class Properties::Units::ResidenciesController < ApplicationController
       return render :new
     else
       flash[:success] = 'New resident has been added! They will be invited by email.'
-      return redirect_to [@residency.property, @residency.unit]
+      return redirect_to [@residency.property]
     end
   end
 
@@ -61,7 +60,8 @@ class Properties::Units::ResidenciesController < ApplicationController
   def verify_units_available
     unless current_property.units.count > 0
       flash[:notice] = "You must create a unit for this property first! :)"
-      redirect_to property_unit_path(@unit)
+      redirect_to property_path(current_property)
     end
   end
 end
+

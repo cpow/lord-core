@@ -86,7 +86,7 @@ class ResidencyFilterTable extends Component {
       output = <Loader />
     } else {
       output =
-        <div className="alert alert-warning">
+        <div className="alert alert-warning text-center">
           You don't have any residents associated to this property.
         </div>
     }

@@ -80,6 +80,9 @@ company
 
 ## Little bugzzz to fix
  *small things that need to be fixed but aren't completely dealbreakers*
+[ ] refactor the duplication in residencies controllers
+ * property/residencies and property/units/residencies
+ * some of the stuff in these should be refactored out into service object(s)
 
 [ ] chat scrolls down too far
  * need to fix the small thing with the scrolling to the last LI. not sure yet.
