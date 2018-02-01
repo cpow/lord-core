@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   resources :properties do
     resources :residencies, controller: 'properties/residencies'
-    resources :property_images, controller: 'properties/property_images'
+    resources :property_images
     resources :units, controller: 'properties/units'
 
     resources :units do
