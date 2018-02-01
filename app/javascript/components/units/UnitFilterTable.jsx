@@ -3,9 +3,16 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import UnitList from 'components/units/UnitList';
 import Loader from 'components/Loader';
-import FilterUnits from 'components/units/FilterUnits';
+import FuzzySearchFilter from 'components/filters/FuzzySearchFilter';
+import DropDownFilter from 'components/filters/DropDownFilter';
 
 const { Component } = React;
+
+const statusOptions = [
+  {label: '', value: 'All'},
+  {label: 'active', value: 'Active'},
+  {label: 'paid', value: 'Paid'}
+]
 
 class UnitFilterTable extends Component {
   constructor(props) {
@@ -62,11 +69,19 @@ class UnitFilterTable extends Component {
     if ( this.state.units.length > 0 ) {
       output =
         <div>
-          <FilterUnits
-            filterStatus={this.filterStatus}
-            fuzzyFilterName={this.fuzzyFilterName} />
+          <div className="row mb-4">
+            <FuzzySearchFilter
+              id="filterName"
+              label="search name"
+              filter={this.fuzzyFilterName} />
+            <DropDownFilter
+              id="filterStatus"
+              label="Payment Status"
+              options={statusOptions}
+              filter={this.filterStatus} />
+          </div>
           <UnitList units={this.state.filteredUnits} />
-        </div>;
+        </div>
     } else if ( this.state.loading === true ) {
       output = <Loader />
     } else {

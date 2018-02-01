@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import getProperty from 'util/dynamic-property';
 import axios from 'axios';
 import ResidencyTable from 'components/residencies/ResidencyTable';
-import ResidencyFilters from 'components/residencies/ResidencyFilters';
+import FuzzySearchFilter from 'components/filters/FuzzySearchFilter';
 import Loader from 'components/Loader';
 
 const { Component } = React;
@@ -66,10 +66,20 @@ class ResidencyFilterTable extends Component {
     if ( this.state.residencies.length > 0 ) {
       output =
         <div>
-          <ResidencyFilters
-            fuzzyFilterName={this.fuzzyFilterName}
-            fuzzyFilterUnitName={this.fuzzyFilterUnitName}
-            fuzzyFilterEmail={this.fuzzyFilterEmail} />
+          <div className="row mb-4">
+            <FuzzySearchFilter
+              id="fuzzyFilterName"
+              label="Search Name"
+              filter={this.fuzzyFilterName} />
+            <FuzzySearchFilter
+              id="fuzzyFilterEmail"
+              label="Search Email"
+              filter={this.fuzzyFilterEmail} />
+            <FuzzySearchFilter
+              id="fuzzyFilterUnit"
+              label="Search Unit"
+              filter={this.fuzzyFilterUnitName} />
+          </div>
           <ResidencyTable residencies={this.state.filteredResidencies} />
         </div>;
     } else if (this.state.loading === true) {
