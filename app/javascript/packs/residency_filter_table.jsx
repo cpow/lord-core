@@ -4,7 +4,11 @@ import ResidencyFilterTable from 'components/residencies/ResidencyFilterTable';
 
 document.addEventListener('DOMContentLoaded', () => {
   const node = document.getElementById('propertyId');
-  const propertyId = JSON.parse(node.getAttribute('data-property-id'));
+  let propertyId;
+
+  if ( node !== null ) {
+    propertyId = JSON.parse(node.getAttribute('data-property-id'));
+  }
 
   ReactDOM.render(
     <ResidencyFilterTable propertyId={propertyId}/>,

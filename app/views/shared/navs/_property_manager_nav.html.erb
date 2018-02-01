@@ -1,7 +1,30 @@
+<li class="nav-item mr-1">
+  <%= link_to residencies_path, class: "nav-link #{'active' if current_page?(residencies_path)}" do %>
+    <i class="fa fa-child"></i>
+    Residents
+  <% end %>
+</li>
+<li class="nav-item mr-1">
+  <%= link_to units_path, class: "nav-link #{'active' if current_page?(units_path)}" do %>
+    <i class="fa fa-home"></i>
+    Units
+  <% end %>
+</li>
+<li class="nav-item mr-1">
+  <%= link_to company_path(current_property_manager.company), class: "nav-link #{'active' if current_page?(company_path(current_property_manager.company))}" do %>
+    <i class="fa fa-drivers-license-o"></i>
+    Company Info
+  <% end %>
+</li>
+<li class="nav-item mr-1">
+  <%= link_to property_manager_path(current_property_manager), class: "nav-link #{'active' if current_page?(property_manager_path(current_property_manager))}" do %>
+    <i class="fa fa-user"></i>
+    Account
+  <% end %>
+</li>
 <li class="nav-item">
   <%= link_to 'Sign Out',
     destroy_property_manager_session_path,
     method: :delete,
     class: 'nav-link'%>
 </li>
-

@@ -19,8 +19,13 @@ class ResidencyFilterTable extends Component {
 
   componentDidMount() {
     let propertyId = this.props.propertyId;
+    let url = 'api/v1/residencies';
 
-    axios.get(`/api/v1/properties/${propertyId}/residencies`).then(resp => {
+    if ( propertyId !== undefined ) {
+      url = `/api/v1/properties/${propertyId}/residencies`
+    }
+
+    axios.get(url).then(resp => {
       let residencies = resp.data.residencies;
       this.setState({
         residencies,

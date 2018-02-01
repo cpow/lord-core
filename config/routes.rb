@@ -3,18 +3,32 @@ Rails.application.routes.draw do
 
   devise_for :admins
 
+  devise_for :property_managers, path: 'property_managers', controllers: {
+    sessions: 'property_managers/sessions',
+    registrations: 'property_managers/registrations'
+  }
+
+  devise_for :users, path: 'users', controllers: {
+    sessions: 'users/sessions',
+    registrations: 'users/registrations'
+  }
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   authenticate :admin do
     mount Sidekiq::Web => '/sidekiq'
   end
 
-  resources :residencies, only: [:show]
-
+  # routes for property managers to see only
+  resources :companies
+  resources :property_managers
+  resources :residencies, only: [:index]
   resources :units do
-    resources :messages, only: [:index]
+    resources :messages, only: [:index], controller: 'units/messages'
   end
 
+
+  # namespaced routes that live within a property's dashboard
   resources :properties do
     resources :residencies, controller: 'properties/residencies'
     resources :property_images
@@ -30,26 +44,15 @@ Rails.application.routes.draw do
 
   resources :payments
   resources :tenant_plaid_accounts, only: :create
-  resources :companies
   resources :bank_accounts, only: [:new, :create]
   resources :stripe_accounts
 
-  devise_for :property_managers, path: 'property_managers', controllers: {
-    sessions: 'property_managers/sessions',
-    registrations: 'property_managers/registrations'
-  }
-
-  devise_for :users, path: 'users', controllers: {
-    sessions: 'users/sessions',
-    registrations: 'users/registrations'
-  }
 
   resources :users do
     resources :leases, only: :show, controller: 'users/leases'
     resources :lease_payments, only: :show, controller: 'users/lease_payments'
   end
 
-  resources :property_managers
 
   resources :user do
     resources :invitation_acceptances
@@ -60,8 +63,11 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
+      # Tables from a company's perspective
       resources :units, only: :index
+      resources :residencies, only: :index
 
+      # Tables from a property's perspective
       resources :properties, only: [] do
         resources :units, only: :index, controller: :property_units
         resources :residencies, only: :index, controller: :property_residencies

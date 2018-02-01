@@ -70,19 +70,21 @@
                 Account
               </h4>
               <p>
-              <i class="fa fa-user fa-3x text-info"></i>
+              <i class="fa fa-user fa-3x text-primary"></i>
               </p>
               <p>
               <%= current_property_manager.name %>
               </p>
-              <%= link_to(edit_property_manager_path(current_property_manager)) do %>
-                <div class="btn btn-light">
-                  Edit Account
-                </div>
-              <% end %>
             </div>
           </div>
         </div>
+      </div>
+      <div class="card-footer">
+        <%= link_to(edit_property_manager_path(current_property_manager)) do %>
+          <div class="card-link font-weight-bold">
+            Edit Account
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
@@ -96,20 +98,22 @@
                 Company
               </h4>
               <p>
-              <i class="fa fa-drivers-license-o fa-3x text-info">
+              <i class="fa fa-drivers-license-o fa-3x text-primary">
               </i>
               </p>
               <p>
               <%= current_property_manager.company.name %>
               </p>
-              <%= link_to(edit_company_path(current_property_manager.company)) do %>
-                <div class="btn btn-light">
-                  Edit Company
-                </div>
-              <% end%>
             </div>
           </div>
         </div>
+      </div>
+      <div class="card-footer">
+        <%= link_to(edit_company_path(current_property_manager.company)) do %>
+          <div class="card-link font-weight-bold">
+            Edit Company
+          </div>
+        <% end%>
       </div>
     </div>
   </div>

@@ -1,8 +1,20 @@
 <nav aria-label="breadcrumb" class="sticky-top bg-white">
   <ol class="breadcrumb bg-white">
     <li class="breadcrumb-item"><%= link_to @company.name, authenticated_property_manager_root_path %></li>
-    <li class="breadcrumb-item"><%= link_to @property.name, property_path(@property) %></li>
     <li class="breadcrumb-item active" aria-current="page">Residents</li>
   </ol>
 </nav>
+
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: "Residents for #{@company.name}",
+  text: 'Here is a table of all residents for this company. You may filter these residents by their unit, name, etc... To create a new resident. Please go back to your company dashboard, and select a property.'
+} %>
+
+<div class="card">
+  <div class="card-body">
+    <div id="residency_table">
+    </div>
+  </div>
+</div>
+<%= javascript_pack_tag "residency_filter_table" %>
 

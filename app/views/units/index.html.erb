@@ -5,7 +5,15 @@
   </ol>
 </nav>
 
-<div id="unit_table">
-</div>
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: "Units for #{@company.name}",
+  text: 'Here is a table of all units for this company. You may filter these units by their unit, name, etc... To create a new unit. Please go back to your company dashboard, and select a property.'
+} %>
 
+<div class="card">
+  <div class="card-body">
+    <div id="unit_table">
+    </div>
+  </div>
+</div>
 <%= javascript_pack_tag "unit_filter_table" %>
