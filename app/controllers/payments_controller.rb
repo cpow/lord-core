@@ -40,7 +40,7 @@ class PaymentsController < ApplicationController
         redirect_to authenticated_user_root_path
       else
         current_user.current_lease_payment.deal_with_payment
-        redirect_to user_lease_path(current_user.current_lease)
+        redirect_to user_lease_path(current_user, current_user.current_lease)
       end
     else
       flash[:danger] = 'We\'re sorry, something went wrong'

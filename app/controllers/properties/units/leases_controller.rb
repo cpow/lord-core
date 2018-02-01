@@ -1,4 +1,4 @@
-class LeasesController < ApplicationController
+class Properties::Units::LeasesController < ApplicationController
   before_action :set_property, :set_unit
   before_action :set_lease, only: [:show, :edit, :update, :destroy]
 

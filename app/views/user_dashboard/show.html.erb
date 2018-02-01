@@ -87,7 +87,7 @@
       </div>
       <% unless @user.current_lease.kind_of?(NullLease) %>
         <div class="card-footer">
-          <%= link_to(user_lease_path(current_user.current_lease)) do %>
+          <%= link_to(user_lease_path(current_user, current_user.current_lease)) do %>
             <div class="card-link font-weight-bold lease-info__link">
               View Lease Details
             </div>

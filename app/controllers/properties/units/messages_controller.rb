@@ -1,4 +1,4 @@
-class PropertyMessagesController < ApplicationController
+class Properties::Units::MessagesController < ApplicationController
   def index
     @unit = Unit.find(params[:unit_id])
     @property = @unit.property

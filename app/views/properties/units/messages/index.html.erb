@@ -1,0 +1,20 @@
+<nav aria-label="breadcrumb" class="breadcrumb-nav sticky-top bg-white">
+  <ol class="breadcrumb bg-white">
+    <li class="breadcrumb-item"><%= link_to @property.company.name, authenticated_property_manager_root_path %></li>
+    <li class="breadcrumb-item"><%= link_to @property.name, property_path(@property) %></li>
+    <li class="breadcrumb-item"><%= link_to @unit.name, [@property, @unit] %></li>
+    <li class="breadcrumb-item active" aria-current="page">Unit Chat</li>
+  </ol>
+</nav>
+
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: "Unit Chatroom for #{@unit.name}",
+  text: 'chat with your tenants here.' }
+%>
+
+<div id="unitId" data-unit-id="<%= @unit.id %>" />
+
+<div id="messageable" data-id="<%= current_property_manager.id %>"
+                      data-type="PropertyManager" />
+
+<%= javascript_pack_tag 'unit_chat' %>

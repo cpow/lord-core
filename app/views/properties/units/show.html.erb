@@ -1,0 +1,147 @@
+<nav aria-label="breadcrumb" class="breadcrumb-nav sticky-top bg-white">
+  <ol class="breadcrumb bg-white">
+    <li class="breadcrumb-item"><%= link_to @company.name, authenticated_property_manager_root_path %></li>
+    <li class="breadcrumb-item"><%= link_to @property.name, property_path(@property) %></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= @unit.name %></li>
+  </ol>
+</nav>
+
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: "#{@unit.name}",
+  text: '' }
+%>
+
+<div class="row equal-height">
+  <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+    <div class="card property-info">
+      <div class="card-body">
+        <h4>
+          Unit Information
+        </h4>
+        <p>
+          <strong>Property:</strong>
+          <%= @unit.property_id %>
+        </p>
+
+        <p>
+          <strong>Description:</strong>
+          <%= @unit.description %>
+        </p>
+
+        <p>
+          <strong>Name:</strong>
+          <%= @unit.name %>
+        </p>
+      </div>
+      <div class="card-footer bg-white">
+        <%= link_to 'Edit', edit_property_unit_path(@unit.property, @unit),
+          class: 'card-link text-uppercase'
+        %>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+    <% if @unit.current_lease.is_a?(NullLease) %>
+      <div class="card alert alert-warning text-center">
+        <div class="card-body">
+          <h4>
+            Lease Information
+          </h4>
+          <p>
+            You don't have a lease for this unit. Please add a lease now.
+          </p>
+          <p>
+            <%= link_to 'New Lease', new_property_unit_lease_path(@unit.property, @unit),
+              class: 'btn btn-warning'
+            %>
+          </p>
+        </div>
+      </div>
+    <% else %>
+    <div class="card lease-info">
+      <div class="card-body">
+        <h4>
+          Lease Information
+        </h4>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item border-bottom-0 border-top-0">
+            <strong class="pull-left"> Total Payments: </strong>
+            <span class="pull-right">
+              <%= number_to_currency(@unit.current_lease.total_payments) %>
+            </span>
+          </li>
+          <li class="list-group-item border-bottom-0 border-top-0">
+            <strong class="pull-left">Already Paid:</strong>
+            <span class="pull-right">
+              <%= number_to_currency(@unit.current_lease.total_paid) %>
+            </span>
+          </li>
+          <li class="list-group-item border-bottom-0 border-top-0">
+            <strong class="pull-left"> Payments: </strong>
+            <span class="pull-right">
+              <%= @unit.current_lease.lease_payments.length %>
+            </span>
+          </li>
+        </ul>
+      </div>
+      <div class="card-footer bg-white">
+          <%= link_to 'View', property_unit_lease_path(@unit.property, @unit, @unit.leases.last),
+            class: 'card-link text-uppercase'
+          %>
+        <%= link_to 'New Lease', new_property_unit_lease_path(@unit.property, @unit),
+          class: 'card-link text-uppercase'
+        %>
+      </div>
+    </div>
+  <% end %>
+  </div>
+  <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+    <div class="card property-info">
+      <div class="card-body">
+        <h4>
+          Tenant Chat
+        </h4>
+        <div class="row mt-4">
+          <div class="col-lg-3 col-sm-0 mt-2">
+            <i class="fa fa-comments fa-3x text-primary"></i>
+          </div>
+          <div class="col-lg-9 col-sm-12">
+            <p>
+            Chat with your tenants. Respond to issues, and answer questions
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer bg-white">
+        <%= link_to 'go to chat', property_unit_messages_path(@unit.property, @unit),
+          class: 'card-link text-uppercase'
+        %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: "Current Residents",
+  text: 'The list of current active residents for this unit' }
+%>
+
+
+<div class="row equal-height">
+  <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+    <div class="card text-center align-middle alert alert-info">
+      <div class="card-body">
+        <h4 class="mb-4">
+          Something New
+        </h4>
+        <p>
+        Add a new resident! Creating a resident is free. When you add a resident they'll be emailed a link to login, and they can start paying you directly right away!
+        </p>
+          <%= link_to "New Resident", new_property_unit_residency_path(@property, @unit), class: 'btn btn-info' %>
+        </div>
+    </div>
+  </div>
+  <%= render partial: 'residencies/cards',
+    locals: { unit: @unit, residencies: @unit.residencies, property: @property }
+  %>
+</div>

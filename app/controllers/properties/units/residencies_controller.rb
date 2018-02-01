@@ -1,4 +1,4 @@
-class ResidenciesController < ApplicationController
+class Properties::Units::ResidenciesController < ApplicationController
   before_action :authenticate_property_manager!
   before_action :verify_units_available
   before_action :set_property

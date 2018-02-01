@@ -17,8 +17,13 @@ class UnitFilterTable extends Component {
 
   componentDidMount() {
     let propertyId = this.props.propertyId;
+    let url = 'api/v1/units';
 
-    axios.get(`/api/v1/properties/${propertyId}/units`).then(resp => {
+    if ( propertyId !== undefined ) {
+      url = `/api/v1/properties/${propertyId}/units`
+    }
+
+    axios.get(url).then(resp => {
       let units = resp.data.units;
       this.setState({
         units,

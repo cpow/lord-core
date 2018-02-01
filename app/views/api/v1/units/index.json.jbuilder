@@ -22,3 +22,4 @@ json.units @units do |unit|
   json.extract! unit, :id, :property_id, :description, :name
 end
 
+

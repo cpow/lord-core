@@ -1,0 +1,30 @@
+<div class="card">
+  <div class="card-body">
+    <table class="table table-striped">
+      <thead class="thead-default">
+        <tr>
+          <th scope="row">ID</th>
+          <th scope="row">Unit ID</th>
+          <th scope="row">Due Date</th>
+          <th scope="row">Reminder Date</th>
+          <th scope="row">Past Due Date</th>
+          <th scope="row">Active (yes/no)</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% lease_payments.each do |lease_payment| %>
+          <tr>
+            <td><%= lease_payment.id %></td>
+            <td><%= lease_payment.unit_id %></td>
+            <td><%= human_date(lease_payment.due_date) %></td>
+            <td><%= human_date(lease_payment.reminder_date) %></td>
+            <td><%= human_date(lease_payment.past_due_date) %></td>
+            <td><%= lease_payment.active %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+</div>

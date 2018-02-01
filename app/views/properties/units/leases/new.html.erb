@@ -1,0 +1,17 @@
+<nav aria-label="breadcrumb" class="breadcrumb-nav sticky-top bg-white">
+  <ol class="breadcrumb bg-white">
+    <li class="breadcrumb-item"><%= link_to @property.company.name, authenticated_property_manager_root_path %></li>
+    <li class="breadcrumb-item"><%= link_to @property.name, property_path(@property) %></li>
+    <li class="breadcrumb-item"><%= link_to @unit.name, [@property, @unit] %></li>
+    <li class="breadcrumb-item active" aria-current="page">New Lease</li>
+  </ol>
+</nav>
+
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: "New Lease",
+  text: 'Let\'s create a new lease. Please select all relevant information like how long the lease will last, how much each monthly payment will be. etc...' }
+%>
+
+<div class="card card-body">
+  <%= render 'form', lease: @lease %>
+</div>

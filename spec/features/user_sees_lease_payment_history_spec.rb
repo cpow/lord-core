@@ -21,7 +21,7 @@ feature 'user sees lease payment history', js: true do
            amount: 25_000)
 
     login_as(user, scope: :user)
-    visit user_lease_payment_path(lease_payment)
+    visit user_lease_payment_path(user, lease_payment)
 
     expect(page).to have_css('.card.payment', count: 3)
   end

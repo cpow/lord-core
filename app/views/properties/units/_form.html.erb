@@ -1,0 +1,16 @@
+<%= form_with(model: unit, local: true, url: (unit.new_record? ? property_units_path : property_unit_path)) do |form| %>
+  <%= render partial: 'layouts/errors', locals: { object: unit } %>
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :unit_name, placeholder: 'Unit #424, 2nd floor, etc...', class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :description %>
+    <%= form.text_area :description, id: :unit_description, class: 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: 'btn btn-primary btn-block' %>
+  </div>
+<% end %>

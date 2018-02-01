@@ -1,10 +1,11 @@
-class UnitsController < ApplicationController
+class Properties::UnitsController < ApplicationController
   before_action :authenticate_property_manager!
   before_action :set_unit, only: [:show, :edit, :update, :destroy]
+  before_action :set_property
   before_action :set_company
 
   def index
-    @units = current_company.units
+    @units = current_property.units
   end
 
   def show

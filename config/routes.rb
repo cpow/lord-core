@@ -16,14 +16,15 @@ Rails.application.routes.draw do
   end
 
   resources :properties do
-    resources :residencies
-    resources :property_images
+    resources :residencies, controller: 'properties/residencies'
+    resources :property_images, controller: 'properties/property_images'
+    resources :units, controller: 'properties/units'
 
     resources :units do
-      resources :leases
-      resources :residencies, only: [:new, :create]
-      resources :lease_payments
-      resources :messages, controller: :property_messages
+      resources :leases, controller: 'properties/units/leases'
+      resources :residencies, only: [:new, :create, :show], controller: 'properties/units/residencies'
+      resources :lease_payments, controller: 'properties/units/lease_payments'
+      resources :messages, controller: 'properties/units/messages'
     end
   end
 
@@ -43,7 +44,10 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-  resources :users
+  resources :users do
+    resources :leases, only: :show, controller: 'users/leases'
+    resources :lease_payments, only: :show, controller: 'users/lease_payments'
+  end
 
   resources :property_managers
 
@@ -52,12 +56,12 @@ Rails.application.routes.draw do
   end
 
   namespace :user do
-    resources :leases, only: :show
-    resources :lease_payments, only: :show
   end
 
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
+      resources :units, only: :index
+
       resources :properties, only: [] do
         resources :units, only: :index, controller: :property_units
         resources :residencies, only: :index, controller: :property_residencies

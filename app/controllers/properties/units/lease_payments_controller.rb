@@ -1,9 +1,9 @@
-class LeasePaymentsController < ApplicationController
+class Properties::Units::LeasePaymentsController < ApplicationController
   before_action :authenticate_property_manager!
   before_action :set_property
   before_action :set_unit
 
-  def index(*args)
+  def index
     @lease_payments = @unit.current_lease.lease_payments
   end
 

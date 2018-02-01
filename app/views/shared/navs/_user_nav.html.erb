@@ -24,7 +24,7 @@
 </li>
 <li class="nav-item mr-1">
   <% unless current_user.current_lease.kind_of?(NullLease) %>
-    <%= link_to user_lease_path(current_user.current_lease), class: "nav-link lease-info__link #{'active' if current_page?(user_lease_path(current_user.current_lease))}" do %>
+    <%= link_to user_lease_path(current_user, current_user.current_lease), class: "nav-link lease-info__link #{'active' if current_page?(user_lease_path(current_user, current_user.current_lease))}" do %>
       <i class="fa fa-newspaper-o"></i>
       Lease Info
     <% end %>

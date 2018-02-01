@@ -1,4 +1,4 @@
-class User::LeasePaymentsController < ApplicationController
+class Users::LeasePaymentsController < ApplicationController
   before_action :authenticate_user!
 
   def show

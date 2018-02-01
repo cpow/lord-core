@@ -12,7 +12,7 @@ describe LeasePayment::CreateFromLease do
 
   describe '#create_payments' do
     it 'should create 4 payments for 4 months' do
-      Timecop.freeze(Time.zone.now.beginning_of_day)
+      Timecop.freeze(DateTime.parse('1985-02-23'))
       start_date = Time.now
       end_date = start_date + 3.months
       lease = create(:lease, start_date: start_date, end_date: end_date)

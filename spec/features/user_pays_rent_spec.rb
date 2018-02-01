@@ -67,7 +67,7 @@ feature 'user pays rent', js: true do
 
     click_on('submitAfterConfirm')
 
-    expect(current_path).to eq(user_lease_path(lease))
+    expect(current_path).to eq(user_lease_path(user, lease))
   end
 
   scenario 'it doesn\'t allow decimals' do
@@ -89,7 +89,7 @@ feature 'user pays rent', js: true do
 
     click_on('submitAfterConfirm')
 
-    expect(current_path).to eq(user_lease_path(lease))
+    expect(current_path).to eq(user_lease_path(user, lease))
     expect(page).to have_content('1,234')
   end
 end
