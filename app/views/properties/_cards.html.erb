@@ -13,12 +13,15 @@
     </div>
   </div>
   <% properties.each do |property| %>
-    <div class="col-sm-12 col-md-6 col-lg-4 mb-4 text-center">
+    <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
       <div class="card">
+        <% if property.property_images.present? %>
+          <%= image_tag property.property_images.first.image.url(:medium), class: 'card-img-top' %>
+        <% end %>
         <div class="card-body">
-          <h4 class="card-title">
+          <h3 class="card-title">
             <%= property.name %>
-          </h4>
+          </h3>
           <ul class="text-left">
             <li>
               units:
@@ -30,8 +33,8 @@
             </li>
           </ul>
         </div>
-        <div class="card-footer bg-white">
-          <%= link_to "Show", property_path(property), class: 'btn btn-primary' %>
+        <div class="card-footer">
+          <%= link_to "Show", property_path(property), class: 'card-link font-weight-bold' %>
         </div>
       </div>
     </div>

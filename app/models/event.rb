@@ -24,7 +24,8 @@ class Event < ApplicationRecord
   EVENT_TYPES = [
     ACCEPTED_INVITE,
     EVENT_EDITED,
-    EVENT_CREATED
+    EVENT_CREATED,
+    EVENT_DESTROYED
   ]
 
   belongs_to :eventable, polymorphic: true
