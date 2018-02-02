@@ -58,46 +58,39 @@
     </div>
   </div>
   <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-    <div class="card lease-info">
-      <div class="card-body">
-        <h4>
-          Your Lease
-        </h4>
-        <p>
-        <i class="fa fa-newspaper-o fa-3x text-primary"></i>
-        </p>
-        <% if @user.current_lease.kind_of?(NullLease) %>
-          <p class="no-lease alert alert-warning">Your property manager hasn't created a lease for you yet.</p>
-        <% else %>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item bg-transparent">
-              <strong class="pull-left"> Start: </strong>
-              <span class="pull-right">
-                <%= human_date(@user.current_lease.start_date) %>
-              </span>
-            </li>
-            <li class="list-group-item bg-transparent">
-              <strong class="pull-left">End:</strong>
-              <span class="pull-right">
-                <%= human_date(@user.current_lease.end_date) %>
-              </span>
-            </li>
-          </ul>
-        <% end %>
-      </div>
-      <% unless @user.current_lease.kind_of?(NullLease) %>
-        <div class="card-footer">
-          <%= link_to(user_lease_path(current_user, current_user.current_lease)) do %>
-            <div class="card-link font-weight-bold lease-info__link">
-              View Lease Details
-            </div>
+    <% unless @user.current_lease.kind_of?(NullLease) %>
+      <%= link_to(user_lease_path(current_user, current_user.current_lease), class: 'card lease-info with-link') do %>
+        <div class="card-body">
+          <h4>
+            Your Lease
+          </h4>
+          <p>
+          <i class="fa fa-newspaper-o fa-3x text-primary"></i>
+          </p>
+          <% if @user.current_lease.kind_of?(NullLease) %>
+            <p class="no-lease alert alert-warning">Your property manager hasn't created a lease for you yet.</p>
+          <% else %>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item bg-transparent">
+                <strong class="pull-left"> Start: </strong>
+                <span class="pull-right">
+                  <%= human_date(@user.current_lease.start_date) %>
+                </span>
+              </li>
+              <li class="list-group-item bg-transparent">
+                <strong class="pull-left">End:</strong>
+                <span class="pull-right">
+                  <%= human_date(@user.current_lease.end_date) %>
+                </span>
+              </li>
+            </ul>
           <% end %>
         </div>
       <% end %>
-    </div>
+    <% end %>
   </div>
   <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-    <div class="card rent-info <%= lease_payment_style.card_class %>">
+    <%= link_to new_payment_path, class: "card rent-info #{lease_payment_style.card_class}", id: 'pay-lease__link' do %>
       <div class="card-body">
         <h4>
           Pay Rent
@@ -117,34 +110,22 @@
           </p>
         <% end %>
       </div>
-      <div class="card-footer">
-        <%= link_to new_payment_path, class: lease_payment_style.card_class, id: 'pay-lease__link' do %>
-          <div class="card-link font-weight-bold">
-            <%= lease_payment_style.button_text %>
-          </div>
-        <% end %>
-      </div>
-    </div>
+      <% end %>
   </div>
   <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-    <div class="card property-info">
+    <%= link_to unit_messages_path(@user.current_unit), class: 'card property-info' do %>
       <div class="card-body">
         <h4>
           Tenant Chat
         </h4>
         <p>
-          <i class="fa fa-comments fa-3x text-primary"></i>
+        <i class="fa fa-comments fa-3x text-primary"></i>
         </p>
         <p>
         Chat with property management. Get answers to your questions
         </p>
       </div>
-      <div class="card-footer">
-        <%= link_to 'go to chat', unit_messages_path(@user.current_unit),
-          class: 'card-link text-uppercase'
-        %>
-      </div>
-    </div>
+    <% end %>
   </div>
 </div>
 

@@ -1,6 +1,6 @@
 <% residencies.each do |residency| %>
   <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-    <div class="card">
+    <%= link_to property_unit_residency_path(property, unit, residency), class: 'card' do %>
       <div class="card-body">
         <h4>
           <%= residency.user.name %>
@@ -21,9 +21,6 @@
           </li>
         </ul>
       </div>
-      <div class="card-footer bg-white">
-        <%= link_to "Show", property_unit_residency_path(property, unit, residency), class: 'card-link text-uppercase' %>
-      </div>
-    </div>
+    <% end %>
   </div>
 <% end %>

@@ -13,7 +13,7 @@
 
 <div class="row equal-height">
   <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-    <div class="card property-info">
+    <%= link_to edit_property_unit_path(@unit.property, @unit), class: 'card property-info' do %>
       <div class="card-body">
         <h4>
           Unit Information
@@ -33,12 +33,7 @@
           <%= @unit.name %>
         </p>
       </div>
-      <div class="card-footer bg-white">
-        <%= link_to 'Edit', edit_property_unit_path(@unit.property, @unit),
-          class: 'card-link text-uppercase'
-        %>
-      </div>
-    </div>
+    <% end %>
   </div>
   <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
     <% if @unit.current_lease.is_a?(NullLease) %>
@@ -58,45 +53,37 @@
         </div>
       </div>
     <% else %>
-    <div class="card lease-info">
-      <div class="card-body">
-        <h4>
-          Lease Information
-        </h4>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item border-bottom-0 border-top-0">
-            <strong class="pull-left"> Total Payments: </strong>
-            <span class="pull-right">
-              <%= number_to_currency(@unit.current_lease.total_payments) %>
-            </span>
-          </li>
-          <li class="list-group-item border-bottom-0 border-top-0">
-            <strong class="pull-left">Already Paid:</strong>
-            <span class="pull-right">
-              <%= number_to_currency(@unit.current_lease.total_paid) %>
-            </span>
-          </li>
-          <li class="list-group-item border-bottom-0 border-top-0">
-            <strong class="pull-left"> Payments: </strong>
-            <span class="pull-right">
-              <%= @unit.current_lease.lease_payments.length %>
-            </span>
-          </li>
-        </ul>
-      </div>
-      <div class="card-footer bg-white">
-          <%= link_to 'View', property_unit_lease_path(@unit.property, @unit, @unit.leases.last),
-            class: 'card-link text-uppercase'
-          %>
-        <%= link_to 'New Lease', new_property_unit_lease_path(@unit.property, @unit),
-          class: 'card-link text-uppercase'
-        %>
-      </div>
-    </div>
+      <%= link_to property_unit_lease_path(@unit.property, @unit, @unit.leases.last), class: 'card lease-info' do %>
+        <div class="card-body">
+          <h4>
+            Lease Information
+          </h4>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item border-bottom-0 border-top-0">
+              <strong class="pull-left"> Total Payments: </strong>
+              <span class="pull-right">
+                <%= number_to_currency(@unit.current_lease.total_payments) %>
+              </span>
+            </li>
+            <li class="list-group-item border-bottom-0 border-top-0">
+              <strong class="pull-left">Already Paid:</strong>
+              <span class="pull-right">
+                <%= number_to_currency(@unit.current_lease.total_paid) %>
+              </span>
+            </li>
+            <li class="list-group-item border-bottom-0 border-top-0">
+              <strong class="pull-left"> Payments: </strong>
+              <span class="pull-right">
+                <%= @unit.current_lease.lease_payments.length %>
+              </span>
+            </li>
+          </ul>
+        </div>
+      <% end %>
   <% end %>
   </div>
   <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-    <div class="card property-info">
+    <%= link_to property_unit_messages_path(@unit.property, @unit), class: 'card' do %>
       <div class="card-body">
         <h4>
           Tenant Chat
@@ -112,12 +99,7 @@
           </div>
         </div>
       </div>
-      <div class="card-footer bg-white">
-        <%= link_to 'go to chat', property_unit_messages_path(@unit.property, @unit),
-          class: 'card-link text-uppercase'
-        %>
-      </div>
-    </div>
+    <% end %>
   </div>
 </div>
 
@@ -126,21 +108,11 @@
   text: 'The list of current active residents for this unit' }
 %>
 
+<div class="text-center mb-4">
+  <%= link_to "New Resident", new_property_unit_residency_path(@property, @unit), class: 'btn btn-info' %>
+</div>
 
 <div class="row equal-height">
-  <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-    <div class="card text-center align-middle alert alert-info">
-      <div class="card-body">
-        <h4 class="mb-4">
-          Something New
-        </h4>
-        <p>
-        Add a new resident! Creating a resident is free. When you add a resident they'll be emailed a link to login, and they can start paying you directly right away!
-        </p>
-          <%= link_to "New Resident", new_property_unit_residency_path(@property, @unit), class: 'btn btn-info' %>
-        </div>
-    </div>
-  </div>
   <%= render partial: 'residencies/cards',
     locals: { unit: @unit, residencies: @unit.residencies, property: @property }
   %>

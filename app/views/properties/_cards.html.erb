@@ -1,20 +1,7 @@
 <div class="row equal-height">
-  <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-    <div class="card text-center align-middle alert alert-info">
-      <div class="card-body">
-        <h4 class="mb-4">
-          Something New
-        </h4>
-        <p>
-        Create a new Property. Creating a property is free. You can add units, residents, and create a payment schedule for your lease!
-        </p>
-          <%= link_to "New Property", new_property_path, class: 'btn btn-info' %>
-        </div>
-    </div>
-  </div>
   <% properties.each do |property| %>
     <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-      <div class="card">
+      <%= link_to property_path(property), class: 'card' do %>
         <% if property.property_images.present? %>
           <%= image_tag property.property_images.first.image.url(:medium), class: 'card-img-top' %>
         <% end %>
@@ -33,10 +20,7 @@
             </li>
           </ul>
         </div>
-        <div class="card-footer">
-          <%= link_to "Show", property_path(property), class: 'card-link font-weight-bold' %>
-        </div>
-      </div>
+      <% end %>
     </div>
   <% end %>
 </div>
