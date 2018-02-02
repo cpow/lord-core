@@ -58,7 +58,17 @@
     </div>
   </div>
   <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-    <% unless @user.current_lease.kind_of?(NullLease) %>
+    <% if @user.current_lease.kind_of?(NullLease) %>
+      <div class="card alert alert-warning lease-info text-center">
+        <div class="card-body">
+          <h4>
+            Your Lease
+          </h4>
+          <p>Your property manager hasn't created a lease for you yet.</p>
+          <p>sit tight :)</p>
+        </div>
+      </div>
+    <% else %>
       <%= link_to(user_lease_path(current_user, current_user.current_lease), class: 'card lease-info with-link') do %>
         <div class="card-body">
           <h4>
@@ -67,9 +77,6 @@
           <p>
           <i class="fa fa-newspaper-o fa-3x text-primary"></i>
           </p>
-          <% if @user.current_lease.kind_of?(NullLease) %>
-            <p class="no-lease alert alert-warning">Your property manager hasn't created a lease for you yet.</p>
-          <% else %>
             <ul class="list-group list-group-flush">
               <li class="list-group-item bg-transparent">
                 <strong class="pull-left"> Start: </strong>
@@ -84,7 +91,6 @@
                 </span>
               </li>
             </ul>
-          <% end %>
         </div>
       <% end %>
     <% end %>
