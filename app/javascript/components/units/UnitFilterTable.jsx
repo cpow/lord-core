@@ -86,7 +86,7 @@ class UnitFilterTable extends Component {
       output = <Loader />
     } else {
       output =
-        <div className="alert alert-warning text-center">
+        <div className="alert alert-warning text-center no-unit-warning">
           You don't have any units associated to this property.
         </div>
     }

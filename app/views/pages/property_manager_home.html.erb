@@ -1,19 +1,17 @@
-<% if current_property_manager.is_company_admin? %>
-  <% unless current_property_manager.company.stripe_account_guid.present? %>
-    <div class="card alert alert-warning text-center">
-      <div class="card-body">
-        <h4 class="card-title">
-          You must create an account to process payments
-        </h4>
-        <p class="card-text">
-        before you can process any payments. You need to create an acocunt for payment processing
-        </p>
-        <%= link_to "Add Payment Processing",
-          new_stripe_account_path,
-          class: "btn btn-primary btn-warning" %>
-      </div>
+<% unless current_property_manager.company.has_banking_information? %>
+  <div class="card alert alert-warning text-center bank-warning">
+    <div class="card-body">
+      <h4 class="card-title">
+        You must create an account to process payments
+      </h4>
+      <p class="card-text">
+      before you can process any payments. You need to create an acocunt for payment processing
+      </p>
+      <%= link_to "Add Payment Processing",
+        new_stripe_account_path,
+        class: "btn btn-primary btn-warning" %>
     </div>
-  <% end %>
+  </div>
 <% end %>
 
 <h3 class="text-center mt-3">Getting Started</h3>
@@ -23,7 +21,7 @@
 <div class="row equal-height text-center">
   <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
     <% if !current_property_manager.company.has_banking_information? %>
-      <div class="card alert alert-warning">
+      <div class="card alert alert-warning bank-info">
         <div class="card-body">
           <h4>
             Bank Account
@@ -37,7 +35,7 @@
             </div>
           <% end %>
         <% else %>
-          <div class="card">
+          <div class="card bank-info">
             <div class="card-body">
               <h4>
                 Bank Account
@@ -61,7 +59,7 @@
     </div>
   </div>
   <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-    <%= link_to(edit_property_manager_path(current_property_manager), class: 'card') do %>
+    <%= link_to(edit_property_manager_path(current_property_manager), class: 'card account-info') do %>
       <div class="card-body">
         <div class="container">
           <div class="row">
@@ -82,7 +80,7 @@
     <% end %>
   </div>
   <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-    <%= link_to(edit_company_path(current_property_manager.company), class: 'card') do %>
+    <%= link_to(edit_company_path(current_property_manager.company), class: 'card company-info') do %>
       <div class="card-body">
         <div class="container">
           <div class="row">
