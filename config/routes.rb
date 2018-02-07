@@ -30,16 +30,15 @@ Rails.application.routes.draw do
 
   # namespaced routes that live within a property's dashboard
   resources :properties do
-    resources :residencies, controller: 'properties/residencies'
-    resources :property_images
-    resources :units, controller: 'properties/units'
-
-    resources :units do
+    resources :units, controller: 'properties/units' do
       resources :leases, controller: 'properties/units/leases'
-      resources :residencies, only: [:new, :create, :show], controller: 'properties/units/residencies'
+      resources :residencies, controller: 'properties/units/residencies'
       resources :lease_payments, controller: 'properties/units/lease_payments'
       resources :messages, controller: 'properties/units/messages'
     end
+
+    resources :residencies, controller: 'properties/residencies'
+    resources :property_images
   end
 
   resources :payments

@@ -7,7 +7,7 @@ class Properties::Units::ResidenciesController < ApplicationController
 
   def new
     @residency = current_property.residencies.new
-    @residency.unit = @unit if @unit
+    @residency.unit = @unit
     @property = current_property
     @company = current_property.company
   end
