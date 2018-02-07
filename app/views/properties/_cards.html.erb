@@ -1,6 +1,6 @@
 <div class="row equal-height">
   <% properties.each do |property| %>
-    <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+    <div class="col-sm-12 col-md-6 col-lg-4 mb-4", id="property_<%= property.id %>">
       <%= link_to property_path(property), class: 'card' do %>
         <% if property.property_images.present? %>
           <%= image_tag property.property_images.first.image.url(:medium), class: 'card-img-top' %>
