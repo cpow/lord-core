@@ -29,7 +29,7 @@ describe LeasePayment::CreateFromLease do
 
       described_class.new(lease: lease).create_payments
 
-      expect(lease.lease_payments.first.active).to be
+      expect(lease.reload.lease_payments.first.active).to be
     end
   end
 end
