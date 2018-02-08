@@ -50,7 +50,7 @@ Rails.application.routes.draw do
   resources :users do
     resources :leases, only: :show, controller: 'users/leases'
     resources :lease_payments, only: :show, controller: 'users/lease_payments'
-    resources :issues, only: [:index, :new, :create], controller: 'users/issues'
+    resources :issues, only: [:index, :new, :create, :show], controller: 'users/issues'
   end
 
 

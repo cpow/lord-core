@@ -5,6 +5,9 @@ module Api::V1
     def create
       issue = Issue.create!(issue_params_with_user)
       issue.issue_images.create!(issue_image_params)
+      Event.create(eventable: issue,
+                  createable: current_user,
+                  event_type: Event::EVENT_CREATED)
     end
 
     private

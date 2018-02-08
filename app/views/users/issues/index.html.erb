@@ -5,3 +5,7 @@
 <div class="text-center mb-4">
   <%= link_to "Create New Issue", new_user_issue_path(current_user), class: 'btn btn-info new-issue__button' %>
 </div>
+
+<div class="row equal-height">
+  <%= render @issues %>
+</div>

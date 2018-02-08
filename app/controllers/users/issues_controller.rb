@@ -4,4 +4,8 @@ class Users::IssuesController < ApplicationController
   def index
     @issues = Issue.where(reporter: current_user)
   end
+
+  def show
+    @issue = Issue.where(reporter: current_user, id: params[:id])
+  end
 end
