@@ -14,22 +14,12 @@ class Comments extends Component {
     }
   }
 
-  rowForMessage(comment) {
-    let base = 'row col-12 comment';
-
-    if (comment.commentable_type === "PropertyManager") {
-      return `${base} float-right`
-    } else {
-      return base
-    }
-  }
-
   render() {
     return (
       <div>
         {this.props.comments.map(comment => (
-          <div className={this.rowForMessage(comment)} key={comment.id}>
-            <div className="card mb-2">
+          <div className='comment' key={comment.id}>
+            <div className="card no-shadow mb-2">
               <div className={this.commentBodyStyle(comment)}>
                 {comment.body}
               </div>

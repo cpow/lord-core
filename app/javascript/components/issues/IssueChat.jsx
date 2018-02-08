@@ -68,21 +68,19 @@ class IssueChat extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="card">
-          <div className="card-body">
-            <div className="card rounded mb-4" style={{height: '500px', overflowY: 'auto'}}>
-              <div className="card-body">
-                <Comments comments={this.state.comments} />
-              </div>
+      <div className="card">
+        <div className="card-body">
+          <div className="card no-shadow mb-4" style={{maxHeight: '500px', overflowY: 'auto'}}>
+            <div className="card-body">
+              <Comments comments={this.state.comments} />
             </div>
-            <form onSubmit={this.sendData}>
-              <div className="form-group">
-                <input type="text" id="comment" className="dataInput form-control" />
-              </div>
-              <button type="submit" className="btn btn-primary">New Comment</button>
-            </form>
           </div>
+          <form onSubmit={this.sendData}>
+            <div className="form-group">
+              <input type="text" id="comment" className="dataInput form-control" />
+            </div>
+            <button type="submit" className="btn btn-primary">New Comment</button>
+          </form>
         </div>
       </div>
     )
