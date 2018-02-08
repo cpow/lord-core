@@ -189,7 +189,7 @@ class NewIssueForm extends Component {
     if (this.state.showSuccess) {
       return (
         <div className="card text-center alert alert-success">
-          <div class="card-body">
+          <div className="card-body">
             <h3>Success</h3>
             <p>
               You created a new issue. The property management will be right on this!
@@ -209,7 +209,7 @@ class NewIssueForm extends Component {
                 </div>
               </div>
               <div className="card-body">
-                <form onSubmit={this.handleSubmit} class='new-issue__form'>
+                <form onSubmit={this.handleSubmit} className='new-issue__form'>
                   {this.section()}
                 </form>
               </div>
