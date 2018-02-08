@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180131204514) do
+ActiveRecord::Schema.define(version: 20180208025331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,31 @@ ActiveRecord::Schema.define(version: 20180131204514) do
     t.datetime "updated_at", null: false
     t.index ["createable_type", "createable_id"], name: "index_events_on_createable_type_and_createable_id"
     t.index ["eventable_type", "eventable_id"], name: "index_events_on_eventable_type_and_eventable_id"
+  end
+
+  create_table "issue_images", force: :cascade do |t|
+    t.bigint "issue_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
+    t.index ["issue_id"], name: "index_issue_images_on_issue_id"
+  end
+
+  create_table "issues", force: :cascade do |t|
+    t.bigint "property_id"
+    t.bigint "unit_id"
+    t.string "reporter_type"
+    t.bigint "reporter_id"
+    t.text "description"
+    t.string "category"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["property_id"], name: "index_issues_on_property_id"
+    t.index ["reporter_type", "reporter_id"], name: "index_issues_on_reporter_type_and_reporter_id"
+    t.index ["unit_id"], name: "index_issues_on_unit_id"
   end
 
   create_table "lease_payment_reminders", force: :cascade do |t|
@@ -240,5 +265,8 @@ ActiveRecord::Schema.define(version: 20180131204514) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "issue_images", "issues"
+  add_foreign_key "issues", "properties"
+  add_foreign_key "issues", "units"
   add_foreign_key "messages", "units"
 end

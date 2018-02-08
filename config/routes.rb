@@ -50,6 +50,7 @@ Rails.application.routes.draw do
   resources :users do
     resources :leases, only: :show, controller: 'users/leases'
     resources :lease_payments, only: :show, controller: 'users/lease_payments'
+    resources :issues, only: [:index, :new, :create], controller: 'users/issues'
   end
 
 
@@ -57,14 +58,13 @@ Rails.application.routes.draw do
     resources :invitation_acceptances
   end
 
-  namespace :user do
-  end
-
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
       # Tables from a company's perspective
       resources :units, only: :index
       resources :residencies, only: :index
+
+      resources :issues, only: :create
 
       # Tables from a property's perspective
       resources :properties, only: [] do

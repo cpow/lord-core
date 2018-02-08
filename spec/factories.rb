@@ -1,15 +1,28 @@
 require 'faker'
 
 FactoryBot.define do
+  factory :issue_image do
+    issue nil
+  end
+  factory :issue do
+    property
+    unit
+    reporter
+    description "MyText"
+    category "MyString"
+  end
+
   factory :event do
     eventable nil
     event_type "MyString"
     createable nil
   end
+
   factory :message do
     unit nil
     body "MyText"
   end
+
   factory :charge_event do
     stripe_charge_id "MyString"
     event_type "MyString"
