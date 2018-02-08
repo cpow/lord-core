@@ -176,6 +176,7 @@ class NewIssueForm extends Component {
           <textarea type="text"
             placeholder='Please describe the problem. Leaky pipe, etc...'
             className='form-control'
+            id='description'
             value={this.state.description}
             onChange={this.setDescription}
             />
@@ -204,11 +205,11 @@ class NewIssueForm extends Component {
             <div className="card">
               <div className="card-header">
                 <div className="pull-right">
-                  <a href="" onClick={this.showFileUpload} >{this.currentLinkText()}</a>
+                  <a href="" className='next-link' onClick={this.showFileUpload} >{this.currentLinkText()}</a>
                 </div>
               </div>
               <div className="card-body">
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleSubmit} class='new-issue__form'>
                   {this.section()}
                 </form>
               </div>
