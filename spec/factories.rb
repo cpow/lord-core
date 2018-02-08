@@ -1,6 +1,11 @@
 require 'faker'
 
 FactoryBot.define do
+  factory :issue_comment do
+    issue nil
+    commentable nil
+    body "MyText"
+  end
   factory :issue_image do
     issue nil
   end

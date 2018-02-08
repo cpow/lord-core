@@ -1,1 +1,48 @@
-<h2>hi</h2>
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: "Issue #{@issue.id}, #{@issue.category}",
+  text: 'Issues that have been reported by you.'
+} %>
+
+<div class="text-center mb-4">
+  <%= link_to "Back to Issues", user_issues_path(current_user), class: 'btn btn-info new-issue__button' %>
+</div>
+
+<div class="row">
+  <div class="col-lg-8 col-sm-12">
+    <div class="card">
+      <% if @issue.issue_images.present? %>
+        <%= image_tag @issue.issue_images.first.image.url(:original), class: 'card-img-top' %>
+      <% end %>
+      <div class="card-body" style="font-size: 1.25rem;">
+        <div class="row align-items-center">
+          <div class="col-sm-12 col-lg-10">
+            <h2><%= @issue.category %></h2>
+          </div>
+          <div class="col-sm-12 col-lg-2 pull-right">
+            <%= @issue.status %>
+          </div>
+        </div>
+        <hr>
+        <ul class='list-unstyled'>
+          <li>
+            description:
+            <ul>
+              <li>
+                <%= @issue.description %>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4 col-sm-12">
+    <div id="issue_chat"></div>
+    <div id="issueId" data-issue-id="<%= @issue.id %>" />
+
+    <div id="commentable" data-id="<%= current_user.id %>"
+                          data-type="User" />
+
+    <%= javascript_pack_tag 'issue_chat' %>
+  </div>
+</div>

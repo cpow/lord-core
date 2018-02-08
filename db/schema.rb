@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180208025331) do
+ActiveRecord::Schema.define(version: 20180208201111) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,17 @@ ActiveRecord::Schema.define(version: 20180208025331) do
     t.index ["eventable_type", "eventable_id"], name: "index_events_on_eventable_type_and_eventable_id"
   end
 
+  create_table "issue_comments", force: :cascade do |t|
+    t.bigint "issue_id"
+    t.string "commentable_type"
+    t.bigint "commentable_id"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["commentable_type", "commentable_id"], name: "index_issue_comments_on_commentable_type_and_commentable_id"
+    t.index ["issue_id"], name: "index_issue_comments_on_issue_id"
+  end
+
   create_table "issue_images", force: :cascade do |t|
     t.bigint "issue_id"
     t.datetime "created_at", null: false
@@ -89,6 +100,7 @@ ActiveRecord::Schema.define(version: 20180208025331) do
     t.string "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "status", default: "created"
     t.index ["property_id"], name: "index_issues_on_property_id"
     t.index ["reporter_type", "reporter_id"], name: "index_issues_on_reporter_type_and_reporter_id"
     t.index ["unit_id"], name: "index_issues_on_unit_id"
@@ -265,6 +277,7 @@ ActiveRecord::Schema.define(version: 20180208025331) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "issue_comments", "issues"
   add_foreign_key "issue_images", "issues"
   add_foreign_key "issues", "properties"
   add_foreign_key "issues", "units"

@@ -77,6 +77,10 @@ Rails.application.routes.draw do
         resources :messages, only: [:index, :show], controller: :unit_messages
       end
 
+      resources :issues, only: [] do
+        resources :issue_comments, only: [:index, :show], controller: :issue_comments
+      end
+
       namespace :stripe do
         namespace :webhooks do
           resources :charges, only: :create

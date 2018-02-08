@@ -6,6 +6,6 @@ class Users::IssuesController < ApplicationController
   end
 
   def show
-    @issue = Issue.where(reporter: current_user, id: params[:id])
+    @issue = Issue.where(reporter: current_user, id: params[:id]).first
   end
 end
