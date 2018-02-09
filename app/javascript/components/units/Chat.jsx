@@ -38,7 +38,7 @@ class Chat extends Component {
     let listElements = document.getElementsByClassName('message');
     let lastElement = listElements[listElements.length - 1];
     if (lastElement) {
-      lastElement.scrollIntoView(true);
+      lastElement.scrollIntoView(false);
     }
   }
 
@@ -71,7 +71,7 @@ class Chat extends Component {
       <div className="container">
         <div className="card">
           <div className="card-body">
-            <div className="card rounded mb-4" style={{height: '500px', overflowY: 'auto'}}>
+            <div className="card no-shadow unit-chat rounded mb-4" style={{height: '500px', overflowY: 'auto'}}>
               <div className="card-body">
                 <Messages messages={this.state.messages} />
               </div>

@@ -2,6 +2,7 @@
   <ol class="breadcrumb bg-white">
     <li class="breadcrumb-item"><%= link_to @residency.company.name, authenticated_property_manager_root_path %></li>
     <li class="breadcrumb-item"><%= link_to @residency.property.name, property_path(@residency.property) %></li>
+    <li class="breadcrumb-item"><%= link_to 'Units', property_units_path(@residency.property) %></li>
     <li class="breadcrumb-item"><%= link_to @residency.unit.name, property_unit_path(@residency.property, @residency.unit) %></li>
     <li class="breadcrumb-item active" aria-current="page"><%= @residency.user.name %></li>
   </ol>

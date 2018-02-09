@@ -2,19 +2,21 @@
   <ol class="breadcrumb bg-white">
     <li class="breadcrumb-item"><%= link_to @company.name, authenticated_property_manager_root_path %></li>
     <li class="breadcrumb-item"><%= link_to @property.name, property_path(@property) %></li>
-    <li class="breadcrumb-item"><%= link_to 'Units', property_units_path(@property) %></li>
-    <li class="breadcrumb-item"><%= link_to @unit.name, property_unit_path(@property, @unit) %></li>
-    <li class="breadcrumb-item active" aria-current="page">Edit</li>
+    <li class="breadcrumb-item active" aria-current="page">Units</li>
   </ol>
 </nav>
 
+<div id="propertyId" data-property-id="<%= @property.id %>" />
+
 <%= render partial: 'layouts/pretty_header', locals: {
-  title: "Editing #{@unit.name}",
-  text: '' }
+  title: "Issues",
+  text: 'Issues that have been reported by your residents' }
 %>
 
 <div class="card">
   <div class="card-body">
-    <%= render 'form', unit: @unit %>
+    <div id="issue_table">
+    </div>
   </div>
 </div>
+<%= javascript_pack_tag "issue_filter_table" %>

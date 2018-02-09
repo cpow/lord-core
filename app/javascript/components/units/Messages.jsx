@@ -29,7 +29,7 @@ class Messages extends Component {
       <div>
         {this.props.messages.map(message => (
           <div className={this.rowForMessage(message)} key={message.id}>
-            <div className="card mb-2">
+            <div className="card no-shadow mb-2">
               <div className={this.messageBodyStyle(message)}>
                 {message.body}
               </div>

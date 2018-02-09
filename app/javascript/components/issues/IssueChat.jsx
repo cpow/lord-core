@@ -38,7 +38,7 @@ class IssueChat extends Component {
     let listElements = document.getElementsByClassName('comment');
     let lastElement = listElements[listElements.length - 1];
     if (lastElement) {
-      lastElement.scrollIntoView(true);
+      lastElement.scrollIntoView(false);
     }
   }
 

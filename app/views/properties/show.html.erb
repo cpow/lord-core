@@ -7,9 +7,53 @@
 
 <%= render partial: 'layouts/pretty_header', locals: {
   title: "Property #{@property.name}",
-  text: '' }
+  text: 'Welcome to your Property Dashboard. This is the \'home base\' of your property. You can manage your units, leases, residents, and issues from this dashboard.' }
 %>
-<div class="row equal-height">
+
+<div class="card property-images mb-4">
+  <% if @property.property_images.present? %>
+    <div class="card-body">
+      <div id="carouselControls" class="carousel slide mb-4" data-ride="carousel">
+        <div class="carousel-inner bg-dark text-center">
+          <% @property.property_images.each_with_index do |image, index| %>
+            <div class="carousel-item <%= 'active' if index == 0 %>">
+              <%= image_tag image.image.url(:original),
+                class: 'd-block',
+                style: 'margin: 0 auto;height: 300px; max-width: 100%' %>
+            </div>
+          <% end %>
+        </div>
+        <a class="carousel-control-prev" href="#carouselControls" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselControls" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </div>
+    <div class="card-footer bg-white">
+      <%= link_to 'Edit Images',
+        new_property_property_image_path(@property),
+        class: 'card-link text-uppercase' %>
+    </div>
+  <% else %>
+    <div class="card-body alert-warning text-center">
+      <h4>
+        Images
+      </h4>
+      <p>
+        You have no images for this property. Your tenants won't know what this property looks like!
+      </p>
+      <%= link_to 'Add Images',
+        new_property_property_image_path(@property),
+        class: 'btn btn-warning' %>
+    </div>
+  <% end %>
+</div>
+
+<div class="row equal-height justify-content-center">
   <div class="col-sm-12 col-md-4 col-lg-4 mb-4">
     <%= link_to edit_property_path(@property), class: 'card property-info' do %>
       <div class="card-body">
@@ -18,7 +62,7 @@
         </h4>
         <div class="row mt-4">
           <div class="col-lg-3 col-sm-0 mt-2">
-            <i class="fa fa-home fa-3x text-primary"></i>
+            <i class="fa fa-building-o fa-3x text-primary"></i>
           </div>
           <div class="col-lg-9 col-sm-12">
             <p>
@@ -31,100 +75,64 @@
   </div>
 
   <div class="col-sm-12 col-md-4 col-lg-4 mb-4">
-    <div class="card property-images">
-      <% if @property.property_images.present? %>
-        <div class="card-body">
+    <%= link_to property_units_path(@property), class: 'card property-units' do %>
+      <div class="card-body">
         <h4>
-          Images
+          Units
         </h4>
-          <div id="carouselControls" class="carousel slide mb-4" data-ride="carousel">
-            <div class="carousel-inner bg-dark text-center">
-              <% @property.property_images.each_with_index do |image, index| %>
-                <div class="carousel-item <%= 'active' if index == 0 %>">
-                  <%= image_tag image.image.url(:medium),
-                    class: 'd-block',
-                    style: 'margin: 0 auto;height: 150px; max-width: 100%' %>
-                </div>
-              <% end %>
-            </div>
-            <a class="carousel-control-prev" href="#carouselControls" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselControls" role="button" data-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="sr-only">Next</span>
-            </a>
+        <div class="row mt-4">
+          <div class="col-lg-3 col-sm-0 mt-2">
+            <i class="fa fa-home fa-3x text-primary"></i>
+          </div>
+          <div class="col-lg-9 col-sm-12">
+            <p>
+            Manage units, leases, and tenants from within the unit dashboard.
+            </p>
           </div>
         </div>
-        <div class="card-footer bg-white">
-          <%= link_to 'Edit Images',
-            new_property_property_image_path(@property),
-            class: 'card-link text-uppercase' %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="col-sm-12 col-md-4 col-lg-4 mb-4">
+    <%= link_to property_residencies_path(@property), class: 'card property-info' do %>
+      <div class="card-body">
+        <h4>
+          Residents
+        </h4>
+        <div class="row mt-4">
+          <div class="col-lg-3 col-sm-0 mt-2">
+            <i class="fa fa-users fa-3x text-primary"></i>
+          </div>
+          <div class="col-lg-9 col-sm-12">
+            <p>
+            Manage your residents within this property.
+            </p>
+          </div>
         </div>
-      <% else %>
-        <div class="card-body alert-warning text-center">
-          <h4>
-            Images
-          </h4>
-          <p>
-            You have no images for this property. Your tenants won't know what this property looks like!
-          </p>
-          <%= link_to 'Add Images',
-            new_property_property_image_path(@property),
-            class: 'btn btn-warning' %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="col-sm-12 col-md-4 col-lg-4 mb-4">
+    <%= link_to property_issues_path(@property), class: 'card property-info' do %>
+      <div class="card-body">
+        <h4>
+          Issues
+        </h4>
+        <div class="row mt-4">
+          <div class="col-lg-3 col-sm-0 mt-2">
+            <i class="fa fa-exclamation-triangle fa-3x text-warning"></i>
+          </div>
+          <div class="col-lg-9 col-sm-12">
+            <p>
+            Manage all issues reported by your tenants.
+            </p>
+          </div>
         </div>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   </div>
 </div>
 
 
-<div id="propertyId" data-property-id="<%= @property.id %>" />
-
-<%= render partial: 'layouts/pretty_header', locals: {
-  title: "Units",
-  text: 'Units within this property' }
-%>
-
-<div class="text-center mb-4">
-  <%= link_to "New Unit", new_property_unit_path(@property), class: 'btn btn-primary new-property-unit__link' %>
-</div>
-
-<div class="card">
-  <div class="card-body">
-    <div id="unit_table">
-    </div>
-  </div>
-</div>
-<%= javascript_pack_tag "unit_filter_table" %>
-
-<%= render partial: 'layouts/pretty_header', locals: {
-  title: "Residents",
-  text: 'Manage residents that live here.' }
-%>
-
-<div class="text-center mb-4">
-  <%= link_to "Invite a Resident", new_property_residency_path(@property), class: 'btn btn-primary' %>
-</div>
-
-<div class="card">
-  <div class="card-body">
-    <div id="residency_table">
-    </div>
-  </div>
-</div>
-<%= javascript_pack_tag "residency_filter_table" %>
-
-<%= render partial: 'layouts/pretty_header', locals: {
-  title: "Issues",
-  text: 'Issues that have been reported by your residents' }
-%>
-
-<div class="card">
-  <div class="card-body">
-    <div id="issue_table">
-    </div>
-  </div>
-</div>
-<%= javascript_pack_tag "issue_filter_table" %>
