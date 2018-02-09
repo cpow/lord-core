@@ -19,6 +19,7 @@ class Property < ApplicationRecord
   has_many :units
   has_many :property_images
   has_many :residencies
+  has_many :issues
   has_many :users, through: :residencies
   has_many :events, as: :eventable
 

@@ -117,14 +117,14 @@
 <%= javascript_pack_tag "residency_filter_table" %>
 
 <%= render partial: 'layouts/pretty_header', locals: {
-  title: "Events",
-  text: '' }
+  title: "Issues",
+  text: 'Issues that have been reported by your residents' }
 %>
 
 <div class="card">
   <div class="card-body">
-    <div id="property_events">
+    <div id="issue_table">
     </div>
   </div>
 </div>
-<%= javascript_pack_tag "property_event_table" %>
+<%= javascript_pack_tag "issue_filter_table" %>

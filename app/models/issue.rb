@@ -1,9 +1,14 @@
 class Issue < ApplicationRecord
+  ACK = 'acknowledged'.freeze
+  IN_PROGRESS = 'in progress'.freeze
+  COMPLETED = 'completed'.freeze
+  CREATED = 'created'.freeze
+
   ISSUE_STATUSES = [
-    'created',
-    'acknowledged',
-    'in progress',
-    'completed'
+    ACK,
+    CREATED,
+    IN_PROGRESS,
+    COMPLETED
   ].freeze
 
   ISSUE_CATEGORIES = [

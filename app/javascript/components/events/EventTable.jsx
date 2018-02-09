@@ -45,3 +45,4 @@ EventTable.propTypes = {
 
 export default EventTable;
 
+

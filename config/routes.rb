@@ -38,6 +38,7 @@ Rails.application.routes.draw do
     end
 
     resources :residencies, controller: 'properties/residencies'
+    resources :issues, controller: 'properties/issues'
     resources :property_images
   end
 
@@ -71,6 +72,7 @@ Rails.application.routes.draw do
         resources :units, only: :index, controller: :property_units
         resources :residencies, only: :index, controller: :property_residencies
         resources :events, only: :index, controller: :property_events
+        resources :issues, only: :index, controller: :property_issues
       end
 
       resources :units, only: [] do
