@@ -31,6 +31,8 @@ class Messages extends Component {
           <div className={this.rowForMessage(message)} key={message.id}>
             <div className="card no-shadow mb-2">
               <div className={this.messageBodyStyle(message)}>
+                <small>{message.messageable.email}</small>
+                <br />
                 {message.body}
               </div>
             </div>

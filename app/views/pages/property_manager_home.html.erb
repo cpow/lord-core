@@ -18,14 +18,21 @@
 <h3 class="text-center mt-3">Getting Started</h3>
 <p class="text-center">Here is all the information you need for your company. Please edit this as you see fit</p>
 
+<script>
+  $(function () {
+    $('.bank-info').on('click', function() {
+      $('.bank-info .card-body').html("<h4>Loading...</h4><p><i class='fa fa-spinner fa-spin fa-3x text-primary' /></p><p>loading financial information</p>");
+    });
+  });
+</script>
 
 <div class="row equal-height text-center">
-  <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-    <% if !current_property_manager.company.has_banking_information? %>
+  <% if !current_property_manager.company.has_banking_information? %>
+    <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
       <div class="card alert alert-warning bank-info">
         <div class="card-body">
           <h4>
-            Bank Account
+            Financials
           </h4>
           <p>
           You must add payment processing in order to receive payments from tenants
@@ -35,70 +42,69 @@
               Add Payment Processing
             </div>
           <% end %>
-        <% else %>
-          <div class="card bank-info">
-            <div class="card-body">
-              <h4>
-                Bank Account
-              </h4>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item bg-transparent">
-                  <strong class="pull-left"> Name: </strong>
-                  <span class="pull-right">
-                    <%= current_property_manager.company.bank_account_name %>
-                  </span>
-                </li>
-                <li class="list-group-item bg-transparent">
-                  <strong class="pull-left">Account:</strong>
-                  <span class="pull-right">
-                    .....<%= current_property_manager.company.bank_account_last4 %>
-                  </span>
-                </li>
-              </ul>
-            <% end %>
+        </div>
       </div>
     </div>
-  </div>
+  <% else %>
+    <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+      <%= link_to(company_finance_path(current_property_manager.company), class: 'card bank-info') do %>
+        <div class="card-body">
+          <h4>
+            Financials
+          </h4>
+          <p>
+            <i class="fa fa-money fa-3x text-primary"></i>
+          </p>
+          <p>
+          Current balance & Bank Payout schedule
+          </p>
+
+          <!-- <ul class="list&#45;group list&#45;group&#45;flush"> -->
+          <!--   <li class="list&#45;group&#45;item bg&#45;transparent"> -->
+          <!--     <strong class="pull&#45;left"> Name: </strong> -->
+          <!--     <span class="pull&#45;right"> -->
+          <!--       <%#= current_property_manager.company.bank_account_name %> -->
+          <!--     </span> -->
+          <!--   </li> -->
+          <!--   <li class="list&#45;group&#45;item bg&#45;transparent"> -->
+          <!--     <strong class="pull&#45;left">Account:</strong> -->
+          <!--     <span class="pull&#45;right"> -->
+          <!--       .....<%#= current_property_manager.company.bank_account_last4 %> -->
+          <!--     </span> -->
+          <!--   </li> -->
+          <!-- </ul> -->
+        </div>
+      <% end %>
+    </div>
+  <% end %>
   <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
     <%= link_to(edit_property_manager_path(current_property_manager), class: 'card account-info') do %>
       <div class="card-body">
-        <div class="container">
-          <div class="row">
-            <div class="col">
-              <h4>
-                Account
-              </h4>
-              <p>
-              <i class="fa fa-user fa-3x text-primary"></i>
-              </p>
-              <p>
-              <%= current_property_manager.name %>
-              </p>
-            </div>
-          </div>
-        </div>
+        <h4>
+          Account
+        </h4>
+        <p>
+        <i class="fa fa-user fa-3x text-primary"></i>
+        </p>
+        <p>
+        <%= current_property_manager.name %>
+        </p>
       </div>
     <% end %>
   </div>
   <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
     <%= link_to(edit_company_path(current_property_manager.company), class: 'card company-info') do %>
       <div class="card-body">
-        <div class="container">
-          <div class="row">
-            <div class="col">
-              <h4>
-                Company
-              </h4>
-              <p>
-              <i class="fa fa-drivers-license-o fa-3x text-primary">
-              </i>
-              </p>
-              <p>
-              <%= current_property_manager.company.name %>
-              </p>
-            </div>
-          </div>
-        </div>
+        <h4>
+          Company
+        </h4>
+        <p>
+        <i class="fa fa-drivers-license-o fa-3x text-primary">
+        </i>
+        </p>
+        <p>
+        <%= current_property_manager.company.name %>
+        </p>
       </div>
     <% end%>
   </div>

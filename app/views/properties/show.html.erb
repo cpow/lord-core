@@ -10,50 +10,7 @@
   text: 'Welcome to your Property Dashboard. This is the \'home base\' of your property. You can manage your units, leases, residents, and issues from this dashboard.' }
 %>
 
-<div class="card property-images mb-4">
-  <% if @property.property_images.present? %>
-    <div class="card-body">
-      <div id="carouselControls" class="carousel slide mb-4" data-ride="carousel">
-        <div class="carousel-inner bg-dark text-center">
-          <% @property.property_images.each_with_index do |image, index| %>
-            <div class="carousel-item <%= 'active' if index == 0 %>">
-              <%= image_tag image.image.url(:original),
-                class: 'd-block',
-                style: 'margin: 0 auto;height: 300px; max-width: 100%' %>
-            </div>
-          <% end %>
-        </div>
-        <a class="carousel-control-prev" href="#carouselControls" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselControls" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div>
-    </div>
-    <div class="card-footer bg-white">
-      <%= link_to 'Edit Images',
-        new_property_property_image_path(@property),
-        class: 'card-link text-uppercase' %>
-    </div>
-  <% else %>
-    <div class="card-body alert-warning text-center">
-      <h4>
-        Images
-      </h4>
-      <p>
-        You have no images for this property. Your tenants won't know what this property looks like!
-      </p>
-      <%= link_to 'Add Images',
-        new_property_property_image_path(@property),
-        class: 'btn btn-warning' %>
-    </div>
-  <% end %>
-</div>
-
-<div class="row equal-height justify-content-center">
+<div class="row equal-height">
   <div class="col-sm-12 col-md-4 col-lg-4 mb-4">
     <%= link_to edit_property_path(@property), class: 'card property-info' do %>
       <div class="card-body">
@@ -135,4 +92,48 @@
   </div>
 </div>
 
+
+
+<div class="card property-images mb-4">
+  <% if @property.property_images.present? %>
+    <div class="card-body">
+      <div id="carouselControls" class="carousel slide mb-4" data-ride="carousel">
+        <div class="carousel-inner bg-dark text-center">
+          <% @property.property_images.each_with_index do |image, index| %>
+            <div class="carousel-item <%= 'active' if index == 0 %>">
+              <%= image_tag image.image.url(:original),
+                class: 'd-block',
+                style: 'margin: 0 auto;height: 300px; max-width: 100%' %>
+            </div>
+          <% end %>
+        </div>
+        <a class="carousel-control-prev" href="#carouselControls" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselControls" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </div>
+    <div class="card-footer bg-white">
+      <%= link_to 'Edit Images',
+        new_property_property_image_path(@property),
+        class: 'card-link text-uppercase' %>
+    </div>
+  <% else %>
+    <div class="card-body alert-warning text-center">
+      <h4>
+        Images
+      </h4>
+      <p>
+        You have no images for this property. Your tenants won't know what this property looks like!
+      </p>
+      <%= link_to 'Add Images',
+        new_property_property_image_path(@property),
+        class: 'btn btn-warning' %>
+    </div>
+  <% end %>
+</div>
 

@@ -20,7 +20,9 @@ Rails.application.routes.draw do
   end
 
   # routes for property managers to see only
-  resources :companies
+  resources :companies do
+    resources :finances, only: [:show], controller: 'companies/finances'
+  end
   resources :property_managers
   resources :residencies, only: [:index]
   resources :units do
@@ -44,7 +46,7 @@ Rails.application.routes.draw do
 
   resources :payments
   resources :tenant_plaid_accounts, only: :create
-  resources :bank_accounts, only: [:new, :create]
+  resources :bank_accounts, only: [:new, :create, :show]
   resources :stripe_accounts
 
 
@@ -53,7 +55,6 @@ Rails.application.routes.draw do
     resources :lease_payments, only: :show, controller: 'users/lease_payments'
     resources :issues, only: [:index, :new, :create, :show], controller: 'users/issues'
   end
-
 
   resources :user do
     resources :invitation_acceptances
@@ -94,10 +95,11 @@ Rails.application.routes.draw do
   authenticated :user do
     root 'user_dashboard#show', as: :authenticated_user_root
   end
+
   authenticated :property_manager do
     root 'high_voltage/pages#show', id: 'property_manager_home', as: :authenticated_property_manager_root
   end
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
   HighVoltage.configure do |config|
     config.home_page = 'home'
   end

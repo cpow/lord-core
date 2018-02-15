@@ -54,4 +54,5 @@ class BankAccountsController < ApplicationController
       handle_error(e.message, 'new')
     end
   end
+
 end
