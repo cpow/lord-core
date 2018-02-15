@@ -32,22 +32,38 @@
   </div>
 
   <div class="col-sm-12 col-md-4 col-lg-4 mb-4">
-    <%= link_to property_units_path(@property), class: 'card property-units' do %>
-      <div class="card-body">
-        <h4>
-          Units
-        </h4>
-        <div class="row mt-4">
-          <div class="col-lg-3 col-sm-0 mt-2">
-            <i class="fa fa-home fa-3x text-primary"></i>
-          </div>
-          <div class="col-lg-9 col-sm-12">
-            <p>
-            Manage units, leases, and tenants from within the unit dashboard.
-            </p>
-          </div>
+    <% if @property.units.empty? %>
+      <div class="card alert-warning text-center">
+        <div class="card-body">
+          <h4>
+            Units
+          </h4>
+          <p>
+          You haven't added a unit for this property yet. When you add a unit, you can create a lease and invite tenants!
+          </p>
+          <%= link_to 'Create Unit',
+            new_property_unit_path(@property),
+            class: 'btn btn-warning new-property-unit__link' %>
         </div>
       </div>
+    <% else %>
+      <%= link_to property_units_path(@property), class: 'card property-units' do %>
+        <div class="card-body">
+          <h4>
+            Units
+          </h4>
+          <div class="row mt-4">
+            <div class="col-lg-3 col-sm-0 mt-2">
+              <i class="fa fa-home fa-3x text-primary"></i>
+            </div>
+            <div class="col-lg-9 col-sm-12">
+              <p>
+              Manage units, leases, and tenants from within the unit dashboard.
+              </p>
+            </div>
+          </div>
+        </div>
+      <% end %>
     <% end %>
   </div>
 
@@ -91,8 +107,6 @@
     <% end %>
   </div>
 </div>
-
-
 
 <div class="card property-images mb-4">
   <% if @property.property_images.present? %>
