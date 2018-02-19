@@ -14,13 +14,13 @@ json.issues @issues do |issue|
   json.badge do
     case issue.status
     when Issue::CREATED
-      json.class 'info'
+      json.class 'primary'
       json.value 'created'
     when Issue::ACK
       json.class 'warning'
       json.value 'acknowledged'
     when Issue::IN_PROGRESS
-      json.class 'danger'
+      json.class 'info'
       json.value 'in progress'
     when Issue::COMPLETED
       json.class 'success'

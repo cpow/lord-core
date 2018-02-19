@@ -23,8 +23,8 @@ class IssueTable extends Component {
           <thead className="thead-default">
             <tr>
               <th scope="row">Media</th>
-              <th scope="row">ID</th>
               <th scope="row">Category</th>
+              <th scope="row">Status</th>
               <th scope="row">Reporter</th>
               <th scope="row">Unit</th>
             </tr>
@@ -37,8 +37,16 @@ class IssueTable extends Component {
                 <a href={`/properties/${issue.property_id}/issues/${issue.id}`}>
                   <td>{this.issueMediaUrl(issue)}</td>
                 </a>
-                <td>{issue.id}</td>
-                <td>{issue.category}</td>
+                <td>
+                  <a href={`/properties/${issue.property_id}/issues/${issue.id}`}>
+                    {issue.category}
+                  </a>
+                </td>
+                <td>
+                  <span className={`badge badge-${issue.badge.class}`}>
+                    {issue.badge.value}
+                  </span>
+                </td>
                 <td>{issue.reporter.name}</td>
                 <td>{issue.unit.name}</td>
               </tr>

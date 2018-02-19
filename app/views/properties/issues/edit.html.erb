@@ -2,8 +2,8 @@
   <ol class="breadcrumb bg-white">
     <li class="breadcrumb-item"><%= link_to @company.name, authenticated_property_manager_root_path %></li>
     <li class="breadcrumb-item"><%= link_to @property.name, property_path(@property) %></li>
-    <li class="breadcrumb-item"><%= link_to 'Issues', property_issues_path(@property) %></li>
-    <li class="breadcrumb-item active" aria-current="page">issue: <%= @issue.id %></li>
+    <li class="breadcrumb-item"> <%= link_to "issue: #{@issue.id}", property_issue_path(@property, @issue) %></li>
+    <li class="breadcrumb-item active" aria-current="page">Edit</li>
   </ol>
 </nav>
 
@@ -19,36 +19,37 @@
       <% if @issue.issue_images.present? %>
         <%= image_tag @issue.issue_images.first.image.url(:original), class: 'card-img-top' %>
       <% end %>
-      <div class="card-body" style="font-size: 1rem;">
-        <div class="row align-items-center">
-          <div class="col-sm-12 col-lg-10">
-            <h3><%= @issue.category %></h3>
-          </div>
-          <div class="col-sm-12 col-lg-2 pull-right">
-            <span class="<%= issue_status_badge(@issue) %>">
-              <%= @issue.status %>
-            </span>
-          </div>
-        </div>
+      <div class="card-body">
+        <h3>Updating issue id: <%= @issue.id %></h3>
         <hr>
-        <ul class='list-unstyled'>
-          <li>
-            description:
-            <ul>
-              <li>
-                <%= @issue.description %>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-      <div class="card-footer text-center">
-        <%= link_to 'Manage Issue',
-          edit_property_issue_path(@issue.property, @issue),
-          class: 'btn btn-primary' %>
+        <%= form_with(model: @issue, local: true, url: (property_issue_path(@issue.property, @issue))) do |form| %>
+
+          <div class="form-group">
+            <%= form.label :category %>
+            <%= form.select :category,
+              options_for_select(
+                Issue::ISSUE_CATEGORIES.map{|val| [val,val]},
+                @issue.category),
+              {},
+              { class: 'form-control' } %>
+          </div>
+
+          <div class="form-group">
+            <%= form.label :status %>
+            <%= form.select :status,
+              options_for_select(
+                Issue::ISSUE_STATUSES.map{|val| [val,val]},
+                @issue.status),
+              {},
+              { class: 'form-control' } %>
+          </div>
+
+        <%= form.submit class: "btn btn-primary btn-block" %>
+      <% end %>
       </div>
     </div>
   </div>
+
   <div class="col-lg-4 col-sm-12">
     <h4 class="mb-4 text-center">Comments</h4>
     <div id="issue_chat"></div>
@@ -60,4 +61,5 @@
     <%= javascript_pack_tag 'issue_chat' %>
   </div>
 </div>
+
 
