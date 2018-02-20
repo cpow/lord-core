@@ -3,6 +3,30 @@
 ## Big Stuff!
  *things that will take a while to do, but really need to be done and are essential.*
 
+[ ] issues: need a few things
+ * paginate the table
+ * make sorting/filtering hit server-side. so a user can copy+paste the table
+ * optionally -- save filters for later use?
+
+[ ] handle webhooks in production. need the CSRF section in stripe docs
+
+[ ] Paginate the tables. you shouldn't have more than X records on one table
+
+[ ] Multi step form for lease. Just makes sense
+
+[ ] Month-to-month leases
+ * maybe need to make a special kind of lease with no end. and you just run a
+   cron job that updates these leases with more lease payments. every 6 months?
+
+[ ] NOTIFICATIONS
+ * notify users on a per-unit and per-property basis
+ * maybe this is very similar to chat?????
+    * yes, you can hit people with notifications in actioncable
+ * maybe notifications rely on events.
+ * potentially: for every unit in a property, you create a new chat message.
+   Then all units and tenants can see a property-wide message. and can respond
+   in their own self-contained tenant/unit chat to property management.
+
 [x] CHAT
  * on a per unit basis. would be nice to have chats with tenants. They can get
 *this should be handled for now. may not need anything else around this*
@@ -16,39 +40,21 @@
     * yeah. create chats only to residents in a unit. Then residents can only
       see their chats. and not chats for any other resident... that makes sense
 
-[ ] Banking Information
+[x] Banking Information
  * need better TOS and better information around the banking information
 
-[ ] Bank lifecycle
+[x] Bank lifecycle
  * handle displaying when funds get transferred to bank account
 
-[ ] handle webhooks in production. need the CSRF section in stripe docs
-
-[ ] Property Manager Home Page
+[x] Property Manager Home Page
  * handle all links on the first page. Actually be able to edit the things I say
    you can edit.
-
-[ ] Paginate the tables. you shouldn't have more than X records on one table
-
-[ ] Multi step form for lease. Just makes sense
-
-[ ] Month-to-month leases
- * maybe need to make a special kind of lease with no end. and you just run a
-   cron job that updates these leases with more lease payments. every 6 months?
 
 [x] EVENTS
  * need events so managers can see what is going on with their property.
  * CRUD actions on all models for events
  * type == CRUD stuff
  * eventable fucking ... ... polymorphic association for all things
-
-[ ] NOTIFICATIONS
- * notify users on a per-unit and per-property basis
- * maybe this is very similar to chat?????
- * maybe notifications rely on events.
- * potentially: for every unit in a property, you create a new chat message.
-   Then all units and tenants can see a property-wide message. and can respond
-   in their own self-contained tenant/unit chat to property management.
 
 [x] make a nice stepper for creating a property.
  * maybe only do this for a first property? Either way, would be nice.
@@ -58,7 +64,7 @@
    TODOs to a person. might be overwhelming
 *this should be handled for now. may not need anything else around this*
 
-[ ] get more information to tables displaying transactions.
+[x] get more information to tables displaying transactions.
  * Get more information into the objects that store local transactions.
  * clicking on a table row will pop up a modal displaying the current status
    from stripe perhaps? or not.
@@ -80,17 +86,17 @@ company
 
 ## Little bugzzz to fix
  *small things that need to be fixed but aren't completely dealbreakers*
-[ ] refactor the duplication in residencies controllers
+[x] refactor the duplication in residencies controllers
  * property/residencies and property/units/residencies
  * some of the stuff in these should be refactored out into service object(s)
 
-[ ] chat scrolls down too far
+[x] chat scrolls down too far
  * need to fix the small thing with the scrolling to the last LI. not sure yet.
 
 ## Smaller Stuff!
  *stuff that wont take as much time to do. and are mostly just bugs or refactors.*
 
-[ ] Links in property management nav
+[x] Links in property management nav
  * currently there is nothing there and is a joke
 
 [x] add simple_form with bootstrap initializer for form stuff

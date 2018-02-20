@@ -19,7 +19,7 @@ class IssueTable extends Component {
   render() {
     return (
       <div className="table-responsive">
-        <table className="table table-striped">
+        <table className="table table-striped table-hover">
           <thead className="thead-default">
             <tr>
               <th scope="row">Media</th>
