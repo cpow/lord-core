@@ -1,15 +1,118 @@
-<h2>Available</h2>
-<% @balance.available.each do |available| %>
-<ul>
-  <li>currency: <%= available.currency %></li>
-  <li>amount: <%= available.amount %></li>
-</ul>
-<% end %>
+<nav aria-label="breadcrumb" class="sticky-top bg-white">
+  <ol class="breadcrumb bg-white">
+    <li class="breadcrumb-item"><%= link_to @company.name, authenticated_property_manager_root_path %></li>
+    <li class="breadcrumb-item active" aria-current="page">Finances</li>
+  </ol>
+</nav>
 
-<h2>Pending</h2>
-<% @balance.pending.each do |pending| %>
-<ul>
-  <li>currency: <%= pending.currency %></li>
-  <li>amount: <%= pending.amount %></li>
-</ul>
-<% end %>
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: "Bank Account Information",
+  text: ''
+} %>
+
+
+<div class="card mb-4">
+  <div class="card-body">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item border-bottom-0 border-top-0 text-muted">
+        <span class="pull-left">Bank Account Name:</span>
+        <span class="pull-right">
+          <%= @company.bank_account_name %>
+        </span>
+      </li>
+      <li class="list-group-item border-bottom-0 border-top-0 text-muted">
+        <span class="pull-left">Pending:</span>
+        <span class="pull-right">
+          <%= @company.bank_account_last4 %>
+        </span>
+      </li>
+    </ul>
+    <div class="mt-2 mb-2 text-center">
+      <div class="mb-2">
+        <span class='text-muted'>Want to change your bank account?</span>
+      </div>
+      <%= link_to "New Bank Account", new_bank_account_path, class: 'btn btn-primary' %>
+    </div>
+  </div>
+</div>
+
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: "Pending Funds",
+  text: 'All funds that are available to you but have not been transferred to your bank account. These funds will be transferred soon to your account'
+} %>
+
+<div class="card mb-4">
+  <div class="card-body">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item border-bottom-0 border-top-0 text-muted">
+        <span class="pull-left">Available:</span>
+        <span class="pull-right">
+          <%= number_to_currency(@available) %>
+        </span>
+      </li>
+      <li class="list-group-item border-bottom-0 border-top-0 text-muted">
+        <span class="pull-left">Last 4 digits:</span>
+        <span class="pull-right">
+          <%= number_to_currency(@pending) %>
+        </span>
+      </li>
+    </ul>
+    <hr />
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item border-bottom-0 border-top-0">
+        <h4>
+          <span class="pull-left">Total Balance</span>
+        </h4>
+        <h4>
+          <span class="pull-right">
+            <%= number_to_currency(@balance_available) %>
+          </span>
+        </h4>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: "Payout History",
+  text: 'Payments that have been made to our bank account'
+} %>
+
+<div class="card">
+  <div class="card-body">
+    <table class="table table-bordered table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Transfer ID</th>
+          <th>Destination</th>
+          <th>Amount</th>
+          <th>Deposit date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @payouts.each do |payout| %>
+          <tr>
+            <td>
+              <% if payout.type.eql?('bank_account') %>
+                <i class="fa fa-bank text-muted"></i>
+                <%= link_to payout.id, payout_path(payout.id), class: "leftspace" %>
+              <% else %>
+                <i class="fa fa-credit-card text-muted"></i>
+                <span class="leftspace"><%= payout.id %></span>
+              <% end %>
+            </td>
+            <td>
+              <% if payout.type.eql?('bank_account') %>
+                <%= payout.destination.bank_name %> ending in <%= payout.destination.last4 %>
+              <% elsif payout.type.eql?('card') %>
+                <%= payout.destination.brand %> ending in <%= payout.destination.last4 %>
+              <% end %>
+            </td>
+            <td><%= number_to_currency(payout.amount) %></td>
+            <td><%= format_date_from_seconds(payout.arrival_date) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

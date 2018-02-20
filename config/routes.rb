@@ -45,6 +45,7 @@ Rails.application.routes.draw do
   end
 
   resources :payments
+  resources :payouts
   resources :tenant_plaid_accounts, only: :create
   resources :bank_accounts, only: [:new, :create, :show]
   resources :stripe_accounts

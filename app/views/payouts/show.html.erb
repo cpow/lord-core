@@ -1,0 +1,85 @@
+<nav aria-label="breadcrumb" class="sticky-top bg-white">
+  <ol class="breadcrumb bg-white">
+    <li class="breadcrumb-item"><%= link_to @company.name, authenticated_property_manager_root_path %></li>
+    <li class="breadcrumb-item"><%= link_to 'Finances', company_finance_path(@company) %></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= "Payout #{@payout.id}" %></li>
+  </ol>
+</nav>
+
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: "Payout Details",
+  text: ''
+} %>
+
+<div class="card">
+  <div class="card-body">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item border-bottom-0 border-top-0">
+        <span class="pull-left font-weight-bold">Date Paid:</span>
+        <span class="pull-right">
+          <%= format_date_from_seconds(@payout.created) %>
+        </span>
+      </li>
+      <li class="list-group-item border-bottom-0 border-top-0">
+        <span class="pull-left font-weight-bold">Payment Amount:</span>
+        <span class="pull-right">
+          <%= number_to_currency(@payout.amount) %>
+        </span>
+      </li>
+      <li class="list-group-item border-bottom-0 border-top-0">
+        <span class="pull-left font-weight-bold">Bank Account:</span>
+        <span class="pull-right">
+          <%#= "#{@payout.bank_account.bank_name} ending in #{@payout.bank_account.last4}" %>
+        </span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: "Transactions in this payout",
+  text: 'Here is a list of all transactions that are included in this payout'
+} %>
+
+<div class="card">
+  <div class="card-body">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Gross</th>
+          <th>Fee</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @txns.auto_paging_each do |txn| %>
+          <% unless txn.type.eql?('transfer') && txn.source.type.eql?('bank_account') %>
+            <tr>
+              <td>
+                <% if txn.type.eql?('payment') %>
+                  Payment
+                <% elsif txn.type.eql?('payment_refund') %>
+                  Refund
+                <% elsif txn.type.eql?('adjustment') %>
+                  Marketplace fee refund
+                <% elsif txn.type.eql?('transfer') && txn.source.method.eql?('instant') %>
+                  Instant payout <%= txn.source.id %>
+              <% elsif txn.type.eql?('transfer') && txn.source.type.eql?('stripe_account') %>
+                <%= txn.description %>
+              <% elsif txn.description.present? %>
+                <%= txn.description %>
+              <% else %>
+                <%= txn.type %>
+              <% end %>
+              </td>
+              <td><%= number_to_currency(txn.amount) %></td>
+              <td><%= number_to_currency(txn.fee) %></td>
+              <td><%= number_to_currency(txn.net) %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

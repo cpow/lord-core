@@ -1,4 +1,8 @@
 module ApplicationHelper
+  def format_date_from_seconds(created)
+    human_date(Time.at(created))
+  end
+
   def normalize_bootstrap_message_class(key)
     case key
     when 'alert'
