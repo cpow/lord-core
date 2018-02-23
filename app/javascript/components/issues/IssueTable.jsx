@@ -32,7 +32,7 @@ class IssueTable extends Component {
             {this.props.issues.map(issue => (
               <tr key={issue.id}>
                 <a href={`/properties/${issue.property_id}/issues/${issue.id}`}>
-                  <td>{this.issueMediaUrl(issue)}</td>
+                  <td>{IssueTable.issueMediaUrl(issue)}</td>
                 </a>
                 <td>
                   <a href={`/properties/${issue.property_id}/issues/${issue.id}`}>

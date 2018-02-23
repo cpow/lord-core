@@ -19,7 +19,7 @@ class Comments extends Component {
         {this.props.comments.map(comment => (
           <div className="comment" key={comment.id}>
             <div className="card no-shadow mb-2">
-              <div className={this.commentBodyStyle(comment)}>
+              <div className={Comments.commentBodyStyle(comment)}>
                 {comment.body}
               </div>
             </div>

@@ -26,9 +26,9 @@ class Messages extends Component {
     return (
       <div>
         {this.props.messages.map(message => (
-          <div className={this.rowForMessage(message)} key={message.id}>
+          <div className={Messages.rowForMessage(message)} key={message.id}>
             <div className="card no-shadow mb-2">
-              <div className={this.messageBodyStyle(message)}>
+              <div className={Messages.messageBodyStyle(message)}>
                 <small>{message.messageable.email}</small>
                 <br />
                 {message.body}

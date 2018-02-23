@@ -60,7 +60,7 @@ class NewIssueForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    this.getBase64(this.state.files[0]).then((fileData) => {
+    NewIssueForm.getBase64(this.state.files[0]).then((fileData) => {
       const data = {
         issue: {
           image: fileData,
