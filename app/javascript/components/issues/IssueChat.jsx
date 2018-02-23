@@ -10,23 +10,38 @@ class IssueChat extends Component {
   constructor(props) {
     super(props);
     this.sendData = this.sendData.bind(this);
-    this.state = {comments: []}
+    this.state = { comments: [] };
   }
 
-  sendData(e) {
-    e.preventDefault();
-    let bodyElement = e.target.elements.namedItem('comment');
-    let body = bodyElement.value;
-    bodyElement.value = '';
+  componentDidMount() {
+    axios.get(`/api/v1/issues/${this.props.issueId}/issue_comments`).then((resp) => {
+      const comments = resp.data.issue_comments;
+      this.setState({ comments });
+    }).catch(() => {
+    });
 
-    let payload = {
-      body,
-      commentableId: this.props.commentableId,
-      commentableType: this.props.commentableType,
-      issueId: this.props.issueId
+    this.cable = ActionCable.createConsumer();
+
+    this.subscription = this.cable.subscriptions.create(
+      {
+        channel: 'IssueChatChannel',
+        issueId: this.props.issueId,
+      },
+
+      {
+        received: (data) => {
+          this.updateIssueComments(JSON.parse(data));
+        },
+      },
+    );
+  }
+
+  componentDidUpdate() {
+    const listElements = document.getElementsByClassName('comment');
+    const lastElement = listElements[listElements.length - 1];
+    if (lastElement) {
+      lastElement.scrollIntoView(false);
     }
-
-    this.subscription.send(payload);
   }
 
   updateIssueComments(data) {
@@ -34,43 +49,27 @@ class IssueChat extends Component {
     this.setState({ comments: this.state.comments });
   }
 
-  componentDidUpdate() {
-    let listElements = document.getElementsByClassName('comment');
-    let lastElement = listElements[listElements.length - 1];
-    if (lastElement) {
-      lastElement.scrollIntoView(false);
-    }
-  }
+  sendData(e) {
+    e.preventDefault();
+    const bodyElement = e.target.elements.namedItem('comment');
+    const body = bodyElement.value;
+    bodyElement.value = '';
 
-  componentDidMount() {
-    axios.get(`/api/v1/issues/${this.props.issueId}/issue_comments`).then(resp => {
-      let comments = resp.data.issue_comments;
-      this.setState({ comments });
-    }).catch(error => {
-      console.log(error)
-    });
+    const payload = {
+      body,
+      commentableId: this.props.commentableId,
+      commentableType: this.props.commentableType,
+      issueId: this.props.issueId,
+    };
 
-    this.cable = ActionCable.createConsumer();
-
-    this.subscription = this.cable.subscriptions.create(
-      {
-        channel: "IssueChatChannel",
-        issueId: this.props.issueId
-      },
-
-      {
-        received: data => {
-          this.updateIssueComments(JSON.parse(data));
-        }
-      }
-    )
+    this.subscription.send(payload);
   }
 
   render() {
     return (
       <div className="card">
         <div className="card-body">
-          <div className="card no-shadow mb-4" style={{maxHeight: '500px', overflowY: 'auto'}}>
+          <div className="card no-shadow mb-4" style={{ maxHeight: '500px', overflowY: 'auto' }}>
             <div className="card-body">
               <Comments comments={this.state.comments} />
             </div>
@@ -83,14 +82,14 @@ class IssueChat extends Component {
           </form>
         </div>
       </div>
-    )
+    );
   }
 }
 
 IssueChat.propTypes = {
-  issueId: PropTypes.number,
-  commentableId: PropTypes.number,
-  commentableType: PropTypes.string
-}
+  issueId: PropTypes.number.isRequired,
+  commentableId: PropTypes.number.isRequired,
+  commentableType: PropTypes.string.isRequired,
+};
 
 export default IssueChat;

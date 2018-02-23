@@ -15,9 +15,10 @@ document.addEventListener('DOMContentLoaded', () => {
     <Chat
       unitId={unitId}
       messageableType={messageableType}
-      messageableId={messageableId}/>,
+      messageableId={messageableId}
+    />,
 
     document.body.appendChild(document.createElement('div')),
-  )
-})
+  );
+});
 

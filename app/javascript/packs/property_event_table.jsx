@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const propertyId = JSON.parse(node.getAttribute('data-property-id'));
 
   ReactDOM.render(
-    <PropertyEventFilterTable propertyId={propertyId}/>,
-    document.getElementById('property_events')
-  )
-})
+    <PropertyEventFilterTable propertyId={propertyId} />,
+    document.getElementById('property_events'),
+  );
+});

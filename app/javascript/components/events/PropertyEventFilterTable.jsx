@@ -8,25 +8,28 @@ const { Component } = React;
 class PropertyEventFilterTable extends Component {
   constructor(props) {
     super(props);
-    this.state = { events: [], filteredEvents: [] };
+    this.state = { filteredEvents: [] };
   }
 
   componentDidMount() {
-    let propertyId = this.props.propertyId;
+    const { propertyId } = this.props;
 
-    axios.get(`/api/v1/properties/${propertyId}/events`).then(resp => {
-      let events = resp.data.events;
-      this.setState({ events, filteredEvents: events });
-    }).catch(error => {
-      console.log(error)
+    axios.get(`/api/v1/properties/${propertyId}/events`).then((resp) => {
+      const { events } = resp.data;
+      this.setState({ filteredEvents: events });
+    }).catch(() => {
     });
   }
 
   render() {
     return (
       <EventTable events={this.state.filteredEvents} />
-    )
+    );
   }
 }
+
+PropertyEventFilterTable.propTypes = {
+  propertyId: PropTypes.number.isRequired,
+};
 
 export default PropertyEventFilterTable;

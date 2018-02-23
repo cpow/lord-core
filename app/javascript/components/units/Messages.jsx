@@ -4,24 +4,22 @@ import PropTypes from 'prop-types';
 const { Component } = React;
 
 class Messages extends Component {
-  messageBodyStyle(message) {
-    let base = 'card-body';
+  static messageBodyStyle(message) {
+    const base = 'card-body';
 
-    if (message.messageable_type === "PropertyManager") {
-      return `${base} bg-primary text-white`
-    } else {
-      return base
+    if (message.messageable_type === 'PropertyManager') {
+      return `${base} bg-primary text-white`;
     }
+    return base;
   }
 
-  rowForMessage(message) {
-    let base = 'row col-lg-8 col-sm-12 message';
+  static rowForMessage(message) {
+    const base = 'row col-lg-8 col-sm-12 message';
 
-    if (message.messageable_type === "PropertyManager") {
-      return `${base} float-right`
-    } else {
-      return base
+    if (message.messageable_type === 'PropertyManager') {
+      return `${base} float-right`;
     }
+    return base;
   }
 
   render() {
@@ -39,14 +37,12 @@ class Messages extends Component {
           </div>
         ))}
       </div>
-    )
+    );
   }
 }
 
 Messages.propTypes = {
-  messages: PropTypes.array
-}
+  messages: PropTypes.arrayOf.isRequired,
+};
 
 export default Messages;
-
-

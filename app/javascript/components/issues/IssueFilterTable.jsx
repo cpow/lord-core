@@ -9,13 +9,13 @@ import IssueTable from 'components/issues/IssueTable';
 const { Component } = React;
 
 const categoryOptions = [
-  {label: '', value: 'All'},
-  {label: 'Electrical', value: 'Electrical'},
-  {label: 'Water Damage', value: 'Water Damage'},
-  {label: 'Plumbing', value: 'Plumbing'},
-  {label: 'Exterior', value: 'Exterior'},
-  {label: 'Property / Landscaping', value: 'Property / Landscaping'}
-]
+  { label: '', value: 'All' },
+  { label: 'Electrical', value: 'Electrical' },
+  { label: 'Water Damage', value: 'Water Damage' },
+  { label: 'Plumbing', value: 'Plumbing' },
+  { label: 'Exterior', value: 'Exterior' },
+  { label: 'Property / Landscaping', value: 'Property / Landscaping' },
+];
 
 class IssueFilterTable extends Component {
   constructor(props) {
@@ -26,19 +26,22 @@ class IssueFilterTable extends Component {
     this.filterCategory = this.filterCategory.bind(this);
   }
 
-  filterBy(property, e) {
-    let str = e.target.value;
-    let pattern = str.replace(/[^a-zA-Z0-9_-]/, '').split('').join('.*');
-    let matcher = new RegExp(pattern, 'i');
+  componentDidMount() {
+    const { propertyId } = this.props;
 
-    if ( str === '' ) {
+    axios.get(`/api/v1/properties/${propertyId}/issues`).then((resp) => {
+      const { issues } = resp.data;
+      this.setState({ issues, filteredIssues: issues });
+    }).catch(() => {
+    });
+  }
+
+  filterCategory(e) {
+    const val = e.target.value;
+    if (val === '') {
       this.setState({ filteredIssues: this.state.issues });
     } else {
-      let filtered = this.state.issues.filter(issue => {
-        return matcher.test(getProperty(issue, property));
-      })
-
-      this.setState({ filteredIssues: filtered});
+      this.setState({ filteredIssues: this.state.issues.filter(issue => issue.category === val) });
     }
   }
 
@@ -46,45 +49,46 @@ class IssueFilterTable extends Component {
     return this.filterBy('unit.name', e);
   }
 
-  filterCategory(e) {
-    let val = e.target.value;
-    if ( val === '' ) {
+  filterBy(property, e) {
+    const str = e.target.value;
+    const pattern = str.replace(/[^a-zA-Z0-9_-]/, '').split('').join('.*');
+    const matcher = new RegExp(pattern, 'i');
+
+    if (str === '') {
       this.setState({ filteredIssues: this.state.issues });
     } else {
-      this.setState({ filteredIssues: this.state.issues.filter(issue => issue.category == val )});
+      const filtered = this.state.issues.filter(issue => (
+        matcher.test(getProperty(issue, property))
+      ));
+
+      this.setState({ filteredIssues: filtered });
     }
-  }
-
-  componentDidMount() {
-    let propertyId = this.props.propertyId;
-
-    axios.get(`/api/v1/properties/${propertyId}/issues`).then(resp => {
-      let issues = resp.data.issues;
-      this.setState({ issues, filteredIssues: issues });
-    }).catch(error => {
-      console.log(error)
-    });
   }
 
   render() {
     return (
       <div>
-        <div class="row mb-4">
+        <div className="row mb-4">
           <FuzzySearchFilter
             id="filterUnit"
             label="Search Unit Name"
-            filter={this.fuzzyFilterUnitName} />
+            filter={this.fuzzyFilterUnitName}
+          />
           <DropDownFilter
             id="filterStatus"
             label="Payment Status"
             options={categoryOptions}
-            filter={this.filterCategory} />
+            filter={this.filterCategory}
+          />
         </div>
         <IssueTable issues={this.state.filteredIssues} />
       </div>
-    )
+    );
   }
 }
 
-export default IssueFilterTable;
+IssueFilterTable.propTypes = {
+  propertyId: PropTypes.number.isRequired,
+};
 
+export default IssueFilterTable;

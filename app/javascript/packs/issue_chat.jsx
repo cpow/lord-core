@@ -15,10 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
     <IssueChat
       issueId={issueId}
       commentableType={commentableType}
-      commentableId={commentableId}/>,
+      commentableId={commentableId}
+    />,
 
-    document.getElementById('issue_chat')
-  )
-})
-
-
+    document.getElementById('issue_chat'),
+  );
+});

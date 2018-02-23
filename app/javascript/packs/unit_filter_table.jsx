@@ -6,13 +6,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const node = document.getElementById('propertyId');
   let propertyId;
 
-  if ( node !== null ) {
+  if (node !== null) {
     propertyId = JSON.parse(node.getAttribute('data-property-id'));
   }
 
   ReactDOM.render(
-    <UnitFilterTable propertyId={propertyId}/>,
-    document.getElementById('unit_table')
-  )
-})
+    <UnitFilterTable propertyId={propertyId} />,
+    document.getElementById('unit_table'),
+  );
+});
 

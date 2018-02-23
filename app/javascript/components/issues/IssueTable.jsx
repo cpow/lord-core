@@ -4,16 +4,13 @@ import PropTypes from 'prop-types';
 const { Component } = React;
 
 class IssueTable extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  issueMediaUrl(issue) {
+  static issueMediaUrl(issue) {
     if (issue.media) {
       return (
         <img src={issue.media.url} alt={issue.media.filename} />
-      )
+      );
     }
+    return '';
   }
 
   render() {
@@ -54,12 +51,12 @@ class IssueTable extends Component {
           </tbody>
         </table>
       </div>
-    )
+    );
   }
 }
 
 IssueTable.propTypes = {
-  issues: PropTypes.array
-}
+  issues: PropTypes.arrayOf.isRequired,
+};
 
 export default IssueTable;
