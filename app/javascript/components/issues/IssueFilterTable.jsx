@@ -34,10 +34,7 @@ const defaultQueryParams = {
 class IssueFilterTable extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      page: 1,
-      unitSearch: '',
-    };
+    this.state = defaultQueryParams;
 
     this.fuzzyFilterUnitName = this.fuzzyFilterUnitName.bind(this);
     this.filterCategory = this.filterCategory.bind(this);
@@ -49,12 +46,14 @@ class IssueFilterTable extends Component {
 
   componentWillMount() {
     const currentQuery = queryString.parse(window.location.search);
-    const {
-      page, category, status, unitSearch,
-    } = currentQuery;
-    this.setState({
-      page, category, status, unitSearch,
-    });
+    if (Object.keys(currentQuery).length !== 0) {
+      const {
+        page, category, status, unitSearch,
+      } = currentQuery;
+      this.setState({
+        page, category, status, unitSearch,
+      });
+    }
   }
 
   filterCategory(e) {
