@@ -1,3 +1,10 @@
+json.pagination do
+  json.total_pages @issues.total_pages
+  json.current_page @issues.current_page
+  json.next_page @issues.next_page
+  json.prev_page @issues.prev_page
+end
+
 json.issues @issues do |issue|
   json.issue_comments issue.issue_comments
   json.unit issue.unit
@@ -28,6 +35,6 @@ json.issues @issues do |issue|
     end
   end
 
-  json.extract! issue, :id, :category, :status, :property_id
+  json.extract! issue, :id, :category, :status, :property_id, :created_at
 end
 

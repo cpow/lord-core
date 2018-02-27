@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: issues
+#
+#  id            :integer          not null, primary key
+#  property_id   :integer
+#  unit_id       :integer
+#  reporter_type :string
+#  reporter_id   :integer
+#  description   :text
+#  category      :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  status        :string           default("created")
+#
+
 class Issue < ApplicationRecord
   ACK = 'acknowledged'.freeze
   IN_PROGRESS = 'in progress'.freeze
@@ -28,4 +44,16 @@ class Issue < ApplicationRecord
 
   validates :category, inclusion: { in: ISSUE_CATEGORIES }
   validates :status, inclusion: { in: ISSUE_STATUSES }
+
+  searchkick
+
+  def search_data
+    {
+      category: category,
+      reporter_name: reporter.name,
+      unit_name: unit.name,
+      status: status,
+      created_at: created_at
+    }
+  end
 end

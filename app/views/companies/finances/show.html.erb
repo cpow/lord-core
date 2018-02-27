@@ -16,13 +16,13 @@
       <li class="list-group-item border-bottom-0 border-top-0 text-muted">
         <span class="pull-left">Available:</span>
         <span class="pull-right">
-          <%= number_to_currency(@available) %>
+          <%= number_to_currency(@available / 100) %>
         </span>
       </li>
       <li class="list-group-item border-bottom-0 border-top-0 text-muted">
         <span class="pull-left">Pending:</span>
         <span class="pull-right">
-          <%= number_to_currency(@pending) %>
+          <%= number_to_currency(@pending / 100) %>
         </span>
       </li>
     </ul>
@@ -34,7 +34,7 @@
         </h4>
         <h4>
           <span class="pull-right">
-            <%= number_to_currency(@balance_available) %>
+            <%= number_to_currency(@balance_available / 100) %>
           </span>
         </h4>
       </li>
@@ -108,7 +108,7 @@
                 <%= payout.destination.brand %> ending in <%= payout.destination.last4 %>
               <% end %>
             </td>
-            <td><%= number_to_currency(payout.amount) %></td>
+            <td><%= number_to_currency(payout.amount / 100) %></td>
             <td><%= format_date_from_seconds(payout.arrival_date) %></td>
           </tr>
         <% end %>

@@ -1,10 +1,9 @@
 import React from 'react';
+import queryString from 'query-string';
 import PropTypes from 'prop-types';
 import FuzzySearchFilter from 'components/filters/FuzzySearchFilter';
 import DropDownFilter from 'components/filters/DropDownFilter';
-import getProperty from 'util/dynamic-property';
-import axios from 'axios';
-import IssueTable from 'components/issues/IssueTable';
+import FetchTable from 'components/issues/FetchTable';
 
 const { Component } = React;
 
@@ -17,71 +16,129 @@ const categoryOptions = [
   { label: 'Property / Landscaping', value: 'Property / Landscaping' },
 ];
 
+const statusOptions = [
+  { label: '', value: 'All' },
+  { label: 'in progress', value: 'in progress' },
+  { label: 'acknowledged', value: 'acknowledged' },
+  { label: 'completed', value: 'completed' },
+  { label: 'created', value: 'created' },
+];
+
+const defaultQueryParams = {
+  page: 1,
+  unitSearch: '',
+  status: '',
+  category: '',
+};
+
 class IssueFilterTable extends Component {
   constructor(props) {
     super(props);
-    this.state = { issues: [], filteredIssues: [] };
+    this.state = {
+      page: 1,
+      unitSearch: '',
+    };
 
     this.fuzzyFilterUnitName = this.fuzzyFilterUnitName.bind(this);
     this.filterCategory = this.filterCategory.bind(this);
+    this.filterStatus = this.filterStatus.bind(this);
+    this.resetParams = this.resetParams.bind(this);
+    this.nextPage = this.nextPage.bind(this);
+    this.prevPage = this.prevPage.bind(this);
   }
 
-  componentDidMount() {
-    const { propertyId } = this.props;
-
-    axios.get(`/api/v1/properties/${propertyId}/issues`).then((resp) => {
-      const { issues } = resp.data;
-      this.setState({ issues, filteredIssues: issues });
-    }).catch(() => {
+  componentWillMount() {
+    const currentQuery = queryString.parse(window.location.search);
+    const {
+      page, category, status, unitSearch,
+    } = currentQuery;
+    this.setState({
+      page, category, status, unitSearch,
     });
   }
 
   filterCategory(e) {
     const val = e.target.value;
-    if (val === '') {
-      this.setState({ filteredIssues: this.state.issues });
-    } else {
-      this.setState({ filteredIssues: this.state.issues.filter(issue => issue.category === val) });
-    }
+    this.setState({ category: val });
+  }
+
+  filterStatus(e) {
+    const val = e.target.value;
+    this.setState({ status: val });
   }
 
   fuzzyFilterUnitName(e) {
-    return this.filterBy('unit.name', e);
+    const str = e.target.value;
+    this.setState({ unitSearch: str });
   }
 
-  filterBy(property, e) {
-    const str = e.target.value;
-    const pattern = str.replace(/[^a-zA-Z0-9_-]/, '').split('').join('.*');
-    const matcher = new RegExp(pattern, 'i');
+  resetParams() {
+    this.setState(defaultQueryParams);
+  }
 
-    if (str === '') {
-      this.setState({ filteredIssues: this.state.issues });
-    } else {
-      const filtered = this.state.issues.filter(issue => (
-        matcher.test(getProperty(issue, property))
-      ));
+  nextPage() {
+    let { page } = this.state;
+    page = parseInt(page, 10);
+    page += 1;
+    this.setState({ page });
+  }
 
-      this.setState({ filteredIssues: filtered });
-    }
+  prevPage() {
+    let { page } = this.state;
+    page = parseInt(page, 10);
+    page -= 1;
+    this.setState({ page });
   }
 
   render() {
+    const {
+      unitSearch, category, status, page,
+    } = this.state;
+    const { propertyId } = this.props;
+
     return (
       <div>
-        <div className="row mb-4">
+        <div className="row mb-2">
           <FuzzySearchFilter
             id="filterUnit"
             label="Search Unit Name"
             filter={this.fuzzyFilterUnitName}
+            value={this.state.unitSearch}
           />
           <DropDownFilter
             id="filterStatus"
-            label="Payment Status"
+            label="Status"
+            options={statusOptions}
+            filter={this.filterStatus}
+            selected={status}
+          />
+          <DropDownFilter
+            id="filterCategory"
+            label="Category"
             options={categoryOptions}
             filter={this.filterCategory}
+            selected={category}
           />
         </div>
-        <IssueTable issues={this.state.filteredIssues} />
+        <div className="row mb-4">
+          <div className="col text-center">
+            <button
+              onClick={this.resetParams}
+              className="btn btn-primary"
+            >
+              Reset All
+            </button>
+          </div>
+        </div>
+        <FetchTable
+          unitSearch={unitSearch}
+          page={parseInt(page, 10)}
+          category={category}
+          propertyId={propertyId}
+          nextPage={this.nextPage}
+          prevPage={this.prevPage}
+          status={status}
+        />
       </div>
     );
   }

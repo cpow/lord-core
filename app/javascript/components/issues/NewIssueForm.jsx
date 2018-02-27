@@ -107,30 +107,30 @@ class NewIssueForm extends Component {
         <div className="form-group">
           <label htmlFor="issue_category">
               Select Category
-            <select
-              id="issue_category"
-              className="form-control"
-              onChange={this.setCategory}
-              value={this.state.category}
-            >
-              {categories.map(option => (
-                <option key={option} value={option}>{option}</option>
-                ))}
-            </select>
           </label>
+          <select
+            id="issue_category"
+            className="form-control"
+            onChange={this.setCategory}
+            value={this.state.category}
+          >
+            {categories.map(option => (
+              <option key={option} value={option}>{option}</option>
+              ))}
+          </select>
         </div>
         <div className="form-group">
           <label htmlFor="description">
             Description
-            <textarea
-              type="text"
-              placeholder="Please describe the problem. Leaky pipe, etc..."
-              className="form-control"
-              id="description"
-              value={this.state.description}
-              onChange={this.setDescription}
-            />
           </label>
+          <textarea
+            type="text"
+            placeholder="Please describe the problem. Leaky pipe, etc..."
+            className="form-control"
+            id="description"
+            value={this.state.description}
+            onChange={this.setDescription}
+          />
         </div>
       </div>
     );

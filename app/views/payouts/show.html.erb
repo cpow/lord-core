@@ -23,7 +23,7 @@
       <li class="list-group-item border-bottom-0 border-top-0">
         <span class="pull-left font-weight-bold">Payment Amount:</span>
         <span class="pull-right">
-          <%= number_to_currency(@payout.amount) %>
+          <%= number_to_currency(@payout.amount / 100) %>
         </span>
       </li>
       <li class="list-group-item border-bottom-0 border-top-0">
@@ -73,9 +73,9 @@
                 <%= txn.type %>
               <% end %>
               </td>
-              <td><%= number_to_currency(txn.amount) %></td>
-              <td><%= number_to_currency(txn.fee) %></td>
-              <td><%= number_to_currency(txn.net) %></td>
+              <td><%= number_to_currency(txn.amount / 100) %></td>
+              <td><%= number_to_currency(txn.fee / 100) %></td>
+              <td><%= number_to_currency(txn.net / 100) %></td>
             </tr>
           <% end %>
         <% end %>

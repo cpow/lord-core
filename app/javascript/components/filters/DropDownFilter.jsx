@@ -2,23 +2,30 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const DropDownFilter = ({
-  id, label, options, filter,
+  id, label, options, filter, selected,
 }) => (
   <div className="col-lg-4 col-sm-12">
     <label htmlFor={id}>
       {label}
-
-      <select id={id} className="form-control" onChange={filter}>
-        {options.map(option => (
-          <option key={option.label} value={option.label}>{option.value}</option>
-        ))}
-      </select>
     </label>
+
+    <select id={id} className="form-control" onChange={filter}>
+      {options.map(option => (
+        <option
+          key={option.label}
+          value={option.label}
+          selected={selected === option.value}
+        >
+          {option.value}
+        </option>
+      ))}
+    </select>
   </div>
 );
 
 DropDownFilter.propTypes = {
   id: PropTypes.string.isRequired,
+  selected: PropTypes.string,
   label: PropTypes.string.isRequired,
   options: PropTypes.arrayOf.isRequired,
   filter: PropTypes.func.isRequired,

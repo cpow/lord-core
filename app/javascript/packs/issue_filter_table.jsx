@@ -1,6 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Router } from 'react-router-dom';
+import createBrowserHistory from 'history/createBrowserHistory';
 import IssueFilterTable from 'components/issues/IssueFilterTable';
+
+const history = createBrowserHistory();
 
 document.addEventListener('DOMContentLoaded', () => {
   const node = document.getElementById('propertyId');
@@ -11,7 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   ReactDOM.render(
-    <IssueFilterTable propertyId={propertyId} />,
+    <Router history={history}>
+      <IssueFilterTable propertyId={propertyId} />
+    </Router>,
     document.getElementById('issue_table'),
   );
 });

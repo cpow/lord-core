@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Moment from 'react-moment';
 
 const { Component } = React;
 
@@ -24,6 +25,7 @@ class IssueTable extends Component {
               <th scope="row">Status</th>
               <th scope="row">Reporter</th>
               <th scope="row">Unit</th>
+              <th scope="row">Created</th>
             </tr>
           </thead>
 
@@ -46,6 +48,12 @@ class IssueTable extends Component {
                 </td>
                 <td>{issue.reporter.name}</td>
                 <td>{issue.unit.name}</td>
+                <td>
+                  <Moment
+                    date={issue.created_at}
+                    format="MM/DD/YYYY"
+                  />
+                </td>
               </tr>
             ))}
           </tbody>
