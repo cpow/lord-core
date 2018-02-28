@@ -1,9 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import createBrowserHistory from 'history/createBrowserHistory';
 import IssueFilterTable from 'components/issues/IssueFilterTable';
-
-const history = createBrowserHistory();
 
 document.addEventListener('DOMContentLoaded', () => {
   const node = document.getElementById('propertyId');
@@ -14,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   ReactDOM.render(
-    <IssueFilterTable propertyId={propertyId} />
+    <IssueFilterTable propertyId={propertyId} />,
     document.getElementById('issue_table'),
   );
 });
