@@ -10,8 +10,7 @@
         "heroku-postgresql:hobby-dev"
       ],
       "scripts": {
-        "test-setup": "yarn",
-        "test-setup": "NODE_ENV=test bundle exec rails webpacker:compile",
+        "test-setup": "yarn; NODE_ENV=test bundle exec rails webpacker:compile",
         "test": "bundle exec rspec spec"
       }
     }
