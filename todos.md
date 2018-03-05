@@ -3,14 +3,33 @@
 ## Big Stuff!
  *things that will take a while to do, but really need to be done and are essential.*
 
-[ ] issues: need a few things
+[ ] flesh out the residents view in property manager portal
+
+[ ] clean up all errors/warnings from react
+
+[ ] maybe some jest/specs or enzyme or whatever the hell the cool kids use these days
+
+[ ] handle debounce-ness on the issue creation form
+
+[ ] show more granular information to a property manager on the residency show
+page. something like, when they were invited, emails that have been sent to
+them, etc...
+
+[ ] issue creation for property managers.
+
+[ ] make chat messages its own component so it looks the same from chat to chat
+:)
+
+
+
+[x] issues: need a few things
  * paginate the table
  * make sorting/filtering hit server-side. so a user can copy+paste the table
  * optionally -- save filters for later use?
 
 [ ] handle webhooks in production. need the CSRF section in stripe docs
 
-[ ] Paginate the tables. you shouldn't have more than X records on one table
+[x] Paginate the tables. you shouldn't have more than X records on one table
 
 [ ] Multi step form for lease. Just makes sense
 

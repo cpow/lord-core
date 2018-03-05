@@ -2,6 +2,7 @@
   <ol class="breadcrumb bg-white">
     <li class="breadcrumb-item"><%= link_to @company.name, authenticated_property_manager_root_path %></li>
     <li class="breadcrumb-item"><%= link_to @property.name, property_path(@property) %></li>
+    <li class="breadcrumb-item"><%= link_to 'Issues', property_issues_path(@property) %></li>
     <li class="breadcrumb-item"> <%= link_to "issue: #{@issue.id}", property_issue_path(@property, @issue) %></li>
     <li class="breadcrumb-item active" aria-current="page">Edit</li>
   </ol>
