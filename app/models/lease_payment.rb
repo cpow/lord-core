@@ -36,6 +36,8 @@ class LeasePayment < ApplicationRecord
     local_amount || lease.payment_amount
   end
 
+  # TODO: handle the negative form of this. update to active, and de-activate
+  # the next payment
   def deal_with_payment
     if human_amount_due <= 0
       update_attributes!(active: false)

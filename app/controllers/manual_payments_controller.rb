@@ -18,6 +18,7 @@ class ManualPaymentsController < ApplicationController
     @manual_payment = ManualPayment.new(create_params)
 
     if @manual_payment.save
+      @manual_payment.lease_payment.deal_with_payment
       redirect_to [@property, @unit, @lease_payment],
         notice: 'Created manual payment, thanks!'
     else

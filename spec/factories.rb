@@ -87,7 +87,9 @@ FactoryBot.define do
     unit
 
     trait :with_payment do
-      lease_payment
+      after(:create) do |instance|
+        create(:lease_payment, lease: instance)
+      end
     end
   end
 
