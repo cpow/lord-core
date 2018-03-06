@@ -18,6 +18,14 @@ class ApplicationController < ActionController::Base
     @property ||= Property.find(params[:property_id])
   end
 
+  def set_unit
+    @unit ||= Unit.find(params[:unit_id])
+  end
+
+  def set_lease_payment
+    @lease_payment ||= LeasePayment.find(params[:lease_payment_id])
+  end
+
   def set_property
     @property = current_property
   end

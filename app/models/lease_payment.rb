@@ -19,6 +19,8 @@ class LeasePayment < ApplicationRecord
   scope :active, -> { where(active: true) }
 
   has_many :payments
+  has_many :manual_payments
+
   has_many :users, through: :unit
   has_many :lease_payment_reminders
   has_many :events, as: :eventable
@@ -60,7 +62,7 @@ class LeasePayment < ApplicationRecord
   end
 
   def amount_due
-    (payment_amount - payments.sum(:amount))
+    (payment_amount - payments.sum(:amount) - manual_payments.sum(:amount))
   end
 
   def payment_late?

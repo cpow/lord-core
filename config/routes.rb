@@ -44,6 +44,10 @@ Rails.application.routes.draw do
     resources :property_images
   end
 
+  resources :lease_payments, only: [] do
+    resources :manual_payments
+  end
+
   resources :payments
   resources :payouts
   resources :tenant_plaid_accounts, only: :create

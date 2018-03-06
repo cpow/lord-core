@@ -20,6 +20,7 @@ them, etc...
 [ ] make chat messages its own component so it looks the same from chat to chat
 :)
 
+[ ] shallow routes
 
 
 [x] issues: need a few things

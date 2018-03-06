@@ -2,6 +2,7 @@
   <ol class="breadcrumb bg-white">
     <li class="breadcrumb-item"><%= link_to @property.company.name, authenticated_property_manager_root_path %></li>
     <li class="breadcrumb-item"><%= link_to @property.name, property_path(@property) %></li>
+    <li class="breadcrumb-item"><%= link_to 'Units', property_units_path(@property) %></li>
     <li class="breadcrumb-item"><%= link_to @unit.name, [@property, @unit] %></li>
     <li class="breadcrumb-item"><%= link_to 'Lease', [@property, @unit, @lease_payment.lease] %></li>
     <li class="breadcrumb-item active" aria-current="page">Payments</li>
@@ -12,8 +13,6 @@
   title: 'Lease Payment Information',
   text: 'Here is some information regardinig a lease payment. A lease payment may have already been paid, it may be due soon, or it may be late.' }
 %>
-
-<hr>
 
 <div class="card mb-4">
   <div class="card-body">
@@ -38,9 +37,12 @@
       </li>
     </ul>
   </div>
+  <div class="card-footer bg-white">
+    <%= link_to 'Record Manual Payment', new_lease_payment_manual_payment_path(@lease_payment), class: 'btn btn-primary' %>
+  </div>
 </div>
 
-<h3 class="text-center mb-4">Payments Already Made</h3>
+<h3 class="text-center mb-4">Payments</h3>
 
 <% if @lease_payment.payments.present? %>
   <div class="row equal-height text-center">
@@ -78,5 +80,39 @@
   </div>
 <% else %>
   <div class="alert alert-info">No payments have been made yet</div>
+<% end %>
+
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: 'Manual Payments',
+  text: '' }
+%>
+
+<% if @lease_payment.manual_payments.present? %>
+  <div class="row equal-height text-center">
+  <% @lease_payment.manual_payments.each do |manual_payment| %>
+      <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+        <div class="card payment">
+          <div class="card-body">
+            <h4>
+              Recorded
+            </h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item bg-transparent">
+                <strong class="pull-left">Payment:</strong>
+                <span class="pull-right">
+                <%= number_to_currency(manual_payment.human_amount) %>
+                </span>
+              </li>
+            </ul>
+          </div>
+          <div class="card-footer bg-white text-left">
+            <%= link_to 'Edit', edit_lease_payment_manual_payment_path(@lease_payment, manual_payment), class: 'btn btn-info btn-block' %>
+          </div>
+        </div>
+      </div>
+  <% end %>
+  </div>
+<% else %>
+  <div class="alert alert-info">No manual payments recorded</div>
 <% end %>
 

@@ -1,0 +1,19 @@
+<%= form_with(model: @manual_payment, local: true, url: @manual_payment.new_record? ? lease_payment_manual_payments_path(@lease_payment) : lease_payment_manual_payment_path(@lease_payment, @manual_payment)) do |form| %>
+  <%= render partial: 'layouts/errors',
+    locals: { object: @manual_payment } %>
+
+  <div class="form-group">
+    <%= form.label :amount %>
+    <%= form.number_field :amount, class: 'form-control', value: @manual_payment.human_amount %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :description %>
+    <%= form.text_area :description, class: 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: 'btn btn-primary btn-block' %>
+  </div>
+<% end %>
+

@@ -77,13 +77,6 @@ class Properties::Units::LeasesController < ApplicationController
       LeasePayment::CreateFromLease.new(lease: @lease).create_payments
     end
 
-    def set_property
-      @property ||= Property.find(params[:property_id])
-    end
-
-    def set_unit
-      @unit ||= Unit.find(params[:unit_id])
-    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def lease_params
