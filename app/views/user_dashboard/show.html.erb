@@ -19,6 +19,20 @@
   </div>
 <% end %>
 
+<% if @user.current_lease_payment.payment_late? %>
+  <div class="card alert alert-danger text-center">
+    <div class="card-body">
+      <h4 class="card-title">
+        Your Rent is currently Overdue
+      </h4>
+      <p>
+      Your rent was due on <%= @user.current_lease_payment.formatted_due_date %>. Please pay your rent as soon as you can. Thank you.
+      </p>
+      <%= link_to 'Pay Rent', new_payment_path, class: 'btn btn-danger' %>
+    </div>
+  </div>
+<% end %>
+
 <%= render partial: 'layouts/pretty_header', locals: {
   title: 'Getting Started',
   text: 'This is your basic information. Handle your banking information and your profile here.'
