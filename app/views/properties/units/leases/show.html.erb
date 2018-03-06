@@ -21,6 +21,11 @@
 
 <div class="card">
   <div class="card-body">
+    <% if @lease.active_lease_payment_count > 1 %>
+      <div class="alert alert-warning">
+        Your lease has two active lease payments. Please de-activate one.
+      </div>
+    <% end %>
     <div class="row mb-5 mt-3">
       <div class="col-lg-6 mb-4">
         <h3>
@@ -83,6 +88,7 @@
             <th scope="row">Due Date</th>
             <th scope="row">Amount Due</th>
             <th scope="row">Status</th>
+            <th scope="row">Active</th>
             <th scope="row">actions</th>
           </tr>
         </thead>
@@ -98,6 +104,11 @@
               </td>
               <td>
                 <%= badge_for_lease_payment_status(lease_payment) %>
+              </td>
+              <td>
+                <% if lease_payment.active? %>
+                  <i class='fa fa-check text-success'></i>
+                <% end %>
               </td>
               <td>
                 <%= link_to "Edit Amount", edit_property_unit_lease_payment_path(@property, @unit, lease_payment) %>

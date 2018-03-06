@@ -35,6 +35,17 @@ describe LeasePaymentQuery do
       end
     end
 
+    describe '#for_currently_late' do
+      it 'should return only lease payments that are late' do
+        late = create(:lease_payment, :late)
+        create(:lease_payment, :due_today)
+        query = described_class.new
+
+        expect(query.search.for_currently_late.count).to eq(1)
+        expect(query.search.for_currently_late).to include(late)
+      end
+    end
+
     describe '#for_no_reminders_of_type' do
       it 'should not return lease payments that have reminders of a type' do
         reminder_type = LeasePaymentReminder::REMINDER_TYPE_DUE_SOON

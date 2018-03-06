@@ -49,6 +49,10 @@ class Lease < ApplicationRecord
     lease_payment&.update_attributes!(active: true)
   end
 
+  def active_lease_payment_count
+    lease_payments.where(active: true).count
+  end
+
   def next_lease_payment_from_date(date)
     lease_payments.where("due_date > ?", date).first
   end

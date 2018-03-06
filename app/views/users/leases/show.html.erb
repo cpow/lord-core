@@ -75,7 +75,7 @@
             <tr>
               <td><%= human_date(lease_payment.due_date) %></td>
               <td>
-                <%= link_to(user_lease_payment_path(lease_payment.id)) do %>
+                <%= link_to(user_lease_payment_path(current_user, lease_payment.id)) do %>
                   <%= number_to_currency(lease_payment.human_amount_due) %>
                 <% end %>
               </td>

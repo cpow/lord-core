@@ -22,6 +22,9 @@ them, etc...
 
 [ ] shallow routes
 
+[ ] lease payments for tenant/manager view need shared partials for the shared
+stuff
+
 
 [x] issues: need a few things
  * paginate the table

@@ -1,0 +1,6 @@
+<div class="container text-center">
+  <h1>Friendly reminder that your rent currently late</h1>
+  <p>From <%= @lease_payment.unit.property.company.name %>. You are being reminded that your rent is late. it was due on <%= @lease_payment.formatted_due_date %>. Here are the details: </p>
+  <%= render partial: 'rent_card', locals: { lease_payment: @lease_payment } %>
+</div>
+

@@ -14,6 +14,10 @@ class LeasePaymentQuery
       where('due_date = ?', Time.zone.now.beginning_of_day)
     end
 
+    def for_currently_late
+      where('due_date < ?', Time.zone.now.beginning_of_day)
+    end
+
     def for_payments_due_soon
       where('reminder_date = ?', Time.zone.now.beginning_of_day)
     end

@@ -8,33 +8,78 @@
 <div class="card mb-4">
   <div class="card-body">
     <ul class="list-group list-group-flush">
-      <li class="list-group-item bg-transparent">
+      <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
         <strong class="pull-left">Due Date:</strong>
         <span class="pull-right">
           <%= human_date(@lease_payment.due_date) %>
         </span>
       </li>
-      <li class="list-group-item bg-transparent">
-        <strong class="pull-left">Amount Due:</strong>
-        <span class="pull-right">
-          <%= number_to_currency(@lease_payment.human_amount_due) %>
-        </span>
-      </li>
-      <li class="list-group-item bg-transparent">
+      <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
         <strong class="pull-left">Status</strong>
         <span class="pull-right">
           <%= badge_for_lease_payment_status(@lease_payment) %>
         </span>
       </li>
+      <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
+        <strong class="pull-left">Active</strong>
+        <span class="pull-right">
+          <% if @lease_payment.active? %>
+            <i class='fa fa-check text-success'></i>
+          <% else %>
+            <i class="fa fa-times text-danger"></i>
+          <% end %>
+        </span>
+      </li>
     </ul>
+
+    <h4 class="mt-4 ml-3">Totals</h4>
+    <div class="card mb-4">
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
+            <strong class="pull-left">Original Amount:</strong>
+            <span class="pull-right">
+              <%= number_to_currency(@lease_payment.human_payment_amount) %>
+            </span>
+          </li>
+          <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
+            <strong class="pull-left">Payments:</strong>
+            <span class="pull-right">
+              - <%= number_to_currency(@lease_payment.payment_total / 100) %>
+            </span>
+          </li>
+          <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
+            <strong class="pull-left">Manual Payments:</strong>
+            <span class="pull-right">
+              - <%= number_to_currency(@lease_payment.manual_total / 100) %>
+            </span>
+          </li>
+        </ul>
+        <ul class="list-group list-group-flush alert-success">
+          <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
+            <h4 class='font-weight-bold'>
+              <span class="pull-left">Due:</span>
+            </h4>
+            <h4>
+              <span class="pull-right font-weight-bold">
+                <%= number_to_currency(@lease_payment.human_amount_due) %>
+              </span>
+            </h4>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
-  <div class="card-footer text-center">
-    <%= link_to 'Back to Lease', user_lease_path(@lease_payment.lease), class: 'card-link font-weight-bold' %>
+  <div class="card-footer">
+    <%= link_to 'Back to Lease', user_lease_path(current_user, @lease_payment.lease), class: 'card-link font-weight-bold' %>
     <%= link_to 'Make a Payment', new_payment_path, class: 'card-link font-weight-bold' %>
   </div>
 </div>
 
-<h3 class="text-center mb-4">Payments Already Made</h3>
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: 'Tenant Payments',
+  text: '' }
+%>
 
 <% if @lease_payment.payments.present? %>
   <div class="row equal-height text-center">
@@ -71,5 +116,39 @@
   <% end %>
   </div>
 <% else %>
-  <div class="alert alert-info">No payments have been made yet</div>
+  <div class="alert alert-info">No payments have been made yet from tenants</div>
+<% end %>
+
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: 'Manual Payments',
+  text: '' }
+%>
+
+<% if @lease_payment.manual_payments.present? %>
+  <div class="row equal-height text-center">
+  <% @lease_payment.manual_payments.each do |manual_payment| %>
+      <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+        <div class="card payment">
+          <div class="card-body">
+            <h4>
+              Recorded
+            </h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item bg-transparent">
+                <strong class="pull-left">Payment:</strong>
+                <span class="pull-right">
+                <%= number_to_currency(manual_payment.human_amount) %>
+                </span>
+              </li>
+            </ul>
+          </div>
+          <div class="card-footer bg-white text-left">
+            <%= link_to 'Edit', edit_lease_payment_manual_payment_path(@lease_payment, manual_payment), class: 'btn btn-info btn-block' %>
+          </div>
+        </div>
+      </div>
+  <% end %>
+  </div>
+<% else %>
+  <div class="alert alert-info">No manual payments recorded</div>
 <% end %>

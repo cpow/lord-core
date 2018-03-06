@@ -13,9 +13,11 @@
 class LeasePaymentReminder < ApplicationRecord
   REMINDER_TYPE_DUE_NOW = 'due_now'.freeze
   REMINDER_TYPE_DUE_SOON = 'due_soon'.freeze
+  REMINDER_TYPE_DUE_LATE = 'late'.freeze
 
   REMINDER_TYPES = [
     REMINDER_TYPE_DUE_NOW,
+    REMINDER_TYPE_DUE_LATE,
     REMINDER_TYPE_DUE_SOON
   ].freeze
 

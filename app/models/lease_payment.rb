@@ -47,6 +47,22 @@ class LeasePayment < ApplicationRecord
     end
   end
 
+  def human_local_amount
+    local_amount.present? ? local_amount / 100 : 0
+  end
+
+  def human_payment_amount
+    payment_amount / 100
+  end
+
+  def manual_total
+    manual_payments.sum(:amount)
+  end
+
+  def payment_total
+    payments.sum(:amount)
+  end
+
   def users
     unit.users
   end
@@ -64,7 +80,7 @@ class LeasePayment < ApplicationRecord
   end
 
   def amount_due
-    (payment_amount - payments.sum(:amount) - manual_payments.sum(:amount))
+    (payment_amount - payment_total - manual_total)
   end
 
   def payment_late?

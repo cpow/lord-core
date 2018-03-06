@@ -8,4 +8,9 @@ namespace :lease_reminder do
   task due_now: :environment do
     LeasePayment::RemindUsers.rent_is_due
   end
+
+  desc "TODO"
+  task late: :environment do
+    LeasePayment::RemindUsers.rent_is_late
+  end
 end
