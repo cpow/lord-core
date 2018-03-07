@@ -1,5 +1,5 @@
-<div class="container text-center">
-  <h1 class="display-4">Welcome To Lord & Lease</h1>
+<div class="container text-center mt-4">
+  <h1>Welcome To Lord & Lease</h1>
   <div class="text-secondary mb-4">
     We've been waiting for you
   </div>
@@ -10,21 +10,20 @@
       <div class="card-body">
         <h4 class="mb-4">Managers</h4>
         <i class="fa fa-newspaper-o fa-3x text-primary mb-4"></i>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
+        <ul class="list-group list-group-flush mb-4">
+          <li class="list-group-item border-top-0 border-bottom-0">
             Manager your properties
           </li>
-          <li class="list-group-item">
+          <li class="list-group-item border-top-0 border-bottom-0">
             Never miss a rent payment again
           </li>
-          <li class="list-group-item">
+          <li class="list-group-item border-top-0 border-bottom-0">
             Easy to use lease management tools
           </li>
         </ul>
-      </div>
-      <div class="card-footer">
+
         <%= link_to "Manager sign in", new_property_manager_session_path,
-          class: 'font-weight-bold card-link' %>
+          class: 'font-weight-bold btn btn-primary' %>
       </div>
     </div>
   </div>
@@ -33,22 +32,20 @@
       <div class="card-body">
         <h4 class="mb-4">Tenants</h4>
         <i class="fa fa-user-o fa-3x text-primary mb-4"></i>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
+        <ul class="list-group list-group-flush mb-4">
+          <li class="list-group-item border-top-0 border-bottom-0">
             World class payment software
           </li>
-          <li class="list-group-item">
+          <li class="list-group-item border-top-0 border-bottom-0">
             Track your payments and disputes
           </li>
-          <li class="list-group-item">
+          <li class="list-group-item border-bottom-0 border-top-0">
             Easily report problems directly to management
           </li>
         </ul>
+        <%= link_to "Tenant sign in", new_user_session_path,
+          class: 'font-weight-bold card-link btn btn-primary' %>
       </div>
-        <div class="card-footer">
-          <%= link_to "Tenant sign in", new_user_session_path,
-            class: 'font-weight-bold card-link' %>
-        </div>
     </div>
   </div>
 </div>
