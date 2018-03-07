@@ -81,8 +81,8 @@
 
   </div>
   <div class="card-footer bg-white">
-    <%= link_to 'Record Manual Payment', new_lease_payment_manual_payment_path(@lease_payment), class: 'btn btn-primary' %>
-    <%= link_to 'Edit Information', edit_property_unit_lease_payment_path(@property, @unit, @lease_payment), class: 'btn btn-primary' %>
+    <%= link_to 'Record Manual Payment', new_lease_payment_manual_payment_path(@lease_payment), class: 'btn btn-primary mb-2 mt-2' %>
+    <%= link_to 'Edit Information', edit_property_unit_lease_payment_path(@property, @unit, @lease_payment), class: 'btn btn-primary mb-2 mt-2' %>
   </div>
 </div>
 
@@ -92,9 +92,9 @@
 %>
 
 <% if @lease_payment.payments.present? %>
-  <div class="row equal-height text-center">
+  <div class="row equal-height text-center justify-content-md-center">
   <% @lease_payment.payments.each do |payment| %>
-      <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+      <div class="col-sm-12 col-md-12 col-lg-4 mb-4">
         <div class="card payment">
           <div class="card-body">
             <h4>
@@ -128,16 +128,15 @@
 <% else %>
   <div class="alert alert-info">No payments have been made yet from tenants</div>
 <% end %>
-
 <%= render partial: 'layouts/pretty_header', locals: {
   title: 'Manual Payments',
   text: '' }
 %>
 
 <% if @lease_payment.manual_payments.present? %>
-  <div class="row equal-height text-center">
+  <div class="row equal-height text-center justify-content-md-center">
   <% @lease_payment.manual_payments.each do |manual_payment| %>
-      <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+      <div class="col-sm-12 col-md-12 col-lg-4 mb-4">
         <div class="card payment">
           <div class="card-body">
             <h4>
@@ -163,3 +162,14 @@
   <div class="alert alert-info">No manual payments recorded</div>
 <% end %>
 
+<div class="row">
+  <div class="col-lg-12 col-md-12 col-sm-12">
+    <%= render partial: 'layouts/pretty_header', locals: {
+      title: 'Reminders',
+      text: '' }
+    %>
+    <div class="row equal-height text-center justify-content-md-center">
+      <%= render @lease_payment.lease_payment_reminders %>
+    </div>
+  </div>
+</div>

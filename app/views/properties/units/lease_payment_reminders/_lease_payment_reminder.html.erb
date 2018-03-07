@@ -1,0 +1,21 @@
+<div class="col-sm-12 col-md-12 col-lg-4 mb-4">
+  <div class="card">
+    <div class="card-body">
+      <h4>Reminder type: <%= lease_payment_reminder.reminder_type %></h4>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
+            <strong class="pull-left">Date Sent:</strong>
+            <span class="pull-right">
+              <%= lease_payment_reminder.formatted_created_at %>
+            </span>
+          </li>
+          <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
+            <strong class="pull-left">Email Text:</strong>
+            <span class="pull-right">
+              <%= lease_payment_reminder.email_text %>
+            </span>
+          </li>
+        </ul>
+    </div>
+  </div>
+</div>

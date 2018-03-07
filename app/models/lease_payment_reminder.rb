@@ -25,4 +25,8 @@ class LeasePaymentReminder < ApplicationRecord
   has_many :events, as: :eventable
 
   validates :reminder_type, presence: true, inclusion: { in: REMINDER_TYPES }
+
+  def formatted_created_at
+    created_at.strftime('%B %d, %Y')
+  end
 end

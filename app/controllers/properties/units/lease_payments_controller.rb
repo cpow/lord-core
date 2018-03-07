@@ -23,7 +23,7 @@ class Properties::Units::LeasePaymentsController < ApplicationController
       Event.create(eventable: @lease_payment,
                    createable: current_property_manager,
                    event_type: Event::EVENT_EDITED)
-      redirect_to [@property, @unit, @lease_payment.lease], notice: 'Lease payment was successfully updated.'
+      redirect_to [@property, @unit, @lease_payment], notice: 'Lease payment was successfully updated.'
     else
       render :edit
     end
