@@ -45,7 +45,7 @@ class LeasePayment::RemindUsers
                       .for_no_reminders_of_type(reminder_type)
 
     @lease_payments.each do |lease_payment|
-      send_rent_reminder_email(lease_payment)
+      send_rent_late_email(lease_payment)
       LeasePaymentReminder.create!(
         lease_payment: lease_payment,
         reminder_type: reminder_type
