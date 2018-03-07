@@ -8,6 +8,11 @@
   </div>
 
   <div class="form-group">
+    <%= form.label :user, 'Tenant' %>
+    <%= form.select :user_id, options_for_select(tenants_for_unit(@unit), @manual_payment.user_id), {}, { class: 'form-control input-lg' } %>
+  </div>
+
+  <div class="form-group">
     <%= form.label :description %>
     <%= form.text_area :description, class: 'form-control' %>
   </div>

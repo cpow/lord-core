@@ -52,6 +52,6 @@ class ManualPaymentsController < ApplicationController
   end
 
   def manual_payment_params
-    params.require(:manual_payment).permit(:amount, :description)
+    params.require(:manual_payment).permit(:amount, :description, :user_id)
   end
 end

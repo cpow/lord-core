@@ -101,19 +101,19 @@
               Paid
             </h4>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item bg-transparent">
+              <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
                 <strong class="pull-left">Payment:</strong>
                 <span class="pull-right">
                 <%= number_to_currency(payment.human_amount) %>
                 </span>
               </li>
-              <li class="list-group-item bg-transparent">
+              <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
                 <strong class="pull-left">User Email:</strong>
                 <span class="pull-right">
                   <%= payment.user.email %>
                 </span>
               </li>
-              <li class="list-group-item bg-transparent">
+              <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
                 <strong class="pull-left">Status:</strong>
                 <span class="pull-right badge <%= payment_badge(payment) %>">
                   <%= payment.human_event_type %>
@@ -143,10 +143,22 @@
               Recorded
             </h4>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item bg-transparent">
+              <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
                 <strong class="pull-left">Payment:</strong>
                 <span class="pull-right">
                 <%= number_to_currency(manual_payment.human_amount) %>
+                </span>
+              </li>
+              <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
+                <strong class="pull-left">Tenant:</strong>
+                <span class="pull-right">
+                <%= manual_payment.user.email %>
+                </span>
+              </li>
+              <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
+                <strong class="pull-left">Description:</strong>
+                <span class="pull-right">
+                <%= manual_payment.description %>
                 </span>
               </li>
             </ul>
