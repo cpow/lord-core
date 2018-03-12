@@ -37,7 +37,7 @@ class Lease < ApplicationRecord
   end
 
   def total_paid
-    (lease_payments.map { |payment| payment.payments.sum(:amount) }.sum) / 100
+    (lease_payments.map { |payment| payment.manual_with_online_payment_total }.sum) / 100
   end
 
   def total_payments

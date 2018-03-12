@@ -63,6 +63,10 @@ class LeasePayment < ApplicationRecord
     payments.sum(:amount)
   end
 
+  def manual_with_online_payment_total
+    manual_total + payment_total
+  end
+
   def users
     unit.users
   end
