@@ -37,7 +37,8 @@ describe LeasePaymentQuery do
 
     describe '#for_currently_late' do
       it 'should return only lease payments that are late' do
-        late = create(:lease_payment, :late)
+        late = create(:lease_payment,
+                      past_due_date: Time.zone.now.beginning_of_day)
         create(:lease_payment, :due_today)
         query = described_class.new
 
