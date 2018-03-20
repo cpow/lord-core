@@ -77,7 +77,7 @@ class Chat extends Component {
             </div>
             <form onSubmit={this.sendData}>
               <div className="form-group">
-                <input type="text" id="message" className="dataInput form-control" />
+                <input type="text" id="message" autocomplete="off" className="dataInput form-control" />
               </div>
               <button type="submit" className="btn btn-primary">New Message</button>
             </form>
