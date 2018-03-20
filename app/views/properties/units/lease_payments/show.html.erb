@@ -91,7 +91,7 @@
       <div class="col-lg-6 col-sm-12">
         <div class="row">
           <h4 class="mt-4 ml-3">Reminders Sent to Tenants</h4>
-          <div class="row equal-height text-center justify-content-md-center">
+          <div class="row equal-height text-center">
             <%= render @lease_payment.lease_payment_reminders %>
           </div>
         </div>
@@ -105,7 +105,7 @@
         <% if @lease_payment.payments.present? %>
           <div class="row equal-height text-center">
             <% @lease_payment.payments.each do |payment| %>
-              <div class="col-sm-12 col-md-12 col-lg-6 mb-4">
+              <div class="col-sm-12 col-md-12 col-lg-12 mb-4">
                 <div class="card payment">
                   <div class="card-body">
                     <h4>
@@ -147,7 +147,7 @@
         <% if @lease_payment.manual_payments.present? %>
           <div class="row equal-height text-center">
             <% @lease_payment.manual_payments.each do |manual_payment| %>
-              <div class="col-sm-12 col-md-12 col-lg-6 mb-4">
+              <div class="col-sm-12 col-md-12 col-lg-12 mb-4">
                 <div class="card payment">
                   <% if manual_payment.manual_payment_receipts.present? %>
                     <%= image_tag manual_payment.manual_payment_receipts.first.image, class: 'card-img-top' %>
