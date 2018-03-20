@@ -7,10 +7,19 @@ class ManualPaymentsController < ApplicationController
 
   def new
     @manual_payment = ManualPayment.new(lease_payment: @lease_payment)
+    # build receipts so user can see them on the form
+    build_receipts(2)
+  end
+
+  def build_receipts(count)
+    count.times { @manual_payment.manual_payment_receipts.build }
   end
 
   def edit
     @manual_payment = ManualPayment.find(params[:id])
+    #if there are less than 2 receipts, build enough to allow user to add
+    #receipts to manual payment during edit
+    build_receipts(2 - @manual_payment.manual_payment_receipts.length)
   end
 
   def create
@@ -52,6 +61,6 @@ class ManualPaymentsController < ApplicationController
   end
 
   def manual_payment_params
-    params.require(:manual_payment).permit(:amount, :description, :user_id)
+    params.require(:manual_payment).permit(:amount, :description, :user_id, manual_payment_receipts_attributes: [:image])
   end
 end

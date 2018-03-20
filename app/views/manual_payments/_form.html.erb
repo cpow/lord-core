@@ -2,6 +2,8 @@
   <%= render partial: 'layouts/errors',
     locals: { object: @manual_payment } %>
 
+  <h4>Information</h4>
+
   <div class="form-group">
     <%= form.label :amount %>
     <%= form.number_field :amount, class: 'form-control', value: @manual_payment.human_amount %>
@@ -16,6 +18,16 @@
     <%= form.label :description %>
     <%= form.text_area :description, class: 'form-control' %>
   </div>
+
+  <h4>Images for this receipt</h4>
+  <small>Was this a check? If so, enter the front and back images here</small>
+
+  <%= form.fields_for :manual_payment_receipts do |receipt_form| %>
+    <div class="form-group">
+      <%= receipt_form.label :image %>
+      <%= receipt_form.file_field :image, class: 'form-control' %>
+    </div>
+  <% end %>
 
   <div class="actions">
     <%= form.submit class: 'btn btn-primary btn-block' %>

@@ -3,6 +3,13 @@
 ## Big Stuff!
  *things that will take a while to do, but really need to be done and are essential.*
 
+[ ] notify when user makes payment on lease
+  * maybe show that a new payment has been made
+  * send out an email to property managers
+
+[ ] better information on the fee when a user looks at pending funds on their
+finances page
+
 [ ] flesh out the residents view in property manager portal
 
 [ ] clean up all errors/warnings from react

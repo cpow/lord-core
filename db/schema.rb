@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180307142113) do
+ActiveRecord::Schema.define(version: 20180318205933) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -138,6 +138,17 @@ ActiveRecord::Schema.define(version: 20180307142113) do
     t.datetime "updated_at", null: false
     t.integer "payment_id"
     t.index ["payment_id"], name: "index_leases_on_payment_id"
+  end
+
+  create_table "manual_payment_receipts", force: :cascade do |t|
+    t.bigint "manual_payment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
+    t.index ["manual_payment_id"], name: "index_manual_payment_receipts_on_manual_payment_id"
   end
 
   create_table "manual_payments", force: :cascade do |t|
@@ -292,6 +303,7 @@ ActiveRecord::Schema.define(version: 20180307142113) do
   add_foreign_key "issue_images", "issues"
   add_foreign_key "issues", "properties"
   add_foreign_key "issues", "units"
+  add_foreign_key "manual_payment_receipts", "manual_payments"
   add_foreign_key "manual_payments", "lease_payments"
   add_foreign_key "manual_payments", "users"
   add_foreign_key "messages", "units"

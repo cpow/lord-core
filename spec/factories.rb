@@ -1,6 +1,10 @@
 require 'faker'
 
 FactoryBot.define do
+  factory :manual_payment_receipt do
+    manual_payment nil
+  end
+
   factory :issue_comment do
     issue nil
     commentable nil
