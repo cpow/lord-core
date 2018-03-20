@@ -8,7 +8,7 @@ module Api::V1
 
     def index
       property = Property.find(params[:property_id])
-      @events = property.notifications.order(:created_at).limit(100)
+      @events = property.notifications.order(created_at: :desc).limit(100)
       render :index, status: :ok
     end
 
