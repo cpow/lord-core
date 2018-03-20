@@ -4,7 +4,38 @@ import PropTypes from 'prop-types';
 const { Component } = React;
 
 class EventTable extends Component {
-  static notificationLink(event) {
+  static bodyFor(event) {
+    if (event.eventable_type === 'Issue') {
+      return event.eventable.description;
+    }
+
+    return event.eventable.body;
+  }
+
+  static badgeFor(event) {
+    if (event.eventable_type === 'Issue') {
+      return (
+        <i className="fa fa-exclamation-triangle text-warning pr-3" />
+      );
+    }
+
+    return (
+      <i className="fa fa-comments text-primary pr-3" />
+    );
+  }
+
+  static classFor(event) {
+    return event.read ? '' : 'font-weight-bold';
+  }
+
+  constructor(props) {
+    super(props);
+    this.notificationLink = this.notificationLink.bind(this);
+  }
+
+  notificationLink(event) {
+    this.props.markEventAsRead(event);
+
     switch (event.eventable_type) {
       case 'Message':
         window.location.pathname = `/properties/${event.property_id}/units/${event.eventable.unit_id}/messages`;
@@ -18,26 +49,6 @@ class EventTable extends Component {
       default:
         break;
     }
-  }
-
-  static bodyFor(event) {
-    if (event.eventable_type === 'Issue') {
-      return event.eventable.description;
-    }
-
-    return event.eventable.body;
-  }
-
-  static badgeFor(event) {
-    if (event.eventable_type === 'Issue') {
-      return (
-        <i className="fa fa-exclamation-triangle pr-3" />
-      );
-    }
-
-    return (
-      <i className="fa fa-comments pr-3" />
-    );
   }
 
   render() {
@@ -55,7 +66,12 @@ class EventTable extends Component {
 
           <tbody>
             {this.props.events.map(event => (
-              <tr key={event.id} onClick={() => EventTable.notificationLink(event)} style={{cursor: 'pointer'}}>
+              <tr
+                className={EventTable.classFor(event)}
+                key={event.id}
+                onClick={() => this.notificationLink(event)}
+                style={{ cursor: 'pointer' }}
+              >
                 <td>{EventTable.badgeFor(event)} {`${event.event_type} ${event.eventable_type}`}</td>
                 <td>{EventTable.bodyFor(event)}</td>
                 <td>{event.createable.name}</td>
@@ -71,6 +87,7 @@ class EventTable extends Component {
 
 EventTable.propTypes = {
   events: PropTypes.arrayOf.isRequired,
+  markEventAsRead: PropTypes.func.isRequired,
 };
 
 export default EventTable;

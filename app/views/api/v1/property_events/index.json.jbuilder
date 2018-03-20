@@ -8,6 +8,7 @@ json.events @events do |event|
     :event_type,
     :serialized_changes,
     :serialized_record,
+    :read,
     :createable,
     :createable_type
     )
