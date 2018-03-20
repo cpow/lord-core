@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180318205933) do
+ActiveRecord::Schema.define(version: 20180320193446) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,8 +65,12 @@ ActiveRecord::Schema.define(version: 20180318205933) do
     t.bigint "createable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "property_id"
+    t.boolean "read", default: false
     t.index ["createable_type", "createable_id"], name: "index_events_on_createable_type_and_createable_id"
     t.index ["eventable_type", "eventable_id"], name: "index_events_on_eventable_type_and_eventable_id"
+    t.index ["property_id"], name: "index_events_on_property_id"
+    t.index ["read"], name: "index_events_on_read"
   end
 
   create_table "issue_comments", force: :cascade do |t|

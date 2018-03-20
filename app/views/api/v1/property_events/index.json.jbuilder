@@ -2,6 +2,7 @@ json.events @events do |event|
   json.extract!(
     event,
     :id,
+    :property_id,
     :eventable,
     :eventable_type,
     :event_type,
@@ -11,4 +12,3 @@ json.events @events do |event|
     :createable_type
     )
 end
-

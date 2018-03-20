@@ -30,6 +30,7 @@ class Event < ApplicationRecord
 
   belongs_to :eventable, polymorphic: true
   belongs_to :createable, polymorphic: true
+  belongs_to :property, optional: true
 
   validates :event_type, inclusion: { in: Event::EVENT_TYPES }
   validates :eventable, presence: true

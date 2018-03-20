@@ -16,10 +16,14 @@ class IssueChatChannel < ApplicationCable::Channel
       commentable_type: data['commentableType']
     )
 
+    property = issue_comment.issue.property
+
     Event.create!(eventable: issue_comment,
                   createable: issue_comment.commentable,
                   event_type: Event::EVENT_CREATED,
+                  property: property
                  )
+
     issue_comment
   end
 

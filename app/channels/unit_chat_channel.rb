@@ -24,10 +24,14 @@ class UnitChatChannel < ApplicationCable::Channel
       messageable_type: data['messageableType']
     )
 
+    property = message.unit.property
+
     Event.create!(eventable: message,
                   createable: message.messageable,
                   event_type: Event::EVENT_CREATED,
+                  property: property
                  )
+
     message
   end
 
