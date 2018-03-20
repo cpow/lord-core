@@ -1,7 +1,7 @@
 class ManualPayment < ApplicationRecord
   belongs_to :lease_payment
   belongs_to :user
-  has_many :manual_payment_receipts
+  has_many :manual_payment_receipts, dependent: :destroy
   accepts_nested_attributes_for :manual_payment_receipts
 
 

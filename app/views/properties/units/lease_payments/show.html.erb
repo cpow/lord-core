@@ -21,7 +21,7 @@
     <%= link_to 'Edit Information', edit_property_unit_lease_payment_path(@property, @unit, @lease_payment), class: 'card-link font-weight-bold' %>
     </div>
     <hr>
-    
+
     <ul class="list-group list-group-flush">
       <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
         <strong class="pull-left">Due Date:</strong>
@@ -48,7 +48,6 @@
     </ul>
 
     <hr>
-
 
     <h4 class="mt-4 ml-3">Totals</h4>
     <ul class="list-group list-group-flush">
@@ -150,7 +149,7 @@
               <div class="col-sm-12 col-md-12 col-lg-12 mb-4">
                 <div class="card payment">
                   <% if manual_payment.manual_payment_receipts.present? %>
-                    <%= image_tag manual_payment.manual_payment_receipts.first.image, class: 'card-img-top' %>
+                    <%= image_tag manual_payment.manual_payment_receipts.first.image(:medium), class: 'card-img-top' %>
                   <% end %>
                   <div class="card-body">
                     <ul class="list-group list-group-flush">
@@ -175,7 +174,13 @@
                     </ul>
                   </div>
                   <div class="card-footer bg-white text-left">
-                    <%= link_to 'Edit', edit_lease_payment_manual_payment_path(@lease_payment, manual_payment), class: 'btn btn-info btn-block' %>
+                    <%= link_to 'Edit', edit_lease_payment_manual_payment_path(@lease_payment, manual_payment), class: 'card-link font-weight-bold' %>
+                    <%= link_to 'Delete',
+                      lease_payment_manual_payment_path(@lease_payment, manual_payment),
+                      method: :delete,
+                      data: {confirm: "Delete this manual payment. Are you sure? (you can always create another one)."},
+                      class: 'card-link font-weight-bold text-danger'
+                    %>
                   </div>
                 </div>
               </div>

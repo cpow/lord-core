@@ -46,6 +46,13 @@ class ManualPaymentsController < ApplicationController
     end
   end
 
+  def destroy
+    @manual_payment = ManualPayment.find(params[:id])
+    @manual_payment.destroy
+    redirect_to [@property, @unit, @lease_payment],
+      alert: 'manual payment has been deleted'
+  end
+
   private
 
   def set_lease
