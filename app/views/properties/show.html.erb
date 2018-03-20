@@ -37,7 +37,7 @@
 %>
   <% if @property.property_images.present? %>
       <div class="card-body">
-        <div id="carouselControls" class="carousel slide mb-4" data-ride="carousel">
+        <div id="carouselControls" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner bg-dark text-center">
             <% @property.property_images.each_with_index do |image, index| %>
               <div class="carousel-item <%= 'active' if index == 0 %>">
