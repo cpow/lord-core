@@ -3,7 +3,7 @@ module Api::V1
     def update
       @event = Event.find(params[:id])
       @event.update_attributes!(event_params)
-      render '', status: :ok
+      render @event, status: :ok
     end
 
     def index

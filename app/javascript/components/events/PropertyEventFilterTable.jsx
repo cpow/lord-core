@@ -40,11 +40,26 @@ class PropertyEventFilterTable extends Component {
         if (e.id === event.id) {
           e.read = true;
         }
+
+        return e;
       });
 
-
       this.setState({ filteredEvents: newEvents });
-    });
+
+      switch (event.eventable_type) {
+        case 'Message':
+          window.location.pathname = `/properties/${event.property_id}/units/${event.eventable.unit_id}/messages`;
+          break;
+        case 'IssueComment':
+          window.location.pathname = `/properties/${event.property_id}/issues/${event.eventable.issue_id}`;
+          break;
+        case 'Issue':
+          window.location.pathname = `/properties/${event.property_id}/issues/${event.eventable.id}`;
+          break;
+        default:
+          break;
+      }
+    }).catch((error) => { console.log(error); });
   }
 
   render() {

@@ -30,25 +30,6 @@ class EventTable extends Component {
 
   constructor(props) {
     super(props);
-    this.notificationLink = this.notificationLink.bind(this);
-  }
-
-  notificationLink(event) {
-    this.props.markEventAsRead(event);
-
-    switch (event.eventable_type) {
-      case 'Message':
-        window.location.pathname = `/properties/${event.property_id}/units/${event.eventable.unit_id}/messages`;
-        break;
-      case 'IssueComment':
-        window.location.pathname = `/properties/${event.property_id}/issues/${event.eventable.issue_id}`;
-        break;
-      case 'Issue':
-        window.location.pathname = `/properties/${event.property_id}/issues/${event.eventable.id}`;
-        break;
-      default:
-        break;
-    }
   }
 
   render() {
@@ -69,7 +50,7 @@ class EventTable extends Component {
               <tr
                 className={EventTable.classFor(event)}
                 key={event.id}
-                onClick={() => this.notificationLink(event)}
+                onClick={() => this.props.markEventAsRead(event)}
                 style={{ cursor: 'pointer' }}
               >
                 <td>{EventTable.badgeFor(event)} {`${event.event_type} ${event.eventable_type}`}</td>
