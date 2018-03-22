@@ -89,7 +89,6 @@ FetchTable.propTypes = {
   status: PropTypes.string.isRequired,
   nextPage: PropTypes.func.isRequired,
   prevPage: PropTypes.func.isRequired,
-  totalPages: PropTypes.number.isRequired,
   page: PropTypes.number.isRequired,
 };
 

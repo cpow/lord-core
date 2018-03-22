@@ -1,73 +1,63 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
-import EventTable from 'components/events/EventTable';
+import queryString from 'query-string';
+import EventFetchTable from 'components/events/EventFetchTable';
 
 const { Component } = React;
 
-const token = document.getElementsByName('csrf-token')[0].getAttribute('content');
-axios.defaults.headers.common['X-CSRF-Token'] = token;
-axios.defaults.headers.common.Accept = 'application/json';
+const defaultQueryParams = {
+  page: 1,
+};
 
 class PropertyEventFilterTable extends Component {
   constructor(props) {
     super(props);
-    this.state = { filteredEvents: [] };
-    this.onMarkEvent = this.onMarkEvent.bind(this);
+
+    this.state = defaultQueryParams;
+
+    this.nextPage = this.nextPage.bind(this);
+    this.prevPage = this.prevPage.bind(this);
+    this.resetParams = this.resetParams.bind(this);
   }
 
-  componentDidMount() {
-    const { propertyId } = this.props;
-
-    axios.get(`/api/v1/properties/${propertyId}/events`).then((resp) => {
-      const { events } = resp.data;
-      this.setState({ filteredEvents: events });
-    }).catch(() => {
-    });
+  componentWillMount() {
+    const currentQuery = queryString.parse(window.location.search);
+    if (Object.keys(currentQuery).length !== 0) {
+      const { page } = currentQuery;
+      this.setState({ page });
+    }
   }
 
-  onMarkEvent(event) {
-    const data = {
-      event: {
-        read: true,
-      },
-    };
+  resetParams() {
+    this.setState(defaultQueryParams);
+  }
 
-    axios.patch(`/api/v1/properties/${this.props.propertyId}/events/${event.id}`, data).then(() => {
-      const currentEvents = this.state.filteredEvents;
+  nextPage() {
+    let { page } = this.state;
+    page = parseInt(page, 10);
+    page += 1;
+    this.setState({ page });
+  }
 
-      const newEvents = currentEvents.map((e) => {
-        if (e.id === event.id) {
-          e.read = true;
-        }
-
-        return e;
-      });
-
-      this.setState({ filteredEvents: newEvents });
-
-      switch (event.eventable_type) {
-        case 'Message':
-          window.location.pathname = `/properties/${event.property_id}/units/${event.eventable.unit_id}/messages`;
-          break;
-        case 'IssueComment':
-          window.location.pathname = `/properties/${event.property_id}/issues/${event.eventable.issue_id}`;
-          break;
-        case 'Issue':
-          window.location.pathname = `/properties/${event.property_id}/issues/${event.eventable.id}`;
-          break;
-        default:
-          break;
-      }
-    }).catch((error) => { console.log(error); });
+  prevPage() {
+    let { page } = this.state;
+    page = parseInt(page, 10);
+    page -= 1;
+    this.setState({ page });
   }
 
   render() {
+    const { page } = this.state;
+
     return (
-      <EventTable
-        events={this.state.filteredEvents}
-        markEventAsRead={this.onMarkEvent}
-      />
+      <div>
+        <EventFetchTable
+          page={parseInt(page, 10)}
+          propertyId={this.props.propertyId}
+          nextPage={this.nextPage}
+          prevPage={this.prevPage}
+        />
+      </div>
     );
   }
 }

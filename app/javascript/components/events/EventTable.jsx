@@ -40,8 +40,7 @@ class EventTable extends Component {
             <tr>
               <th scope="row">Type</th>
               <th scope="row">Description</th>
-              <th scope="row">User Name</th>
-              <th scope="row">User Type</th>
+              <th scope="row">User</th>
             </tr>
           </thead>
 
@@ -54,9 +53,8 @@ class EventTable extends Component {
                 style={{ cursor: 'pointer' }}
               >
                 <td>{EventTable.badgeFor(event)} {`${event.event_type} ${event.eventable_type}`}</td>
-                <td>{EventTable.bodyFor(event)}</td>
-                <td>{event.createable.name}</td>
-                <td>{event.createable_type}</td>
+                <td className="text-truncate" style={{maxWidth: '300px'}}>{EventTable.bodyFor(event)}</td>
+                <td>{event.createable.email}</td>
               </tr>
             ))}
           </tbody>

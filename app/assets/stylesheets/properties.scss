@@ -1,3 +1,21 @@
 // Place all the styles related to the Properties controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@include media-breakpoint-up(sm) {
+  .card.property-events {
+    height: 550px;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .card.property-events {
+    height: 600px;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .card.property-events {
+    height: 450px;
+  }
+}
