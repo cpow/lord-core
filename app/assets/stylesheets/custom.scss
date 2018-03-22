@@ -1,6 +1,24 @@
 $primary: #4281B2;
 @import "bootstrap";
 
+@include media-breakpoint-up(sm) {
+  .card.property-events {
+    height: 600px;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .card.property-events {
+    height: 550px;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .card.property-events {
+    height: 450px;
+  }
+}
+
 // NOTE: This makes card decks responsive https://github.com/twbs/bootstrap/issues/20321
 .row.equal-height {
   display: flex;
