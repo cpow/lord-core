@@ -3,19 +3,19 @@ $primary: #4281B2;
 
 @include media-breakpoint-up(sm) {
   .card.property-events {
-    height: 600px;
+    height: 650px;
   }
 }
 
 @include media-breakpoint-up(md) {
   .card.property-events {
-    height: 550px;
+    height: 600px;
   }
 }
 
 @include media-breakpoint-up(lg) {
   .card.property-events {
-    height: 450px;
+    height: 500px;
   }
 }
 

@@ -16,6 +16,7 @@ class EventFetchTable extends Component {
     this.state = { events: [] };
 
     this.onMarkEvent = this.onMarkEvent.bind(this);
+    this.unreadEvents = this.unreadEvents.bind(this);
     this.next = this.next.bind(this);
     this.prev = this.prev.bind(this);
   }
@@ -104,12 +105,22 @@ class EventFetchTable extends Component {
     }
   }
 
+  unreadEvents() {
+    return this.state.events.filter(event => event.read === false);
+  }
+
   render() {
     const { totalPages } = this.state;
     const { page } = this.props;
+    const unreadEvents = this.unreadEvents();
 
     return (
       <div>
+        {unreadEvents.length > 0 &&
+          <div className="alert alert-danger text-center">
+            You have {unreadEvents.length} unread notifications.
+          </div>
+        }
         <div className="row mb-2">
           <div className="col">
             <Pagination
