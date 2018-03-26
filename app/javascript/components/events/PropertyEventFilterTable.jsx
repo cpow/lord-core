@@ -54,6 +54,8 @@ class PropertyEventFilterTable extends Component {
         <EventFetchTable
           page={parseInt(page, 10)}
           propertyId={this.props.propertyId}
+          readerType={this.props.readerType}
+          readerId={this.props.readerId}
           nextPage={this.nextPage}
           prevPage={this.prevPage}
         />
@@ -64,6 +66,8 @@ class PropertyEventFilterTable extends Component {
 
 PropertyEventFilterTable.propTypes = {
   propertyId: PropTypes.number.isRequired,
+  readerType: PropTypes.string.isRequired,
+  readerId: PropTypes.number.isRequired,
 };
 
 export default PropertyEventFilterTable;

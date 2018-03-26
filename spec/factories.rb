@@ -5,14 +5,21 @@ FactoryBot.define do
     manual_payment nil
   end
 
+  factory :event_read do
+    event
+    reader nil
+  end
+
   factory :issue_comment do
     issue nil
     commentable nil
     body "MyText"
   end
+
   factory :issue_image do
     issue nil
   end
+
   factory :issue do
     property
     unit
@@ -22,9 +29,9 @@ FactoryBot.define do
   end
 
   factory :event do
-    eventable nil
-    event_type "MyString"
-    createable nil
+    eventable { build(:property) }
+    createable { build(:user) }
+    event_type Event::EVENT_CREATED
   end
 
   factory :message do

@@ -30,14 +30,16 @@ class EventFetchTable extends Component {
   }
 
   onMarkEvent(event) {
+    const { readerType, readerId } = this.props;
     const data = {
-      event: {
-        read: true,
+      event_read: {
+        reader_type: readerType,
+        reader_id: readerId,
       },
     };
 
-    axios.patch(
-      `/api/v1/properties/${this.props.propertyId}/events/${event.id}`,
+    axios.post(
+      `/api/v1/events/${event.id}/event_reads`,
       data,
     ).then(() => {
       const currentEvents = this.state.events;
@@ -50,11 +52,10 @@ class EventFetchTable extends Component {
         return e;
       });
 
-      this.setState({ events: newEvents });
-
       switch (event.eventable_type) {
         case 'Message':
-          window.location.pathname = `/properties/${event.property_id}/units/${event.eventable.unit_id}/messages`;
+          const url = `/properties/${event.property_id}/units/${event.eventable.unit_id}/messages`;
+          window.location.pathname = url;
           break;
         case 'IssueComment':
           window.location.pathname = `/properties/${event.property_id}/issues/${event.eventable.issue_id}`;
@@ -69,6 +70,7 @@ class EventFetchTable extends Component {
   }
 
   fetchEvents(next = null) {
+    this.setState(this.state);
     const currentProps = next !== null ? next : this.props;
     const {
       propertyId, page,
@@ -146,6 +148,8 @@ class EventFetchTable extends Component {
 
 EventFetchTable.propTypes = {
   propertyId: PropTypes.number.isRequired,
+  readerType: PropTypes.string.isRequired,
+  readerId: PropTypes.number.isRequired,
   nextPage: PropTypes.func.isRequired,
   prevPage: PropTypes.func.isRequired,
   page: PropTypes.number.isRequired,

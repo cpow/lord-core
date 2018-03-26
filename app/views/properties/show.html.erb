@@ -147,6 +147,11 @@
   text: 'New messgages, issues reported, and everything else.' }
 %>
 <div id="propertyId" data-property-id="<%= @property.id %>"></div>
+<div id="reader"
+  data-reader-type="<%= current_property_manager.class.name %>"
+  data-reader-id="<%= current_property_manager.id %>"
+  >
+</div>
 <div class="card mb-4 property-events">
   <div class="card-body">
     <div id="property_events"></div>

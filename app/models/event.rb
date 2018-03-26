@@ -32,6 +32,8 @@ class Event < ApplicationRecord
   belongs_to :createable, polymorphic: true
   belongs_to :property, optional: true
 
+  has_many :event_reads
+
   validates :event_type, inclusion: { in: Event::EVENT_TYPES }
   validates :eventable, presence: true
 
@@ -39,6 +41,14 @@ class Event < ApplicationRecord
 
   def take_snapshot_of_record
     self.serialized_record = eventable.to_json
+  end
+
+  def has_been_read_by?(user)
+    read_by(user).present?
+  end
+
+  def read_by(user)
+    event_reads.where(reader: user)
   end
 
   def record_what_changed

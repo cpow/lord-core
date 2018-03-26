@@ -3,6 +3,8 @@
 ## Big Stuff!
  *things that will take a while to do, but really need to be done and are essential.*
 
+[ ] private github organization for repository
+
 [ ] notify when user makes payment on lease
   * maybe show that a new payment has been made
   * send out an email to property managers
@@ -48,7 +50,7 @@ stuff
  * maybe need to make a special kind of lease with no end. and you just run a
    cron job that updates these leases with more lease payments. every 6 months?
 
-[ ] NOTIFICATIONS
+[x] NOTIFICATIONS
  * notify users on a per-unit and per-property basis
  * maybe this is very similar to chat?????
     * yes, you can hit people with notifications in actioncable

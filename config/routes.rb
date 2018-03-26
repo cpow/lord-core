@@ -73,6 +73,10 @@ Rails.application.routes.draw do
 
       resources :issues, only: :create
 
+      resources :events, only: [] do
+        resources :event_reads, only: :create
+      end
+
       # Tables from a property's perspective
       resources :properties, only: [] do
         resources :units, only: :index, controller: :property_units

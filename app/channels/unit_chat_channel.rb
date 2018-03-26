@@ -29,7 +29,7 @@ class UnitChatChannel < ApplicationCable::Channel
     Event.create!(eventable: message,
                   createable: message.messageable,
                   event_type: Event::EVENT_CREATED,
-                  property: property
+                  property: property,
                  )
 
     message

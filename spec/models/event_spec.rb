@@ -27,6 +27,26 @@ RSpec.describe Event, type: :model do
     expect(event.serialized_record).to eq(property.to_json)
   end
 
+  describe "read_by" do
+    it 'will return event_read where user is that user' do
+      event = create(:event)
+      user = create(:user)
+      read = create(:event_read, reader: user, event: event)
+
+      expect(event.read_by(user)).to eq([read])
+    end
+  end
+
+  describe "#has_been_read_by?" do
+    it 'will return true if user has read an event' do
+      event = create(:event)
+      user = create(:user)
+      create(:event_read, reader: user, event: event)
+
+      expect(event.has_been_read_by?(user)).to be_truthy
+    end
+  end
+
   it 'will record what changed through previous_changes' do
     property = create(:property)
     property.update_attributes!(name: "something else")
