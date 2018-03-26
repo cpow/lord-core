@@ -20,6 +20,14 @@ class Properties::Units::ResidenciesController < ApplicationController
     @residency = Residency.find(params[:id])
   end
 
+  def send_another_invite
+    @residency = Residency.find(params[:id])
+    InviteUserToPropertyMailer.invite(@residency).deliver_later
+
+    flash[:success] = 'Another invite email has been sent to resident!'
+    redirect_to [@residency.property, @residency.unit, @residency]
+  end
+
   def create
     @residency = current_property.residencies.new(residency_params)
 

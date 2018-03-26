@@ -48,6 +48,12 @@
       </li>
     </ul>
   </div>
+  <div class="card-footer bg-white">
+    <% if @residency.user.status == 'pending' %>
+      <%= link_to 'Send Another Invite', property_unit_send_another_invite_path(@residency.property, @residency.unit, @residency), data: { confirm: 'Send another invite email to this user?' }, class: 'card-link font-weight-bold' %>
+    <% end %>
+    <%= link_to 'Chat', property_unit_messages_path(@residency.property, @residency.unit), class: 'card-link font-weight-bold' %>
+  </div>
 </div>
 
 <%= render partial: 'layouts/pretty_header', locals: {

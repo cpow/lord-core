@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     resources :units, controller: 'properties/units' do
       resources :leases, controller: 'properties/units/leases'
       resources :residencies, controller: 'properties/units/residencies'
+      get 'residency/:id/send_another_invite', to: 'properties/units/residencies#send_another_invite', as: 'send_another_invite'
       resources :lease_payments, controller: 'properties/units/lease_payments'
       resources :messages, controller: 'properties/units/messages'
     end
