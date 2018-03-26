@@ -16,6 +16,10 @@ manager = FactoryBot.create(:property_manager,
 
 property = FactoryBot.create(:property, company: manager.company)
 
+admin = FactoryBot.create(:admin,
+                          email: 'admin@example.com',
+                          password: 'test1234')
+
 user = FactoryBot.create(
   :user,
   email: 'tenant@example.com',
