@@ -3,7 +3,7 @@ module ApplicationCable
     identified_by :current_user
 
     def connect
-      current_user = verify_current_user
+      @current_user = verify_current_user
     end
 
     private

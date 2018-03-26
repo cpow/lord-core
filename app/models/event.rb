@@ -31,6 +31,7 @@ class Event < ApplicationRecord
   belongs_to :eventable, polymorphic: true
   belongs_to :createable, polymorphic: true
   belongs_to :property, optional: true
+  belongs_to :unit, optional: true
 
   has_many :event_reads
 

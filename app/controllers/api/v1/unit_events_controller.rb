@@ -1,11 +1,11 @@
 module Api::V1
-  class PropertyEventsController < ApplicationController
-    before_action :authenticate_property_manager!
+  class UnitEventsController < ApplicationController
+    before_action :authenticate_user!
 
     def index
-      property = Property.find(params[:property_id])
+      unit = Unit.find(params[:unit_id])
 
-      @events = property
+      @events = unit
                 .notifications
                 .includes(:event_reads)
                 .order(created_at: :desc)
@@ -25,3 +25,4 @@ module Api::V1
     end
   end
 end
+

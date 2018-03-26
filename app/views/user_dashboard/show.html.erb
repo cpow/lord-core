@@ -165,6 +165,24 @@
   </div>
 </div>
 
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: "Notifications",
+  text: 'New messgages, issues reported, and everything else.' }
+%>
+<div id="unitId" data-unit-id="<%= @user.current_unit.id %>"></div>
+<div id="reader"
+  data-reader-type="<%= current_user.class.name %>"
+  data-reader-id="<%= current_user.id %>"
+  >
+</div>
+<div class="card mb-4 property-events">
+  <div class="card-body">
+    <div id="property_events"></div>
+  </div>
+</div>
+
+<%= javascript_pack_tag 'unit_event_table' %>
+
 <% if @user.residencies.present? %>
   <%= render partial: 'layouts/pretty_header', locals: {
     title: 'Your Home',

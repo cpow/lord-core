@@ -52,20 +52,38 @@ class EventFetchTable extends Component {
         return e;
       });
 
-      switch (event.eventable_type) {
-        case 'Message':
-          const url = `/properties/${event.property_id}/units/${event.eventable.unit_id}/messages`;
-          window.location.pathname = url;
-          break;
-        case 'IssueComment':
-          window.location.pathname = `/properties/${event.property_id}/issues/${event.eventable.issue_id}`;
-          break;
-        case 'Issue':
-          window.location.pathname = `/properties/${event.property_id}/issues/${event.eventable.id}`;
-          break;
-        default:
-          break;
+      if (readerType === 'User') {
+        switch (event.eventable_type) {
+          case 'Message':
+            const url = `/units/${event.eventable.unit_id}/messages`;
+            window.location.pathname = url;
+            break;
+          case 'IssueComment':
+            window.location.pathname = `/users/${readerId}/issues/${event.eventable.issue_id}`;
+            break;
+          case 'Issue':
+            window.location.pathname = `/users/${readerId}/issues/${event.eventable.id}`;
+            break;
+          default:
+            break;
+        }
+      } else {
+        switch (event.eventable_type) {
+          case 'Message':
+            const url = `/properties/${event.property_id}/units/${event.eventable.unit_id}/messages`;
+            window.location.pathname = url;
+            break;
+          case 'IssueComment':
+            window.location.pathname = `/properties/${event.property_id}/issues/${event.eventable.issue_id}`;
+            break;
+          case 'Issue':
+            window.location.pathname = `/properties/${event.property_id}/issues/${event.eventable.id}`;
+            break;
+          default:
+            break;
+        }
       }
+
     }).catch((error) => { console.log(error); });
   }
 
@@ -73,7 +91,7 @@ class EventFetchTable extends Component {
     this.setState(this.state);
     const currentProps = next !== null ? next : this.props;
     const {
-      propertyId, page,
+      propertyId, unitId, page,
     } = currentProps;
 
     const params = new URLSearchParams();
@@ -85,7 +103,12 @@ class EventFetchTable extends Component {
       headers: { Pragma: 'no-cache' },
     });
 
-    api.get(`/api/v1/properties/${propertyId}/events?${params}`).then((resp) => {
+    // looking for unit events, or property events?
+    const url = (unitId === null) ?
+      `/api/v1/properties/${propertyId}/events?${params}` :
+      `/api/v1/units/${unitId}/events?${params}`;
+
+    api.get(url).then((resp) => {
       const { events } = resp.data;
       const totalPages = resp.data.pagination.total_pages;
       this.setState({ events, totalPages });
@@ -148,6 +171,7 @@ class EventFetchTable extends Component {
 
 EventFetchTable.propTypes = {
   propertyId: PropTypes.number.isRequired,
+  unitId: PropTypes.number.isRequired,
   readerType: PropTypes.string.isRequired,
   readerId: PropTypes.number.isRequired,
   nextPage: PropTypes.func.isRequired,

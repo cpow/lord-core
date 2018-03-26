@@ -17,12 +17,17 @@ class IssueChatChannel < ApplicationCable::Channel
     )
 
     property = issue_comment.issue.property
+    unit = issue_comment.issue.unit
 
-    Event.create!(eventable: issue_comment,
-                  createable: issue_comment.commentable,
-                  event_type: Event::EVENT_CREATED,
-                  property: property
-                 )
+    event = Event.create!(
+      eventable: issue_comment,
+      createable: issue_comment.commentable,
+      event_type: Event::EVENT_CREATED,
+      property: property,
+      unit: unit
+    )
+
+    event.event_reads.create!(reader: current_user)
 
     issue_comment
   end

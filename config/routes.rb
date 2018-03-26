@@ -68,7 +68,9 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
       # Tables from a company's perspective
-      resources :units, only: :index
+      resources :units, only: :index do
+        resources :events, only: :index, controller: :unit_events
+      end
       resources :residencies, only: :index
 
       resources :issues, only: :create
@@ -81,7 +83,7 @@ Rails.application.routes.draw do
       resources :properties, only: [] do
         resources :units, only: :index, controller: :property_units
         resources :residencies, only: :index, controller: :property_residencies
-        resources :events, only: [:index, :update], controller: :property_events
+        resources :events, only: :index, controller: :property_events
         resources :issues, only: :index, controller: :property_issues
       end
 

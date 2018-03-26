@@ -25,12 +25,18 @@ class UnitChatChannel < ApplicationCable::Channel
     )
 
     property = message.unit.property
+    unit = message.unit
 
-    Event.create!(eventable: message,
-                  createable: message.messageable,
-                  event_type: Event::EVENT_CREATED,
-                  property: property,
-                 )
+    event = Event.create!(
+      eventable: message,
+      createable: message.messageable,
+      event_type: Event::EVENT_CREATED,
+      property: property,
+      unit: unit
+    )
+
+
+    event.event_reads.create!(reader: current_user)
 
     message
   end
