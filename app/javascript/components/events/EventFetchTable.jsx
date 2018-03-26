@@ -7,8 +7,13 @@ import Pagination from 'components/Pagination';
 const { Component } = React;
 
 const token = document.getElementsByName('csrf-token')[0].getAttribute('content');
-axios.defaults.headers.common['X-CSRF-Token'] = token;
-axios.defaults.headers.common.Accept = 'application/json';
+
+const api = axios.create({
+  headers: { Pragma: 'no-cache' },
+});
+
+api.defaults.headers.common['X-CSRF-Token'] = token;
+api.defaults.headers.common.Accept = 'application/json';
 
 class EventFetchTable extends Component {
   constructor(props) {
@@ -38,7 +43,8 @@ class EventFetchTable extends Component {
       },
     };
 
-    axios.post(
+
+    api.post(
       `/api/v1/events/${event.id}/event_reads`,
       data,
     ).then(() => {
@@ -99,9 +105,6 @@ class EventFetchTable extends Component {
 
     window.history.replaceState({}, '', `?${params.toString()}`);
 
-    const api = axios.create({
-      headers: { Pragma: 'no-cache' },
-    });
 
     // looking for unit events, or property events?
     const url = (unitId === null) ?

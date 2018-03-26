@@ -1,5 +1,5 @@
 <div class="col-sm-12 col-md-6 col-lg-4 mb-4", id="issue_<%= issue.id %>">
-  <%= link_to user_issue_path(current_user, issue), class: 'card' do %>
+  <div class="card">
     <% if issue.issue_images.present? %>
       <%= image_tag issue.issue_images.first.image.url(:medium), class: 'card-img-top' %>
     <% end %>
@@ -8,9 +8,7 @@
       <p><%= issue.description %></p>
     </div>
     <div class="card-footer">
-      <small>
-        <strong>Reported By: </strong> <%= issue.reporter.name %> (<%= issue.reporter.email %>)
-      </small>
+      <%= link_to 'View', property_issue_path(issue.property, issue), class: 'btn btn-info' %>
     </div>
-  <% end %>
+  </div>
 </div>

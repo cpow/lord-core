@@ -15,14 +15,75 @@
 
 <div class="card">
   <div class="card-body">
+    <h3 class="mb-4"><%= @residency.user.email %></h3>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
+        <strong class="pull-left">Status:</strong>
+        <span class="pull-right">
+          <% if @residency.user.status == 'active' %>
+            <span class='badge badge-success'><%= @residency.user.status %></span>
+          <% else %>
+            <span class='badge badge-warning'><%= @residency.user.status %></span>
+          <% end %>
+        </span>
+      </li>
+      <li class="list-group-item bg-transparent border-bottom-0 border-top-0">
+        <strong class="pull-left">Current Unit:</strong>
+        <span class="pull-right">
+          <%= link_to @residency.user.current_unit.name, property_unit_path(@residency.user.current_unit) %>
+        </span>
+      </li>
+      <li class="list-group-item bg-transparent border-bottom-0 border-top-0">
+        <strong class="pull-left">Current Lease ID:</strong>
+        <span class="pull-right">
+          <%= link_to "lease ID: #{@residency.user.current_lease.id}", property_unit_lease_path(@residency.user.current_lease) %>
+        </span>
+      </li>
 
-    <%= render partial: 'layouts/pretty_header', locals: {
-      title: "Recent payments for this resident",
-      text: '' }
-    %>
-
-    <% if @residency.payments %>
-      <%= render 'shared/payments/table', payments: @residency.payments %>
-    <% end %>
+      <li class="list-group-item bg-transparent border-bottom-0 border-top-0">
+        <strong class="pull-left">Current Owed:</strong>
+        <span class="pull-right">
+          <%= number_to_currency(@residency.user.current_human_amount_owed) %>
+        </span>
+      </li>
+    </ul>
   </div>
 </div>
+
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: "Reported issues from this user",
+  text: '' }
+%>
+
+<% if @residency.user.issues.present? %>
+  <div class="row equal-height">
+    <% @residency.user.issues.limit(5).each do |issue| %>
+        <%= render 'shared/issues/issue', issue: issue %>
+    <% end %>
+  </div>
+<% end %>
+
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: "Recent payments for this resident",
+  text: '' }
+%>
+
+<% if @residency.user.payments %>
+  <div class="row equal-height text-center">
+    <% @residency.user.payments.limit(5).each do |payment| %>
+      <%= render 'shared/payments/payment_card', payment: payment %>
+    <% end %>
+  </div>
+<% end %>
+
+<% if @residency.user.manual_payments %>
+  <%= render partial: 'layouts/pretty_header', locals: {
+    title: "Recent manual payments for this resident",
+    text: '' }
+  %>
+  <div class="row equal-height text-center">
+    <% @residency.user.manual_payments.limit(5).each do |manual_payment| %>
+      <%= render 'shared/payments/manual_payment_card', manual_payment: manual_payment %>
+    <% end %>
+  </div>
+<% end %>

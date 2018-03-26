@@ -1,0 +1,39 @@
+<div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+  <div class="card payment">
+    <% if manual_payment.manual_payment_receipts.present? %>
+      <%= image_tag manual_payment.manual_payment_receipts.first.image(:medium), class: 'card-img-top' %>
+    <% end %>
+    <div class="card-body">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
+          <strong class="pull-left">Payment:</strong>
+          <span class="pull-right">
+            <%= number_to_currency(manual_payment.human_amount) %>
+          </span>
+        </li>
+        <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
+          <strong class="pull-left">Tenant:</strong>
+          <span class="pull-right">
+            <%= manual_payment.user.email %>
+          </span>
+        </li>
+        <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
+          <strong class="pull-left">Description:</strong>
+          <span class="pull-right">
+            <%= manual_payment.description %>
+          </span>
+        </li>
+      </ul>
+    </div>
+    <div class="card-footer bg-white text-left">
+      <%= link_to 'Edit', edit_lease_payment_manual_payment_path(manual_payment.lease_payment, manual_payment), class: 'card-link font-weight-bold' %>
+      <%= link_to 'Delete',
+        lease_payment_manual_payment_path(manual_payment.lease_payment, manual_payment),
+        method: :delete,
+        data: {confirm: "Delete this manual payment. Are you sure? (you can always create another one)."},
+        class: 'card-link font-weight-bold text-danger'
+      %>
+    </div>
+  </div>
+</div>
+

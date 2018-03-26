@@ -28,7 +28,7 @@ const ResidencyTable = ({ residencies }) => (
               </span>
             </td>
             <td>
-              <a href={`/properties/${residency.property_id}/residencies/${residency.id}`}>Show</a>
+              <a href={`/properties/${residency.property_id}/units/${residency.unit.id}/residencies/${residency.id}`}>Show</a>
             </td>
           </tr>
         ))}

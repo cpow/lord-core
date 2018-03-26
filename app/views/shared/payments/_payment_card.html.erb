@@ -1,0 +1,30 @@
+<div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+  <div class="card payment">
+    <div class="card-body">
+      <h4>
+        Paid
+      </h4>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
+          <strong class="pull-left">Payment:</strong>
+          <span class="pull-right">
+            <%= number_to_currency(payment.human_amount) %>
+          </span>
+        </li>
+        <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
+          <strong class="pull-left">User Email:</strong>
+          <span class="pull-right">
+            <%= payment.user.email %>
+          </span>
+        </li>
+        <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
+          <strong class="pull-left">Status:</strong>
+          <span class="pull-right badge <%= payment_badge(payment) %>">
+            <%= payment.human_event_type %>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+

@@ -35,6 +35,7 @@ class User < ApplicationRecord
   has_secure_token :invite_token
 
   has_many :residencies
+  has_many :manual_payments
   has_many :units,      through: :residencies
   has_many :properties, through: :residencies
   has_many :companies,  through: :residencies
@@ -47,6 +48,10 @@ class User < ApplicationRecord
 
   def status
     activated ? 'active' : 'pending'
+  end
+
+  def issues
+    Issue.where(reporter: self)
   end
 
   def set_placeholder_password
