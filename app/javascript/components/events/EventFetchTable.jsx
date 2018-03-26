@@ -79,7 +79,11 @@ class EventFetchTable extends Component {
 
     window.history.replaceState({}, '', `?${params.toString()}`);
 
-    axios.get(`/api/v1/properties/${propertyId}/events?${params}`).then((resp) => {
+    const api = axios.create({
+      headers: { Pragma: 'no-cache' },
+    });
+
+    api.get(`/api/v1/properties/${propertyId}/events?${params}`).then((resp) => {
       const { events } = resp.data;
       const totalPages = resp.data.pagination.total_pages;
       this.setState({ events, totalPages });
