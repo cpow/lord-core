@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'user edits information', js: true do
   context 'entering correct information' do
     scenario 'the user will see confirmation that they changed the info' do
-      user = create(:user)
+      user = create(:user, :with_subscription)
       login_as(user, scope: :user)
       visit edit_user_path(user)
 
