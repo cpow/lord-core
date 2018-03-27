@@ -1,5 +1,7 @@
 module Api::V1
   class EventReadsController < ApplicationController
+    skip_before_action :verify_authenticity_token
+
     def create
       create_params = event_read_params
       user_object = create_params[:reader_type]

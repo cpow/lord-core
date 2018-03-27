@@ -6,13 +6,10 @@ import Pagination from 'components/Pagination';
 
 const { Component } = React;
 
-const token = document.getElementsByName('csrf-token')[0].getAttribute('content');
-
 const api = axios.create({
   headers: { Pragma: 'no-cache' },
 });
 
-api.defaults.headers.common['X-CSRF-Token'] = token;
 api.defaults.headers.common.Accept = 'application/json';
 
 class EventFetchTable extends Component {
