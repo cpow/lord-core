@@ -3,6 +3,8 @@ require 'faker'
 FactoryBot.define do
   factory :notification_subscription do
     email_new_notifications true
+    property_manager
+    user
   end
 
   factory :manual_payment_receipt do
