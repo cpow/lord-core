@@ -3,6 +3,8 @@
 ## Big Stuff!
  *things that will take a while to do, but really need to be done and are essential.*
 
+[ ] holy shit clean up form_with's... dont need urls
+
 [ ] private github organization for repository
 
 [ ] notify when user makes payment on lease

@@ -23,7 +23,10 @@ Rails.application.routes.draw do
   resources :companies do
     resources :finances, only: [:show], controller: 'companies/finances'
   end
-  resources :property_managers
+
+  resources :property_managers do
+    resources :notification_subscriptions, only: [:edit, :update], controller: 'property_managers/notification_subscriptions'
+  end
   resources :residencies, only: [:index]
   resources :units do
     resources :messages, only: [:index], controller: 'units/messages'
@@ -58,6 +61,7 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :leases, only: :show, controller: 'users/leases'
+    resources :notification_subscriptions, only: [:update, :edit], controller: 'users/notification_subscriptions'
     resources :lease_payments, only: :show, controller: 'users/lease_payments'
     resources :issues, only: [:index, :new, :create, :show], controller: 'users/issues'
   end

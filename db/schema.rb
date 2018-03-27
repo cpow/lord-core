@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180326163216) do
+ActiveRecord::Schema.define(version: 20180327200047) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,11 +74,12 @@ ActiveRecord::Schema.define(version: 20180326163216) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "property_id"
-    t.boolean "read"
+    t.boolean "read", default: false
     t.bigint "unit_id"
     t.index ["createable_type", "createable_id"], name: "index_events_on_createable_type_and_createable_id"
     t.index ["eventable_type", "eventable_id"], name: "index_events_on_eventable_type_and_eventable_id"
     t.index ["property_id"], name: "index_events_on_property_id"
+    t.index ["read"], name: "index_events_on_read"
     t.index ["unit_id"], name: "index_events_on_unit_id"
   end
 
@@ -184,6 +185,17 @@ ActiveRecord::Schema.define(version: 20180326163216) do
     t.datetime "updated_at", null: false
     t.index ["messageable_type", "messageable_id"], name: "index_messages_on_messageable_type_and_messageable_id"
     t.index ["unit_id"], name: "index_messages_on_unit_id"
+  end
+
+  create_table "notification_subscriptions", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "property_manager_id"
+    t.boolean "email_new_notifications", default: true
+    t.datetime "last_email_notification_reminder_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["property_manager_id"], name: "index_notification_subscriptions_on_property_manager_id"
+    t.index ["user_id"], name: "index_notification_subscriptions_on_user_id"
   end
 
   create_table "payments", force: :cascade do |t|
@@ -320,4 +332,6 @@ ActiveRecord::Schema.define(version: 20180326163216) do
   add_foreign_key "manual_payments", "lease_payments"
   add_foreign_key "manual_payments", "users"
   add_foreign_key "messages", "units"
+  add_foreign_key "notification_subscriptions", "property_managers"
+  add_foreign_key "notification_subscriptions", "users"
 end

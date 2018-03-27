@@ -37,6 +37,19 @@ describe Residency::CreateFromProperty do
         expect(creator.residency).to be_valid
       end
 
+      it 'should create a notification subscription for the user' do
+        prop = create(:property)
+        unit = create(:unit, property: prop)
+        email = 'hello@kitty.com'
+        residency = prop.residencies.new(unit: unit, user_email: email)
+        creator = described_class.new(property: prop,
+                                      residency: residency,
+                                      manager: create(:property_manager))
+
+        expect(creator.save).to eq(Residency::SUCCESS)
+        expect(creator.residency.user.notification_subscription).to be
+      end
+
       it 'should make a new event upon successful creation' do
         prop = create(:property)
         unit = create(:unit, property: prop)

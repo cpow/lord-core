@@ -5,7 +5,7 @@
   <% end %>
 </li>
 <li class="nav-item mr-1">
-  <%= link_to user_path(current_user), class: "nav-link #{'active' if current_page?(user_path(current_user))}" do %>
+  <%= link_to edit_user_path(current_user), class: "nav-link #{'active' if current_page?(user_path(current_user))}" do %>
     <i class="fa fa-user"></i>
     Account
   <% end %>

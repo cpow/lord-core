@@ -26,6 +26,7 @@ class PropertyManager < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_one :notification_subscription
   belongs_to :company, optional: true
   has_many :messages, as: :messageable
   has_many :events, as: :eventable

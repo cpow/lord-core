@@ -1,6 +1,10 @@
 require 'faker'
 
 FactoryBot.define do
+  factory :notification_subscription do
+    email_new_notifications true
+  end
+
   factory :manual_payment_receipt do
     manual_payment nil
   end
@@ -11,8 +15,8 @@ FactoryBot.define do
   end
 
   factory :issue_comment do
-    issue nil
-    commentable nil
+    issue
+    commentable
     body "MyText"
   end
 
@@ -159,6 +163,12 @@ FactoryBot.define do
     trait :with_company do
       company
     end
+
+    trait :with_subscription do
+      after(:create) do |instance|
+        create(:notification_subscription, property_manager: instance)
+      end
+    end
   end
 
   factory :user do
@@ -169,6 +179,12 @@ FactoryBot.define do
 
     trait :with_stripe_account do
       stripe_account_guid '123stripe'
+    end
+
+    trait :with_subscription do
+      after(:create) do |instance|
+        create(:notification_subscription, user: instance)
+      end
     end
 
     trait :with_residence do

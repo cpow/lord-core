@@ -34,6 +34,7 @@ class User < ApplicationRecord
 
   has_secure_token :invite_token
 
+  has_one :notification_subscription
   has_many :residencies
   has_many :manual_payments
   has_many :units,      through: :residencies

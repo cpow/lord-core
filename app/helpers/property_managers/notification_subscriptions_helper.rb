@@ -1,0 +1,2 @@
+module PropertyManagers::NotificationSubscriptionsHelper
+end

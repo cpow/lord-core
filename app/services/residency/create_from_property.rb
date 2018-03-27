@@ -12,6 +12,7 @@ class Residency::CreateFromProperty
       create_user_from_email
       return Residency::EXISTS if residency_with_user_exists
       add_user_to_residency
+      add_notification_subscription_to_user
       update_join_ids
       @residency.save!
       mail_invite_to_residency
@@ -23,6 +24,10 @@ class Residency::CreateFromProperty
   end
 
   private
+
+  def add_notification_subscription_to_user
+    NotificationSubscription.create!(user: @user)
+  end
 
   def create_event_for_residency
     Event.create!(eventable: @residency,

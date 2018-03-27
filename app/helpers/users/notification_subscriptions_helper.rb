@@ -1,0 +1,2 @@
+module Users::NotificationSubscriptionsHelper
+end

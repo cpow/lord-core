@@ -1,0 +1,13 @@
+<%= render partial: 'layouts/errors', locals: { object: subscription } %>
+
+<div class="form-check">
+  <%= form.check_box :email_new_notifications, class: 'form-check-input' %>
+  <%= form.label :email_new_notifications, class: 'form-check-label' %>
+</div>
+<p class="mb-4">
+  <small class="mb-4">Allow notifications to be mailed to you as they happen</small>
+</p>
+
+<div class="actions">
+  <%= form.submit class: 'btn btn-primary btn-block' %>
+</div>

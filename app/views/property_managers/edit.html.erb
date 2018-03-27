@@ -32,3 +32,16 @@
   </div>
 </div>
 
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: 'Notifications',
+  text: 'Information about how you receive notifications.'
+} %>
+
+<div class="card">
+  <div class="card-body">
+    <%= render @property_manager.notification_subscription %>
+  </div>
+  <div class="card-footer bg-white">
+    <%= link_to 'Edit', edit_property_manager_notification_subscription_path(@property_manager), class: 'font-weight-bold card-link' %>
+  </div>
+</div>

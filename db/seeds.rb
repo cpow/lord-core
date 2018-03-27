@@ -10,6 +10,7 @@ require 'factory_bot'
 
 manager = FactoryBot.create(:property_manager,
                  :with_company,
+                 :with_subscription,
                  admin: true,
                  email: 'manager@example.com',
                  password: 'test1234')
@@ -22,6 +23,7 @@ admin = FactoryBot.create(:admin,
 
 user = FactoryBot.create(
   :user,
+  :with_subscription,
   email: 'tenant@example.com',
   password: 'test1234'
 )

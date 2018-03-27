@@ -11,5 +11,13 @@ RSpec.describe PropertyManagers::CreateService do
       expect(manager.has_company?).to be_truthy
       expect(manager.is_company_admin?).to be_truthy
     end
+
+    it 'creates a notification subscription' do
+      manager = create(:property_manager)
+
+      expect do
+        described_class.new(property_manager: manager).handle_callbacks!
+      end.to change(NotificationSubscription, :count).by(1)
+    end
   end
 end

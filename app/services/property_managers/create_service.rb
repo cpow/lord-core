@@ -8,6 +8,7 @@ module PropertyManagers
 
     def handle_callbacks!
       add_company unless property_manager.has_company?
+      add_notification_subscription
     end
 
     private
@@ -15,6 +16,10 @@ module PropertyManagers
     def add_company
       company = Company.create!(name: property_manager.dummy_company_name)
       property_manager.update_attributes!(company_id: company.id, admin: true)
+    end
+
+    def add_notification_subscription
+      NotificationSubscription.create!(property_manager: @property_manager)
     end
   end
 end
