@@ -1,0 +1,8 @@
+<div class="container text-center">
+  <h1>You have a new notification!</h1>
+  <p>From your apartment in <%= @event.unit&.name %>. You have a new unread notification.</p>
+
+  <%= render partial: 'notification_card', locals: { event: @event } %>
+
+  <%= link_to "Check it out", authenticated_user_root_url, class: 'btn btn-primary btn-block' %>
+</div>

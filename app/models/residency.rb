@@ -24,7 +24,9 @@ class Residency < ApplicationRecord
   belongs_to :property
   belongs_to :user
   belongs_to :unit
+  # TODO: remove company. no need
   belongs_to :company
+
   has_many :events, as: :eventable
 
   attribute :user_email, :string

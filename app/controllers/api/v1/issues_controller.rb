@@ -7,10 +7,17 @@ module Api::V1
       issue.issue_images.create!(issue_image_params)
       property = issue.property
 
-      Event.create(eventable: issue,
-                  createable: current_user,
-                  event_type: Event::EVENT_CREATED,
-                  property: property)
+      event = Event.create(eventable: issue,
+                           createable: current_user,
+                           event_type: Event::EVENT_CREATED,
+                           unit: issue.unit,
+                           property: property)
+
+      event.event_reads.create!(reader: current_user)
+
+      NotificationEmailReminderWorker.perform_async(event.id)
+
+      render json: event, status: :ok
     end
 
     private

@@ -52,6 +52,10 @@ class Event < ApplicationRecord
     event_reads.where(reader: user)
   end
 
+  def body
+    eventable_type == 'Issue' ? eventable.description : eventable.try(:body)
+  end
+
   def record_what_changed
     self.serialized_changes = eventable.previous_changes
   end

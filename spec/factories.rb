@@ -13,12 +13,12 @@ FactoryBot.define do
 
   factory :event_read do
     event
-    reader nil
+    reader { build(:user) }
   end
 
   factory :issue_comment do
     issue
-    commentable
+    commentable { build(:user) }
     body "MyText"
   end
 
@@ -29,13 +29,13 @@ FactoryBot.define do
   factory :issue do
     property
     unit
-    reporter
-    description "MyText"
-    category "MyString"
+    reporter { build(:user) }
+    description "Something happened OMG"
+    category Issue::ISSUE_CATEGORIES[0]
   end
 
   factory :event do
-    eventable { build(:property) }
+    eventable { build(:issue_comment) }
     createable { build(:user) }
     event_type Event::EVENT_CREATED
   end
@@ -247,6 +247,7 @@ FactoryBot.define do
 
   factory :company do
     name 'property management company'
+
     trait :with_stripe_account do
       stripe_account_guid '123stripe'
     end

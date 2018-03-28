@@ -29,6 +29,8 @@ class IssueChatChannel < ApplicationCable::Channel
 
     event.event_reads.create!(reader: current_user)
 
+    NotificationEmailReminderWorker.perform_async(event.id)
+
     issue_comment
   end
 

@@ -29,6 +29,12 @@ class Property < ApplicationRecord
     Payment.where(unit_id: units.pluck(:id))
   end
 
+  def property_managers
+    # TODO: assign property managers to a property. don't use everyone from
+    # company
+    company.property_managers
+  end
+
   validates :address_line1,
     :address_postal,
     :address_city,
