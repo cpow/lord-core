@@ -18,6 +18,12 @@
           </span>
         </li>
         <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
+          <strong class="pull-left">Created:</strong>
+          <span class="pull-right">
+            <%= human_date(manual_payment.created_at) %>
+          </span>
+        </li>
+        <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
           <strong class="pull-left">Description:</strong>
           <span class="pull-right">
             <%= manual_payment.description %>

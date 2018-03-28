@@ -21,7 +21,7 @@ class Unit < ApplicationRecord
   has_many :messages
   has_many :events, as: :eventable
 
-  has_many :notifications, foreign_key: "unit_id", class_name: "Event"
+  has_many :notifications, foreign_key: 'unit_id', class_name: 'Event'
 
   validates :name, :property_id, presence: true
 
@@ -29,6 +29,10 @@ class Unit < ApplicationRecord
     # NOTE: This needs to be refactored with active status and whatnot. like
     # lease payments
     leases.last || NullLease.new
+  end
+
+  def unread_notifications_for(user)
+    notifications - notifications.read_by(user)
   end
 
   def current_lease_payment

@@ -50,18 +50,17 @@
       </div>
     <% end %>
   <% else %>
-    <%= link_to new_property_property_image_path(@property),
-      class: 'card property-images alert-warning text-center' do
-    %>
-    <div class="card-body">
-      <h4 class="alert">
-        Images
-      </h4>
-      <p>
-        You have no images for this property. Your tenants won't know what this property looks like!
-      </p>
+    <div class="card alert-warning text-center">
+      <div class="card-body">
+        <h4>
+          Images
+        </h4>
+        <p>
+          You have no images for this property. Your tenants won't know what this property looks like!
+        </p>
+        <%= link_to 'Add Images', new_property_property_image_path(@property), class: 'btn btn-warning' %>
+      </div>
     </div>
-    <% end %>
   <% end %>
 </div>
 

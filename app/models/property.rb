@@ -23,10 +23,14 @@ class Property < ApplicationRecord
   has_many :users, through: :residencies
   has_many :events, as: :eventable
 
-  has_many :notifications, foreign_key: "property_id", class_name: "Event"
+  has_many :notifications, foreign_key: 'property_id', class_name: 'Event'
 
   def payments
     Payment.where(unit_id: units.pluck(:id))
+  end
+
+  def unread_notifications_for(user)
+    notifications - notifications.read_by(user)
   end
 
   def property_managers

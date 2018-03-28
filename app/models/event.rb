@@ -26,7 +26,7 @@ class Event < ApplicationRecord
     EVENT_EDITED,
     EVENT_CREATED,
     EVENT_DESTROYED
-  ]
+  ].freeze
 
   belongs_to :eventable, polymorphic: true
   belongs_to :createable, polymorphic: true
@@ -39,6 +39,12 @@ class Event < ApplicationRecord
   validates :eventable, presence: true
 
   before_create :take_snapshot_of_record, :record_what_changed
+
+  scope :read_by, ->(user) do
+    left_outer_joins(:event_reads)
+      .where('event_reads.reader_id = ?', user.id)
+      .references(:event)
+  end
 
   def take_snapshot_of_record
     self.serialized_record = eventable.to_json

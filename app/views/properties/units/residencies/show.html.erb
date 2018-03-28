@@ -56,12 +56,11 @@
   </div>
 </div>
 
-<%= render partial: 'layouts/pretty_header', locals: {
-  title: "Reported issues from this user",
-  text: '' }
-%>
-
 <% if @residency.user.issues.present? %>
+  <%= render partial: 'layouts/pretty_header', locals: {
+    title: "Reported issues from this user",
+    text: '' }
+  %>
   <div class="row equal-height">
     <% @residency.user.issues.limit(5).each do |issue| %>
         <%= render 'shared/issues/issue', issue: issue %>
@@ -69,12 +68,11 @@
   </div>
 <% end %>
 
-<%= render partial: 'layouts/pretty_header', locals: {
-  title: "Recent payments for this resident",
-  text: '' }
-%>
-
-<% if @residency.user.payments %>
+<% if @residency.user.payments.present? %>
+  <%= render partial: 'layouts/pretty_header', locals: {
+    title: "Recent payments for this resident",
+    text: '' }
+  %>
   <div class="row equal-height text-center">
     <% @residency.user.payments.limit(5).each do |payment| %>
       <%= render 'shared/payments/payment_card', payment: payment %>
@@ -82,7 +80,7 @@
   </div>
 <% end %>
 
-<% if @residency.user.manual_payments %>
+<% if @residency.user.manual_payments.present? %>
   <%= render partial: 'layouts/pretty_header', locals: {
     title: "Recent manual payments for this resident",
     text: '' }

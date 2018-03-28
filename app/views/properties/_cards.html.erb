@@ -9,6 +9,13 @@
           <h3 class="card-title">
             <%= property.name %>
           </h3>
+          <% if property.unread_notifications_for(current_property_manager).length > 0 %>
+            <div class="text-center mb-4">
+              <button type="button" class="btn btn-danger">
+                Notifications <span class="badge badge-light"><%= property.unread_notifications_for(current_property_manager).length %></span>
+              </button>
+            </div>
+          <% end %>
           <ul class="text-left">
             <li>
               units:
