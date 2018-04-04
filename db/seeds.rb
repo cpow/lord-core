@@ -30,6 +30,10 @@ user = FactoryBot.create(
 
 unit = FactoryBot.create(:unit, property: property)
 
+issue = FactoryBot.create(:issue, property: property, unit: unit, reporter: user)
+issue_comment = FactoryBot.create(:issue_comment, issue: issue, commentable: user)
+FactoryBot.create(:event, createable: user, unit: unit, property: property, eventable: issue_comment)
+
 residency = FactoryBot.create(:residency, user: user, company: manager.company, unit: unit, property: property)
 
 lease = FactoryBot.create(:lease, unit: unit)

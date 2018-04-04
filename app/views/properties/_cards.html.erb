@@ -1,7 +1,7 @@
 <div class="row equal-height justify-content-md-center">
   <% properties.each do |property| %>
     <div class="col-sm-12 col-md-6 col-lg-4 mb-4", id="property_<%= property.id %>">
-      <%= link_to property_path(property), class: 'card' do %>
+      <%= link_to property_path(property), class: 'card text-center' do %>
         <% if property.property_images.present? %>
           <%= image_tag property.property_images.first.image.url(:medium), class: 'card-img-top' %>
         <% end %>
@@ -9,23 +9,34 @@
           <h3 class="card-title">
             <%= property.name %>
           </h3>
+          <hr>
           <% if property.unread_notifications_for(current_property_manager).length > 0 %>
-            <div class="text-center mb-4">
+            <div class="mb-4">
               <button type="button" class="btn btn-danger">
                 Notifications <span class="badge badge-light"><%= property.unread_notifications_for(current_property_manager).length %></span>
               </button>
             </div>
           <% end %>
-          <ul class="text-left">
-            <li>
-              units:
-              <%= property.units.count %>
-            </li>
-            <li>
-              address:
-              <%= property.address_line1 %>
-            </li>
-          </ul>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
+                <strong class="pull-left">Units:</strong>
+                <span class="pull-right">
+                  <%= property.units.count %>
+                </span>
+              </li>
+              <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
+                <strong class="pull-left">Address:</strong>
+                <span class="pull-right">
+                  <%= property.address_line1 %>
+                </span>
+              </li>
+              <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
+                <strong class="pull-left">Residents</strong>
+                <span class="pull-right">
+                  <%= property.residencies.count %>
+                </span>
+              </li>
+            </ul>
         </div>
       <% end %>
     </div>
