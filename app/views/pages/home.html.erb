@@ -23,7 +23,10 @@
         </ul>
 
         <%= link_to "Manager sign in", new_property_manager_session_path,
-          class: 'font-weight-bold btn btn-primary' %>
+          class: 'font-weight-bold btn btn-light' %>
+
+        <%= link_to "Manager sign up", new_property_manager_registration_path,
+          class: 'font-weight-bold btn btn-success' %>
       </div>
     </div>
   </div>
@@ -44,7 +47,10 @@
           </li>
         </ul>
         <%= link_to "Tenant sign in", new_user_session_path,
-          class: 'font-weight-bold card-link btn btn-primary' %>
+          class: 'font-weight-bold card-link btn btn-light' %>
+
+        <%= link_to "Tenant sign up", new_user_registration_path,
+          class: 'font-weight-bold btn btn-success' %>
       </div>
     </div>
   </div>
