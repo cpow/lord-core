@@ -26,10 +26,10 @@ class PropertyManager < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_one :notification_subscription
+  has_one :notification_subscription, dependent: :destroy
   belongs_to :company, optional: true
-  has_many :messages, as: :messageable
-  has_many :events, as: :eventable
+  has_many :messages, as: :messageable, dependent: :destroy
+  has_many :events, as: :eventable, dependent: :destroy
 
   def has_company?
     company.present?
