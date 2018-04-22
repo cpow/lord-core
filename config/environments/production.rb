@@ -103,14 +103,14 @@ Rails.application.configure do
   ActionMailer::Base.smtp_settings = {
     user_name: ENV.fetch('SENDGRID_USERNAME'),
     password: ENV.fetch('SENDGRID_PASSWORD'),
-    domain: 'app.lordandlease.com',
+    domain: 'app.livingroomhq.com',
     address: 'smtp.sendgrid.net',
     port: 587,
     authentication: :plain,
     enable_starttls_auto: true
   }
 
-  config.action_mailer.default_url_options = { host: 'app.lordandlease.com' }
+  config.action_mailer.default_url_options = { host: 'app.livingroomhq.com' }
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false

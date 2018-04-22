@@ -32,9 +32,18 @@ class PaymentsController < ApplicationController
     )
 
     if local.save
-      Event.create!(eventable: local,
-                    event_type: Event::EVENT_CREATED,
-                    createable: current_user)
+      event = Event.create!(
+        eventable: local,
+        createable: current_user,
+        event_type: Event::EVENT_CREATED,
+        property: current_user.current_unit.property,
+        unit: current_user.current_unit
+      )
+
+      event.event_reads.create!(reader: current_user)
+
+      NotificationEmailReminderWorker.perform_async(event.id)
+
       flash[:success] = 'Success! You\'ve submitted your payment'
       if current_user.current_lease.instance_of?(NullLease)
         redirect_to authenticated_user_root_path
