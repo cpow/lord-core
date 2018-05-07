@@ -9,6 +9,7 @@ describe Api::V1::Stripe::Webhooks::ChargesController do
           id: payment.stripe_charge_id,
           type: 'charge.pending'
         )
+        allow(Stripe::Webhook).to receive(:construct_event) { true }
 
         expect do
           post :create, params: params

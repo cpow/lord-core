@@ -4,8 +4,24 @@ module Api::V1::Stripe::Webhooks
     before_action :payment_from_stripe
 
     def create
-      if @payment
-        @payment.update(latest_event_type: event_type)
+      payload = request.body.read
+      sig_header = request.env['HTTP_STRIPE_SIGNATURE']
+      endpoint_secret = ENV['WEBHOOK_SECRET']
+
+      begin
+        Stripe::Webhook.construct_event(
+          payload, sig_header, endpoint_secret
+        )
+      rescue JSON::ParserError => e
+        render json: {'error': e}, status: 400
+        return
+      rescue Stripe::SignatureVerificationError => e
+        render json: {'error': e}, status: 400
+        return
+      end
+
+      if @payment_from_stripe
+        @payment_from_stripe.update(latest_event_type: event_type)
         ChargeEvent.create!(create_params)
       end
 
@@ -15,12 +31,12 @@ module Api::V1::Stripe::Webhooks
     private
 
     def payment_from_stripe
-      @payment ||= Payment.find_by(stripe_charge_id: charge_id)
+      @payment_from_stripe ||= Payment.find_by(stripe_charge_id: charge_id)
     end
 
     def create_params
       {
-        payment: @payment,
+        payment: @payment_from_stripe,
         stripe_charge_id: charge_id,
         event_type: event_type
       }.merge(failure_data)
