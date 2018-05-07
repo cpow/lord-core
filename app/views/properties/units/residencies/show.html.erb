@@ -30,13 +30,13 @@
       <li class="list-group-item bg-transparent border-bottom-0 border-top-0">
         <strong class="pull-left">Current Unit:</strong>
         <span class="pull-right">
-          <%= link_to @residency.user.current_unit.name, property_unit_path(@residency.user.current_unit) %>
+          <%= link_to @residency.user.current_unit.name, property_unit_path(@residency.property, @residency.unit) %>
         </span>
       </li>
       <li class="list-group-item bg-transparent border-bottom-0 border-top-0">
         <strong class="pull-left">Current Lease ID:</strong>
         <span class="pull-right">
-          <%= link_to "lease ID: #{@residency.user.current_lease.id}", property_unit_lease_path(@residency.user.current_lease) %>
+          <%= link_to "lease ID: #{@residency.user.current_lease.id}", property_unit_lease_path(@residency.property, @residency.unit, @residency.unit.current_lease) %>
         </span>
       </li>
 
