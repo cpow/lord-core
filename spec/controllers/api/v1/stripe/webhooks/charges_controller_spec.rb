@@ -13,6 +13,8 @@ describe Api::V1::Stripe::Webhooks::ChargesController do
         expect do
           post :create, params: params
         end.to change(ChargeEvent, :count).by(1)
+
+        expect(payment.reload.latest_event_type).to eq(params[:type])
       end
     end
   end

@@ -1,11 +1,11 @@
 module Api::V1::Stripe::Webhooks
   class ChargesController < ApplicationController
-    protect_from_forgery except: :create
+    skip_before_action :verify_authenticity_token
     before_action :payment_from_stripe
 
     def create
       if @payment
-        @payment.update_attributes!(latest_event_type: event_type)
+        @payment.update(latest_event_type: event_type)
         ChargeEvent.create!(create_params)
       end
 
