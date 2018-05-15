@@ -13,3 +13,5 @@ json.(
 )
 
 json.read (event.has_been_read_by?(current_user))
+json.lease_id (event.eventable.try(:lease_payment)&.lease_id)
+json.lease_payment_id (event.eventable.try(:lease_payment)&.id)

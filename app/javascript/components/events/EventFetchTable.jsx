@@ -61,6 +61,9 @@ class EventFetchTable extends Component {
             const url = `/units/${event.eventable.unit_id}/messages`;
             window.location.pathname = url;
             break;
+          case 'Payment':
+            window.location.pathname = `/users/${readerId}/lease_payments/${event.lease_payment_id}`;
+            break;
           case 'IssueComment':
             window.location.pathname = `/users/${readerId}/issues/${event.eventable.issue_id}`;
             break;
@@ -75,6 +78,9 @@ class EventFetchTable extends Component {
           case 'Message':
             const url = `/properties/${event.property_id}/units/${event.eventable.unit_id}/messages`;
             window.location.pathname = url;
+            break;
+          case 'Payment':
+            window.location.pathname = `/properties/${event.property_id}/units/${event.eventable.unit_id}/lease_payments/${event.lease_payment_id}`;
             break;
           case 'IssueComment':
             window.location.pathname = `/properties/${event.property_id}/issues/${event.eventable.issue_id}`;
