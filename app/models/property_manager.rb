@@ -46,4 +46,12 @@ class PropertyManager < ApplicationRecord
   def make_admin_with_company(company)
     update_attributes!(company: company, admin: true)
   end
+
+  def set_placeholder_password
+    self.password = unique_password
+  end
+
+  def unique_password
+    @unique_password ||= SecureRandom.base58(24)
+  end
 end

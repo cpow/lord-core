@@ -1,0 +1,26 @@
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: 'Welcome to the Neighborhood',
+  text: 'To finish creating your account, please create a password.'
+} %>
+
+<div class="card">
+  <div class="card-body">
+    <%= form_with(model: @property_manager, local: true, url: property_manager_initializer_path, method: :post) do |f| %>
+      <%= render partial: 'layouts/errors', locals: { object: @property_manager } %>
+
+      <div class="form-group">
+        <%= f.label :password %>
+        <%= f.password_field :password, class: "form-control", id: 'password' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password_confirmation%>
+        <%= f.password_field :password_confirmation, class: "form-control", id: 'password_confirmation' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.submit 'Activate Account', class: "btn btn-primary btn-block" %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 class PropertyManagersController < ApplicationController
-  before_action :authenticate_property_manager!
+  before_action :authenticate_property_manager!, except: :create
 
   def show
     @property_manager = current_property_manager
