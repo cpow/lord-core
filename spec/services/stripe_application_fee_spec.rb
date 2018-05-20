@@ -7,7 +7,7 @@ describe StripeApplicationFee do
       result = described_class.for_amount(amount)
       expected = amount * described_class::FEE_PERCENTAGE
 
-      expect(result).to eq(expected)
+      expect(result).to eq(expected.round)
     end
   end
 end
