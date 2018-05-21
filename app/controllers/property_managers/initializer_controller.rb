@@ -10,11 +10,11 @@ class PropertyManagers::InitializerController < ApplicationController
   def create
     @property_manager = PropertyManager.find(params[:property_manager_id])
     if @property_manager.update(property_manager_params.merge(active: true))
-      redirect_to new_property_manager_session_path,
-        notice: <<~HEREDOC
-          Thank you for creating your account! Now log in with the password you
-          just added!
-        HEREDOC
+      PropertyManagers::CreateService.new(
+        property_manager: @property_manager
+      ).handle_callbacks!
+      sign_in(@property_manager)
+      redirect_to authenticated_property_manager_root_path(@property_manager)
     else
       render :new
     end
