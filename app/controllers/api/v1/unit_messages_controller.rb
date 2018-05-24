@@ -7,7 +7,7 @@ module Api::V1
 
     def index
       unit = Unit.find(params[:unit_id])
-      @messages = unit.messages.limit(200)
+      @messages = unit.messages.limit(200).order(:created_at)
       render :index, status: :ok
     end
   end
