@@ -8,7 +8,7 @@ feature 'property manager creates a property', js: true do
 
   scenario 'by clicking on the new property button on the dashboard' do
     property_name = 'something'
-    click_on(class: 'new-property__button')
+    click_on(class: 'new-property-warning__button')
     expect(page).to have_css('.new-property__form')
 
     fill_in('Property Name', with: property_name)

@@ -124,11 +124,12 @@
       <%= link_to "Create New", new_property_path, class: 'btn btn-info new-property-warning__button' %>
     </div>
   </div>
-<% end %>
-
+<% else %>
 <div class="text-center mb-4">
   <%= link_to "Create New", new_property_path, class: 'btn btn-info new-property__button' %>
 </div>
+<% end %>
+
 
 <%= render partial: 'properties/cards',
   locals: { properties: current_property_manager.company.properties }
