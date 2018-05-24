@@ -40,6 +40,9 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
+    airbrake (7.3.3)
+      airbrake-ruby (~> 2.10)
+    airbrake-ruby (2.10.0)
     annotate (2.7.2)
       activerecord (>= 3.2, < 6.0)
       rake (>= 10.4, < 13.0)
@@ -906,6 +909,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  airbrake (~> 7.3)
   annotate
   aws-sdk
   bootstrap (~> 4.0.0)
