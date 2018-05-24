@@ -12,7 +12,7 @@ feature 'property manager initializes their account' do
 
     click_on('Activate Account')
 
-    expect(current_path).to eq(new_property_manager_session_path)
+    expect(current_path).to eq(authenticated_property_manager_root_path)
   end
 
   scenario 'will redirect if active' do

@@ -19,7 +19,7 @@ feature 'property manager sees dashboard', js: true do
     end
 
     scenario 'the manager will see a notice to provide banking information' do
-      expect(page).to have_css('.bank-warning')
+      expect(page).to have_css('.no-properties-warning')
     end
 
     scenario 'the manager will see no residents, units, etc...' do

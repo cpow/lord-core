@@ -1,18 +1,18 @@
-<% unless current_property_manager.company.has_banking_information? %>
-  <div class="card alert alert-warning text-center bank-warning mt-4">
-    <div class="card-body">
-      <h4 class="card-title">
-        You must create an account to process payments
-      </h4>
-      <p class="card-text">
-      before you can process any payments. You need to create an account for payment processing
-      </p>
-      <%= link_to "Add Payment Processing",
-        new_stripe_account_path,
-        class: "btn btn-primary btn-warning" %>
-    </div>
-  </div>
-<% end %>
+<%# <% unless current_property_manager.company.has_banking_information? %>
+<%#   <div class="card alert alert-warning text-center bank-warning mt-4">
+<%#     <div class="card-body">
+<%#       <h4 class="card-title">
+<%#         You must create an account to process payments
+<%#       </h4>
+<%#       <p class="card-text">
+<%#       before you can process any payments. You need to create an account for payment processing
+<%#       </p>
+<%#       <%= link_to "Add Payment Processing",
+<%#         new_stripe_account_path,
+<%#         class: "btn btn-primary btn-warning" %>
+<%#     </div>
+<%#   </div>
+<%# <% end %>
 
 
 <h3 class="text-center mt-4">Getting Started</h3>
@@ -112,6 +112,20 @@
 
 <h3 class="text-center mt-3">Properties</h3>
 <p class="text-center">The properties that you manage.</p>
+<% if current_property_manager.company.properties.blank? %>
+  <div class="card alert alert-info text-center no-properties-warning mt-4">
+    <div class="card-body">
+      <h4 class="card-title">
+        Add a new property here!
+      </h4>
+      <p class="card-text">
+        Get started, add your first property. From there you can add units, tenants, and everything else!
+      </p>
+      <%= link_to "Create New", new_property_path, class: 'btn btn-info new-property-warning__button' %>
+    </div>
+  </div>
+<% end %>
+
 <div class="text-center mb-4">
   <%= link_to "Create New", new_property_path, class: 'btn btn-info new-property__button' %>
 </div>
