@@ -14,6 +14,32 @@
 <%#   </div>
 <%# <% end %>
 
+<% if current_property_manager.company.properties.count == 0 %>
+  <div class="card alert alert-success text-center welcome-message-manager mt-4">
+    <div class="card-body">
+      <h4 class="card-title">
+        Welcome to LivingRoom
+      </h4>
+      <p class="card-text">
+        Thank you for signing up for LivingRoom. Here is a list of things you need to do in order to get started.
+      </p>
+      <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-12 text-left">
+          <ul>
+            <li>Add your property down below</li>
+            <li>Add any units/apartments in your property</li>
+            <li>Invite all your tenants to use LivingRoom</li>
+            <li>Create and Manage leases for all your apartments</li>
+          </ul>
+        </div>
+      </div>
+      <p class="card-text">
+        If you have any questions, email: help@livingroomhq.com
+      </p>
+      <%= link_to "Create a new property now!", new_property_path, class: 'btn btn-success new-property-success__button' %>
+    </div>
+  </div>
+<% end %>
 
 <h3 class="text-center mt-4">Getting Started</h3>
 <p class="text-center">Here is all the information you need for your company. Please edit this as you see fit</p>

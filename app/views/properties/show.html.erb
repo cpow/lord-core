@@ -5,6 +5,23 @@
   </ol>
 </nav>
 
+<% if @property.units.count == 0 %>
+  <div class="card alert alert-success text-center welcome-message-manager mt-4">
+    <div class="card-body">
+      <h4 class="card-title">
+        Great job creating this property!
+      </h4>
+      <p class="card-text">
+        This is your property dashboard. It's where you can access all important information for this property.
+        To continue, let's add a new unit.
+      </p>
+      <%= link_to 'Add a Unit',
+        new_property_unit_path(@property),
+        class: 'btn btn-success new-property-unit-success__link' %>
+    </div>
+  </div>
+<% end %>
+
 <%= render partial: 'layouts/pretty_header', locals: {
   title: "Property #{@property.name}",
   text: 'Welcome to your Property Dashboard. This is the \'home base\' of your property. You can manage your units, leases, residents, and issues from this dashboard.' }

@@ -7,6 +7,32 @@
   </ol>
 </nav>
 
+<% if @unit.residencies.count == 0 %>
+  <div class="card alert alert-success text-center welcome-message-manager mt-4">
+    <div class="card-body">
+      <h4 class="card-title">
+        Good job adding this unit to your property
+      </h4>
+      <p class="card-text">
+        This is your "Unit" dashboard. This is where you can find all information regarding this unit. This is where you can:
+      </p>
+      <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-12 text-left">
+          <ul>
+            <li>Add/edit lease information</li>
+            <li>Chat with your residents in this unit</li>
+            <li>Invite a new resident to use this platform</li>
+          </ul>
+        </div>
+      </div>
+      <p class="card-text">
+      Let's continue by inviting a new resident. All you need is their email.
+      </p>
+      <%= link_to "Invite Resident", new_property_unit_residency_path(@property, @unit), class: 'btn btn-success new-property-unit-resident-success__button' %>
+    </div>
+  </div>
+<% end %>
+
 <%= render partial: 'layouts/pretty_header', locals: {
   title: "#{@unit.name}",
   text: 'Here is the dashboard for your unit within this property. Handle and manage anything related to this unit/apartment here. You can chat with your tenants, manage leases and payments, and edit the unit\'s information!' }
