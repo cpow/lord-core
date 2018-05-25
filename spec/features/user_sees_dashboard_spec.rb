@@ -52,6 +52,17 @@ feature 'user sees dashboard', js: true do
     end
   end
 
+  context 'without a unit/residence' do
+    scenario 'should not see unit chat' do
+      user = create(:user)
+
+      login_as(user, scope: :user)
+      visit root_path
+
+      expect(page).to_not have_css('.card.unit-chat')
+    end
+  end
+
   context 'paying rent' do
     scenario 'should be a danger when the user is late for rent' do
       user = create(:user, :with_late_lease_payment)
