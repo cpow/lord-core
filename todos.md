@@ -1,9 +1,11 @@
 # This is a list of TODOs for lordcore
 
-## Big Stuff!
- *things that will take a while to do, but really need to be done and are essential.*
+[ ] make sure things like GA and airbrake aren't running in test/dev modes
 
-[ ] holy shit clean up form_with's... dont need urls
+[ ] resource for PMs to get all their income from rent?
+  * maybe a nice JS table like all the other
+  * filterable, etc...
+  * export the filtered set to CSV or something. email it out, or w/e
 
 [ ] private github organization for repository
 
@@ -11,8 +13,7 @@
   * maybe show that a new payment has been made
   * send out an email to property managers
 
-[ ] better information on the fee when a user looks at pending funds on their
-finances page
+[ ] better information on the fee when a user looks at pending funds on their finances page
 
 [ ] flesh out the residents view in property manager portal
 
