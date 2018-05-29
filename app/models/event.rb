@@ -13,6 +13,9 @@
 #  createable_id      :integer
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
+#  property_id        :integer
+#  read               :boolean          default(FALSE)
+#  unit_id            :integer
 #
 
 class Event < ApplicationRecord

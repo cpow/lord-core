@@ -20,6 +20,7 @@ class Unit < ApplicationRecord
   has_many :users, through: :residencies
   has_many :messages
   has_many :events, as: :eventable
+  has_many :expenses, as: :expenseable
 
   has_many :notifications, foreign_key: 'unit_id', class_name: 'Event'
 

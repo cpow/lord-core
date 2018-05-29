@@ -22,6 +22,7 @@ class Property < ApplicationRecord
   has_many :issues
   has_many :users, through: :residencies
   has_many :events, as: :eventable
+  has_many :expenses, as: :expenseable
 
   has_many :notifications, foreign_key: 'property_id', class_name: 'Event'
 

@@ -41,11 +41,12 @@ class Issue < ApplicationRecord
   belongs_to :reporter, polymorphic: true
   has_many :issue_images
   has_many :issue_comments
+  has_many :expenses, as: :expenseable
 
   validates :category, inclusion: { in: ISSUE_CATEGORIES }
   validates :status, inclusion: { in: ISSUE_STATUSES }
 
-  searchkick
+  searchkick _all: false, default_fields: [:name]
 
   def search_data
     {

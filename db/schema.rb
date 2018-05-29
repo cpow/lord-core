@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180520200056) do
+ActiveRecord::Schema.define(version: 20180529142517) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,16 @@ ActiveRecord::Schema.define(version: 20180520200056) do
     t.index ["property_id"], name: "index_events_on_property_id"
     t.index ["read"], name: "index_events_on_read"
     t.index ["unit_id"], name: "index_events_on_unit_id"
+  end
+
+  create_table "expenses", force: :cascade do |t|
+    t.integer "amount"
+    t.text "description"
+    t.string "expenseable_type"
+    t.bigint "expenseable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["expenseable_type", "expenseable_id"], name: "index_expenses_on_expenseable_type_and_expenseable_id"
   end
 
   create_table "issue_comments", force: :cascade do |t|

@@ -18,6 +18,7 @@
 #  admin                  :boolean          default(FALSE)
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  active                 :boolean
 #
 
 class PropertyManager < ApplicationRecord

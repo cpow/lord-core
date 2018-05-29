@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: manual_payment_receipts
+#
+#  id                 :integer          not null, primary key
+#  manual_payment_id  :integer
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  image_file_name    :string
+#  image_content_type :string
+#  image_file_size    :integer
+#  image_updated_at   :datetime
+#
+
 class ManualPaymentReceipt < ApplicationRecord
   belongs_to :manual_payment
   validates :manual_payment, presence: true

@@ -1,5 +1,5 @@
 /* web: bundle exec puma -C config/puma.rb */
 worker: bundle exec sidekiq -t 25
 webpack: bin/webpack-dev-server
-redis: redis-server
+/* redis: redis-server */
 

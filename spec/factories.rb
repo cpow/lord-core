@@ -1,6 +1,11 @@
 require 'faker'
 
 FactoryBot.define do
+  factory :expense do
+    amount 1
+    description "MyText"
+    expenseable nil
+  end
   factory :notification_subscription do
     email_new_notifications true
     property_manager
