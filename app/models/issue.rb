@@ -46,7 +46,7 @@ class Issue < ApplicationRecord
   validates :category, inclusion: { in: ISSUE_CATEGORIES }
   validates :status, inclusion: { in: ISSUE_STATUSES }
 
-  searchkick _all: false, default_fields: [:name]
+  searchkick _all: false
 
   def search_data
     {

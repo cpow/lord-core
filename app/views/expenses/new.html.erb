@@ -1,0 +1,14 @@
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: 'Expense',
+  text: 'Create a new expense for your property, unit, or issue.' }
+%>
+
+<div class="card">
+  <div class="card-body">
+    <% if @expense.expenseable_type.present? %>
+      <%= render 'form' %>
+    <% else %>
+      <%= render 'expenseable_type' %>
+    <% end %>
+  </div>
+</div>

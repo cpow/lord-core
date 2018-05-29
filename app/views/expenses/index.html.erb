@@ -1,0 +1,15 @@
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: "Expenses for #{current_property_manager.company.name}",
+  text: 'These are all expenses for your company.' }
+%>
+
+<ul>
+<% @expenses.each do |expense| %>
+  <li>
+    amount: <%= expense.amount %>
+  </li>
+  <li>
+    id: <%= expense.id %>
+  </li>
+<% end%>
+</ul>

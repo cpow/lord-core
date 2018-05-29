@@ -26,6 +26,8 @@ Rails.application.routes.draw do
 
   resources :property_manager_creation, only: :create
 
+  resources :expenses
+
   resources :property_managers do
     resource :initializer, only: [:new, :create], controller: 'property_managers/initializer'
     resources :notification_subscriptions, only: [:edit, :update], controller: 'property_managers/notification_subscriptions'

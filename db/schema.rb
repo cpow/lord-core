@@ -88,8 +88,10 @@ ActiveRecord::Schema.define(version: 20180529142517) do
     t.text "description"
     t.string "expenseable_type"
     t.bigint "expenseable_id"
+    t.bigint "company_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_expenses_on_company_id"
     t.index ["expenseable_type", "expenseable_id"], name: "index_expenses_on_expenseable_type_and_expenseable_id"
   end
 

@@ -16,6 +16,8 @@ class Company < ApplicationRecord
   has_many :property_managers
   has_many :properties
   has_many :units, through: :properties
+  has_many :issues, through: :properties
+  has_many :expenses
   has_many :residencies, through: :properties
   validates :name, presence: true
   has_many :events, as: :eventable

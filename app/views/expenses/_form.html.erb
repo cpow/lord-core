@@ -1,0 +1,37 @@
+<div class="row mb-4">
+  <div class="col-12">
+    <%= link_to '<< Back', new_expense_path, class: 'mb-4' %>
+  </div>
+</div>
+
+<h2>The rest of the details</h2>
+<p>This expense is being created for a <%= @expense.expenseable_type.downcase %></p>
+
+<%= form_with(model: @expense, local: true, url: expenses_path, method: :post, class: 'full-form') do |form| %>
+  <%= render partial: 'layouts/errors', locals: { object: @expense } %>
+
+  <%= form.hidden_field :expenseable_type %>
+  <%= form.hidden_field :company_id, value: current_property_manager.company.id %>
+
+  <div class="form-group">
+    <%= form.label :expenseable_id, value: @expense.expenseable_type %>
+    <%= form.select :expenseable_id,
+      options_for_select(@expenseable_objects),
+      {},
+      { class: 'form-control input-lg', id: 'expenseable_id' }
+    %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :amount %>
+    <%= form.number_field :amount, id: :amount, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :description %>
+    <p class="small">A short blurb about this expense</p>
+    <%= form.text_area :description, id: :description, class: 'form-control' %>
+  </div>
+
+  <%= form.submit 'Submit', class: 'btn btn-info' %>
+<% end %>
