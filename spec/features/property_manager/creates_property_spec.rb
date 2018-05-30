@@ -11,11 +11,11 @@ feature 'property manager creates a property', js: true do
     click_on(class: 'new-property-warning__button')
     expect(page).to have_css('.new-property__form')
 
-    fill_in('Property Name', with: property_name)
-    fill_in('Address', with: '34 brittin ave')
-    fill_in('City', with: 'Bridgeport')
+    fill_in('property_name', with: property_name)
+    fill_in('property_address_line1', with: '34 brittin ave')
+    fill_in('property_address_city', with: 'Bridgeport')
     select('Connecticut', from: 'property[address_state]')
-    fill_in('Zip Code', with: '06605')
+    fill_in('property_address_postal', with: '06605')
 
     click_on(class: 'property__submit')
 
