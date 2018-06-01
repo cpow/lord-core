@@ -22,14 +22,21 @@ RSpec.describe PaymentsController, type: :controller do
         expect(Payment.last.amount).to eq(amount_paid * 100)
       end
 
-      it 'should store the stripe charge id locally' do
+      it 'should store the stripe charge id locally and make lineitem' do
         user = create(:user, :with_residence, :with_stripe_account)
         sign_in(user)
         amount_paid = 100
         lease = create(:lease)
         lp = create(:lease_payment, lease: lease)
 
-        post :create, params: { payment: { amount: amount_paid, lease_payment_id: lp.id } }
+        expect do
+          post :create, params: {
+            payment: {
+              amount: amount_paid,
+              lease_payment_id: lp.id
+            }
+          }
+        end.to change(LineItem, :count).by(1)
 
         expect(Payment.last.stripe_charge_id).to_not be_empty
       end

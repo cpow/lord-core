@@ -15,8 +15,8 @@ class ManualPayment < ApplicationRecord
   belongs_to :lease_payment
   belongs_to :user
   has_many :manual_payment_receipts, dependent: :destroy
+  has_many :line_items, as: :itemable
   accepts_nested_attributes_for :manual_payment_receipts
-
 
   validates :amount, presence: true
   validates :amount, numericality: true

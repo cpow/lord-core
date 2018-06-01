@@ -1,6 +1,9 @@
 require 'faker'
 
 FactoryBot.define do
+  factory :line_item do
+    itemable nil
+  end
   factory :expense do
     amount 1
     description "MyText"

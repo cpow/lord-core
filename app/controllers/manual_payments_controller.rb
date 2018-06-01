@@ -17,8 +17,8 @@ class ManualPaymentsController < ApplicationController
 
   def edit
     @manual_payment = ManualPayment.find(params[:id])
-    #if there are less than 2 receipts, build enough to allow user to add
-    #receipts to manual payment during edit
+    # if there are less than 2 receipts, build enough to allow user to add
+    # receipts to manual payment during edit
     build_receipts(2 - @manual_payment.manual_payment_receipts.length)
   end
 
@@ -27,6 +27,10 @@ class ManualPaymentsController < ApplicationController
     @manual_payment = ManualPayment.new(create_params)
 
     if @manual_payment.save
+      LineItem.create!(
+        itemable: @manual_payment,
+        company: @lease_payment.unit.property.company
+      )
       @manual_payment.lease_payment.deal_with_payment
       redirect_to [@property, @unit, @lease_payment],
         notice: 'Created manual payment, thanks!'

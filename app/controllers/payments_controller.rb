@@ -32,6 +32,11 @@ class PaymentsController < ApplicationController
     )
 
     if local.save
+      LineItem.create!(
+        itemable: local,
+        company: current_user.current_unit.property.company
+      )
+
       event = Event.create!(
         eventable: local,
         createable: current_user,

@@ -9,6 +9,7 @@ class ExpensesController < ApplicationController
   def create
     @expense = Expense.new(expense_params)
     if @expense.save
+      LineItem.create!(itemable: @expense, company: @expense.company)
       flash[:success] = 'Successfully created expense!'
       redirect_to expenses_path
     else

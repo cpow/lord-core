@@ -20,6 +20,7 @@ class Payment < ApplicationRecord
   belongs_to :unit, optional: true
   has_many :charge_events
   has_many :events, as: :eventable
+  has_many :line_items, as: :itemable
 
   validates :stripe_charge_id, presence: true
 

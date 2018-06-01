@@ -28,12 +28,14 @@ RSpec.describe ManualPaymentsController, type: :controller do
         res = create(:residency, unit: lease.unit)
         lp = lease.lease_payments.last
 
-        post :create, params: {
-          lease_payment_id: lp.id,
-          manual_payment: {
-            amount: 100, description: 'check', user_id: res.user.id
+        expect do
+          post :create, params: {
+            lease_payment_id: lp.id,
+            manual_payment: {
+              amount: 100, description: 'check', user_id: res.user.id
+            }
           }
-        }
+        end.to change(LineItem, :count).by(1)
 
         manual = ManualPayment.last
 

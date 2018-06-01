@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_29_142517) do
+ActiveRecord::Schema.define(version: 2018_06_01_022435) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -164,6 +164,16 @@ ActiveRecord::Schema.define(version: 2018_05_29_142517) do
     t.datetime "updated_at", null: false
     t.integer "payment_id"
     t.index ["payment_id"], name: "index_leases_on_payment_id"
+  end
+
+  create_table "line_items", force: :cascade do |t|
+    t.string "itemable_type"
+    t.bigint "itemable_id"
+    t.bigint "company_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_line_items_on_company_id"
+    t.index ["itemable_type", "itemable_id"], name: "index_line_items_on_itemable_type_and_itemable_id"
   end
 
   create_table "manual_payment_receipts", force: :cascade do |t|
@@ -342,6 +352,7 @@ ActiveRecord::Schema.define(version: 2018_05_29_142517) do
   add_foreign_key "issue_images", "issues"
   add_foreign_key "issues", "properties"
   add_foreign_key "issues", "units"
+  add_foreign_key "line_items", "companies"
   add_foreign_key "manual_payment_receipts", "manual_payments"
   add_foreign_key "manual_payments", "lease_payments"
   add_foreign_key "manual_payments", "users"
