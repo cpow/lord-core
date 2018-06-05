@@ -50,6 +50,7 @@ class Issue < ApplicationRecord
 
   def search_data
     {
+      property_id: property.id,
       category: category,
       reporter_name: reporter.name,
       unit_name: unit.name,

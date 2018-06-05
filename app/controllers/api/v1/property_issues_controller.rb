@@ -4,19 +4,17 @@ module Api::V1
     before_action :property
 
     def index
-      @issues = property
-                .issues
-                .eager_load(:unit, :issue_images, :issue_comments)
-                .search(unit_search,
-                        fields: [:unit_name],
-                        where: filter_params,
-                        page: params[:page],
-                        per_page: 10,
-                        order: {
-                          created_at: {order: 'desc'},
-                          status: {order: 'desc'}
-                        }
-                       )
+      @issues = Issue.search(
+        unit_search,
+        fields: [:unit_name],
+        where: filter_params,
+        page: params[:page],
+        per_page: 10,
+        order: {
+          created_at: { order: 'desc' },
+          status: { order: 'desc' }
+        }
+      )
 
       render :index, status: :ok
     end
@@ -24,11 +22,15 @@ module Api::V1
     private
 
     def property
-      @property ||= Property.find(params[:property_id])
+      @property ||= current_property_manager
+                    .properties
+                    .find(params[:property_id])
     end
 
     def filter_params
-      [:category, :status].inject({}) do |obj, param_key|
+      keys = %i[category status]
+
+      keys.each_with_object(property_id: property.id) do |obj, param_key|
         if params[param_key].present?
           obj.merge!(Hash[param_key, params[param_key]])
         end

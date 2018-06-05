@@ -40,7 +40,6 @@ class EventFetchTable extends Component {
       },
     };
 
-
     api.post(
       `/api/v1/events/${event.id}/event_reads`,
       data,

@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   resources :property_manager_creation, only: :create
 
   resources :expenses
+  resources :line_items
 
   resources :property_managers do
     resource :initializer, only: [:new, :create], controller: 'property_managers/initializer'
@@ -77,6 +78,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
+      resources :line_items, only: :index
       # Tables from a company's perspective
       resources :units, only: :index do
         resources :events, only: :index, controller: :unit_events

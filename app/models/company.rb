@@ -15,6 +15,7 @@
 class Company < ApplicationRecord
   has_many :property_managers
   has_many :properties
+  has_many :line_items
   has_many :units, through: :properties
   has_many :issues, through: :properties
   has_many :expenses

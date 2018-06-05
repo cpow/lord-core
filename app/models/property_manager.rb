@@ -29,6 +29,7 @@ class PropertyManager < ApplicationRecord
 
   has_one :notification_subscription, dependent: :destroy
   belongs_to :company, optional: true
+  has_many :properties, through: :company
   has_many :messages, as: :messageable, dependent: :destroy
   has_many :events, as: :eventable, dependent: :destroy
 
