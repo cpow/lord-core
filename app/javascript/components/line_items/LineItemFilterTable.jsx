@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import queryString from 'query-string';
 import LineItemFetchTable from 'components/line_items/LineItemFetchTable';
 import DropDownFilter from 'components/filters/DropDownFilter';
@@ -12,7 +11,8 @@ const defaultQueryParams = {
 
 const typeOptions = [
   { label: 'Expenses', value: 'Expense' },
-  { label: 'Income', value: 'Payment' },
+  { label: 'Manual Payment', value: 'ManualPayment' },
+  { label: 'Online Payment', value: 'Payment' },
 ];
 
 class LineItemFilterTable extends Component {
@@ -37,10 +37,10 @@ class LineItemFilterTable extends Component {
   resetParams() {
     this.setState(defaultQueryParams);
   }
-  
+
   filterType(e) {
     const val = e.target.value;
-    this.setState({ itemableType: val })
+    this.setState({ itemableType: val });
   }
 
   nextPage() {

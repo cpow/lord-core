@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
 
   def filter_params(keys, initial_obj)
     #this will build out the search params from the client
-    keys.each_with_object(initial_obj) do |obj, param_key|
+    keys.inject(initial_obj) do |obj, param_key|
       if params[param_key].present?
         obj.merge!(Hash[param_key, params[param_key]])
       end

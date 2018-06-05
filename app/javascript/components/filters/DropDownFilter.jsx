@@ -13,10 +13,10 @@ const DropDownFilter = ({
       {options.map(option => (
         <option
           key={option.label}
-          value={option.label}
+          value={option.value}
           selected={selected === option.value}
         >
-          {option.value}
+          {option.label}
         </option>
       ))}
     </select>
