@@ -2,13 +2,17 @@ require 'faker'
 
 FactoryBot.define do
   factory :line_item do
-    itemable nil
+    itemable { create(:expense) }
+    company
   end
+
   factory :expense do
     amount 1
+    company
     description "MyText"
-    expenseable nil
+    expenseable { build(:property) }
   end
+
   factory :notification_subscription do
     email_new_notifications true
     property_manager
