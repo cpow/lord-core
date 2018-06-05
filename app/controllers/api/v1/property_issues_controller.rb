@@ -7,7 +7,7 @@ module Api::V1
       @issues = Issue.search(
         unit_search,
         fields: [:unit_name],
-        where: filter_params,
+        where: filter_params(filter_keys, initial_object),
         page: params[:page],
         per_page: 10,
         order: {
@@ -27,15 +27,12 @@ module Api::V1
                     .find(params[:property_id])
     end
 
-    def filter_params
-      keys = %i[category status]
+    def filter_keys
+      %i[category, status]
+    end
 
-      keys.each_with_object(property_id: property.id) do |obj, param_key|
-        if params[param_key].present?
-          obj.merge!(Hash[param_key, params[param_key]])
-        end
-        obj
-      end
+    def initial_object
+      { property_id: property.id }
     end
 
     def unit_search

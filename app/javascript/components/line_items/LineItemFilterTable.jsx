@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
 import LineItemFetchTable from 'components/line_items/LineItemFetchTable';
+import DropDownFilter from 'components/filters/DropDownFilter';
 
 const { Component } = React;
 
@@ -9,11 +10,17 @@ const defaultQueryParams = {
   page: 1,
 };
 
+const typeOptions = [
+  { label: 'Expenses', value: 'Expense' },
+  { label: 'Income', value: 'Payment' },
+];
+
 class LineItemFilterTable extends Component {
   constructor(props) {
     super(props);
     this.state = defaultQueryParams;
 
+    this.filterType = this.filterType.bind(this);
     this.nextPage = this.nextPage.bind(this);
     this.prevPage = this.prevPage.bind(this);
     this.resetParams = this.resetParams.bind(this);
@@ -29,6 +36,11 @@ class LineItemFilterTable extends Component {
 
   resetParams() {
     this.setState(defaultQueryParams);
+  }
+  
+  filterType(e) {
+    const val = e.target.value;
+    this.setState({ itemableType: val })
   }
 
   nextPage() {
@@ -46,10 +58,19 @@ class LineItemFilterTable extends Component {
   }
 
   render() {
-    const { page } = this.state;
+    const { page, itemableType } = this.state;
 
     return (
       <div>
+        <div className="row mb-2">
+          <DropDownFilter
+            id="filterType"
+            label="Income or Expense"
+            options={typeOptions}
+            filter={this.filterType}
+            selected={itemableType}
+          />
+        </div>
         <div className="row mb-4">
           <div className="col text-center">
             <button
@@ -62,6 +83,7 @@ class LineItemFilterTable extends Component {
         </div>
         <LineItemFetchTable
           page={parseInt(page, 10)}
+          itemableType={this.state.itemableType}
           nextPage={this.nextPage}
           prevPage={this.prevPage}
         />

@@ -8,4 +8,3 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('line_item_filter_table'),
   );
 });
-

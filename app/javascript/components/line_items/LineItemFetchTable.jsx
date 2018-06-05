@@ -17,6 +17,8 @@ class LineItemFetchTable extends Component {
     super(props);
 
     this.state = { lineItems: [] };
+    this.next = this.next.bind(this);
+    this.prev = this.prev.bind(this);
   }
 
   componentDidMount() {
@@ -47,10 +49,11 @@ class LineItemFetchTable extends Component {
   fetchLineItems(next = null) {
     this.setState(this.state);
     const currentProps = next !== null ? next : this.props;
-    const { page } = currentProps;
+    const { page, itemableType } = currentProps;
     const params = new URLSearchParams();
 
     params.append('page', page || 1);
+    params.append('itemable_type', itemableType || '');
 
     window.history.replaceState({}, '', `?${params.toString()}`);
 
@@ -67,7 +70,7 @@ class LineItemFetchTable extends Component {
 
   render() {
     const { page } = this.props;
-    const { totalPages } = this.state;
+    const { totalPages, lineItems } = this.state;
 
     return (
       <div>
@@ -81,7 +84,7 @@ class LineItemFetchTable extends Component {
             />
           </div>
         </div>
-        <LineItemTable lineItems={this.state.lineItems} />
+        <LineItemTable lineItems={lineItems} />
       </div>
     );
   }
