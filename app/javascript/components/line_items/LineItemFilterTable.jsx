@@ -7,9 +7,11 @@ const { Component } = React;
 
 const defaultQueryParams = {
   page: 1,
+  itemableType: '',
 };
 
 const typeOptions = [
+  { label: 'All', value: 'All' },
   { label: 'Expenses', value: 'Expense' },
   { label: 'Manual Payment', value: 'ManualPayment' },
   { label: 'Online Payment', value: 'Payment' },
@@ -40,7 +42,7 @@ class LineItemFilterTable extends Component {
 
   filterType(e) {
     const val = e.target.value;
-    this.setState({ itemableType: val });
+    this.setState({ itemableType: val === 'All' ? '' : val });
   }
 
   nextPage() {

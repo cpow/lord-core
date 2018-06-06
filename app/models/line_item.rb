@@ -8,6 +8,7 @@ class LineItem < ApplicationRecord
     {
       itemable_type: itemable_type,
       itemable_id: itemable_id,
+      itemable_amount: itemable.amount,
       created_at: created_at,
       company_id: company.id
     }

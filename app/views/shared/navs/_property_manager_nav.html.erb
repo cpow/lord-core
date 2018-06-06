@@ -5,6 +5,12 @@
   <% end %>
 </li>
 <li class="nav-item mr-1">
+  <%= link_to line_items_path, class: "nav-link #{'active' if current_page?(line_items_path)}" do %>
+    <i class="fa fa-bar-chart"></i>
+    Line Items
+  <% end %>
+</li>
+<li class="nav-item mr-1">
   <%= link_to units_path, class: "nav-link #{'active' if current_page?(units_path)}" do %>
     <i class="fa fa-home"></i>
     Units

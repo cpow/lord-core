@@ -1,0 +1,54 @@
+<nav aria-label="breadcrumb" class="breadcrumb-nav sticky-top bg-white">
+  <ol class="breadcrumb bg-white">
+    <li class="breadcrumb-item"><%= link_to 'Expenses', expenses_path %></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= "Expense ID: #{@expense.id}" %></li>
+  </ol>
+</nav>
+
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: "Expense ID: #{@expense.id}",
+  text: 'Information regardin this expense' }
+%>
+
+<div class="card">
+  <div class="card-body">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
+        <strong class="pull-left">Amount:</strong>
+        <span class="pull-right">
+          <%= number_to_currency(@expense.human_amount) %>
+        </span>
+      </li>
+      <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
+        <strong class="pull-left">Created At</strong>
+        <span class="pull-right">
+          <%= human_date(@expense.created_at) %>
+        </span>
+      </li>
+      <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
+        <strong class="pull-left">Expenseable Item</strong>
+        <span class="pull-right">
+          <% if @expense.expenseable_type == 'Issue' %>
+            <%= link_to "Issue id: #{@expense.expenseable_id}",
+              property_issue_path(
+                @expense.expenseable.property, @expense.expenseable
+              )
+            %>
+          <% elsif @expense.expenseable_type == 'Unit' %>
+            <%= link_to "Unit id: #{@expense.expenseable_id}",
+              property_unit_path(
+                @expense.expenseable.property, @expense.expenseable
+              )
+            %>
+          <% elsif @expense.expenseable_type == 'Property' %>
+            <%= link_to "Property id: #{@expense.expenseable_id}",
+              property_path(@expense.expenseable)
+            %>
+          <% else %>
+            dunno
+          <% end %>
+        </span>
+      </li>
+    </ul>
+  </div>
+</div>

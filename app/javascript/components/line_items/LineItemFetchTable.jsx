@@ -10,6 +10,23 @@ const api = axios.create({
   headers: { Pragma: 'no-cache' },
 });
 
+const chartDataReducer = ((accum, currentItem) => {
+  const existingItem = accum.find(item =>
+    (typeof item === 'object') && (item.x === currentItem.itemable_type));
+
+  if (existingItem) {
+    existingItem.y += currentItem.itemable.human_amount;
+  } else {
+    const obj = {
+      x: currentItem.itemable_type,
+      y: currentItem.itemable.human_amount,
+    };
+    accum.push(obj);
+  }
+
+  return accum;
+});
+
 api.defaults.headers.common.Accept = 'application/json';
 
 class LineItemFetchTable extends Component {
@@ -19,6 +36,7 @@ class LineItemFetchTable extends Component {
     this.state = { lineItems: [] };
     this.next = this.next.bind(this);
     this.prev = this.prev.bind(this);
+    this.onClick = this.onClick.bind(this);
   }
 
   componentDidMount() {
@@ -27,6 +45,10 @@ class LineItemFetchTable extends Component {
 
   componentWillReceiveProps(next) {
     this.fetchLineItems(next);
+  }
+
+  onClick(lineItem) {
+    window.location = lineItem.itemable.url;
   }
 
   prev() {
@@ -62,7 +84,8 @@ class LineItemFetchTable extends Component {
     api.get(url).then((resp) => {
       const lineItems = resp.data.line_items;
       const totalPages = resp.data.pagination.total_pages;
-      this.setState({ lineItems, totalPages });
+      const chartData = lineItems.reduce(chartDataReducer, []);
+      this.setState({ lineItems, totalPages, chartData });
     }).catch(() => {
       console.log(error);
     });
@@ -70,7 +93,7 @@ class LineItemFetchTable extends Component {
 
   render() {
     const { page } = this.props;
-    const { totalPages, lineItems } = this.state;
+    const { totalPages, lineItems, chartData } = this.state;
 
     return (
       <div>
@@ -84,7 +107,11 @@ class LineItemFetchTable extends Component {
             />
           </div>
         </div>
-        <LineItemTable lineItems={lineItems} />
+        <LineItemTable
+          lineItems={lineItems}
+          onLineItemClick={this.onClick}
+          chartData={chartData}
+        />
       </div>
     );
   }

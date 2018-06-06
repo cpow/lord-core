@@ -42,7 +42,6 @@
 <% end %>
 
 <h3 class="text-center mt-4">Getting Started</h3>
-<p class="text-center">Here is all the information you need for your company. Please edit this as you see fit</p>
 
 <script>
   $(function () {
@@ -103,6 +102,22 @@
       <% end %>
     </div>
   <% end %>
+  <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+    <%= link_to(line_items_path, class: 'card line-items-info') do %>
+      <div class="card-body">
+        <h4>
+          Expenses vs. Income
+        </h4>
+        <p>
+          <i class="fa fa-bar-chart fa-3x text-warning">
+          </i>
+        </p>
+        <p class="font-italic">
+          Find out how you're stacking up
+        </p>
+      </div>
+    <% end%>
+  </div>
   <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
     <%= link_to(edit_property_manager_path(current_property_manager), class: 'card account-info') do %>
       <div class="card-body">

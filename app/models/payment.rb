@@ -25,7 +25,7 @@ class Payment < ApplicationRecord
   validates :stripe_charge_id, presence: true
 
   def human_amount
-    amount / 100
+    amount && amount / 100
   end
 
   def human_event_type

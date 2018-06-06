@@ -7,9 +7,9 @@ FactoryBot.define do
   end
 
   factory :expense do
-    amount 1
+    amount 1200
     company
-    description "MyText"
+    description 'MyText'
     expenseable { build(:property) }
   end
 
