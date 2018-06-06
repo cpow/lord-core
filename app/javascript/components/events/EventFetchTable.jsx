@@ -155,7 +155,11 @@ class EventFetchTable extends Component {
             You have {unreadEvents.length} unread notifications.
           </div>
         }
-        <div className="row mb-2">
+        <EventTable
+          events={this.state.events}
+          markEventAsRead={this.onMarkEvent}
+        />
+        <div className="row mt-2">
           <div className="col">
             <Pagination
               page={page}
@@ -165,10 +169,6 @@ class EventFetchTable extends Component {
             />
           </div>
         </div>
-        <EventTable
-          events={this.state.events}
-          markEventAsRead={this.onMarkEvent}
-        />
       </div>
     );
   }

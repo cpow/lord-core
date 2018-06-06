@@ -97,7 +97,12 @@ class LineItemFetchTable extends Component {
 
     return (
       <div>
-        <div className="row mb-2">
+        <LineItemTable
+          lineItems={lineItems}
+          onLineItemClick={this.onClick}
+          chartData={chartData}
+        />
+        <div className="row mt-2">
           <div className="col">
             <Pagination
               page={page}
@@ -107,11 +112,6 @@ class LineItemFetchTable extends Component {
             />
           </div>
         </div>
-        <LineItemTable
-          lineItems={lineItems}
-          onLineItemClick={this.onClick}
-          chartData={chartData}
-        />
       </div>
     );
   }

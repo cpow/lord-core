@@ -66,7 +66,8 @@ class FetchTable extends Component {
     const { totalPages } = this.state;
     return (
       <div>
-        <div className="row mb-2">
+        <IssueTable issues={this.state.issues} />
+        <div className="row mt-2">
           <div className="col">
             <Pagination
               page={page}
@@ -76,7 +77,6 @@ class FetchTable extends Component {
             />
           </div>
         </div>
-        <IssueTable issues={this.state.issues} />
       </div>
     );
   }
