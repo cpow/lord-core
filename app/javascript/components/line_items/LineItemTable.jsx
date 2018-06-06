@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Moment from 'react-moment';
 import { XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalBarSeries } from 'react-vis';
 
 const { Component } = React;
@@ -26,6 +27,7 @@ class LineItemTable extends Component {
               <tr>
                 <th scope="row">ID</th>
                 <th scope="row">Type</th>
+                <th scope="row">Created on</th>
                 <th scope="row">Amount</th>
               </tr>
             </thead>
@@ -40,6 +42,12 @@ class LineItemTable extends Component {
                 >
                   <td>{lineItem.id}</td>
                   <td>{lineItem.itemable_type}</td>
+                  <td>
+                    <Moment
+                      date={lineItem.created_at}
+                      format="MM/DD/YYYY"
+                    />
+                  </td>
                   <td>${lineItem.itemable.human_amount}</td>
                 </tr>
               ))}
