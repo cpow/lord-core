@@ -20,8 +20,6 @@
 //= require handlebars-v4.0.11
 //= require bootstrap-datepicker.min
 //= require property_images
-//= require Chart.bundle
-//= require chartkick
 
 
 $(function () {
