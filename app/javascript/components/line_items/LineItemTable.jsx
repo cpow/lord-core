@@ -27,6 +27,7 @@ class LineItemTable extends Component {
               <tr>
                 <th scope="row">ID</th>
                 <th scope="row">Type</th>
+                <th scope="row">Description</th>
                 <th scope="row">Created on</th>
                 <th scope="row">Amount</th>
               </tr>
@@ -42,6 +43,7 @@ class LineItemTable extends Component {
                 >
                   <td>{lineItem.id}</td>
                   <td>{lineItem.itemable_type}</td>
+                  <td>{lineItem.itemable.description}</td>
                   <td>
                     <Moment
                       date={lineItem.created_at}

@@ -2,6 +2,11 @@
   title: "Expenses vs. Income for #{current_property_manager.company.name}",
   text: 'Filterable table of your expenses vs income for your company' }
 %>
+<div class="row mb-4 text-center">
+  <div class="col-12">
+    <%= link_to 'Create an Expense', new_expense_path, class: 'btn btn-primary' %>
+  </div>
+</div>
 
 <div class="card">
   <div class="card-body">

@@ -1,0 +1,14 @@
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: 'Edit Expense',
+  text: '' }
+%>
+
+<div class="card">
+  <div class="card-body">
+    <% if @expense.changing_expenseable_type %>
+      <%= render 'expenseable_type' %>
+    <% else %>
+      <%= render 'form' %>
+    <% end %>
+  </div>
+</div>

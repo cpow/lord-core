@@ -1,6 +1,6 @@
 <nav aria-label="breadcrumb" class="breadcrumb-nav sticky-top bg-white">
   <ol class="breadcrumb bg-white">
-    <li class="breadcrumb-item"><%= link_to 'Expenses', expenses_path %></li>
+    <li class="breadcrumb-item"><%= link_to 'Expenses', line_items_path %></li>
     <li class="breadcrumb-item active" aria-current="page"><%= "Expense ID: #{@expense.id}" %></li>
   </ol>
 </nav>
@@ -50,5 +50,8 @@
         </span>
       </li>
     </ul>
+  </div>
+  <div class="card-footer">
+    <%= link_to 'Edit', edit_expense_path(@expense) %>
   </div>
 </div>

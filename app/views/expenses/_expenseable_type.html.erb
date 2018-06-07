@@ -1,7 +1,7 @@
 <h2>What type of expense is this?</h2>
 <p class="small">Please select what type of expense this is going to be. Is it for the property? for an apartment? or for a repair?</p>
 
-<%= form_with(model: @expense, local: true, url: new_expense_path(@expense), method: :get) do |form| %>
+<%= form_with(model: @expense, local: true, url: @edit_or_new_url, method: :get) do |form| %>
   <div class="form-group">
     <%= form.select :expenseable_type, options_for_select(Expense::EXPENSEABLE_TYPES), {}, { class: 'form-control input-lg', id: 'expenseable_type' } %>
   </div>

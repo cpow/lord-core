@@ -26,7 +26,10 @@ Rails.application.routes.draw do
 
   resources :property_manager_creation, only: :create
 
-  resources :expenses
+  resources :expenses do
+    get :changing_expenseable_type, on: :member
+    get :update_expenseable_type, on: :member
+  end
   resources :line_items
 
   resources :property_managers do

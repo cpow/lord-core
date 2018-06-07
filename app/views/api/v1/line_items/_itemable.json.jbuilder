@@ -1,4 +1,4 @@
-json.(itemable, :created_at, :amount, :human_amount)
+json.(itemable, :created_at, :amount, :human_amount, :description)
 
 if itemable.is_a?(ManualPayment) || itemable.is_a?(Payment)
   json.url property_unit_lease_payment_url(itemable.unit.property, itemable.unit, itemable.lease_payment)

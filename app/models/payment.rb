@@ -28,6 +28,10 @@ class Payment < ApplicationRecord
     amount && amount / 100
   end
 
+  def description
+    "#{user.email}, for unit: #{unit.name}. In property #{unit.property.name}"
+  end
+
   def human_event_type
     latest_event_type.split('charge.').last
   end

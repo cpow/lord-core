@@ -1,13 +1,13 @@
 <div class="row mb-4">
   <div class="col-12">
-    <%= link_to '<< Back', new_expense_path, class: 'mb-4' %>
+    <%= link_to '<< Back', @back_url, class: 'mb-4' %>
   </div>
 </div>
 
 <h2>The rest of the details</h2>
 <p>This expense is being created for a <%= @expense.expenseable_type.downcase %></p>
 
-<%= form_with(model: @expense, local: true, url: expenses_path, method: :post, class: 'full-form') do |form| %>
+<%= form_with(model: @expense, local: true, class: 'full-form') do |form| %>
   <%= render partial: 'layouts/errors', locals: { object: @expense } %>
 
   <%= form.hidden_field :expenseable_type %>
@@ -24,7 +24,7 @@
 
   <div class="form-group">
     <%= form.label :amount %>
-    <%= form.number_field :amount, id: :amount, class: 'form-control' %>
+    <%= form.number_field :amount, value: @expense.human_amount, id: :amount, class: 'form-control' %>
   </div>
 
   <div class="form-group">

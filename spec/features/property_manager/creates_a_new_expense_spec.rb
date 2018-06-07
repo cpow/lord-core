@@ -19,7 +19,7 @@ feature 'property manager creates an expense', js: true do
 
     click_on('Submit')
 
-    expect(current_path).to eq(expenses_path)
+    expect(current_path).to eq(line_items_path)
     expect(page).to have_css('.alert.alert-success')
   end
 end
