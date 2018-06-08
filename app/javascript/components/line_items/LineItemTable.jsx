@@ -1,15 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
-import { XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalBarSeries } from 'react-vis';
+import { XYPlot, XAxis, YAxis, VerticalBarSeries, Crosshair } from 'react-vis';
 
 const { Component } = React;
 
 class LineItemTable extends Component {
   static styleFor(lineItem) {
     return lineItem.itemable_type === 'Expense' ?
-      'text-danger' :
-      'text-success';
+      'danger' :
+      'success';
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = { crosshairValues: [] };
   }
 
   render() {
@@ -17,11 +22,24 @@ class LineItemTable extends Component {
       <div>
         <div className="d-flex justify-content-center">
           {this.props.chartData &&
-            <XYPlot width={400} height={200} xType="ordinal">
+            <XYPlot
+              width={400}
+              height={200}
+              xType="ordinal"
+              onMouseLeave={() => this.setState({crosshairValues: []})}
+            >
               <VerticalBarSeries
                 data={this.props.chartData}
-                animation
+                onNearestX={(value, {index}) =>
+                  this.setState({crosshairValues: [value]})}
               />
+              <Crosshair values={this.state.crosshairValues}>
+                {this.state.crosshairValues[0] &&
+                  <div className={`alert-${LineItemTable.styleFor({itemable_type: this.state.crosshairValues[0].x})}`}>
+                    <h4>{this.state.crosshairValues[0].x}s: {this.state.crosshairValues[0].y}</h4>
+                  </div>
+                }
+              </Crosshair>
               <XAxis />
               <YAxis />
             </XYPlot>
@@ -56,7 +74,7 @@ class LineItemTable extends Component {
                       format="MM/DD/YYYY"
                     />
                   </td>
-                  <td className={LineItemTable.styleFor(lineItem)}>
+                  <td className={`text-${LineItemTable.styleFor(lineItem)}`}>
                     ${lineItem.itemable.human_amount}
                   </td>
                 </tr>
