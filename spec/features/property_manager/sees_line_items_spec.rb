@@ -33,20 +33,4 @@ feature 'property manager sees line items', js: true do
       property_unit_lease_payment_path(property, unit, lease_payment)
     )
   end
-
-  scenario 'by seeing expenses' do
-    manager = create(:property_manager, :with_company)
-    expense = create(:expense, company: manager.company)
-    line_item = create(:line_item, itemable: expense, company: manager.company)
-
-    login_as(manager, scope: :property_manager)
-    visit root_path
-    find(:css, '.card.line-items-info').click
-
-    expect(page).to have_content(line_item.id)
-
-    find(:css, 'tbody td', text: line_item.id).click
-
-    expect(current_path).to eq(expense_path(expense))
-  end
 end

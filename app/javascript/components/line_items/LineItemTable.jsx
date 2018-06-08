@@ -6,6 +6,12 @@ import { XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalBarSeries } from 're
 const { Component } = React;
 
 class LineItemTable extends Component {
+  static styleFor(lineItem) {
+    return lineItem.itemable_type === 'Expense' ?
+      'text-danger' :
+      'text-success';
+  }
+
   render() {
     return (
       <div>
@@ -50,7 +56,9 @@ class LineItemTable extends Component {
                       format="MM/DD/YYYY"
                     />
                   </td>
-                  <td>${lineItem.itemable.human_amount}</td>
+                  <td className={LineItemTable.styleFor(lineItem)}>
+                    ${lineItem.itemable.human_amount}
+                  </td>
                 </tr>
               ))}
             </tbody>
