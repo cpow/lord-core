@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import Pagination from 'components/Pagination';
 import LineItemTable from 'components/line_items/LineItemTable';
+import Loader from 'components/Loader';
 
 const { Component } = React;
 
@@ -33,7 +34,7 @@ class LineItemFetchTable extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { lineItems: [] };
+    this.state = { lineItems: [], loading: true };
     this.next = this.next.bind(this);
     this.prev = this.prev.bind(this);
     this.onClick = this.onClick.bind(this);
@@ -69,9 +70,13 @@ class LineItemFetchTable extends Component {
   }
 
   fetchLineItems(next = null) {
-    this.setState(this.state);
+    const newState = this.state;
+    newState.loading = true;
+    this.setState(newState);
     const currentProps = next !== null ? next : this.props;
-    const { page, itemableType, startDate, endDate } = currentProps;
+    const {
+      page, itemableType, startDate, endDate,
+    } = currentProps;
     const params = new URLSearchParams();
 
     params.append('page', page || 1);
@@ -87,7 +92,9 @@ class LineItemFetchTable extends Component {
       const lineItems = resp.data.line_items;
       const totalPages = resp.data.pagination.total_pages;
       const chartData = lineItems.reduce(chartDataReducer, []);
-      this.setState({ lineItems, totalPages, chartData });
+      this.setState({
+        lineItems, totalPages, chartData, loading: false,
+      });
     }).catch(() => {
       console.log(error);
     });
@@ -96,24 +103,37 @@ class LineItemFetchTable extends Component {
   render() {
     const { page } = this.props;
     const { totalPages, lineItems, chartData } = this.state;
+    let tableOrLoad;
+
+    if (this.state.loading === true) {
+      tableOrLoad = (
+        <Loader />
+      );
+    } else {
+      tableOrLoad = (
+        <div>
+          <LineItemTable
+            lineItems={lineItems}
+            onLineItemClick={this.onClick}
+            chartData={chartData}
+          />
+          <div className="row mt-2">
+            <div className="col">
+              <Pagination
+                page={page}
+                totalPages={totalPages}
+                nextPage={this.next}
+                prevPage={this.prev}
+              />
+            </div>
+          </div>
+        </div>
+      );
+    }
 
     return (
       <div>
-        <LineItemTable
-          lineItems={lineItems}
-          onLineItemClick={this.onClick}
-          chartData={chartData}
-        />
-        <div className="row mt-2">
-          <div className="col">
-            <Pagination
-              page={page}
-              totalPages={totalPages}
-              nextPage={this.next}
-              prevPage={this.prev}
-            />
-          </div>
-        </div>
+        { tableOrLoad }
       </div>
     );
   }
