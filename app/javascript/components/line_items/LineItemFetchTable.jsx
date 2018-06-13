@@ -71,11 +71,13 @@ class LineItemFetchTable extends Component {
   fetchLineItems(next = null) {
     this.setState(this.state);
     const currentProps = next !== null ? next : this.props;
-    const { page, itemableType } = currentProps;
+    const { page, itemableType, startDate, endDate } = currentProps;
     const params = new URLSearchParams();
 
     params.append('page', page || 1);
     params.append('itemable_type', itemableType || '');
+    params.append('start_date', startDate || '');
+    params.append('end_date', endDate || '');
 
     window.history.replaceState({}, '', `?${params.toString()}`);
 

@@ -6,7 +6,7 @@ module Api
       def index
         @line_items = LineItem.search(
           '*',
-          where: filter_params(filter_keys, initial_object),
+          where: filter_params,
           page: params[:page],
           per_page: 10,
           order: {
@@ -25,12 +25,21 @@ module Api
         @company ||= current_property_manager.company
       end
 
-      def filter_keys
-        %i[itemable_type]
-      end
+      def filter_params
+        base = {
+          company_id: company.id
+        }
 
-      def initial_object
-        { company_id: company.id }
+        if params[:itemable_type].present?
+          base[:itemable_type] = params[:itemable_type]
+        end
+
+        if params[:start_date].present? && params[:end_date].present?
+          base[:created_on] = \
+            { gte: params[:start_date], lte: params[:end_date] }
+        end
+
+        base
       end
     end
   end

@@ -2,12 +2,16 @@ import React from 'react';
 import queryString from 'query-string';
 import LineItemFetchTable from 'components/line_items/LineItemFetchTable';
 import DropDownFilter from 'components/filters/DropDownFilter';
+import DateFilter from 'components/filters/DateFilter';
+import moment from 'moment';
 
 const { Component } = React;
 
 const defaultQueryParams = {
   page: 1,
   itemableType: '',
+  startDate: '',
+  endDate: '',
 };
 
 const typeOptions = [
@@ -23,6 +27,8 @@ class LineItemFilterTable extends Component {
     this.state = defaultQueryParams;
 
     this.filterType = this.filterType.bind(this);
+    this.filterStartDate = this.filterStartDate.bind(this);
+    this.filterEndDate = this.filterEndDate.bind(this);
     this.nextPage = this.nextPage.bind(this);
     this.prevPage = this.prevPage.bind(this);
     this.resetParams = this.resetParams.bind(this);
@@ -43,6 +49,16 @@ class LineItemFilterTable extends Component {
   filterType(e) {
     const val = e.target.value;
     this.setState({ itemableType: val === 'All' ? '' : val });
+  }
+
+  filterEndDate(date) {
+    const endDate = moment(date[0]).format('YYYY-MM-DD');
+    this.setState({ endDate });
+  }
+
+  filterStartDate(date) {
+    const startDate = moment(date[0]).format('YYYY-MM-DD');
+    this.setState({ startDate });
   }
 
   nextPage() {
@@ -72,6 +88,16 @@ class LineItemFilterTable extends Component {
             filter={this.filterType}
             selected={itemableType}
           />
+          <DateFilter
+            filter={this.filterStartDate}
+            value={this.state.startDate}
+            label="Start Date"
+          />
+          <DateFilter
+            filter={this.filterEndDate}
+            value={this.state.endDate}
+            label="End Date"
+          />
         </div>
         <div className="row mb-4">
           <div className="col text-center">
@@ -86,6 +112,8 @@ class LineItemFilterTable extends Component {
         <LineItemFetchTable
           page={parseInt(page, 10)}
           itemableType={this.state.itemableType}
+          startDate={this.state.startDate}
+          endDate={this.state.endDate}
           nextPage={this.nextPage}
           prevPage={this.prevPage}
         />

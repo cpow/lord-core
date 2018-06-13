@@ -10,6 +10,7 @@ class LineItem < ApplicationRecord
       itemable_id: itemable_id,
       itemable_amount: itemable.amount,
       created_at: created_at,
+      created_on: created_at.strftime('%Y-%m-%d'),
       company_id: company.id
     }
   end

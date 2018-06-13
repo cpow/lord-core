@@ -2,6 +2,7 @@ json.(
   line_item,
   :id,
   :itemable_type,
+  :created_at,
   :itemable_id,
   :company_id
 )
