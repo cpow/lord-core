@@ -19,6 +19,10 @@ $primary: #4281B2;
   }
 }
 
+input.flatpickr-input {
+  background-color: transparent !important;
+}
+
 // NOTE: This makes card decks responsive https://github.com/twbs/bootstrap/issues/20321
 .row.equal-height {
   display: flex;
