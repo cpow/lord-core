@@ -1,21 +1,26 @@
 # This is a list of TODOs for lordcore
 
-[ ] make sure things like GA and airbrake aren't running in test/dev modes
+[x] make sure things like GA and airbrake aren't running in test/dev modes
 
 [ ] resource for PMs to get all their income from rent?
   * maybe a nice JS table like all the other
   * filterable, etc...
   * export the filtered set to CSV or something. email it out, or w/e
+  * also handle expenses with this
 
-[ ] private github organization for repository
+[x] private github organization for repository (dev account -> prvate)
 
-[ ] notify when user makes payment on lease
+[x] notify when user makes payment on lease
   * maybe show that a new payment has been made
   * send out an email to property managers
 
-[ ] better information on the fee when a user looks at pending funds on their finances page
+[ ] make lease creation and discovery easier
+  * currently its locked behind units. should be a bit more in-the-open
 
-[ ] flesh out the residents view in property manager portal
+[ ] better information on the fee when a user looks at pending funds on their finances page
+  * also some JS to display the fee when a PM is creating a lease for tenants
+
+[x] flesh out the residents view in property manager portal
 
 [ ] clean up all errors/warnings from react
 
@@ -23,7 +28,7 @@
 
 [ ] handle debounce-ness on the issue creation form
 
-[ ] show more granular information to a property manager on the residency show
+[x] show more granular information to a property manager on the residency show
 page. something like, when they were invited, emails that have been sent to
 them, etc...
 

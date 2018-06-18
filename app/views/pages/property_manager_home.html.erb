@@ -14,6 +14,22 @@
 <%#   </div>
 <%# <% end %>
 
+<% if current_property_manager.company.stripe_problem %>
+  <div class="card alert alert-warning text-center bank-warning mt-4">
+    <div class="card-body">
+      <h4 class="card-title">
+        You need to verify your stripe account to receive payments
+      </h4>
+      <p class="card-text">
+      before you can process any payments. You need to verify your account.
+      </p>
+      <%= link_to "Edit Payment Account",
+        edit_stripe_account_path(id: current_property_manager.company.stripe_account_guid),
+        class: "btn btn-primary btn-warning" %>
+    </div>
+  </div>
+<% end %>
+
 <% if current_property_manager.company.properties.count == 0 %>
   <div class="card alert alert-success text-center welcome-message-manager mt-4">
     <div class="card-body">

@@ -50,5 +50,5 @@ manager_without_company = FactoryBot.create(:property_manager,
                                  email: 'managerwithoutcompany@example.com',
                                  password: 'test1234')
 
-FactoryBot.create(:expense, expenseable: property)
+expense = FactoryBot.create(:expense, expenseable: property)
 FactoryBot.create(:line_item, itemable: expense, company: manager.company)

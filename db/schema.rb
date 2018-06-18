@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_01_022435) do
+ActiveRecord::Schema.define(version: 2018_06_18_131000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 2018_06_01_022435) do
     t.datetime "updated_at", null: false
     t.string "bank_account_name"
     t.string "bank_account_last4"
+    t.boolean "stripe_problem", default: false
   end
 
   create_table "event_reads", force: :cascade do |t|

@@ -113,6 +113,7 @@ Rails.application.routes.draw do
       namespace :stripe do
         namespace :webhooks do
           resources :charges, only: :create
+          resources :accounts, only: :create
         end
       end
     end

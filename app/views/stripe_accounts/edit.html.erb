@@ -1,18 +1,12 @@
-<%= content_for :page_title, 'Fundraising Marketplace | Submit your account info' %>
-<div class="container">
-  <div class="row topspace-lg">
-    <div class="col-md-6 col-md-offset-3">
-      <h1 class="text-center">
-        Update your account
-      </h1>
-      <div>
-        <%= render 'identity_verification_form' %>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12 text-center">
-      <a href="https://stripe.com/docs/connect/testing#identity-verification" target="_blank">Stripe Connect test numbers</a>
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: 'Update your stripe account',
+  text: 'Update your payment information' }
+%>
+
+<div class="card">
+  <div class="card-body">
+    <div>
+      <%= render 'identity_verification_form' %>
     </div>
   </div>
 </div>

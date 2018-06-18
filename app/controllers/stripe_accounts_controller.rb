@@ -46,10 +46,14 @@ class StripeAccountsController < ApplicationController
           stripe_account.save
         end
 
+
         # Save the account ID for this company for later
         @account.stripe_account_guid = stripe_account.id
         @account.save
         current_company.stripe_account_guid = stripe_account.id
+        if stripe_account.verification.fields_needed.present?
+          current_company.stripe_problem = true
+        end
 
         if current_company.save
           flash[:success] = "Your account has been created!
@@ -87,6 +91,7 @@ class StripeAccountsController < ApplicationController
     @account = StripeAccount.find_by(stripe_account_guid: params[:id])
 
     if @stripe_account.verification.fields_needed.empty?
+      current_company.update(stripe_problem: false)
       flash[:success] = "Your information is all up to date."
       return redirect_to authenticated_user_root_path
     end
