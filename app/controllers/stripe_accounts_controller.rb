@@ -51,9 +51,6 @@ class StripeAccountsController < ApplicationController
         @account.stripe_account_guid = stripe_account.id
         @account.save
         current_company.stripe_account_guid = stripe_account.id
-        if stripe_account.verification.fields_needed.present?
-          current_company.stripe_problem = true
-        end
 
         if current_company.save
           flash[:success] = "Your account has been created!
