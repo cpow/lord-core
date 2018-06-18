@@ -27,7 +27,7 @@ feature 'property manager sees line items', js: true do
 
     expect(page).to have_content(line_item.id)
 
-    find(:css, 'tbody td', text: line_item.id).click
+    first(:css, 'tbody td', text: line_item.id).click
 
     expect(current_path).to eq(
       property_unit_lease_payment_path(property, unit, lease_payment)
