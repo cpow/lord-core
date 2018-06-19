@@ -112,6 +112,16 @@ class LineItemFetchTable extends Component {
     } else {
       tableOrLoad = (
         <div>
+          <div className="row mb-2">
+            <div className="col text-center">
+              <a
+                href={`${window.location.origin}${window.location.pathname}.csv${window.location.search}`}
+                className="btn btn-secondary"
+              >
+                Download CSV
+              </a>
+            </div>
+          </div>
           <LineItemTable
             lineItems={lineItems}
             onLineItemClick={this.onClick}

@@ -99,11 +99,11 @@ class LineItemFilterTable extends Component {
             label="End Date"
           />
         </div>
-        <div className="row mb-4">
+        <div className="row mb-2">
           <div className="col text-center">
             <button
               onClick={this.resetParams}
-              className="btn btn-primary"
+              className="btn btn-primary pr-4"
             >
               Reset All
             </button>

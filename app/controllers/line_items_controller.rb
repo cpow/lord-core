@@ -3,18 +3,15 @@ class LineItemsController < ApplicationController
   before_action :company
 
   def index
-    @line_items = LineItem.search(
-      '*',
-      where: filter_params(filter_keys, initial_object),
-      order: {
-        created_at: {
-          order: 'desc'
-        }
-      }
-    )
+    @line_items = LineItems::Query.new(
+      params: params, company: company
+    ).search
 
-    @chart_items = @line_items.group_by(&:itemable_type).map do |type, items|
-      [type, items.map{|i| i.itemable.human_amount}.sum]
+    respond_to do |format|
+      format.html
+      format.csv do
+        send_data Generators::Csv::LineItems.new(@line_items).generate
+      end
     end
   end
 
@@ -22,13 +19,5 @@ class LineItemsController < ApplicationController
 
   def company
     @company ||= current_property_manager.company
-  end
-
-  def filter_keys
-    %i[itemable_type]
-  end
-
-  def initial_object
-    { company_id: company.id }
   end
 end
