@@ -2,7 +2,7 @@
 
 [x] make sure things like GA and airbrake aren't running in test/dev modes
 
-[ ] resource for PMs to get all their income from rent?
+[x] resource for PMs to get all their income from rent?
   * maybe a nice JS table like all the other
   * filterable, etc...
   * export the filtered set to CSV or something. email it out, or w/e

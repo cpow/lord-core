@@ -1,0 +1,28 @@
+<table class="table charge-events table-striped table-hover">
+  <thead class="thead-default">
+    <tr>
+      <th scope="row">ID</th>
+      <th scope="row">Created</th>
+      <th scope="row">Stripe Charge ID</th>
+      <th scope="row">Event Type</th>
+      <th scope="row">Failure Code</th>
+      <th scope="row">Failure Message</th>
+      <th scope="row">Payment</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @charge_events.each do |charge_event| %>
+      <tr>
+        <td><%= charge_event.id %></td>
+        <td><%= human_date(charge_event.created_at) %></td>
+        <td><%= charge_event.stripe_charge_id %></td>
+        <td><%= charge_event.event_type %></td>
+        <td><%= charge_event.failure_code %></td>
+        <td><%= charge_event.failure_message %></td>
+        <td><%= charge_event.payment_id %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

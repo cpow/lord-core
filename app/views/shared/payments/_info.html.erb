@@ -1,0 +1,30 @@
+<div class="card mb-4">
+  <div class="card-body">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
+        <strong class="pull-left">Cretaed On:</strong>
+        <span class="pull-right">
+          <%= human_date(@payment.created_at) %>
+        </span>
+      </li>
+      <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
+        <strong class="pull-left">Updated On:</strong>
+        <span class="pull-right">
+          <%= human_date(@payment.updated_at) %>
+        </span>
+      </li>
+      <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
+        <strong class="pull-left">Amount:</strong>
+        <span class="pull-right">
+          <%= number_to_currency(@payment.human_amount) %>
+        </span>
+      </li>
+      <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
+        <strong class="pull-left">Status</strong>
+        <span class="pull-right badge <%= payment_badge(@payment) %>">
+          <%= @payment.human_event_type %>
+        </span>
+      </li>
+    </ul>
+  </div>
+</div>

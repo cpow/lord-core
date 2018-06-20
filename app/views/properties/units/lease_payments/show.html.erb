@@ -100,7 +100,7 @@
         <% if @lease_payment.payments.present? %>
           <div class="row equal-height text-center">
             <% @lease_payment.payments.each do |payment| %>
-              <%= render 'shared/payments/payment_card', payment: payment %>
+              <%= render 'shared/payments/payment_card', payment: payment, link_path: property_unit_payment_path(@property, @unit, payment) %>
             <% end %>
           </div>
         <% else %>

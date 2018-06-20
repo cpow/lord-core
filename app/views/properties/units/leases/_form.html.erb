@@ -31,6 +31,12 @@
           <%= form.label :payment_amount, "Payment amount per month" %>
           <%= form.number_field :payment_amount, id: :lease_payment_amount, class: 'form-control' %>
         </div>
+          <script type="text/javascript">
+            var el = document.findElementById('lease_payment_amount');
+            el.on('change', function() {
+              console.log("SUP");
+            })
+          </script>
         <div class="form-group col-lg-6 col-sm-12">
           <%= form.label :payment_first_date, "First Payment Date" %>
           <%= form.text_field :payment_first_date,

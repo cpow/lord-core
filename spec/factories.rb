@@ -58,12 +58,12 @@ FactoryBot.define do
   end
 
   factory :charge_event do
-    stripe_charge_id "MyString"
-    event_type "MyString"
+    stripe_charge_id "something"
+    event_type ChargeEvent::FAILURE_TYPE
     stripe_event_id "MyString"
-    failure_code "MyString"
-    failure_message "MyString"
-    payment_id ""
+    failure_code "This is a failure"
+    failure_message "Something happened and it failed"
+    payment
   end
 
   factory :admin do

@@ -1,3 +1,10 @@
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: 'Payments',
+  text: 'All the payments you\'ve made over time'
+} %>
+
 <div class="card">
-  <%= render 'shared/payments/table', payments: @payments %>
+  <div class="card-body">
+    <%= render 'shared/payments/table', payments: @payments %>
+  </div>
 </div>

@@ -3,6 +3,11 @@ class PaymentsController < ApplicationController
   before_action :check_for_stripe_token
   before_action :check_for_company_stripe_token
 
+  def show
+    @payment = current_user.payments.find(params[:id])
+    @charge_events = @payment.charge_events
+  end
+
   def index
     @payments = current_user.payments
   end
