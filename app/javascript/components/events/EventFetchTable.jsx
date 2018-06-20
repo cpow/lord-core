@@ -64,10 +64,10 @@ class EventFetchTable extends Component {
             window.location.pathname = `/users/${readerId}/lease_payments/${event.lease_payment_id}`;
             break;
           case 'IssueComment':
-            window.location.pathname = `/users/${readerId}/issues/${event.eventable.issue_id}`;
+            window.location.pathname = `/units/${event.eventable.unit_id}/issues/${event.eventable.issue_id}`;
             break;
           case 'Issue':
-            window.location.pathname = `/users/${readerId}/issues/${event.eventable.id}`;
+            window.location.pathname = `/units/${event.eventable.unit_id}/issues/${event.eventable.issue_id}`;
             break;
           default:
             break;
