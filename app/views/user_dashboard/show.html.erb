@@ -151,7 +151,9 @@
   <% end %>
 
   <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-    <%= link_to user_issues_path(current_user), class: 'card property-info', id: 'issues__link' do %>
+    <%= link_to unit_issues_path(current_user.current_unit),
+      class: 'card property-info',
+      id: 'issues__link' do %>
       <div class="card-body">
         <h4>
           Issues

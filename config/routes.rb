@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   resources :residencies, only: [:index]
   resources :units do
     resources :messages, only: [:index], controller: 'units/messages'
+    resources :issues, only: [:index, :new, :create, :show], controller: 'units/issues'
   end
 
 
@@ -72,7 +73,6 @@ Rails.application.routes.draw do
     resources :leases, only: :show, controller: 'users/leases'
     resources :notification_subscriptions, only: [:update, :edit], controller: 'users/notification_subscriptions'
     resources :lease_payments, only: :show, controller: 'users/lease_payments'
-    resources :issues, only: [:index, :new, :create, :show], controller: 'users/issues'
   end
 
   resources :user do

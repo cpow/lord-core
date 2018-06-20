@@ -2,14 +2,14 @@ require 'rails_helper'
 
 RSpec.describe StripeAccountsController, type: :controller do
   describe 'POST #create' do
-    it 'should flag company with stripe_problem when more info required' do
+    it 'should not flag company with stripe_problem right away' do
       manager = create(:property_manager, :with_company)
       sign_in(manager)
 
       post :create, params: default_stripe_params
 
       expect(manager.company.reload.stripe_account_guid).to be_truthy
-      expect(manager.company.reload.stripe_problem).to be_truthy
+      expect(manager.company.reload.stripe_problem).to be_falsey
     end
 
     it 'should create stripe account without issues when everything is good' do
