@@ -25,6 +25,11 @@ class Payment < ApplicationRecord
   validates :stripe_charge_id, presence: true
 
   def human_amount
+    return 0 if latest_event_type == ChargeEvent::FAILURE_TYPE
+    original_amount
+  end
+
+  def original_amount
     amount && amount / 100
   end
 
