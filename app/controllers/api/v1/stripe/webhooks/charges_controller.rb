@@ -29,8 +29,8 @@ module Api::V1::Stripe::Webhooks
 
     def failure_data
       {
-        failure_code: params[:data][:failure_code],
-        failure_message: params[:data][:failure_message]
+        failure_code: params[:data][:object][:failure_code],
+        failure_message: params[:data][:object][:failure_message]
       }
     end
 

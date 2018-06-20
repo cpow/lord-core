@@ -28,9 +28,9 @@ describe Api::V1::Stripe::Webhooks::ChargesController do
       pending_webhooks: 1,
       api_version: '2017-12-14',
       data: {
-        failure_code: 'something',
-        failuire_message: 'some failure message',
         object: {
+          failure_code: 'something',
+          failuire_message: 'some failure message',
           id: id
         }
       }
