@@ -25,6 +25,7 @@ class LineItemTable extends Component {
             <XYPlot
               width={400}
               height={200}
+              colorType="literal"
               xType="ordinal"
               onMouseLeave={() => this.setState({crosshairValues: []})}
             >

@@ -11,6 +11,12 @@ const api = axios.create({
   headers: { Pragma: 'no-cache' },
 });
 
+const colorFor = ((itemableType) => {
+  return itemableType === 'Expense' ?
+    '#d9534f' :
+    '#5cb85c';
+})
+
 const chartDataReducer = ((accum, currentItem) => {
   const existingItem = accum.find(item =>
     (typeof item === 'object') && (item.x === currentItem.itemable_type));
@@ -21,6 +27,7 @@ const chartDataReducer = ((accum, currentItem) => {
     const obj = {
       x: currentItem.itemable_type,
       y: currentItem.itemable.human_amount,
+      color: colorFor(currentItem.itemable_type),
     };
     accum.push(obj);
   }
