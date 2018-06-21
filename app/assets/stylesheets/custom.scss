@@ -30,7 +30,7 @@ input.flatpickr-input {
   flex-wrap: wrap;
 }
 
-.card-img-top {
+.card-img-top.profile {
   height: 100px;
   width: 100%;
   background-image: linear-gradient(90deg, $primary 45%, lighten($primary, 10) 25%, lighten($primary, 15) 35%, lighten($primary, 20) 55%, darken($light, 15) 65%, darken($light, 10) 35%, darken($light, 8));
