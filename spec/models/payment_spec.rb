@@ -17,4 +17,13 @@
 require 'rails_helper'
 
 RSpec.describe Payment, type: :model do
+  describe Payment, '.successful' do
+    it 'filters out bad boys' do
+      bad = create(:payment, :error)
+      good = create(:payment)
+
+      expect(Payment.successful).to include(good)
+      expect(Payment.successful).to_not include(bad)
+    end
+  end
 end

@@ -60,7 +60,7 @@ class LeasePayment < ApplicationRecord
   end
 
   def payment_total
-    payments.sum(:amount)
+    payments.successful.sum(:amount)
   end
 
   def manual_with_online_payment_total

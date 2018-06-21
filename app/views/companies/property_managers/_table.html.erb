@@ -1,0 +1,41 @@
+<nav aria-label="breadcrumb" class="breadcrumb-nav sticky-top bg-white">
+  <ol class="breadcrumb bg-white">
+    <li class="breadcrumb-item"><%= link_to @company.name, authenticated_property_manager_root_path %></li>
+    <li class="breadcrumb-item active" aria-current="page">Company</li>
+  </ol>
+</nav>
+
+<table class="table payments table-striped table-hover">
+  <thead class="thead-default">
+    <tr>
+      <th scope="row">ID</th>
+      <th scope="row">Name</th>
+      <th scope="row">Email</th>
+      <th scope="row">Active</th>
+      <th scope="row">Admin?</th>
+      <th scope="row">Sign in Count</th>
+      <th scope="row">Created</th>
+      <th scope="row">Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% property_managers.each do |manager| %>
+      <tr id=<%= manager.id %>>
+        <td><%= manager.id %></td>
+        <td><%= manager.name %></td>
+        <td><%= manager.email %></td>
+        <td><%= manager.active %></td>
+        <td><%= manager.admin %></td>
+        <td><%= manager.sign_in_count %></td>
+        <td><%= manager.created_at %></td>
+        <td>
+          <%= link_to 'Show',
+            [manager.company, manager],
+            class: 'manager-show__link'
+          %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

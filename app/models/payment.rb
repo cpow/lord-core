@@ -24,6 +24,10 @@ class Payment < ApplicationRecord
 
   validates :stripe_charge_id, presence: true
 
+  scope :successful, -> do
+    where('latest_event_type <> ?', ChargeEvent::FAILURE_TYPE)
+  end
+
   def human_amount
     return 0 if latest_event_type == ChargeEvent::FAILURE_TYPE
     original_amount

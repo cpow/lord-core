@@ -2,6 +2,10 @@
 
 [x] make sure things like GA and airbrake aren't running in test/dev modes
 
+[ ] separate property managers from 1-1 relationship with company
+
+[ ] pics on everyone's profiles
+
 [x] resource for PMs to get all their income from rent?
   * maybe a nice JS table like all the other
   * filterable, etc...

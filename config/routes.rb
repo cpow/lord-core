@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   # routes for property managers to see only
   resources :companies do
     resources :finances, only: [:show], controller: 'companies/finances'
+    resources :property_managers, controller: 'companies/property_managers'
   end
 
   resources :property_manager_creation, only: :create

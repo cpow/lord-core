@@ -1,0 +1,48 @@
+<nav aria-label="breadcrumb" class="breadcrumb-nav sticky-top bg-white">
+  <ol class="breadcrumb bg-white">
+    <li class="breadcrumb-item"><%= link_to @company.name, authenticated_property_manager_root_path %></li>
+    <li class="breadcrumb-item active" aria-current="page">Company</li>
+  </ol>
+</nav>
+
+<%= render partial: 'layouts/pretty_header', locals: {
+  title: "Manager: #{@property_manager.name}",
+  text: ''
+} %>
+
+<div class="card mb-4">
+  <div class="card-body">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
+        <strong class="pull-left">Name:</strong>
+        <span class="pull-right">
+          <%= @property_manager.name %>
+        </span>
+      </li>
+      <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
+        <strong class="pull-left">Email:</strong>
+        <span class="pull-right">
+          <%= @property_manager.email %>
+        </span>
+      </li>
+      <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
+        <strong class="pull-left">Active:</strong>
+        <span class="pull-right">
+          <%= @property_manager.active %>
+        </span>
+      </li>
+      <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
+        <strong class="pull-left">Sign in Count:</strong>
+        <span class="pull-right">
+          <%= @property_manager.sign_in_count %>
+        </span>
+      </li>
+      <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
+        <strong class="pull-left">Admin?:</strong>
+        <span class="pull-right">
+          <%= @property_manager.admin %>
+        </span>
+      </li>
+    </ul>
+  </div>
+</div>

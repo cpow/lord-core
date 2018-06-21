@@ -11,3 +11,18 @@
 } %>
 
 <%= render @company %>
+
+<% if current_property_manager.is_company_admin? %>
+  <%= render partial: 'layouts/pretty_header', locals: {
+    title: 'Company Managers',
+    text: ''
+  } %>
+
+  <div class="card">
+    <div class="card-body">
+      <%= render 'companies/property_managers/table',
+        property_managers: @company.property_managers
+      %>
+    </div>
+  </div>
+<% end %>
