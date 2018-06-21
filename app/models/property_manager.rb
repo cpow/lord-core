@@ -33,6 +33,8 @@ class PropertyManager < ApplicationRecord
   has_many :messages, as: :messageable, dependent: :destroy
   has_many :events, as: :eventable, dependent: :destroy
 
+  has_one_attached :avatar
+
   def has_company?
     company.present?
   end

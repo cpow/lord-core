@@ -1,26 +1,7 @@
 <% residencies.each do |residency| %>
   <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
     <%= link_to property_unit_residency_path(property, unit, residency), class: 'card' do %>
-      <div class="card-body">
-        <h4>
-          <%= residency.user.name %>
-        </h4>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item border-bottom-0">
-            <strong class="pull-left"> Status: </strong>
-            <span class="pull-right">
-            <span class="<%= status_badge(residency) %>">
-              <%= residency.user.status %>
-            </span>
-          </li>
-          <li class="list-group-item border-bottom-0 border-top-0">
-            <strong class="pull-left">Email:</strong>
-            <span class="pull-right">
-              <%= residency.user.email %>
-            </span>
-          </li>
-        </ul>
-      </div>
+      <%= render 'residencies/card', residency: residency %>
     <% end %>
   </div>
 <% end %>

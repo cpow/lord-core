@@ -45,6 +45,8 @@ class User < ApplicationRecord
 
   has_many :payments
 
+  has_one_attached :avatar
+
   scope :inactive, -> { where(activated: false) }
 
   def status

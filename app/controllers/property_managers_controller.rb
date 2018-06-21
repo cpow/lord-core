@@ -21,6 +21,6 @@ class PropertyManagersController < ApplicationController
   private
 
   def property_manager_params
-    params.require(:property_manager).permit(:email, :name)
+    params.require(:property_manager).permit(:email, :name, :avatar)
   end
 end

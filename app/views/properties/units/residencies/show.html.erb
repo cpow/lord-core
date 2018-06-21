@@ -10,12 +10,16 @@
 
 <%= render partial: 'layouts/pretty_header', locals: {
   title: "Resident: #{@residency.user.name}",
-  text: 'Resident information page.' }
+  text: '' }
 %>
+
+<div class="mb-4">
+  <%= render 'residencies/card', residency: @residency %>
+</div>
 
 <div class="card">
   <div class="card-body">
-    <h3 class="mb-4"><%= @residency.user.email %></h3>
+    <h3 class="mb-4">Information</h3>
     <ul class="list-group list-group-flush">
       <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
         <strong class="pull-left">Status:</strong>
@@ -48,6 +52,7 @@
       </li>
     </ul>
   </div>
+
   <div class="card-footer bg-white">
     <% if @residency.user.status == 'pending' %>
       <%= link_to 'Send Another Invite', property_unit_send_another_invite_path(@residency.property, @residency.unit, @residency), data: { confirm: 'Send another invite email to this user?' }, class: 'card-link font-weight-bold' %>
@@ -75,7 +80,10 @@
   %>
   <div class="row equal-height text-center">
     <% @residency.user.payments.limit(5).each do |payment| %>
-      <%= render 'shared/payments/payment_card', payment: payment %>
+      <%= render 'shared/payments/payment_card',
+        payment: payment,
+        link_path: property_unit_payment_path(@residency.property, @residency.unit, payment)
+      %>
     <% end %>
   </div>
 <% end %>

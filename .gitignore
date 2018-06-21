@@ -33,6 +33,8 @@ public/system
 
 dump.rdb
 
+storage
+
 .idea/
 /public/packs
 /public/packs-test

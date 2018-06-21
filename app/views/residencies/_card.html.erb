@@ -1,0 +1,33 @@
+<div class="card">
+  <%= image_tag 'default-background', class: 'card-img-top' %>
+  <div class="card-header text-center bg-white border-bottom-0">
+    <div class="profile-image">
+      <% if residency.user.avatar.attachment.present? %>
+        <%= image_tag residency.user.avatar.variant(resize: "100x100!"), class: 'rounded-circle' %>
+      <% else %>
+        <%= render 'shared/icons/face_avatar' %>
+      <% end %>
+    </div>
+    <h2>
+      <%= residency.user.name || residency.user.email %>
+    </h2>
+  </div>
+  <div class="card-body">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item border-bottom-0">
+        <strong class="pull-left"> Status: </strong>
+        <span class="pull-right">
+          <span class="<%= status_badge(residency) %>">
+            <%= residency.user.status %>
+          </span>
+      </li>
+      <li class="list-group-item border-bottom-0 border-top-0">
+        <strong class="pull-left">Email:</strong>
+        <span class="pull-right">
+          <%= residency.user.email %>
+        </span>
+      </li>
+    </ul>
+  </div>
+</div>
+

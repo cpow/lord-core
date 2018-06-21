@@ -11,14 +11,21 @@
 } %>
 
 <div class="card mb-4">
+  <%= image_tag 'default-background', class: 'card-img-top' %>
+  <div class="card-header text-center bg-white border-bottom-0">
+    <div class="profile-image">
+      <% if @property_manager.avatar.attachment.present? %>
+        <%= image_tag @property_manager.avatar.variant(resize: "100x100!"), class: 'rounded-circle' %>
+      <% else %>
+        <%= render 'shared/icons/manager_profile_placeholder' %>
+      <% end %>
+    </div>
+    <h2>
+      <%= @property_manager.name || @property_manager.email %>
+    </h2>
+  </div>
   <div class="card-body">
     <ul class="list-group list-group-flush">
-      <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
-        <strong class="pull-left">Name:</strong>
-        <span class="pull-right">
-          <%= @property_manager.name %>
-        </span>
-      </li>
       <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
         <strong class="pull-left">Email:</strong>
         <span class="pull-right">
@@ -44,5 +51,8 @@
         </span>
       </li>
     </ul>
+  </div>
+  <div class="card-footer">
+    hi
   </div>
 </div>
