@@ -22,7 +22,7 @@
 #
 
 class PropertyManager < ApplicationRecord
-  # Include default devise modules. Others available are:
+ # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
@@ -32,6 +32,8 @@ class PropertyManager < ApplicationRecord
   has_many :properties, through: :company
   has_many :messages, as: :messageable, dependent: :destroy
   has_many :events, as: :eventable, dependent: :destroy
+
+  include Avatarable
 
   has_one_attached :avatar
 

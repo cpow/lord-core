@@ -135,17 +135,7 @@
   </div>
   <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
     <%= link_to(edit_property_manager_path(current_property_manager), class: 'card account-info') do %>
-      <div class="card-body">
-        <h4>
-          Account
-        </h4>
-        <p>
-        <img src="data:image/png;base64,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">
-        </p>
-        <p>
-        <%= current_property_manager.name %>
-        </p>
-      </div>
+      <%= render '/shared/users/user', user: current_property_manager, display_info: false %>
     <% end %>
   </div>
   <div class="col-sm-12 col-md-6 col-lg-4 mb-4">

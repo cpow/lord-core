@@ -72,6 +72,11 @@
     </div>
   </div>
   <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+    <%= link_to(edit_user_path(current_user), class: 'card user-info with-link') do %>
+      <%= render '/shared/users/user', user: @user, display_info: false %>
+    <% end %>
+  </div>
+  <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
     <% if @user.current_lease.kind_of?(NullLease) %>
       <div class="card alert alert-warning lease-info text-center">
         <div class="card-body">

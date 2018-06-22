@@ -4,8 +4,8 @@ module ResidenciesHelper
     units.map { |u| [u.name, u.id.to_s] }
   end
 
-  def status_badge(residency)
-    if residency.user.activated
+  def status_badge(user)
+    if user.activated
       'badge badge-success'
     else
       'badge badge-warning'
