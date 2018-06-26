@@ -34,6 +34,19 @@ RSpec.describe User, type: :model do
     expect(user).to be
   end
 
+  describe '#has_lease?' do
+    it 'should return false if the lease is a null lease' do
+      expect(described_class.new.has_lease?).to be_falsey
+    end
+
+    it 'should return true if a user has a lease' do
+      residency = create(:residency)
+      create(:lease, unit: residency.unit)
+      user = residency.user
+      expect(user.has_lease?).to be_truthy
+    end
+  end
+
   context '#current_lease_payment' do
     it 'should return a null lease payment if there is nothing' do
       user = create(:user)

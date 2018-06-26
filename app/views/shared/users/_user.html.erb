@@ -13,21 +13,52 @@
   </h2>
 </div>
 <% if display_info %>
-  <div class="card-body">
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item border-bottom-0">
-        <strong class="pull-left"> Status: </strong>
-        <span class="pull-right">
+  <% if user.is_a?(PropertyManager) %>
+    <div class="card-body">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
+          <strong class="pull-left">Email:</strong>
+          <span class="pull-right">
+          <%= user.email %>
+        </span>
+        </li>
+        <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
+          <strong class="pull-left">Active:</strong>
+          <span class="pull-right">
+          <%= user.active ? 'true' : 'false' %>
+        </span>
+        </li>
+        <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
+          <strong class="pull-left">Sign in Count:</strong>
+          <span class="pull-right">
+          <%= user.sign_in_count %>
+        </span>
+        </li>
+        <li class="list-group-item bg-transparent border-top-0 border-bottom-0">
+          <strong class="pull-left">Admin?:</strong>
+          <span class="pull-right">
+          <%= user.admin %>
+        </span>
+        </li>
+      </ul>
+    </div>
+  <% else %>
+    <div class="card-body">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item border-bottom-0">
+          <strong class="pull-left"> Status: </strong>
+          <span class="pull-right">
           <span class="<%= status_badge(user) %>">
             <%= user.status %>
           </span>
-      </li>
-      <li class="list-group-item border-bottom-0 border-top-0">
-        <strong class="pull-left">Email:</strong>
-        <span class="pull-right">
+        </li>
+        <li class="list-group-item border-bottom-0 border-top-0">
+          <strong class="pull-left">Email:</strong>
+          <span class="pull-right">
           <%= user.email %>
         </span>
-      </li>
-    </ul>
-  </div>
+        </li>
+      </ul>
+    </div>
+  <% end %>
 <% end %>

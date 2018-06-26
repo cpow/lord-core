@@ -80,6 +80,10 @@ class User < ApplicationRecord
     current_unit.current_lease
   end
 
+  def has_lease?
+   !current_lease.is_a?(NullLease)
+  end
+
   def current_lease_payment
     current_unit.current_lease_payment
   end
