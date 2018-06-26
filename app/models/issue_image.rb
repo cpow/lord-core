@@ -2,8 +2,8 @@
 #
 # Table name: issue_images
 #
-#  id                 :integer          not null, primary key
-#  issue_id           :integer
+#  id                 :bigint(8)        not null, primary key
+#  issue_id           :bigint(8)
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  image_file_name    :string

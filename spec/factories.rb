@@ -1,6 +1,9 @@
 require 'faker'
 
 FactoryBot.define do
+  factory :payment_error do
+    
+  end
   factory :line_item do
     itemable { create(:expense) }
     company

@@ -2,10 +2,10 @@
 #
 # Table name: messages
 #
-#  id               :integer          not null, primary key
-#  unit_id          :integer
+#  id               :bigint(8)        not null, primary key
+#  unit_id          :bigint(8)
 #  messageable_type :string
-#  messageable_id   :integer
+#  messageable_id   :bigint(8)
 #  body             :text
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null

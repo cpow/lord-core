@@ -24,9 +24,22 @@ class PaymentsController < ApplicationController
       amount: amount
     )
 
-    # NOTE: we need to store whatever comes out of this.
-    # Also, need specs around this class
-    stripe_charge = payment_stripe_charge.create
+    begin
+      # NOTE: we need to store whatever comes out of this.
+      # Also, need specs around this class
+      stripe_charge = payment_stripe_charge.create
+    rescue Stripe::CardError => e
+      PaymentError.create(
+        user: current_user,
+        unit: current_user.current_unit,
+        property: current_user.current_unit.property,
+        error_message: e.message,
+      )
+
+      flash[:danger] = "#{e.message}.
+        We've been notified of this issue and will make sure to resolve as soon as we can."
+      return redirect_to authenticated_user_root_path
+    end
 
     local = current_user.payments.new(
       amount: amount,

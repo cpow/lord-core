@@ -2,7 +2,7 @@
 #
 # Table name: property_images
 #
-#  id                 :integer          not null, primary key
+#  id                 :bigint(8)        not null, primary key
 #  property_id        :integer
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null

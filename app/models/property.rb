@@ -2,7 +2,7 @@
 #
 # Table name: properties
 #
-#  id             :integer          not null, primary key
+#  id             :bigint(8)        not null, primary key
 #  address_city   :string           not null
 #  address_line1  :string           not null
 #  address_state  :string           not null

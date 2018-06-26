@@ -2,20 +2,20 @@
 #
 # Table name: events
 #
-#  id                 :integer          not null, primary key
+#  id                 :bigint(8)        not null, primary key
 #  eventable_type     :string
-#  eventable_id       :integer
+#  eventable_id       :bigint(8)
 #  event_type         :string
 #  serialized_changes :jsonb
 #  object_type        :string
 #  serialized_record  :jsonb
 #  createable_type    :string
-#  createable_id      :integer
+#  createable_id      :bigint(8)
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
-#  property_id        :integer
+#  property_id        :bigint(8)
 #  read               :boolean          default(FALSE)
-#  unit_id            :integer
+#  unit_id            :bigint(8)
 #
 
 class Event < ApplicationRecord

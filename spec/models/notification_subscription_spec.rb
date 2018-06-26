@@ -2,9 +2,9 @@
 #
 # Table name: notification_subscriptions
 #
-#  id                                    :integer          not null, primary key
-#  user_id                               :integer
-#  property_manager_id                   :integer
+#  id                                    :bigint(8)        not null, primary key
+#  user_id                               :bigint(8)
+#  property_manager_id                   :bigint(8)
 #  email_new_notifications               :boolean          default(TRUE)
 #  last_email_notification_reminder_date :datetime
 #  created_at                            :datetime         not null

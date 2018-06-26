@@ -2,8 +2,8 @@
 #
 # Table name: manual_payment_receipts
 #
-#  id                 :integer          not null, primary key
-#  manual_payment_id  :integer
+#  id                 :bigint(8)        not null, primary key
+#  manual_payment_id  :bigint(8)
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  image_file_name    :string

@@ -2,7 +2,7 @@
 #
 # Table name: payments
 #
-#  id                :integer          not null, primary key
+#  id                :bigint(8)        not null, primary key
 #  amount            :integer
 #  amount_refunded   :integer
 #  unit_id           :integer

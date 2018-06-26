@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_21_123902) do
+ActiveRecord::Schema.define(version: 2018_06_26_124106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -242,6 +242,21 @@ ActiveRecord::Schema.define(version: 2018_06_21_123902) do
     t.index ["user_id"], name: "index_notification_subscriptions_on_user_id"
   end
 
+  create_table "payment_errors", force: :cascade do |t|
+    t.text "error_message"
+    t.integer "amount"
+    t.bigint "property_id"
+    t.bigint "unit_id"
+    t.bigint "lease_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lease_id"], name: "index_payment_errors_on_lease_id"
+    t.index ["property_id"], name: "index_payment_errors_on_property_id"
+    t.index ["unit_id"], name: "index_payment_errors_on_unit_id"
+    t.index ["user_id"], name: "index_payment_errors_on_user_id"
+  end
+
   create_table "payments", force: :cascade do |t|
     t.integer "amount"
     t.integer "amount_refunded"
@@ -381,4 +396,8 @@ ActiveRecord::Schema.define(version: 2018_06_21_123902) do
   add_foreign_key "messages", "units"
   add_foreign_key "notification_subscriptions", "property_managers"
   add_foreign_key "notification_subscriptions", "users"
+  add_foreign_key "payment_errors", "leases"
+  add_foreign_key "payment_errors", "properties"
+  add_foreign_key "payment_errors", "units"
+  add_foreign_key "payment_errors", "users"
 end

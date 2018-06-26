@@ -2,7 +2,7 @@
 #
 # Table name: charge_events
 #
-#  id               :integer          not null, primary key
+#  id               :bigint(8)        not null, primary key
 #  stripe_charge_id :string
 #  event_type       :string
 #  stripe_event_id  :string

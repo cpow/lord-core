@@ -2,7 +2,7 @@
 #
 # Table name: units
 #
-#  id          :integer          not null, primary key
+#  id          :bigint(8)        not null, primary key
 #  property_id :integer          not null
 #  description :text
 #  name        :string

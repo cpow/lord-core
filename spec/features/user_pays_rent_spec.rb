@@ -1,7 +1,8 @@
 require 'rails_helper'
-include ActionView::Helpers::NumberHelper
 
 feature 'user pays rent', js: true do
+  include ActionView::Helpers::NumberHelper
+
   scenario 'but cannot when property doesnt have an account set up' do
     user = create(:user, :with_residence)
 
@@ -44,6 +45,30 @@ feature 'user pays rent', js: true do
     click_on('submitAfterConfirm')
 
     expect(current_path).to eq('/')
+  end
+
+  scenario 'But stripe has an error and cannot process' do
+    user = create(:user, :with_residence)
+    user.update_attributes(stripe_account_guid: 'blak')
+    user.properties.last.company.update_attributes!(stripe_account_guid: 'blah')
+    message = 'oops'
+    allow(Stripe::Charge).to receive(:create).and_raise(
+        Stripe::CardError.new(message, 'something', 400)
+    )
+
+    login_as(user, scope: :user)
+    visit root_path
+
+    click_on('pay-lease__link')
+    fill_in(:rentAmount, with: '1234')
+    click_button('Create Payment')
+
+    expect(page).to have_css('#submitAfterConfirm')
+
+    click_on('submitAfterConfirm')
+
+    expect(current_path).to eq('/')
+    expect(page).to have_content(message)
   end
 
   scenario 'by clicking on the link, and paying with a lease' do

@@ -2,13 +2,13 @@
 #
 # Table name: manual_payments
 #
-#  id               :integer          not null, primary key
-#  lease_payment_id :integer
+#  id               :bigint(8)        not null, primary key
+#  lease_payment_id :bigint(8)
 #  amount           :integer
 #  description      :text
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
-#  user_id          :integer
+#  user_id          :bigint(8)
 #
 
 class ManualPayment < ApplicationRecord

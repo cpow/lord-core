@@ -2,7 +2,7 @@
 #
 # Table name: companies
 #
-#  id                  :integer          not null, primary key
+#  id                  :bigint(8)        not null, primary key
 #  name                :string
 #  account_type        :string
 #  stripe_account_guid :string
@@ -10,6 +10,7 @@
 #  updated_at          :datetime         not null
 #  bank_account_name   :string
 #  bank_account_last4  :string
+#  stripe_problem      :boolean          default(FALSE)
 #
 
 class Company < ApplicationRecord

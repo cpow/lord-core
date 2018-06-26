@@ -2,10 +2,10 @@
 #
 # Table name: event_reads
 #
-#  id          :integer          not null, primary key
+#  id          :bigint(8)        not null, primary key
 #  reader_type :string
-#  reader_id   :integer
-#  event_id    :integer
+#  reader_id   :bigint(8)
+#  event_id    :bigint(8)
 #
 
 class EventRead < ApplicationRecord
