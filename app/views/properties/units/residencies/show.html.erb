@@ -39,7 +39,7 @@
       </li>
       <li class="list-group-item bg-transparent border-bottom-0 border-top-0">
         <strong class="pull-left">Current Lease ID:</strong>
-        <% if @residency.current_user.has_lease? %>
+        <% if @residency.user.has_lease? %>
           <span class="pull-right">
             <%= link_to "lease ID: #{@residency.user.current_lease.id}", property_unit_lease_path(@residency.property, @residency.unit, @residency.unit.current_lease) %>
           </span>
