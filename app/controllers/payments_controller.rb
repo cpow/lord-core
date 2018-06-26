@@ -29,12 +29,24 @@ class PaymentsController < ApplicationController
       # Also, need specs around this class
       stripe_charge = payment_stripe_charge.create
     rescue Stripe::CardError => e
-      PaymentError.create(
+      payment_error = PaymentError.create(
         user: current_user,
         unit: current_user.current_unit,
         property: current_user.current_unit.property,
-        error_message: e.message,
+        body: e.message,
       )
+
+      event = Event.create!(
+          eventable: payment_error,
+          createable: current_user,
+          event_type: Event::EVENT_CREATED,
+          property: current_user.current_unit.property,
+          unit: current_user.current_unit
+      )
+
+      event.event_reads.create!(reader: current_user)
+
+      NotificationEmailReminderWorker.perform_async(event.id)
 
       flash[:danger] = "#{e.message}.
         We've been notified of this issue and will make sure to resolve as soon as we can."
