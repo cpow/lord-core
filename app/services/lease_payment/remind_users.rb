@@ -54,20 +54,29 @@ class LeasePayment::RemindUsers
   end
 
   def self.send_rent_due_email(lease_payment)
-    LeasePaymentMailer
-      .remind_tenants_lease_is_due(lease_payment)
-      .deliver_later
+    user_emails = lease_payment.users.pluck(:email)
+    user_emails.each do |email|
+      LeasePaymentMailer
+        .remind_tenants_lease_is_due(lease_payment, email)
+        .deliver_later
+    end
   end
 
   def self.send_rent_reminder_email(lease_payment)
-    LeasePaymentMailer
-      .remind_tenants_lease_is_due_soon(lease_payment)
-      .deliver_later
+    user_emails = lease_payment.users.pluck(:email)
+    user_emails.each do |email|
+      LeasePaymentMailer
+        .remind_tenants_lease_is_due_soon(lease_payment, email)
+        .deliver_later
+    end
   end
 
   def self.send_rent_late_email(lease_payment)
-    LeasePaymentMailer
-      .remind_tenants_lease_is_late(lease_payment)
-      .deliver_later
+    user_emails = lease_payment.users.pluck(:email)
+    user_emails.each do |email|
+      LeasePaymentMailer
+        .remind_tenants_lease_is_late(lease_payment, email)
+        .deliver_later
+    end
   end
 end
