@@ -18,8 +18,8 @@
 class Lease < ApplicationRecord
   belongs_to :unit
 
-  has_many :payments
   has_many :lease_payments
+  has_many :payments, through: :lease_payments
   has_many :events, as: :eventable
 
   validates :payment_first_date,
