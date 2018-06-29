@@ -69,6 +69,8 @@ feature 'user pays rent', js: true do
 
     expect(current_path).to eq('/')
     expect(page).to have_content(message)
+
+    expect(PaymentError.count).to be(1)
   end
 
   scenario 'by clicking on the link, and paying with a lease' do

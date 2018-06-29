@@ -17,6 +17,6 @@
 class PaymentError < ApplicationRecord
   belongs_to :property
   belongs_to :unit
-  belongs_to :lease
+  belongs_to :lease, optional: true
   belongs_to :user
 end
