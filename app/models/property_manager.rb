@@ -19,6 +19,9 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  active                 :boolean
+#  invite_token           :string
+#  invited_by_id          :integer
+#  invite_date            :date
 #
 
 class PropertyManager < ApplicationRecord
@@ -34,8 +37,11 @@ class PropertyManager < ApplicationRecord
   has_many :events, as: :eventable, dependent: :destroy
 
   include Avatarable
+  include PlaceholderPasswordable
 
   has_one_attached :avatar
+
+  scope :inactive, -> { where(activated: false) }
 
   def has_company?
     company.present?
@@ -51,13 +57,5 @@ class PropertyManager < ApplicationRecord
 
   def make_admin_with_company(company)
     update_attributes!(company: company, admin: true)
-  end
-
-  def set_placeholder_password
-    self.password = unique_password
-  end
-
-  def unique_password
-    @unique_password ||= SecureRandom.base58(24)
   end
 end

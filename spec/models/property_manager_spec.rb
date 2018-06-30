@@ -19,6 +19,9 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  active                 :boolean
+#  invite_token           :string
+#  invited_by_id          :integer
+#  invite_date            :date
 #
 
 require 'rails_helper'

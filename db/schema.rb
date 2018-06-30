@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_26_134810) do
+ActiveRecord::Schema.define(version: 2018_06_30_125803) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -309,6 +309,9 @@ ActiveRecord::Schema.define(version: 2018_06_26_134810) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "active"
+    t.string "invite_token"
+    t.integer "invited_by_id"
+    t.date "invite_date"
     t.index ["active"], name: "index_property_managers_on_active"
     t.index ["email"], name: "index_property_managers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_property_managers_on_reset_password_token", unique: true
@@ -381,6 +384,7 @@ ActiveRecord::Schema.define(version: 2018_06_26_134810) do
     t.string "bank_account_guid"
     t.string "bank_account_last4"
     t.string "bank_account_name"
+    t.datetime "locked_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invite_token"], name: "index_users_on_invite_token", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

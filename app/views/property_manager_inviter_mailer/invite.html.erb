@@ -1,0 +1,32 @@
+<div class="">
+  <h1>You've been invited to join up with <%= @company.name %></h1>
+
+  <p>LivingRoom is a way for property managers to give the best service to tenants.
+    With LivingRoom, you can:
+  <ul>
+    <li>
+      Accept rent payments online
+    </li>
+    <li>
+      Track all income and expenses
+    </li>
+    <li>
+      Handle issues within a property
+    </li>
+    <li>
+      And communicate directly with tenants
+    </li>
+  </ul>
+  </p>
+
+  <p>
+    When you accept the invitation, you'll need to enter a new password, and that's it!
+  </p>
+
+  <hr>
+
+  <%= link_to "Accept invitation",
+              new_propert_manager_invitation_acceptance_url(@property_manager.invite_token),
+              class: 'btn btn-primary btn-block'
+  %>
+</div>

@@ -28,12 +28,13 @@
 
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  # :confirmable, :timeoutable and :omniauthable
 
   include Avatarable
+  include PlaceholderPasswordable
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :lockable
 
   has_secure_token :invite_token
 
@@ -58,14 +59,6 @@ class User < ApplicationRecord
 
   def issues
     Issue.where(reporter: self)
-  end
-
-  def set_placeholder_password
-    self.password = unique_password
-  end
-
-  def unique_password
-    @unique_password ||= SecureRandom.base58(24)
   end
 
   def needs_to_sign_up_for_plaid?
